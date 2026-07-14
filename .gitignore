@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+.vercel/
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+*.log
+.DS_Store
+coverage/
+.playwright-cli/
+output/
+
+# Preserved pre-Figma scaffold. It is intentionally kept out of production history.
+_legacy/
