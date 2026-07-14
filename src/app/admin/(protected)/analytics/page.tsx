@@ -1,8 +1,6 @@
 import { Activity, ArrowUpRight, BarChart3, CheckCircle2, Gauge, MousePointerClick } from "lucide-react";
 
-const dashboardUrl = process.env.VERCEL_PROJECT_ID
-  ? `https://vercel.com/${process.env.VERCEL_TEAM_SLUG ?? "unigentamos"}/${process.env.VERCEL_PROJECT_NAME ?? "projectsaite"}/analytics`
-  : "https://vercel.com/dashboard";
+const dashboardUrl = "https://vercel.com/sage-burress/projectsaite/analytics";
 
 export default function AdminAnalyticsPage() {
   return (
