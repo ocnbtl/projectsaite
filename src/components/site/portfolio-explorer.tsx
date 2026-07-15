@@ -17,12 +17,14 @@ export function PortfolioExplorer({ projects }: { projects: Project[] }) {
 
   return (
     <div>
-      <div className="portfolio-filters" aria-label="Filter portfolio projects">
+      <div className="portfolio-filters" role="group" aria-label="Filter portfolio projects">
         {categories.map((category) => (
           <button
             key={category}
             type="button"
             className={selected === category ? "is-active" : undefined}
+            aria-pressed={selected === category}
+            aria-controls="portfolio-project-grid"
             onClick={() => setSelected(category)}
           >
             {category}
@@ -30,7 +32,7 @@ export function PortfolioExplorer({ projects }: { projects: Project[] }) {
         ))}
       </div>
 
-      <div className="portfolio-grid" aria-live="polite">
+      <div id="portfolio-project-grid" className="portfolio-grid" aria-live="polite">
         {visible.map((project, index) => (
           <Link href={`/portfolio/${project.slug}`} className={`portfolio-card portfolio-card--${(index % 3) + 1}`} key={project.slug}>
             <div className="portfolio-card__image">

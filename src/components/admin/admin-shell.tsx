@@ -37,12 +37,18 @@ export function AdminShell({ children }: { children: ReactNode }) {
     <div className="admin-shell">
       <header className="admin-mobile-header">
         <Wordmark compact />
-        <button type="button" aria-label="Toggle admin menu" onClick={() => setOpen((value) => !value)}>
+        <button
+          type="button"
+          aria-label={open ? "Close admin menu" : "Open admin menu"}
+          aria-expanded={open}
+          aria-controls="admin-sidebar"
+          onClick={() => setOpen((value) => !value)}
+        >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </header>
 
-      <aside className={`admin-sidebar${open ? " is-open" : ""}`}>
+      <aside id="admin-sidebar" className={`admin-sidebar${open ? " is-open" : ""}`}>
         <Link className="admin-sidebar__brand" href="/admin" onClick={() => setOpen(false)}>
           <Wordmark compact />
           <span>Studio</span>
