@@ -1,10 +1,10 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-import { seedContent } from "@/lib/content";
 import { Wordmark } from "@/components/site/wordmark";
+import type { SiteContent } from "@/lib/content";
 
-export function SiteFooter() {
+export function SiteFooter({ social }: { social: SiteContent["social"] }) {
   return (
     <footer className="site-footer">
       <div className="site-footer__top container">
@@ -23,7 +23,7 @@ export function SiteFooter() {
 
         <div className="site-footer__nav">
           <p className="ui-label">Follow</p>
-          {seedContent.social.map((item) => (
+          {social.map((item) => (
             <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
               {item.label} <ArrowUpRight size={14} aria-hidden="true" />
             </a>

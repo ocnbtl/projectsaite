@@ -48,6 +48,28 @@ export type SiteContent = {
   social: Array<{ label: string; href: string; handle: string }>;
 };
 
+export type ContentEditingState = {
+  canSave: boolean;
+  message: string;
+};
+
+export function normalizeSiteContentForSave(content: SiteContent): SiteContent {
+  return {
+    ...content,
+    services: content.services.map((service) => ({
+      ...service,
+      deliverables: service.deliverables.map((deliverable) => deliverable.trim()).filter(Boolean),
+    })),
+  };
+}
+
+export function getAvailableProjectSlug(projects: Array<Pick<Project, "slug">>) {
+  const usedSlugs = new Set(projects.map((project) => project.slug));
+  let suffix = projects.length + 1;
+  while (usedSlugs.has(`new-project-${suffix}`)) suffix += 1;
+  return `new-project-${suffix}`;
+}
+
 export const seedContent: SiteContent = {
   hero: {
     kicker: "Model · Creator · Scout · Artist",
@@ -248,16 +270,3 @@ export const publicNavigation = [
   { href: "/portfolio", label: "Portfolio" },
   { href: "/contact", label: "Contact" },
 ];
-
-export function isSiteContent(value: unknown): value is SiteContent {
-  if (!value || typeof value !== "object") return false;
-  const candidate = value as Partial<SiteContent>;
-  return Boolean(
-    candidate.hero &&
-      candidate.about &&
-      candidate.contact &&
-      Array.isArray(candidate.services) &&
-      Array.isArray(candidate.projects) &&
-      Array.isArray(candidate.social),
-  );
-}
