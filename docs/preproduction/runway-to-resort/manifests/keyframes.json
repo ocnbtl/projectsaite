@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "runway-to-resort",
+  "updatedAt": "2026-07-15",
+  "recordDefaults": {
+    "version": 1,
+    "fileHash": null,
+    "sourceAssetIds": [],
+    "promptHash": null,
+    "model": null,
+    "settings": null,
+    "seed": null,
+    "rightsStatus": "RIGHTS_UNKNOWN",
+    "consentStatus": "MISSING",
+    "privacyStatus": "PRIVATE",
+    "provenanceStatus": "PLANNED",
+    "reviewState": "PROPOSED",
+    "reviewer": null,
+    "approvalEvidence": null,
+    "knownDefects": [],
+    "createdAt": "2026-07-15",
+    "updatedAt": "2026-07-15"
+  },
+  "keyframes": [
+    {
+      "id": "KF-01",
+      "variant": "desktop",
+      "beat": "Runway Dormant",
+      "scrollRange": "0-15%",
+      "dimensions": {"width": 3840, "height": 2160, "aspectRatio": "16:9"},
+      "promptSpecPath": "prompts/keyframes/desktop.md#kf-01-desktop--runway-dormant",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "WARD-RUNWAY-001", "ENV-RUNWAY-001", "ENV-RUNWAY-006", "LIGHT-RUNWAY-001"],
+      "segmentRoles": ["VID-RWY-D-001:start"],
+      "purpose": "Desktop opening anchor"
+    },
+    {
+      "id": "KF-01",
+      "variant": "mobile",
+      "beat": "Runway Dormant",
+      "scrollRange": "0-15%",
+      "dimensions": {"width": 2160, "height": 3840, "aspectRatio": "9:16"},
+      "promptSpecPath": "prompts/keyframes/mobile.md#kf-01-mobile--runway-dormant",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "WARD-RUNWAY-001", "ENV-RUNWAY-001", "ENV-RUNWAY-007", "LIGHT-RUNWAY-001"],
+      "segmentRoles": ["VID-RWY-M-001:start"],
+      "purpose": "Mobile opening anchor"
+    },
+    {
+      "id": "KF-02",
+      "variant": "desktop",
+      "beat": "Runway Ignition",
+      "scrollRange": "15-45%",
+      "dimensions": {"width": 3840, "height": 2160, "aspectRatio": "16:9"},
+      "promptSpecPath": "prompts/keyframes/desktop.md#kf-02-desktop--runway-ignition",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-GAIT-001", "WARD-RUNWAY-001", "ENV-RUNWAY-001", "ENV-RUNWAY-006", "LIGHT-RUNWAY-002"],
+      "segmentRoles": ["VID-RWY-D-001:end", "VID-RWY-D-002:start"],
+      "purpose": "Desktop shared runway boundary"
+    },
+    {
+      "id": "KF-02",
+      "variant": "mobile",
+      "beat": "Runway Ignition",
+      "scrollRange": "15-45%",
+      "dimensions": {"width": 2160, "height": 3840, "aspectRatio": "9:16"},
+      "promptSpecPath": "prompts/keyframes/mobile.md#kf-02-mobile--runway-ignition",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-GAIT-001", "WARD-RUNWAY-001", "ENV-RUNWAY-001", "ENV-RUNWAY-007", "LIGHT-RUNWAY-002"],
+      "segmentRoles": ["VID-RWY-M-001:end", "VID-RWY-M-002:start"],
+      "purpose": "Mobile shared runway boundary"
+    },
+    {
+      "id": "KF-03",
+      "variant": "desktop",
+      "beat": "Lens Occlusion",
+      "scrollRange": "45-58%",
+      "dimensions": {"width": 3840, "height": 2160, "aspectRatio": "16:9"},
+      "promptSpecPath": "prompts/keyframes/desktop.md#kf-03-desktop--lens-occlusion",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-GAIT-001", "WARD-RUNWAY-001", "ENV-RUNWAY-004", "ENV-RUNWAY-006", "LIGHT-RUNWAY-003", "TRANS-OCCLUSION-001"],
+      "segmentRoles": ["VID-RWY-D-002:end", "hidden-cut:outgoing"],
+      "purpose": "Desktop full-black outgoing boundary"
+    },
+    {
+      "id": "KF-03",
+      "variant": "mobile",
+      "beat": "Lens Occlusion",
+      "scrollRange": "45-58%",
+      "dimensions": {"width": 2160, "height": 3840, "aspectRatio": "9:16"},
+      "promptSpecPath": "prompts/keyframes/mobile.md#kf-03-mobile--lens-occlusion",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-GAIT-001", "WARD-RUNWAY-001", "ENV-RUNWAY-004", "ENV-RUNWAY-007", "LIGHT-RUNWAY-003", "TRANS-OCCLUSION-001"],
+      "segmentRoles": ["VID-RWY-M-002:end", "hidden-cut:outgoing"],
+      "purpose": "Mobile full-black outgoing boundary"
+    },
+    {
+      "id": "KF-04",
+      "variant": "desktop",
+      "beat": "Resort Light Leak",
+      "scrollRange": "58-64%",
+      "dimensions": {"width": 3840, "height": 2160, "aspectRatio": "16:9"},
+      "promptSpecPath": "prompts/keyframes/desktop.md#kf-04-desktop--resort-light-leak",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "WARD-RESORT-001", "ENV-RESORT-001", "ENV-RESORT-003", "ENV-RESORT-006", "LIGHT-RESORT-001", "TRANS-OCCLUSION-001"],
+      "segmentRoles": ["hidden-cut:incoming", "VID-RST-D-001:start"],
+      "purpose": "Desktop matched-black incoming boundary"
+    },
+    {
+      "id": "KF-04",
+      "variant": "mobile",
+      "beat": "Resort Light Leak",
+      "scrollRange": "58-64%",
+      "dimensions": {"width": 2160, "height": 3840, "aspectRatio": "9:16"},
+      "promptSpecPath": "prompts/keyframes/mobile.md#kf-04-mobile--resort-light-leak",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "WARD-RESORT-001", "ENV-RESORT-001", "ENV-RESORT-003", "ENV-RESORT-007", "LIGHT-RESORT-001", "TRANS-OCCLUSION-001"],
+      "segmentRoles": ["hidden-cut:incoming", "VID-RST-M-001:start"],
+      "purpose": "Mobile matched-black incoming boundary"
+    },
+    {
+      "id": "KF-05",
+      "variant": "desktop",
+      "beat": "Resort Reveal",
+      "scrollRange": "64-88%",
+      "dimensions": {"width": 3840, "height": 2160, "aspectRatio": "16:9"},
+      "promptSpecPath": "prompts/keyframes/desktop.md#kf-05-desktop--resort-reveal",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-GAIT-001", "WARD-RESORT-001", "ENV-RESORT-001", "ENV-RESORT-006", "LIGHT-RESORT-002"],
+      "segmentRoles": ["VID-RST-D-001:end", "VID-RST-D-002:start"],
+      "purpose": "Desktop shared resort boundary"
+    },
+    {
+      "id": "KF-05",
+      "variant": "mobile",
+      "beat": "Resort Reveal",
+      "scrollRange": "64-88%",
+      "dimensions": {"width": 2160, "height": 3840, "aspectRatio": "9:16"},
+      "promptSpecPath": "prompts/keyframes/mobile.md#kf-05-mobile--resort-reveal",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-GAIT-001", "WARD-RESORT-001", "ENV-RESORT-001", "ENV-RESORT-007", "LIGHT-RESORT-002"],
+      "segmentRoles": ["VID-RST-M-001:end", "VID-RST-M-002:start"],
+      "purpose": "Mobile shared resort boundary"
+    },
+    {
+      "id": "KF-06",
+      "variant": "desktop",
+      "beat": "Resort Resolve",
+      "scrollRange": "88-100%",
+      "dimensions": {"width": 3840, "height": 2160, "aspectRatio": "16:9"},
+      "promptSpecPath": "prompts/keyframes/desktop.md#kf-06-desktop--resort-resolve",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-EXPR-001", "WARD-RESORT-001", "ENV-RESORT-001", "ENV-RESORT-006", "LIGHT-RESORT-003"],
+      "segmentRoles": ["VID-RST-D-002:end", "poster:desktop", "reduced-motion:desktop"],
+      "purpose": "Desktop final/poster boundary"
+    },
+    {
+      "id": "KF-06",
+      "variant": "mobile",
+      "beat": "Resort Resolve",
+      "scrollRange": "88-100%",
+      "dimensions": {"width": 2160, "height": 3840, "aspectRatio": "9:16"},
+      "promptSpecPath": "prompts/keyframes/mobile.md#kf-06-mobile--resort-resolve",
+      "continuityDependencies": ["CHR-SAGE-CONT-001", "CHR-SAGE-EXPR-001", "WARD-RESORT-001", "ENV-RESORT-001", "ENV-RESORT-007", "LIGHT-RESORT-003"],
+      "segmentRoles": ["VID-RST-M-002:end", "poster:mobile", "reduced-motion:mobile"],
+      "purpose": "Mobile final/poster boundary"
+    }
+  ]
+}

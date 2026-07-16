@@ -1,0 +1,394 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "runway-to-resort",
+  "updatedAt": "2026-07-15",
+  "recordDefaults": {
+    "version": 1,
+    "parentIds": [],
+    "sourceAssetIds": [],
+    "sourceLocation": null,
+    "fileHash": null,
+    "prompt": null,
+    "promptHash": null,
+    "provider": null,
+    "model": null,
+    "workflow": null,
+    "settings": null,
+    "seed": null,
+    "generatedAt": null,
+    "dimensions": {
+      "width": null,
+      "height": null,
+      "aspectRatio": null,
+      "durationSeconds": null,
+      "frameRate": null
+    },
+    "rightsStatus": "RIGHTS_UNKNOWN",
+    "consentStatus": "MISSING",
+    "privacyStatus": "PRIVATE",
+    "provenanceStatus": "PLANNED",
+    "reviewState": "PROPOSED",
+    "reviewer": null,
+    "approvalEvidence": null,
+    "continuityDependencies": [],
+    "knownDefects": [],
+    "intendedDownstreamUse": null,
+    "createdAt": "2026-07-15",
+    "updatedAt": "2026-07-15"
+  },
+  "requiredSources": [
+    {
+      "slot": "SRC-SAGE-FACE-VIEWS",
+      "sourceStatus": "MISSING",
+      "purpose": "Neutral front, left/right three-quarter, and left/right profile identity coverage",
+      "minimumEvidence": "Original files plus per-file rights ledger and Sage consent"
+    },
+    {
+      "slot": "SRC-SAGE-FULL-BODY",
+      "sourceStatus": "MISSING",
+      "purpose": "Front, side, rear, proportion, stance, and gait evidence",
+      "minimumEvidence": "Original full-body files plus per-file rights ledger and Sage consent"
+    },
+    {
+      "slot": "SRC-SAGE-EXPRESSION-HAIR",
+      "sourceStatus": "MISSING",
+      "purpose": "Source-bounded expressions, hair shape, and movement",
+      "minimumEvidence": "Original files plus per-file rights ledger and Sage consent"
+    },
+    {
+      "slot": "MEDIA-KIT-SAGE",
+      "sourceStatus": "MISSING",
+      "purpose": "Approved biography, claims, metrics, and source provenance",
+      "minimumEvidence": "Latest original media kit and dated owner confirmation"
+    }
+  ],
+  "assets": [
+    {
+      "id": "CHR-SAGE-FACE-001",
+      "category": "character",
+      "purpose": "Five-view neutral face identity master",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-face-001--face-identity-master",
+      "intendedDownstreamUse": "Identity review and all later character/keyframe anchors"
+    },
+    {
+      "id": "CHR-SAGE-BODY-001",
+      "category": "character",
+      "purpose": "Six-view full-body proportion master",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-body-001--proportion-master",
+      "continuityDependencies": ["CHR-SAGE-FACE-001"],
+      "intendedDownstreamUse": "Scale, gait, wardrobe, and full-body keyframes"
+    },
+    {
+      "id": "CHR-SAGE-EXPR-001",
+      "category": "character",
+      "purpose": "Source-bounded expression master",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-expr-001--expression-master",
+      "continuityDependencies": ["CHR-SAGE-FACE-001"],
+      "intendedDownstreamUse": "Keyframe emotional progression"
+    },
+    {
+      "id": "CHR-SAGE-HAIR-001",
+      "category": "character",
+      "purpose": "Hair and movement master",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-hair-001--hair-and-movement-master",
+      "continuityDependencies": ["CHR-SAGE-FACE-001"],
+      "intendedDownstreamUse": "Walk, transition, and resort breeze continuity"
+    },
+    {
+      "id": "CHR-SAGE-GAIT-001",
+      "category": "character",
+      "purpose": "Six-phase runway gait master",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-gait-001--runway-gait-master",
+      "continuityDependencies": ["CHR-SAGE-BODY-001", "CHR-SAGE-HAIR-001"],
+      "intendedDownstreamUse": "Runway and resort motion continuity"
+    },
+    {
+      "id": "CHR-SAGE-CONT-001",
+      "category": "character",
+      "purpose": "Canonical approved continuity constraints",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-cont-001--continuity-control-sheet",
+      "continuityDependencies": [
+        "CHR-SAGE-FACE-001",
+        "CHR-SAGE-BODY-001",
+        "CHR-SAGE-EXPR-001",
+        "CHR-SAGE-HAIR-001",
+        "CHR-SAGE-GAIT-001"
+      ],
+      "intendedDownstreamUse": "Prompt compilation and review"
+    },
+    {
+      "id": "WARD-RUNWAY-001",
+      "category": "wardrobe",
+      "purpose": "Unbranded black architectural runway look",
+      "promptSpecPath": "prompts/wardrobe/wardrobe-sheets.md#ward-runway-001--black-architectural-runway-turnaround",
+      "continuityDependencies": ["CHR-SAGE-BODY-001"],
+      "intendedDownstreamUse": "KF-01 through KF-03 and occlusion"
+    },
+    {
+      "id": "WARD-RESORT-001",
+      "category": "wardrobe",
+      "purpose": "Unbranded warm-neutral resort look",
+      "promptSpecPath": "prompts/wardrobe/wardrobe-sheets.md#ward-resort-001--warm-neutral-resort-turnaround",
+      "continuityDependencies": ["CHR-SAGE-BODY-001"],
+      "intendedDownstreamUse": "KF-04 through KF-06"
+    },
+    {
+      "id": "ENV-RUNWAY-001",
+      "category": "environment",
+      "purpose": "Canonical empty runway master",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "intendedDownstreamUse": "Runway geometry and hero anchors"
+    },
+    {
+      "id": "ENV-RUNWAY-002",
+      "category": "environment",
+      "purpose": "Runway top-down floor plan",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "intendedDownstreamUse": "Subject, fixture, and occlusion marks"
+    },
+    {
+      "id": "ENV-RUNWAY-003",
+      "category": "environment",
+      "purpose": "Runway side elevation",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RUNWAY-001", "ENV-RUNWAY-002"],
+      "intendedDownstreamUse": "Scale and camera-height control"
+    },
+    {
+      "id": "ENV-RUNWAY-004",
+      "category": "environment",
+      "purpose": "Runway camera and subject path diagram",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RUNWAY-001", "ENV-RUNWAY-002", "ENV-RUNWAY-003"],
+      "intendedDownstreamUse": "KF-01 through KF-03 motion"
+    },
+    {
+      "id": "ENV-RUNWAY-005",
+      "category": "environment",
+      "purpose": "Runway material sheet",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "intendedDownstreamUse": "World and transition material locking"
+    },
+    {
+      "id": "ENV-RUNWAY-006",
+      "category": "environment",
+      "purpose": "Desktop runway anchor map",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "aspectRatio": "16:9",
+        "durationSeconds": null,
+        "frameRate": null
+      },
+      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "intendedDownstreamUse": "Desktop keyframes"
+    },
+    {
+      "id": "ENV-RUNWAY-007",
+      "category": "environment",
+      "purpose": "Mobile runway anchor map",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "dimensions": {
+        "width": 2160,
+        "height": 3840,
+        "aspectRatio": "9:16",
+        "durationSeconds": null,
+        "frameRate": null
+      },
+      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "intendedDownstreamUse": "Mobile keyframes"
+    },
+    {
+      "id": "ENV-RESORT-001",
+      "category": "environment",
+      "purpose": "Canonical empty resort master",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "intendedDownstreamUse": "Resort geometry and hero anchors"
+    },
+    {
+      "id": "ENV-RESORT-002",
+      "category": "environment",
+      "purpose": "Resort path plan",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RESORT-001"],
+      "intendedDownstreamUse": "Subject route and marks"
+    },
+    {
+      "id": "ENV-RESORT-003",
+      "category": "environment",
+      "purpose": "Resort forward reveal view",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RESORT-001", "ENV-RESORT-002"],
+      "intendedDownstreamUse": "KF-04 and KF-05"
+    },
+    {
+      "id": "ENV-RESORT-004",
+      "category": "environment",
+      "purpose": "Resort reverse spatial check",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RESORT-001", "ENV-RESORT-002"],
+      "intendedDownstreamUse": "Spatial plausibility review"
+    },
+    {
+      "id": "ENV-RESORT-005",
+      "category": "environment",
+      "purpose": "Resort material sheet",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RESORT-001"],
+      "intendedDownstreamUse": "World material locking"
+    },
+    {
+      "id": "ENV-RESORT-006",
+      "category": "environment",
+      "purpose": "Desktop resort anchor map",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "aspectRatio": "16:9",
+        "durationSeconds": null,
+        "frameRate": null
+      },
+      "continuityDependencies": ["ENV-RESORT-001"],
+      "intendedDownstreamUse": "Desktop keyframes"
+    },
+    {
+      "id": "ENV-RESORT-007",
+      "category": "environment",
+      "purpose": "Mobile resort anchor map",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "dimensions": {
+        "width": 2160,
+        "height": 3840,
+        "aspectRatio": "9:16",
+        "durationSeconds": null,
+        "frameRate": null
+      },
+      "continuityDependencies": ["ENV-RESORT-001"],
+      "intendedDownstreamUse": "Mobile keyframes"
+    },
+    {
+      "id": "LIGHT-RUNWAY-001",
+      "category": "lighting",
+      "purpose": "Dormant runway lighting state",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RUNWAY-001", "ENV-RUNWAY-005"],
+      "intendedDownstreamUse": "KF-01"
+    },
+    {
+      "id": "LIGHT-RUNWAY-002",
+      "category": "lighting",
+      "purpose": "Partially activated runway lighting state",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["LIGHT-RUNWAY-001"],
+      "intendedDownstreamUse": "KF-02"
+    },
+    {
+      "id": "LIGHT-RUNWAY-003",
+      "category": "lighting",
+      "purpose": "Near-camera runway transition lighting",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["LIGHT-RUNWAY-002"],
+      "intendedDownstreamUse": "KF-03"
+    },
+    {
+      "id": "LIGHT-RESORT-001",
+      "category": "lighting",
+      "purpose": "Warm resort emergence state",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["ENV-RESORT-001"],
+      "intendedDownstreamUse": "KF-04"
+    },
+    {
+      "id": "LIGHT-RESORT-002",
+      "category": "lighting",
+      "purpose": "Full resort reveal lighting",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["LIGHT-RESORT-001"],
+      "intendedDownstreamUse": "KF-05"
+    },
+    {
+      "id": "LIGHT-RESORT-003",
+      "category": "lighting",
+      "purpose": "Settled resort poster lighting",
+      "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
+      "continuityDependencies": ["LIGHT-RESORT-002"],
+      "intendedDownstreamUse": "KF-06"
+    },
+    {
+      "id": "TRANS-OCCLUSION-001",
+      "category": "transition",
+      "purpose": "Matched black fabric occlusion and warm-leak edge",
+      "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
+      "continuityDependencies": ["WARD-RUNWAY-001", "LIGHT-RUNWAY-003", "LIGHT-RESORT-001"],
+      "intendedDownstreamUse": "Hidden cut between KF-03 and KF-04"
+    },
+    {
+      "id": "VID-RWY-D-001",
+      "category": "video",
+      "purpose": "Desktop runway approach and ignition",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-001--kf-01-to-kf-02",
+      "continuityDependencies": ["KF-01::desktop", "KF-02::desktop"],
+      "intendedDownstreamUse": "Desktop cinematic master"
+    },
+    {
+      "id": "VID-RWY-D-002",
+      "category": "video",
+      "purpose": "Desktop runway approach and occlusion",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-002--kf-02-to-kf-03",
+      "continuityDependencies": ["KF-02::desktop", "KF-03::desktop"],
+      "intendedDownstreamUse": "Desktop cinematic master"
+    },
+    {
+      "id": "VID-RST-D-001",
+      "category": "video",
+      "purpose": "Desktop resort emergence and reveal",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-001--kf-04-to-kf-05",
+      "continuityDependencies": ["KF-04::desktop", "KF-05::desktop"],
+      "intendedDownstreamUse": "Desktop cinematic master"
+    },
+    {
+      "id": "VID-RST-D-002",
+      "category": "video",
+      "purpose": "Desktop resort reveal and resolve",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-002--kf-05-to-kf-06",
+      "continuityDependencies": ["KF-05::desktop", "KF-06::desktop"],
+      "intendedDownstreamUse": "Desktop cinematic master"
+    },
+    {
+      "id": "VID-RWY-M-001",
+      "category": "video",
+      "purpose": "Mobile runway approach and ignition",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-001--kf-01-to-kf-02",
+      "continuityDependencies": ["KF-01::mobile", "KF-02::mobile"],
+      "intendedDownstreamUse": "Mobile cinematic master"
+    },
+    {
+      "id": "VID-RWY-M-002",
+      "category": "video",
+      "purpose": "Mobile runway approach and occlusion",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-002--kf-02-to-kf-03",
+      "continuityDependencies": ["KF-02::mobile", "KF-03::mobile"],
+      "intendedDownstreamUse": "Mobile cinematic master"
+    },
+    {
+      "id": "VID-RST-M-001",
+      "category": "video",
+      "purpose": "Mobile resort emergence and reveal",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-001--kf-04-to-kf-05",
+      "continuityDependencies": ["KF-04::mobile", "KF-05::mobile"],
+      "intendedDownstreamUse": "Mobile cinematic master"
+    },
+    {
+      "id": "VID-RST-M-002",
+      "category": "video",
+      "purpose": "Mobile resort reveal and resolve",
+      "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-002--kf-05-to-kf-06",
+      "continuityDependencies": ["KF-05::mobile", "KF-06::mobile"],
+      "intendedDownstreamUse": "Mobile cinematic master"
+    }
+  ]
+}
