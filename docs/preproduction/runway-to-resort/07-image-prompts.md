@@ -1,6 +1,6 @@
 # Image Prompt System
 
-Status: PROPOSED, NON-RUNNABLE. The library is structurally complete, but all likeness prompts are blocked until approved SRC-SAGE IDs and evidence-backed identity fields replace the explicit variables.
+Status: PROPOSED. The library remains non-runnable except for the explicitly authorized private CHR-SAGE-FACE-001 diagnostic batch defined in prompts/character/reference-sheets.md. That narrow exception uses five selected private source IDs, permits no more than three OpenAI Image Creator candidates, and does not approve commercial use or any later character, environment, keyframe, video, Higgsfield, website, or publication work.
 
 ## Assembly order
 
@@ -18,7 +18,7 @@ No production prompt asks for typography, logos, watermarks, interface elements,
 
 ## Global identity prefix
 
-Use only after G1–G3 and only with approved inputs:
+Use for production-bound work only after G1–G3 and only with approved inputs:
 
 > Depict the single real person controlled by [APPROVED_SOURCE_IDS] and the approved identity specification CHR-SAGE-CONT-001. Preserve the evidence-linked face geometry, skin tone under the specified physical light, apparent age, hairline, hair texture/color/length, body proportions, stable distinguishing features, and left/right orientation. References control identity rather than wardrobe, location, brand marks, background, lens distortion, retouching, or source lighting. Do not average with another identity, idealize facial geometry, change apparent age, reshape the body, copy source logos, or infer traits not documented in CHR-SAGE-CONT-001.
 
@@ -30,6 +30,8 @@ Required variables:
 - PROHIBITED_IDENTITY_DRIFT
 
 If any variable is unfilled, the prompt is not runnable.
+
+Diagnostic exception: CHR-SAGE-FACE-001 v1 resolves its source mapping and identity constraints directly inside the twenty-field asset specification. It is runnable only for the owner-authorized private OpenAI batch, while every source remains RIGHTS_UNKNOWN for commercial/public use and both unseen profiles remain PROPOSED inference.
 
 ## Global visual-style prefix
 

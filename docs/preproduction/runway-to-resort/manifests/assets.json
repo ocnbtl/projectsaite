@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "project": "runway-to-resort",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-16",
   "recordDefaults": {
     "version": 1,
     "parentIds": [],
@@ -39,27 +39,39 @@
   "requiredSources": [
     {
       "slot": "SRC-SAGE-FACE-VIEWS",
-      "sourceStatus": "MISSING",
+      "sourceStatus": "HASHED",
+      "coverageStatus": "PARTIAL",
+      "rightsStatus": "RIGHTS_UNKNOWN",
       "purpose": "Neutral front, left/right three-quarter, and left/right profile identity coverage",
-      "minimumEvidence": "Original files plus per-file rights ledger and Sage consent"
+      "minimumEvidence": "Private originals, per-file rights ledger, and Sage consent",
+      "evidenceSummary": "Five selected face references are available; no true left or right profile exists."
     },
     {
       "slot": "SRC-SAGE-FULL-BODY",
-      "sourceStatus": "MISSING",
+      "sourceStatus": "HASHED",
+      "coverageStatus": "PARTIAL",
+      "rightsStatus": "RIGHTS_UNKNOWN",
       "purpose": "Front, side, rear, proportion, stance, and gait evidence",
-      "minimumEvidence": "Original full-body files plus per-file rights ledger and Sage consent"
+      "minimumEvidence": "Private full-body files plus per-file rights ledger and Sage consent",
+      "evidenceSummary": "Several posed full-body references exist; neutral side, rear, and genuine gait coverage remain missing."
     },
     {
       "slot": "SRC-SAGE-EXPRESSION-HAIR",
-      "sourceStatus": "MISSING",
+      "sourceStatus": "HASHED",
+      "coverageStatus": "PARTIAL",
+      "rightsStatus": "RIGHTS_UNKNOWN",
       "purpose": "Source-bounded expressions, hair shape, and movement",
-      "minimumEvidence": "Original files plus per-file rights ledger and Sage consent"
+      "minimumEvidence": "Private originals plus per-file rights ledger and Sage consent",
+      "evidenceSummary": "Expression and hair variation exist; no controlled matched-session expression or motion set exists."
     },
     {
       "slot": "MEDIA-KIT-SAGE",
-      "sourceStatus": "MISSING",
+      "sourceStatus": "UNSUITABLE",
+      "coverageStatus": "RECEIVED_UNVERIFIED",
+      "rightsStatus": "RIGHTS_UNKNOWN",
       "purpose": "Approved biography, claims, metrics, and source provenance",
-      "minimumEvidence": "Latest original media kit and dated owner confirmation"
+      "minimumEvidence": "Latest original media kit and dated owner confirmation",
+      "evidenceSummary": "One AI-generated promotional composite was received; claims, metrics, collaborations, and commercial rights are unverified."
     }
   ],
   "assets": [
@@ -68,7 +80,46 @@
       "category": "character",
       "purpose": "Five-view neutral face identity master",
       "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-face-001--face-identity-master",
-      "intendedDownstreamUse": "Identity review and all later character/keyframe anchors"
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-013"
+      ],
+      "rightsStatus": "RIGHTS_UNKNOWN",
+      "consentStatus": "CONFIRMED_PRIVATE_OPENAI_PHASE",
+      "privacyStatus": "PRIVATE",
+      "provenanceStatus": "SOURCE_LINKED_DIAGNOSTIC_BATCH_REVIEWED",
+      "provider": "OpenAI",
+      "model": "BUILT_IN_IMAGE_CREATOR_MODEL_NOT_EXPOSED",
+      "workflow": "PRIVATE_OPENAI_IDENTITY_DIAGNOSTIC_BATCH",
+      "settings": {
+        "attemptCount": 3,
+        "samePromptAllAttempts": true,
+        "selectedRevisionBaselineAttemptId": "GEN-CHR-SAGE-FACE-001-002"
+      },
+      "generatedAt": "2026-07-16",
+      "dimensions": {
+        "width": 1983,
+        "height": 793,
+        "aspectRatio": "5:2",
+        "durationSeconds": null,
+        "frameRate": null
+      },
+      "reviewState": "PROPOSED",
+      "reviewer": "CODEX_VISUAL_REVIEW_OWNER_AND_SAGE_PENDING",
+      "knownDefects": [
+        "TRUE_LEFT_PROFILE_SOURCE_MISSING",
+        "TRUE_RIGHT_PROFILE_SOURCE_MISSING",
+        "MATCHED_NEUTRAL_THREE_QUARTER_PAIR_MISSING",
+        "SOURCE_RETOUCHING_VARIABILITY",
+        "NO_GENERATED_CANDIDATE_APPROVED",
+        "CANDIDATE_002_IRIS_BROW_CHIN_AND_SKIN_REVISION_REQUIRED",
+        "CANDIDATE_002_PROFILE_GEOMETRY_INTERNALLY_INCONSISTENT"
+      ],
+      "updatedAt": "2026-07-16",
+      "intendedDownstreamUse": "Identity review only until an exact version is approved; no downstream character or keyframe use yet"
     },
     {
       "id": "CHR-SAGE-BODY-001",

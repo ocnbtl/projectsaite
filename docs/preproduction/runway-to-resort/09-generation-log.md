@@ -1,40 +1,67 @@
-# Generation Log Protocol
+# Generation Log Protocol and Sanitized Batch Record
 
-Current generation count: 0
+Last verified: 2026-07-16 America/New_York
 
-Current provider jobs: 0
+Current generated candidates: 3
 
-Current credits spent: 0
+Current OpenAI provider submissions: 3, each using the same five private metadata-stripped face references
 
-Current uploads: 0
+Distinct reference assets submitted: 5
+
+Current Higgsfield uploads: 0
+
+Current production/publication uploads: 0
+
+Current recorded credits spent: 0
+
+Built-in Image Creator usage cost: NOT EXPOSED BY THE TOOL
 
 Current approved generated assets: 0
 
-No generation is authorized in this phase. The empty machine-readable log at manifests/generations.json is intentional evidence, not missing work.
+The owner-authorized first CHR-SAGE-FACE-001 diagnostic batch is complete. All three binaries, complete private fingerprints, and private comparison artifacts remain outside Git. This sanitized log records stable IDs and review conclusions only. No candidate is approved for identity lock, Higgsfield, body or gait expansion, keyframes, publication, website use, portfolio use, or production.
+
+## Batch 001 controls
+
+- Asset: CHR-SAGE-FACE-001 v1.
+- Provider/product: OpenAI / ChatGPT Image Creator; the built-in tool did not expose an exact model identifier, seed, or charge.
+- Selected inputs: SRC-SAGE-001, SRC-SAGE-004, SRC-SAGE-005, SRC-SAGE-006, and SRC-SAGE-013.
+- Prompt: the same resolved prompt in prompts/character/reference-sheets.md was used without variation for all three attempts so differences are stochastic rather than prompt-delta effects.
+- Output: one 1983 x 793 five-panel PNG per attempt in private controlled storage.
+- State: REVIEWED / PROPOSED, never APPROVED.
+- Profiles: inferred proposals only because the source batch contains no true left or right profile.
+
+## Candidate review
+
+| Attempt | Overall likeness | Face and feature review | Continuity / artifacts | Disposition |
+|---|---|---|---|---|
+| GEN-CHR-SAGE-FACE-001-001 | MODERATE | Eyes are plausibly gray-green but slightly narrower/duller; brows are too light/thin; face, nose, and chin trend longer, narrower, and more angular than the source consensus; lips are slightly flattened; skin is over-smoothed and apparent age trends older. | Both three-quarter panels turn toward frame-left, so the opposing view is absent. Profiles disagree in nose/chin projection; ear and shoulder geometry vary. No gross anatomy failure. | Reject as direction baseline. |
+| GEN-CHR-SAGE-FACE-001-002 | MODERATE_HIGH | Frontal geometry best preserves the available oval/soft-heart shape, eye spacing, nose/lip relationships, jaw, hairline, and highlighted dark-blonde color. Irises are too bright/cyan and slightly enlarged; brows are too groomed, arched, and symmetric; chin is over-tapered; skin is too pale/uniform; natural asymmetry is suppressed. | All five requested views appear in the requested order. Panel three drifts in styling/identity and hair is not consistently tucked. The two inferred profiles disagree in nasal length/tip, lip projection, chin, and ear form. No gross anatomy failure. | Recommended revision baseline only; not approved. |
+| GEN-CHR-SAGE-FACE-001-003 | MODERATE | Eye color is more restrained, but the frontal face trends too broad/rounded, the nose fuller/longer, and lips/brows more simplified than the source consensus. Jaw/chin proportions and apparent age vary by panel. | Both three-quarter directions exist but their order is reversed. Nose, cheek, chin, ear, neck, parting, and highlight balance drift across views. Profiles remain unverified. No gross anatomy failure. | Reject as direction baseline. |
+
+## Revision direction
+
+Retain GEN-CHR-SAGE-FACE-001-002 only as a diagnostic baseline anchored to its frontal geometry. A future owner-authorized revision should reduce iris size/saturation, soften brow grooming, restore subtle asymmetry and source-consistent cheek/jaw proportions, preserve one nose/chin/ear construction across all views, keep the same hair tuck and crop, and reduce beauty smoothing. Do not promote either inferred profile to identity evidence without true source profiles.
 
 ## Append-only rule
 
-Each submitted provider job creates one immutable attempt record. Failure, cancellation, rejection, or unusable output still receives a record. Corrections create a new attempt with supersedes/supersededBy links; they never rewrite history.
+Each submitted provider job creates one immutable attempt record. Failure, rejection, or unusable output still receives a record. Corrections create a new attempt with supersedes/supersededBy links; they never rewrite history.
 
-## Required attempt fields
+## Required complete private attempt fields
 
-- attemptId and assetId/version;
-- parentAttemptId or supersedes when applicable;
-- submittedAt, completedAt, operator, and authorized account alias;
-- provider, model, workflow, providerJobId;
-- input asset IDs and SHA-256 hashes;
-- prompt spec path, resolved prompt, prompt hash;
-- settings, requested dimensions/aspect/duration/frame rate, and seed when supported;
-- cost estimate, approval evidence, actual credits;
-- output controlled URI and SHA-256;
-- reviewState and reviewer;
-- identity/continuity/geometry/light/motion/rights assessments;
-- known defects and failure category;
-- prompt/settings delta and hypothesis;
-- intended downstream use;
-- retention/deletion state.
+- attempt ID and asset ID/version;
+- parent attempt or supersedes link when applicable;
+- submitted/completed time and operator;
+- provider, model when exposed, workflow, and provider job ID when exposed;
+- input asset IDs and private source fingerprints;
+- prompt spec, resolved prompt, prompt fingerprint, and settings;
+- requested/actual dimensions and seed when supported;
+- cost evidence and actual credits when exposed;
+- private output location and fingerprint;
+- identity, continuity, geometry, light, rights, and artifact assessments;
+- known defects, failure category, prompt/settings delta, and hypothesis;
+- intended downstream use and retention state.
 
-Do not record tokens, passwords, OAuth secrets, private consent documents, or public links to private source/output files.
+Never record tokens, passwords, OAuth secrets, private consent contents, source filenames, private paths, source fingerprints, or generated-output fingerprints in this Git-tracked summary.
 
 ## Failure taxonomy
 
@@ -58,19 +85,6 @@ Do not record tokens, passwords, OAuth secrets, private consent documents, or pu
 - RIGHTS_OR_CONSENT
 - TECHNICAL_OUTPUT
 
-## First authorized experiment template
-
-The first possible job is one low-resolution/minimum-useful-cost CHR-SAGE-FACE-001 candidate batch or, if identity anchors have already been separately approved, VID-RWY-D-001. Before submission:
-
-1. Resolve G1 source intake.
-2. Resolve G2 likeness/rights.
-3. Resolve G3 named provider/account/privacy/cost/spend.
-4. Record exact approved input hashes.
-5. Run official read-only cost preflight.
-6. Obtain explicit approval for the displayed amount and job count.
-7. Submit only the approved job scope.
-8. Export and hash outputs promptly under the approved retention plan.
-
 ## Human review record
 
-Approval evidence must identify the exact file hash/version and the approved downstream use. “Looks good” without asset/version identity is not durable approval. A generation log entry may be REVIEWED while the asset manifest remains PROPOSED; the manifest becomes APPROVED only after the designated reviewer accepts the exact version.
+Approval evidence must identify the exact private file fingerprint/version and approved downstream use. A generation attempt may be REVIEWED while its asset remains PROPOSED. CHR-SAGE-FACE-001 stays PROPOSED until the owner and Sage accept an exact version for a stated purpose. This batch stops at identity review; no automatic continuation is authorized.

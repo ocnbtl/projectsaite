@@ -1,12 +1,12 @@
 # Runway-to-Resort Preproduction Brief
 
-Last verified: 2026-07-15 America/New_York
+Last verified: 2026-07-16 America/New_York
 
 Primary mode: Brand / visual system
 
 Overlay: Cinematic identity, continuity, and web-delivery preproduction
 
-Current scope: Text-only planning and local governance artifacts
+Current scope: Private source intake and first OpenAI face-identity diagnostic; Git remains sanitized text-only and all source/output binaries remain private
 
 Future site implementation: Not authorized in this phase
 
@@ -38,7 +38,7 @@ Desktop uses an art-directed 16:9 composition. Mobile uses a separately art-dire
 | Admin-integrity preview | READY deployment dpl_4X5jQFhiZXu4NzTcSzt2SQpJA4re at 08e755a | Preview remains unchanged. |
 | Current browser access | Vercel Authentication redirects public unauthenticated requests | Content behavior behind the provider gate cannot be treated as publicly verified. |
 | Custom domain | sageburress.com and www present an expired certificate; bypassing TLS reaches the old GoDaddy DPS site, not this Vercel project | Public custom-domain behavior is degraded and belongs to a separate legacy surface. |
-| Source photographs | No Sage identity-photo binaries found in either repository or current attachment store | Identity descriptions and likeness generation are blocked. |
+| Source batch | Fourteen media files were privately materialized and hashed: thirteen photographs and one AI-generated media-kit artifact; five face references were selected, with no exact or screened near duplicates and no true profile views | The first three-candidate private OpenAI diagnostic is complete; source rights and all commercial/public uses remain unresolved. |
 | Local Higgsfield integration | No Higgsfield CLI, skill, or MCP connection found | No account operation or generation can occur locally without a separate install/auth approval. |
 
 ## 3. Contradictions and unknowns
@@ -46,8 +46,9 @@ Desktop uses an art-directed 16:9 composition. Mobile uses a separately art-dire
 - The provider project record reports live=false while a READY target=production deployment and production aliases exist. Deployment identity, not the ambiguous live flag, is the stronger evidence.
 - The custom domain is not attached to the Vercel project. Behind its expired certificate, the apex serves an older GoDaddy DPS site with a different route set; it is not evidence of current Project Saite application behavior.
 - The older iCloud-backed checkout is dirty and stale. It is preserved intact and is not a source of Git truth.
-- Historical notes describe a prior Sage photo set; none is accessible now. Its identity, quality, fingerprints, and rights cannot be confirmed.
-- Historical guidance suggested twenty Soul ID photos. Current official Higgsfield guidance describes five to twenty varied face photos. This does not resolve whether the absent historical set is suitable or authorized.
+- All supplied media is readable, but the photographs use materially different grades, styling, and retouching, and none provides a true left or right profile. Generated profiles are therefore proposed inference, not verified identity evidence.
+- Sage likeness consent and the owner instruction cover the completed private OpenAI batch and eventual consented workflow, but photographer copyright/license, client/agency approval, trademark permission, and commercial-derivative rights remain UNKNOWN for every source.
+- The supplied media-kit artifact carries trained-algorithmic-media provenance and unverified promotional claims. It is context only, not independent photographic identity evidence.
 - Current official schemas expose start and end visual anchors and unordered reference inputs, but no ordered middle-keyframe parameter. Multiple prompt beats or camera cuts are not equivalent to three temporal image anchors.
 - Exact Higgsfield cost per test is account/model/settings dependent and must be preflighted inside an authorized account before spend.
 - Final runtime length remains a 12–18 second, 24 fps hypothesis until low-cost motion tests and web-weight budgets are approved.
@@ -59,9 +60,11 @@ Desktop uses an art-directed 16:9 composition. Mobile uses a separately art-dire
 | Runway-to-Resort creative direction | APPROVED FOR PREPRODUCTION | Direct user instruction; does not approve generated assets or site replacement. |
 | Six-beat narrative contract | APPROVED FOR PREPRODUCTION | KF-01 through KF-06 are required. |
 | Architecture B: four start/end segments | PROPOSED, EVIDENCE-BACKED | Official schemas support start/end anchors; Architecture A lacks verified middle-anchor support. |
-| Character, wardrobe, environment, and keyframe outputs | EXPLORING | Text specifications only; every generated unseen angle begins as PROPOSED. |
-| External reference upload / Soul ID | BLOCKED | Requires source files, rights/consent evidence, provider authorization, and privacy decision. |
-| Credit-spending generation | BLOCKED | Requires explicit spend approval after cost preflight. |
+| Face identity diagnostic | REVIEWED / PROPOSED | Three private OpenAI candidates were generated under one prompt. Attempt 002 is the recommended revision baseline, not an approved identity master. |
+| Body, gait, wardrobe, environment, keyframe, and video outputs | BLOCKED | Stop at identity review; no later-generation phase is authorized. |
+| Private OpenAI reference submission | COMPLETE FOR BATCH 001 ONLY | The same five metadata-stripped face references were used in three authorized submissions; no public output upload occurred. |
+| Higgsfield upload / Soul creation | BLOCKED | Consent exists, but authentication, operational upload, model/cost preflight, credit use, and Soul creation remain a later approval gate. |
+| Paid-credit generation | BLOCKED | No Higgsfield credits were used; exact later model/settings cost and explicit spend approval are required. The built-in Image Creator did not expose usage cost. |
 | Website implementation | BLOCKED | Requires approved assets and a later implementation authorization. |
 | Production deploy or domain/provider mutation | BLOCKED | Requires the formal launch gate and explicit deployment authority. |
 
@@ -161,8 +164,8 @@ Later implementation must preserve:
 | Phase | Steps | Owner | Deliverables | Completion evidence | Estimate | Gate |
 |---|---|---|---|---|---|---|
 | 0. Reconcile | 1 | Engineering | Git/deployment/tool/source audit | Exact commits, deployment IDs, route evidence, clean isolated branch | Complete | G0 |
-| 1. Govern | 2–4 | Creative engineering + owner | Rights register, manifests, IDs, prompt contract, generation log | Valid JSON; no binaries; source status explicit | Complete for text-only scope | G1 |
-| 2. Character | 5–9 | Creative lead + Sage | Identity, body, expression, hair, gait, wardrobe sheets | Source-linked outputs reviewed in small batches | 2–4 review cycles after inputs | G2–G3 |
+| 1. Govern | 2–4 | Creative engineering + owner | Private rights register, sanitized source/asset manifests, stable IDs, prompt contract, generation log | Valid JSON; no binaries or private paths in Git; source uncertainty explicit | Complete for current intake | G1 |
+| 2. Character | 5–9 | Creative lead + Sage | Face identity direction first; body, expression, hair, gait, and wardrobe later | Three face candidates reviewed; attempt 002 is a revision baseline, none approved | STOPPED AT IDENTITY REVIEW | G2–G3 |
 | 3. Worlds | 10–11 | Art direction | Runway/resort geometry, materials, camera, lighting, transition systems | Approved empty plates, anchor maps, and continuity sheets | 2–3 review cycles each | G3 |
 | 4. Keyframes | 12–15 | Art direction + Sage | 6 desktop + 6 mobile keyframes | All review checks pass; selected versions marked APPROVED | 2–5 review cycles | G4 |
 | 5. Motion feasibility | 16–18 | Motion lead | Four low-cost Architecture B segments and defect log | Cost preflight, reproducible settings, continuity findings | 1–3 test rounds | G5 |
@@ -172,14 +175,14 @@ Later implementation must preserve:
 
 Detailed sequence:
 
-1. Verify repository, GitHub, Vercel, browser behavior, tools, and source materials.
-2. Inventory references, claims, duplicates, brand marks, gaps, rights, consent, and privacy.
-3. Verify current Higgsfield schemas, CLI/MCP, Soul ID, prompts, pricing controls, and output terms.
-4. Establish folders, stable IDs, manifests, prompt specifications, and append-only generation logging.
-5. Fill identity and continuity descriptors only from approved source evidence.
-6. Draft the first source-linked face-identity prompt batch.
-7. Generate that batch only after G2 and G3.
-8. Review identity outputs before expanding scope.
+1. Verify repository, GitHub, Vercel, browser behavior, tools, and source materials. COMPLETE for this checkpoint.
+2. Inventory references, claims, duplicates, brand marks, gaps, rights, consent, and privacy. COMPLETE for the supplied batch; third-party rights remain UNKNOWN.
+3. Verify current Higgsfield schemas, CLI/MCP, Soul ID, prompts, pricing controls, and output terms. DEFERRED until Higgsfield execution is authorized.
+4. Establish private folders, stable IDs, manifests, prompt specifications, and append-only generation logging. COMPLETE for Batch 001.
+5. Fill identity and continuity fields only from selected source evidence. COMPLETE for the first face diagnostic, with unknowns preserved.
+6. Draft the first source-linked face-identity prompt batch. COMPLETE.
+7. Generate the owner-authorized three-candidate private OpenAI batch. COMPLETE; no Higgsfield or paid-credit generation occurred.
+8. Review identity outputs before expanding scope. CURRENT STOP: owner and Sage review of the three candidates and the attempt-002 revision direction.
 9. Produce body, expression, hair, gait, and wardrobe sheets in small reviewed batches.
 10. Produce runway geometry, material, camera, light, and transition systems.
 11. Produce resort geometry, material, camera, and light systems.
@@ -203,9 +206,9 @@ Detailed sequence:
 | Gate | Required approval/evidence | Stops |
 |---|---|---|
 | G0 — trustworthy baseline | Canonical Git, provider artifact, live behavior, and dirty check reconciled | Any code or asset work on an uncertain base |
-| G1 — source intake | Complete archive, hash inventory, duplicate/brand classification | Identity description and source-linked prompts |
-| G2 — likeness and rights | Sage consent; photographer/source rights; commercial and AI-reference permissions per file | Any likeness upload, training, generation, or publication |
-| G3 — provider and spend | Approved provider/account, retention/privacy decision, exact cost preflight, explicit credit authority | OAuth, uploads, Soul creation, or generation |
+| G1 — source intake | Readable private batch, hash inventory, duplicates/brands/quality classified, stable IDs, private ledger | COMPLETE for supplied media; missing coverage and rights uncertainty remain explicit |
+| G2 — likeness and rights | Sage consent plus operation-specific owner authority for private diagnostics; photographer/source, client/agency, trademark, derivative, commercial, and publication rights separately resolved before later use | COMPLETE only for the narrow private OpenAI diagnostic; commercial/public use remains blocked |
+| G3 — provider and spend | Named provider and bounded operation approved; retention/privacy and exact cost preflight required before any later paid-credit or Higgsfield work | COMPLETE only for three built-in OpenAI diagnostic submissions; Higgsfield, OAuth, Soul creation, and credits remain blocked |
 | G4 — keyframe selection | Sage/owner approves exact desktop/mobile versions and intended use | Motion tests and downstream interpolation |
 | G5 — final media | Owner approves motion, grade, identity, and web exports | Web integration |
 | G6 — implementation | Explicit authority to change code; preservation test plan accepted | Source-code changes |
@@ -213,7 +216,7 @@ Detailed sequence:
 
 ## 12. Current blockers and exact next owner action
 
-The independent text-only system is complete once the linked manifests, bibles, prompt library, and validation pass. The next creative action is blocked by absent Sage originals and absent per-file rights/consent evidence. The owner should supply the single archive defined in 01-rights-and-source-register.md. Attaching files does not itself authorize external upload, Soul ID, paid generation, publication, or production deployment.
+The current checkpoint is identity review. The owner and Sage should compare all three private candidates against the selected originals and decide whether attempt 002 is the right revision baseline. None is approved. Verified profiles require one same-session shoulder-up set containing true front, 45-degree left/right, and 90-degree left/right views under neutral matched camera/light conditions. Photographer/source identity, copyright/license evidence, client or agency approval, trademark permission, commercial derivative rights, and publication permission also remain unresolved. Do not proceed into body, gait, wardrobe, runway/resort environments, keyframes, video, Higgsfield, publication, application code, or production without the applicable later authorization.
 
 ## 13. Implementation acceptance criteria
 
@@ -230,4 +233,4 @@ No future code batch is acceptable unless it:
 
 ## 14. Plain-language summary
 
-The concept is defined, but Sage’s actual source photographs and usage permissions are not available. This system therefore locks the story, geometry, continuity, prompts, manifests, and four-segment video architecture without inventing her appearance or touching production. The next safe step is one controlled source-and-rights intake, followed by a separate decision on private provider upload and generation spend.
+The supplied source batch has been safely inventoried outside Git, five strong face references were selected, and three controlled private identity candidates were generated and reviewed without changing application code or production. Attempt 002 is the best revision baseline, but its eye/brow treatment, chin, skin texture, cross-panel continuity, and inferred profiles are not accurate enough to approve. The next step is human identity review and, ideally, the exact neutral five-angle photo set; all later character, cinematic, Higgsfield, website, publication, and production work remains stopped.

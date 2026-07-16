@@ -1,80 +1,60 @@
 # Rights and Source Register
 
-Last verified: 2026-07-15
+Last verified: 2026-07-16
 
-Policy: No identity inference, external upload, likeness training, generation, publication, or commercial use without source-level evidence and the applicable approval gate.
+Policy: Private diagnostic generation requires explicit subject/owner authority, a bounded provider scope, and source-level intake evidence. It does not establish photographer copyright, client/agency approval, trademark permission, commercial derivative rights, publication approval, or production authority.
 
 ## Classification vocabulary
 
 - CONFIRMED — file exists and its technical identity was verified.
+- RECEIVED — file is readable but technical review is incomplete.
+- HASHED — original file is readable, privately fingerprinted, and mapped to a stable source ID.
 - DUPLICATE — byte-identical to another confirmed file.
 - UNSUITABLE — accessible but cannot establish Sage identity or the requested visual control.
 - RIGHTS_UNKNOWN — technical source exists but required ownership, license, consent, or downstream-use evidence is absent.
 - MISSING — described historically but not accessible in the current workspace or attachment store.
-- APPROVED_SOURCE — rights/consent evidence has been reviewed for the exact proposed use. No current asset has this state.
+- APPROVED_SOURCE — rights/consent evidence has been reviewed for the exact proposed use. No current source has this state for commercial publication.
 
 ## Current register
 
-| Register ID | Class | Non-sensitive evidence | Suitability | Rights / privacy state | Action |
+| Source ID | Intake / duplicate | Sanitized roles | First identity batch | Rights / brand state | Decision |
 |---|---|---|---|---|---|
-| DOC-CINEMATIC-001 | CONFIRMED | Current owner-approved direction packet was reviewed locally | Direction and constraints only | User-supplied project evidence | Keep as dated instruction; do not treat as visual source |
-| DOC-SNAPSHOT-HISTORICAL | DUPLICATE | Duplicate historical project documentation was identified locally | Historical evidence only | No image rights evidence | Do not duplicate or publish private fingerprints |
-| DOC-BRIEF-001 | CONFIRMED | Original project brief was reviewed locally | Business/design context | No image rights evidence | Treat claims as dated until owner confirms |
-| BRAND-WORDMARK-CANDIDATES | RIGHTS_UNKNOWN | Candidate wordmark exports exist outside Git | Brand review only; not identity input | Creator, font, and export rights require confirmation | Keep binaries and fingerprints in private intake storage |
-| DOC-PROPOSAL-CANDIDATES | UNSUITABLE | Proposal/media-kit-context documents exist outside Git | Context only; not identity masters | Author, claim, and reuse status require confirmation | Keep documents and fingerprints private; reverify claims |
-| WEB-PLACEHOLDERS-001 | UNSUITABLE | Current application source uses third-party placeholder photography | Explicit placeholders; not Sage | Third-party availability is not likeness consent | Never use for Sage identity |
-| SRC-SAGE-HISTORICAL | MISSING | Historical notes indicate a prior photo set, but no source binary is currently available | Unknown until originals are reattached | No private technical or rights ledger is available | Request complete original set |
-| MEDIA-KIT-SAGE | MISSING | No separate current media kit found | Could provide approved claims and provenance | Unknown | Request latest complete original |
+| SRC-SAGE-001 | HASHED / unique | Face, near-front, hair | SELECTED | Copyright/license UNKNOWN; no visible brand | Primary facial anchor |
+| SRC-SAGE-002 | HASHED / unique | Hair, posed full body | REJECTED | Copyright/license UNKNOWN; no visible brand | Face too small; severe pose foreshortening |
+| SRC-SAGE-003 | HASHED / unique | Posed full body, expression, hair | REJECTED | Copyright/license UNKNOWN; no visible brand | Face too small and non-neutral; not gait evidence |
+| SRC-SAGE-004 | HASHED / unique | Face, three-quarter, hair | SELECTED | Copyright/license UNKNOWN; no visible brand | Best available opposing-angle evidence; head-tilt/retouch caveat |
+| SRC-SAGE-005 | HASHED / unique | Near-front face, hairline | SELECTED | Copyright/license UNKNOWN; no visible brand | Strongest near-frontal evidence; one cheek obstructed |
+| SRC-SAGE-006 | HASHED / unique | Face, three-quarter, hair | SELECTED AS FACE CROP | Copyright/license UNKNOWN; source brand present and excluded | Jaw/ear evidence; branded lower frame not submitted |
+| SRC-SAGE-007 | HASHED / unique | Face, expression | REJECTED | Copyright/license UNKNOWN; unidentified product context | Non-neutral expression and cheek/jaw obstruction |
+| SRC-SAGE-008 | HASHED / unique | Hair motion, full body, runway aesthetic | REJECTED | Copyright/license UNKNOWN; no clear brand | Reserve for later hair/motion review; not neutral face evidence |
+| SRC-SAGE-009 | HASHED / unique | Face, three-quarter, runway aesthetic | REJECTED | Copyright/license UNKNOWN; source brand present | Redundant with stronger selected angle; branded full frame |
+| SRC-SAGE-010 | HASHED / unique | Posed full body, runway aesthetic | REJECTED | Copyright/license UNKNOWN; brand cue present | Face too small, severe foreshortening, not gait evidence |
+| SRC-SAGE-011 | HASHED / unique | Full body, wardrobe, runway aesthetic | REJECTED | Copyright/license UNKNOWN; multiple source brands present | Face obscured; do not reproduce styling or marks |
+| SRC-SAGE-012 | HASHED / unique | Full body, near-front context | REJECTED | Copyright/license UNKNOWN; multiple source brands present | Face too small for identity master; retain for later body context only |
+| SRC-SAGE-013 | HASHED / unique | Near-front face, hair, partial body | SELECTED AS FACE CROP | Copyright/license UNKNOWN; source brand present and excluded | Cross-session identity check; branded lower frame not submitted |
+| SRC-SAGE-014 | UNSUITABLE / unique | Media-kit context only | REJECTED | AI-generated promotional composite; claims and brand permissions UNKNOWN | Not independent photographic identity evidence |
 
-No Sage photo, PDF, SVG, screenshot, or archive binary exists in the current attachment store. No present item is APPROVED_SOURCE.
+Intake summary: fourteen source-media files were readable and privately inventoried: thirteen photographs and one media-kit artifact. Exact-byte duplicates: zero. Perceptual near-duplicate candidates at the screening threshold: zero. The owner-supplied consent digest matched the local consent record; the record, digest, filenames, paths, source hashes, EXIF, geolocation, and private ledger remain outside Git.
 
-## Historical sources must be reidentified privately
+## Rights and uncertainty summary
 
-Historical notes described potentially useful face, expression, full-body, gait, and hair coverage, plus possible visible third-party branding. Those descriptions are not source evidence and are intentionally not retained in this Git branch. Reidentify the actual files inside private intake storage, record technical fingerprints only in the private ledger, and keep permanent hero wardrobe unbranded unless explicit brand-use rights are documented.
+- Sage likeness consent and the owner instruction authorize this private OpenAI identity-reference phase.
+- Photographer/source identity, copyright ownership, source license, client approval, agency permission, trademark permission, and commercial derivative rights remain UNKNOWN for every supplied item unless later evidence resolves them.
+- A visible-brand source may contribute only a private face crop that excludes the marked region. No source brand, trade dress, social-platform mark, media-kit text, claim, or campaign styling may be reproduced.
+- SRC-SAGE-014 carries trained-algorithmic-media provenance and uncorroborated promotional claims. It is context only, not verified identity evidence.
+- No source or output is approved for publication or commercial website use at this checkpoint.
 
-## Exact single-batch attachment request
+## Exact missing-photo request
 
-Please attach one archive named Sage_Preproduction_Source_Batch.zip containing:
+The first diagnostic batch may proceed, but generated profiles are inferred proposals. The cleanest follow-up is one same-session five-shot shoulder-up set:
 
-### 01-original-photos/
+1. true front;
+2. 45 degrees with the nose toward frame-left;
+3. 45 degrees with the nose toward frame-right;
+4. 90-degree profile with the nose toward frame-left;
+5. 90-degree profile with the nose toward frame-right.
 
-- The complete previously supplied set, preserving original filenames and the known duplicate.
-- Original-resolution JPEG, HEIC, TIFF, or PNG files—not screenshots or recompressed social downloads.
-- If available, add eight to ten unbranded supplemental originals covering:
-  - neutral straight-on headshot;
-  - left and right three-quarter headshots;
-  - left and right profile headshots;
-  - natural-smile headshot;
-  - full-body front, side, and rear views;
-  - natural walking/full-body frame.
-- Overlap is allowed when one original provides multiple useful views. Do not manufacture new files merely to reach a count.
-
-### 02-media-kit/
-
-- Latest complete Sage media kit or pitch deck.
-- Editable/source export, if available.
-
-### 03-rights/
-
-Include rights-ledger.csv with one row per image:
-
-filename, photographer_or_source, shoot_or_campaign, copyright_owner, website_use_permission, ai_reference_permission, commercial_use_permission, visible_third_party_brands, restrictions, approval_date, evidence_location
-
-Also include any available photographer licenses, model releases, campaign restrictions, or written approvals.
-
-### 04-consent/
-
-Include a dated note from Sage stating whether the supplied photographs may be used as private AI-assisted preproduction references and eventual approved website imagery. The note should distinguish:
-
-- local private review;
-- upload to a named external provider;
-- reusable identity model / Soul creation;
-- generated image and video creation;
-- commercial website publication;
-- provider retention/training/marketing terms;
-- deletion or retention constraints.
-
-This archive request does not itself authorize training, external upload, paid generation, publication, or deployment.
+Use eye-height camera placement, approximately 85–105 mm full-frame-equivalent perspective, diffuse neutral light, identical distance/crop/exposure, closed-mouth neutral expression, hair behind both ears, and no eyewear, jewelry, logos, beauty filters, portrait-mode reshaping, or material retouching. This batch also lacks neutral side/rear body views and a genuine gait sequence, but those are intentionally outside the current identity checkpoint.
 
 ## Intake procedure
 
@@ -92,25 +72,26 @@ This archive request does not itself authorize training, external upload, paid g
 
 | Option | Current decision | Reason |
 |---|---|---|
-| Private local controlled folder | Preferred for intake | No external disclosure; easy hashing and duplicate review |
+| Private local controlled folder | ACTIVE | Contains private intake, working crops, generated candidates, and comparison evidence outside Git |
 | Normal Git | Prohibited for raw/large/private assets | Repository history is durable and may be shared |
 | Git LFS | Evaluate only after repo privacy and retention review | LFS does not by itself create privacy or deletion guarantees |
 | Vercel Blob | Not authorized | Production data mutation and provider upload require explicit approval |
-| Higgsfield account storage | Not authorized | Provider terms, retention/training exposure, account auth, and likeness consent require G2–G3 |
+| OpenAI Image Creator | Authorized for this first private identity batch only | Maximum three diagnostic candidates from the five selected face references |
+| Higgsfield account storage | Not authorized operationally | Consent exists, but authentication, upload, Soul creation, model/cost preflight, and credits remain later gates |
 | Public delivery path | Approved optimized outputs only, later | Requires exact asset approval and implementation authority |
 
 ## Rights gate checklist
 
-Before any external upload or likeness generation, every answer must be YES:
+For the current private OpenAI diagnostic, the named provider, operation, source subset, privacy boundary, and maximum candidate count are explicitly authorized. Before any Higgsfield operation, commercial publication, or production use, every unresolved answer below must be YES:
 
 - Does Sage explicitly authorize the named provider and intended operation?
-- Does each source have sufficient photographer/copyright permission?
+- Does each affected source/output have sufficient photographer/copyright permission for the exact later use?
 - Are commercial website and AI-reference uses covered separately?
 - Are campaign/client restrictions and visible trademarks resolved?
 - Has the owner accepted the provider’s current retention, training, and marketing terms?
 - Is access scoped to an authorized private account?
-- Is exact generation cost known and approved?
+- Is the exact later provider/model cost known and approved before any paid credit use?
 - Is deletion/retention handling documented?
 - Is the output still treated as PROPOSED pending Sage review?
 
-Current result: BLOCKED at source intake and rights/consent evidence.
+Current result: G1 technical intake complete; Sage likeness consent confirmed; narrow private OpenAI diagnostic authorized; third-party source rights and all commercial/public uses remain blocked. Stop after the first identity-review checkpoint.

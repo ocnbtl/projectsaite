@@ -1,13 +1,13 @@
 # Sage Character and Continuity Bible
 
-Status: PROPOSED STRUCTURE; identity fields are intentionally unfilled until approved Sage originals are inventoried.
+Status: PARTIALLY EVIDENCE-LINKED. The first private face diagnostic may use the selected sources below; every output remains PROPOSED, and body/gait/wardrobe continuity remains blocked.
 
-Identity rule: A prompt may point to approved source IDs; it may not invent biometric or physical traits from memory, placeholder photography, or prose alone.
+Identity rule: A prompt may point to operation-authorized selected private source IDs; it may not invent biometric or physical traits from memory, placeholder photography, or prose alone.
 
 ## Continuity hierarchy
 
 1. Identity and proportion accuracy.
-2. Skin tone, facial structure, eye placement, hairline, and distinguishing features as observed in approved sources.
+2. Skin tone, facial structure, eye placement, hairline, and distinguishing features as observed in the selected evidence-linked sources.
 3. Body proportion, height relationship to the set, and gait.
 4. Hair state and motion.
 5. Wardrobe silhouette and material.
@@ -18,19 +18,19 @@ Lower priorities may never be improved by allowing higher-priority drift.
 
 ## Source-controlled identity profile
 
-These fields must be completed from approved source IDs and reviewed by Sage:
+These fields record only what the selected private sources can control without publishing biometric prose. Exact candidate likeness still requires owner and Sage review:
 
 | Field | Value | Evidence |
 |---|---|---|
-| Face geometry | BLOCKED — do not infer | SRC-SAGE-### |
-| Eye shape/color relationship | BLOCKED — do not infer | SRC-SAGE-### |
-| Brows, nose, lips, jaw, ears | BLOCKED — do not infer | SRC-SAGE-### |
-| Skin tone/undertone under neutral light | BLOCKED — do not infer | SRC-SAGE-### |
-| Hairline, texture, length, volume, color | BLOCKED — do not infer | SRC-SAGE-### |
-| Body proportions and stance | BLOCKED — do not infer | SRC-SAGE-### |
-| Distinguishing stable features | BLOCKED — do not infer | SRC-SAGE-### |
-| Features that vary by styling/light | BLOCKED — do not infer | SRC-SAGE-### |
-| Prohibited identity drift | Always active; specific evidence pending | Approved continuity sheet |
+| Face geometry | Source-controlled for front and available three-quarter evidence; profiles remain inferred proposals | SRC-SAGE-001, 004, 005, 006, 013 |
+| Eye shape/color relationship | Source-controlled, but source lighting and retouch variation require matched-crop review | SRC-SAGE-001, 004, 005, 006, 013 |
+| Brows, nose, lips, jaw, ears | Source-controlled where visible; ear/profile confidence is incomplete | SRC-SAGE-001, 004, 005, 006, 013 |
+| Skin tone/undertone under neutral light | UNKNOWN — supplied images use materially different grades and retouching | SRC-SAGE-001, 004, 005, 006, 013 |
+| Hairline, texture, length, volume, color | Partially source-controlled; styling ranges from resting to braided, slicked, and wet | SRC-SAGE-001, 004, 005, 006, 013 |
+| Body proportions and stance | OUT OF SCOPE for the first face batch; neutral side/rear/gait evidence remains missing | SRC-SAGE-003, 008, 012, 013 |
+| Distinguishing stable features | UNKNOWN pending exact candidate review by Sage | Selected face set |
+| Features that vary by styling/light | Hair state, makeup/retouch, exposure, and grade are variable and must not redefine identity | Selected face set |
+| Prohibited identity drift | Face averaging, apparent-age shift, profile invention presented as fact, asymmetry corruption, and source-brand copying | CHR-SAGE-FACE-001 v1 |
 
 ## Required sheet set
 
@@ -119,7 +119,7 @@ These fields must be completed from approved source IDs and reviewed by Sage:
 
 Review identity before style:
 
-1. Compare output at matched crop against at least three approved sources.
+1. Compare output at matched crop against at least three operation-authorized selected private sources.
 2. Review front/three-quarter/profile separately; a strong front view does not approve an unseen profile.
 3. Review full-body proportion on a neutral grid.
 4. Review hands, feet, teeth, ears, hairline, jewelry, and garment edges at 100%.
@@ -127,6 +127,8 @@ Review identity before style:
 6. Record each defect in the manifest; do not hide it in chat history.
 7. Sage or the designated likeness approver must approve the exact file/version.
 
-## First controlled batch, after G1–G3 only
+## First controlled batch — authorized private diagnostic
 
-Generate only CHR-SAGE-FACE-001 low-cost candidates from approved face sources. Do not generate body, expression, hair, gait, wardrobe, keyframes, or video until the face sheet is reviewed. Stop the batch immediately if provider cost, source mapping, or identity preservation cannot be reproduced.
+Generate no more than three CHR-SAGE-FACE-001 candidates from SRC-SAGE-001, 004, 005, 006, and 013 using only the private metadata-stripped face references. Do not generate body, expression, hair, gait, wardrobe, keyframes, environments, or video until the face direction is reviewed. Both profiles remain inferred proposals because no true profile sources exist. Stop the batch immediately if source mapping, identity preservation, privacy, or the no-brand constraint cannot be maintained.
+
+Batch 001 produced and privately retained three candidates under one unchanged prompt. All three were reviewed and remain PROPOSED. GEN-CHR-SAGE-FACE-001-002 is the strongest revision baseline because its frontal geometry and five-view ordering best preserve the available evidence. It is not an identity master: iris saturation/size, brow grooming/symmetry, chin taper, skin uniformity, hair tuck, cross-panel consistency, and inferred profile geometry require revision and human likeness review. Attempts 001 and 003 are rejected as direction baselines. No body, gait, wardrobe, environment, keyframe, video, Higgsfield, publication, or production work is unlocked by this result.

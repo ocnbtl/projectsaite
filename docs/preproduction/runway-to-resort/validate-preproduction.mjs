@@ -22,6 +22,8 @@ const allowedSourceStates = new Set([
 ]);
 const stableAssetId = /^(CHR-SAGE-(FACE|BODY|EXPR|HAIR|GAIT|CONT)-\d{3}|WARD-(RUNWAY|RESORT)-\d{3}|ENV-(RUNWAY|RESORT)-\d{3}|LIGHT-(RUNWAY|RESORT)-\d{3}|TRANS-OCCLUSION-\d{3}|VID-(RWY|RST|MASTER)-[DM]?(?:-)?\d{3})$/;
 const stableKeyframeId = /^KF-0[1-6]$/;
+const stableSourceId = /^SRC-SAGE-\d{3}$/;
+const stableAttemptId = /^GEN-CHR-SAGE-FACE-001-\d{3}$/;
 const errors = [];
 
 function readJson(relativePath) {
@@ -86,23 +88,147 @@ function walk(directory) {
   });
 }
 
+function validateSanitizedJson(label, value, path = []) {
+  const forbiddenKeyFragments = [
+    "filename",
+    "filepath",
+    "privatepath",
+    "sourcepath",
+    "outputpath",
+    "sourcehash",
+    "filehash",
+    "outputhash",
+    "exif",
+    "geolocation",
+    "latitude",
+    "longitude",
+    "gps",
+    "consentcontents",
+    "consentrecord",
+  ];
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => validateSanitizedJson(label, item, [...path, String(index)]));
+    return;
+  }
+  if (value && typeof value === "object") {
+    for (const [key, item] of Object.entries(value)) {
+      const normalized = key.toLowerCase().replaceAll(/[^a-z0-9]/g, "");
+      if (forbiddenKeyFragments.some((fragment) => normalized.includes(fragment))) {
+        errors.push(label + ": forbidden private field " + [...path, key].join("."));
+      }
+      validateSanitizedJson(label, item, [...path, key]);
+    }
+    return;
+  }
+  if (typeof value !== "string") return;
+  if (
+    /(?:^|[\\/])Users[\\/]/.test(value) ||
+    /\b[a-f0-9]{64}\b/i.test(value) ||
+    /\.(?:jpe?g|png|heic|tiff?|txt|pdf)\b/i.test(value)
+  ) {
+    errors.push(label + ": private path, fingerprint, consent name, or binary filename at " + path.join("."));
+  }
+}
+
 const assetsManifest = readJson("manifests/assets.json");
 const keyframeManifest = readJson("manifests/keyframes.json");
 const generationManifest = readJson("manifests/generations.json");
+const sourcesManifest = readJson("manifests/sources.json");
 
 if (assetsManifest.schemaVersion !== "1.0.0") errors.push("assets.json: unexpected schemaVersion");
 if (keyframeManifest.schemaVersion !== "1.0.0") errors.push("keyframes.json: unexpected schemaVersion");
 if (generationManifest.schemaVersion !== "1.0.0") errors.push("generations.json: unexpected schemaVersion");
+if (sourcesManifest.schemaVersion !== "1.0.0") errors.push("sources.json: unexpected schemaVersion");
 
 const assetIds = new Set();
 const keyframeKeys = new Set();
+const sourceIds = new Set();
+
+validateSanitizedJson("sources.json", sourcesManifest);
+validateSanitizedJson("generations.json", generationManifest);
+
+for (const source of sourcesManifest.sources ?? []) {
+  const label = "source " + source.id;
+  if (!stableSourceId.test(source.id ?? "")) errors.push(label + ": unstable ID");
+  if (sourceIds.has(source.id)) errors.push(label + ": duplicate ID");
+  sourceIds.add(source.id);
+  if (!allowedSourceStates.has(source.sourceStatus)) errors.push(label + ": invalid sourceStatus");
+  if (!["original_photo", "media_kit"].includes(source.kind)) errors.push(label + ": invalid kind");
+  if (typeof source.selectedForIdentityBatch !== "boolean") {
+    errors.push(label + ": selectedForIdentityBatch must be boolean");
+  }
+  if (source.duplicateOf != null && !stableSourceId.test(source.duplicateOf)) {
+    errors.push(label + ": invalid duplicateOf");
+  }
+  requireFields(label, source, [
+    "id",
+    "kind",
+    "sourceStatus",
+    "duplicateOf",
+    "classifications",
+    "technicalAssessment",
+    "selectedForIdentityBatch",
+    "selectionReason",
+    "sageLikenessConsent",
+    "copyrightLicenseStatus",
+    "aiReferencePermission",
+    "openAIGenerationPermission",
+    "higgsfieldUploadPermission",
+    "commercialWebsitePermission",
+    "visibleBranding",
+    "restrictions",
+    "confidence",
+    "notes",
+    "privacyStatus",
+    "provenanceStatus",
+    "updatedAt",
+  ]);
+}
+
+const selectedSourceIds = new Set(
+  (sourcesManifest.sources ?? [])
+    .filter((source) => source.selectedForIdentityBatch)
+    .map((source) => source.id),
+);
+const expectedSelectedSourceIds = new Set([
+  "SRC-SAGE-001",
+  "SRC-SAGE-004",
+  "SRC-SAGE-005",
+  "SRC-SAGE-006",
+  "SRC-SAGE-013",
+]);
+if (sourceIds.size !== 14) errors.push("sources.json: expected exactly 14 source records");
+if (
+  selectedSourceIds.size !== expectedSelectedSourceIds.size ||
+  [...expectedSelectedSourceIds].some((id) => !selectedSourceIds.has(id))
+) {
+  errors.push("sources.json: selected identity source set does not match the reviewed five-source subset");
+}
+const sourceSummary = sourcesManifest.summary ?? {};
+const originalPhotoCount = (sourcesManifest.sources ?? []).filter(
+  (source) => source.kind === "original_photo",
+).length;
+const mediaKitCount = (sourcesManifest.sources ?? []).filter(
+  (source) => source.kind === "media_kit",
+).length;
+if (
+  sourceSummary.sourceMediaFiles !== sourceIds.size ||
+  sourceSummary.originalPhotos !== originalPhotoCount ||
+  sourceSummary.mediaKitFiles !== mediaKitCount ||
+  sourceSummary.exactDuplicateFiles !== 0 ||
+  sourceSummary.perceptualNearDuplicateCandidates !== 0 ||
+  sourceSummary.selectedForFirstIdentityBatch !== selectedSourceIds.size ||
+  sourceSummary.trueProfileViewsAvailable !== 0
+) {
+  errors.push("sources.json: summary does not match the reviewed intake totals");
+}
 
 for (const source of assetsManifest.requiredSources ?? []) {
   if (!allowedSourceStates.has(source.sourceStatus)) {
     errors.push("required source " + source.slot + ": invalid sourceStatus");
   }
   if (source.sourceStatus === "APPROVED_SOURCE") {
-    errors.push("required source " + source.slot + ": cannot be approved while no source file is present");
+    errors.push("required source " + source.slot + ": no supplied source is approved for commercial/public use");
   }
 }
 
@@ -146,6 +272,11 @@ for (const raw of assetsManifest.assets ?? []) {
   ]);
   validateDimensions(label, record.dimensions);
   validatePromptPath(label, record.promptSpecPath);
+  for (const sourceId of record.sourceAssetIds ?? []) {
+    if (stableSourceId.test(sourceId) && !sourceIds.has(sourceId)) {
+      errors.push(label + ": unresolved source asset " + sourceId);
+    }
+  }
 }
 
 for (const raw of keyframeManifest.keyframes ?? []) {
@@ -220,14 +351,77 @@ if (keyframeKeys.size !== expectedKeyframes.size) {
   errors.push("keyframes.json: expected exactly 12 desktop/mobile keyframe records");
 }
 
-if (generationManifest.generationAuthorized !== false) {
-  errors.push("generations.json: generation must remain unauthorized in this phase");
+const generationAuthorization = generationManifest.authorization ?? {};
+if (generationManifest.generationAuthorized !== true) {
+  errors.push("generations.json: the bounded first OpenAI diagnostic authorization must be recorded");
 }
-if (generationManifest.uploadsPerformed !== 0 || generationManifest.creditsSpent !== 0) {
-  errors.push("generations.json: uploads and credits must remain zero");
+if (
+  generationAuthorization.scope !== "FIRST_PRIVATE_OPENAI_IDENTITY_DIAGNOSTIC_ONLY" ||
+  generationAuthorization.assetId !== "CHR-SAGE-FACE-001" ||
+  generationAuthorization.provider !== "OpenAI Image Creator" ||
+  generationAuthorization.maxCandidates !== 3 ||
+  generationAuthorization.publicationAuthorized !== false ||
+  generationAuthorization.higgsfieldOperationallyAuthorized !== false ||
+  generationAuthorization.productionMutationAuthorized !== false
+) {
+  errors.push("generations.json: invalid or overbroad generation authorization");
 }
-if (!Array.isArray(generationManifest.attempts) || generationManifest.attempts.length !== 0) {
-  errors.push("generations.json: attempt log must remain empty before authorization");
+const authorizedSourceIds = new Set(generationAuthorization.sourceAssetIds ?? []);
+if (
+  authorizedSourceIds.size !== expectedSelectedSourceIds.size ||
+  [...expectedSelectedSourceIds].some((id) => !authorizedSourceIds.has(id))
+) {
+  errors.push("generations.json: authorization source set does not match the selected source set");
+}
+if (
+  generationManifest.providerSubmissionsPerformed !== 3 ||
+  generationManifest.distinctReferenceAssetsSubmitted !== 5 ||
+  generationManifest.referenceAssetsPerSubmission !== 5 ||
+  generationManifest.higgsfieldUploadsPerformed !== 0 ||
+  generationManifest.productionAssetUploadsPerformed !== 0 ||
+  generationManifest.generatedOutputPublicationUploadsPerformed !== 0 ||
+  generationManifest.creditsSpent !== 0 ||
+  generationManifest.approvedGeneratedAssets !== 0
+) {
+  errors.push("generations.json: provider-submission, upload, credit, or approval counts are inconsistent");
+}
+if (!Array.isArray(generationManifest.attempts) || generationManifest.attempts.length !== 3) {
+  errors.push("generations.json: expected exactly three authorized attempts");
+}
+if ((generationManifest.attempts ?? []).length > (generationAuthorization.maxCandidates ?? 0)) {
+  errors.push("generations.json: attempt count exceeds authorization");
+}
+const attemptIds = new Set();
+for (const attempt of generationManifest.attempts ?? []) {
+  const label = "attempt " + attempt.attemptId;
+  if (!stableAttemptId.test(attempt.attemptId ?? "")) errors.push(label + ": unstable attempt ID");
+  if (attemptIds.has(attempt.attemptId)) errors.push(label + ": duplicate attempt ID");
+  attemptIds.add(attempt.attemptId);
+  if (attempt.assetId !== "CHR-SAGE-FACE-001") errors.push(label + ": unexpected asset ID");
+  if (attempt.provider !== "OpenAI" || attempt.product !== "ChatGPT Image Creator") {
+    errors.push(label + ": unexpected provider or product");
+  }
+  if (attempt.reviewState !== "REVIEWED" || attempt.assetApprovalState !== "PROPOSED") {
+    errors.push(label + ": attempt must be REVIEWED while the asset remains PROPOSED");
+  }
+  if (attempt.publicOrProductionUseAuthorized !== false) {
+    errors.push(label + ": public or production use must remain unauthorized");
+  }
+  if (attempt.privateOutputFingerprintRecorded !== true) {
+    errors.push(label + ": private output fingerprint evidence is missing");
+  }
+  const attemptSourceIds = new Set(attempt.sourceAssetIds ?? []);
+  if (
+    attemptSourceIds.size !== expectedSelectedSourceIds.size ||
+    [...expectedSelectedSourceIds].some((id) => !attemptSourceIds.has(id))
+  ) {
+    errors.push(label + ": submitted source set does not match the authorized subset");
+  }
+  validatePromptPath(label, attempt.promptSpecPath);
+  const dimensions = attempt.actualDimensions ?? {};
+  if (dimensions.width !== 1983 || dimensions.height !== 793) {
+    errors.push(label + ": unexpected output dimensions");
+  }
 }
 
 const expectedDocs = [
@@ -264,10 +458,14 @@ console.log(
   JSON.stringify(
     {
       ok: true,
+      sources: sourceIds.size,
+      selectedIdentitySources: selectedSourceIds.size,
       assets: assetIds.size,
       keyframes: keyframeKeys.size,
       generationAttempts: generationManifest.attempts.length,
-      uploadsPerformed: generationManifest.uploadsPerformed,
+      openAIProviderSubmissions: generationManifest.providerSubmissionsPerformed,
+      higgsfieldUploadsPerformed: generationManifest.higgsfieldUploadsPerformed,
+      productionAssetUploadsPerformed: generationManifest.productionAssetUploadsPerformed,
       creditsSpent: generationManifest.creditsSpent,
       textOnly: true,
     },

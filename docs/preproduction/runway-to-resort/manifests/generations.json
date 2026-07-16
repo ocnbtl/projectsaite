@@ -1,9 +1,163 @@
 {
   "schemaVersion": "1.0.0",
   "project": "runway-to-resort",
-  "updatedAt": "2026-07-15",
-  "generationAuthorized": false,
-  "uploadsPerformed": 0,
+  "updatedAt": "2026-07-16",
+  "generationAuthorized": true,
+  "authorization": {
+    "scope": "FIRST_PRIVATE_OPENAI_IDENTITY_DIAGNOSTIC_ONLY",
+    "assetId": "CHR-SAGE-FACE-001",
+    "provider": "OpenAI Image Creator",
+    "maxCandidates": 3,
+    "sourceAssetIds": [
+      "SRC-SAGE-001",
+      "SRC-SAGE-004",
+      "SRC-SAGE-005",
+      "SRC-SAGE-006",
+      "SRC-SAGE-013"
+    ],
+    "publicationAuthorized": false,
+    "higgsfieldOperationallyAuthorized": false,
+    "productionMutationAuthorized": false
+  },
+  "providerSubmissionsPerformed": 3,
+  "distinctReferenceAssetsSubmitted": 5,
+  "referenceAssetsPerSubmission": 5,
+  "higgsfieldUploadsPerformed": 0,
+  "productionAssetUploadsPerformed": 0,
+  "generatedOutputPublicationUploadsPerformed": 0,
   "creditsSpent": 0,
-  "attempts": []
+  "providerUsageCost": "NOT_EXPOSED_BY_BUILT_IN_TOOL",
+  "approvedGeneratedAssets": 0,
+  "attempts": [
+    {
+      "attemptId": "GEN-CHR-SAGE-FACE-001-001",
+      "assetId": "CHR-SAGE-FACE-001",
+      "assetVersion": 1,
+      "completedAt": "2026-07-16T03:08:19-04:00",
+      "provider": "OpenAI",
+      "product": "ChatGPT Image Creator",
+      "model": "BUILT_IN_IMAGE_CREATOR_MODEL_NOT_EXPOSED",
+      "workflow": "PRIVATE_MULTI_REFERENCE_IMAGE_GENERATION",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-013"
+      ],
+      "promptSpecPath": "prompts/character/reference-sheets.md#resolved-provider-prompt-used-for-batch-001",
+      "promptVersion": "CHR-SAGE-FACE-001-v1",
+      "requestedOutput": "ONE_5_TO_2_FIVE_PANEL_DIAGNOSTIC_SHEET",
+      "actualDimensions": {
+        "width": 1983,
+        "height": 793
+      },
+      "reviewState": "REVIEWED",
+      "assetApprovalState": "PROPOSED",
+      "overallLikeness": "MODERATE",
+      "failureCategories": [
+        "IDENTITY_FACE",
+        "GEOMETRY_OR_ANCHOR",
+        "SKIN_TONE_OR_GRADE"
+      ],
+      "knownDefects": [
+        "BOTH_THREE_QUARTER_PANELS_TURN_TOWARD_FRAME_LEFT",
+        "PROFILE_NOSE_AND_CHIN_GEOMETRY_DIFFERS_ACROSS_SIDES",
+        "EYES_AND_BROWS_ARE_OVER_REGULARIZED",
+        "SKIN_TEXTURE_IS_SMOOTHER_THAN_SOURCE_CONSENSUS",
+        "TRUE_PROFILE_ACCURACY_CANNOT_BE_VERIFIED"
+      ],
+      "disposition": "REJECT_AS_DIRECTION_BASELINE",
+      "privateOutputFingerprintRecorded": true,
+      "publicOrProductionUseAuthorized": false
+    },
+    {
+      "attemptId": "GEN-CHR-SAGE-FACE-001-002",
+      "assetId": "CHR-SAGE-FACE-001",
+      "assetVersion": 1,
+      "completedAt": "2026-07-16T03:11:31-04:00",
+      "provider": "OpenAI",
+      "product": "ChatGPT Image Creator",
+      "model": "BUILT_IN_IMAGE_CREATOR_MODEL_NOT_EXPOSED",
+      "workflow": "PRIVATE_MULTI_REFERENCE_IMAGE_GENERATION",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-013"
+      ],
+      "promptSpecPath": "prompts/character/reference-sheets.md#resolved-provider-prompt-used-for-batch-001",
+      "promptVersion": "CHR-SAGE-FACE-001-v1",
+      "requestedOutput": "ONE_5_TO_2_FIVE_PANEL_DIAGNOSTIC_SHEET",
+      "actualDimensions": {
+        "width": 1983,
+        "height": 793
+      },
+      "reviewState": "REVIEWED",
+      "assetApprovalState": "PROPOSED",
+      "overallLikeness": "MODERATE_HIGH",
+      "failureCategories": [
+        "IDENTITY_FACE",
+        "HAIR_CONTINUITY",
+        "SKIN_TONE_OR_GRADE"
+      ],
+      "knownDefects": [
+        "THIRD_PANEL_SHOWS_IDENTITY_AND_STYLING_DRIFT",
+        "HAIR_IS_NOT_CONSISTENTLY_TUCKED_BEHIND_EARS",
+        "IRISES_ARE_TOO_BRIGHT_CYAN_AND_SLIGHTLY_ENLARGED",
+        "BROWS_ARE_TOO_GROOMED_ARCHED_AND_SYMMETRIC",
+        "CHIN_IS_OVER_TAPERED_AND_SKIN_IS_TOO_UNIFORM",
+        "LEFT_RIGHT_PROFILE_GEOMETRY_IS_INTERNALLY_INCONSISTENT",
+        "TRUE_PROFILE_ACCURACY_CANNOT_BE_VERIFIED"
+      ],
+      "disposition": "RECOMMENDED_REVISION_BASELINE_NOT_APPROVED",
+      "privateOutputFingerprintRecorded": true,
+      "publicOrProductionUseAuthorized": false
+    },
+    {
+      "attemptId": "GEN-CHR-SAGE-FACE-001-003",
+      "assetId": "CHR-SAGE-FACE-001",
+      "assetVersion": 1,
+      "completedAt": "2026-07-16T03:14:56-04:00",
+      "provider": "OpenAI",
+      "product": "ChatGPT Image Creator",
+      "model": "BUILT_IN_IMAGE_CREATOR_MODEL_NOT_EXPOSED",
+      "workflow": "PRIVATE_MULTI_REFERENCE_IMAGE_GENERATION",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-013"
+      ],
+      "promptSpecPath": "prompts/character/reference-sheets.md#resolved-provider-prompt-used-for-batch-001",
+      "promptVersion": "CHR-SAGE-FACE-001-v1",
+      "requestedOutput": "ONE_5_TO_2_FIVE_PANEL_DIAGNOSTIC_SHEET",
+      "actualDimensions": {
+        "width": 1983,
+        "height": 793
+      },
+      "reviewState": "REVIEWED",
+      "assetApprovalState": "PROPOSED",
+      "overallLikeness": "MODERATE",
+      "failureCategories": [
+        "IDENTITY_FACE",
+        "GEOMETRY_OR_ANCHOR",
+        "SKIN_TONE_OR_GRADE"
+      ],
+      "knownDefects": [
+        "THREE_QUARTER_PANEL_ORDER_IS_REVERSED",
+        "FRONTAL_FACE_TRENDS_TOO_BROAD_AND_ROUNDED",
+        "NOSE_TRENDS_FULLER_AND_LONGER_THAN_SOURCE_CONSENSUS",
+        "JAW_CHIN_EAR_AND_NECK_GEOMETRY_DRIFTS_ACROSS_PANELS",
+        "APPARENT_AGE_VARIES_ACROSS_PANELS",
+        "SKIN_REMAINS_MORE_UNIFORM_THAN_THE_NATURAL_TARGET",
+        "TRUE_PROFILE_ACCURACY_CANNOT_BE_VERIFIED"
+      ],
+      "disposition": "REJECT_AS_DIRECTION_BASELINE",
+      "privateOutputFingerprintRecorded": true,
+      "publicOrProductionUseAuthorized": false
+    }
+  ]
 }

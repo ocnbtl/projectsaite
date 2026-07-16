@@ -1,0 +1,682 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "runway-to-resort",
+  "updatedAt": "2026-07-16",
+  "privacyBoundary": "No filenames, paths, hashes, EXIF, geolocation, consent contents, or source binaries are recorded here.",
+  "summary": {
+    "sourceMediaFiles": 14,
+    "originalPhotos": 13,
+    "mediaKitFiles": 1,
+    "exactDuplicateFiles": 0,
+    "perceptualNearDuplicateCandidates": 0,
+    "selectedForFirstIdentityBatch": 5,
+    "trueProfileViewsAvailable": 0
+  },
+  "sources": [
+    {
+      "id": "SRC-SAGE-001",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "neutral front face",
+        "right three-quarter face",
+        "hair"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "EXCELLENT",
+        "perspectiveAndLensDistortion": "LOW; mild portrait compression and slight yaw",
+        "retouching": "HEAVY beauty/editorial retouch",
+        "obstruction": "Hair frames jaw; central features unobstructed",
+        "bodyProportionValue": "NONE",
+        "motionValue": "NONE",
+        "continuityValue": "HIGH for face, eyes, lips, jaw, hairline, and hair color",
+        "identityModelSuitability": "HIGH with retouch caution"
+      },
+      "selectedForIdentityBatch": true,
+      "selectionReason": "Primary large, sharp, near-frontal identity anchor",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
+      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "NONE_VISIBLE",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Selected only for the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-002",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "hair",
+        "wardrobe reference",
+        "full-body proportion"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "LOW; face is small",
+        "perspectiveAndLensDistortion": "SEVERE pose foreshortening from reclined composition",
+        "retouching": "MODERATE_TO_HEAVY",
+        "obstruction": "Furniture and styling obscure neutral body lines",
+        "bodyProportionValue": "LOW",
+        "motionValue": "NONE",
+        "continuityValue": "LOW for identity; LOW for neutral proportion",
+        "identityModelSuitability": "LOW"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: small face and severe foreshortening",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "NONE_VISIBLE",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-003",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "full-body proportion",
+        "expression",
+        "hair",
+        "wardrobe reference",
+        "resort aesthetic"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "LOW; face is small, downturned, and eyes nearly closed",
+        "perspectiveAndLensDistortion": "LOW lens distortion; pose prevents neutral measurement",
+        "retouching": "HEAVY high-key editorial retouch",
+        "obstruction": "No central facial obstruction; bent pose obscures neutral proportion",
+        "bodyProportionValue": "MEDIUM for general context only",
+        "motionValue": "MEDIUM; posed rather than gait evidence",
+        "continuityValue": "MEDIUM for general body/hair styling; LOW for face",
+        "identityModelSuitability": "LOW"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: face too small and non-neutral",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "NONE_VISIBLE",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-004",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "left three-quarter face",
+        "expression",
+        "hair"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2400x3000",
+        "facialVisibility": "EXCELLENT",
+        "perspectiveAndLensDistortion": "LOW lens distortion; pronounced head tilt",
+        "retouching": "HEAVY high-key beauty retouch",
+        "obstruction": "No central facial obstruction; styled braids/accessories alter hair state",
+        "bodyProportionValue": "NONE",
+        "motionValue": "NONE",
+        "continuityValue": "HIGH for opposing-angle facial evidence; MEDIUM for natural hair state",
+        "identityModelSuitability": "MEDIUM_HIGH with tilt/retouch caution"
+      },
+      "selectedForIdentityBatch": true,
+      "selectionReason": "Best available opposing three-quarter facial evidence",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
+      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "NONE_VISIBLE",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Selected only for the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-005",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "neutral front face",
+        "left three-quarter face",
+        "hair"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "EXCELLENT except one cheek",
+        "perspectiveAndLensDistortion": "LOW",
+        "retouching": "HEAVY skincare/beauty retouch",
+        "obstruction": "Hand and cream obscure one cheek; central geometry remains visible",
+        "bodyProportionValue": "NONE",
+        "motionValue": "NONE",
+        "continuityValue": "HIGH for frontal geometry, brows, eyes, nose, lips, and hairline",
+        "identityModelSuitability": "HIGH with obstruction/retouch caution"
+      },
+      "selectedForIdentityBatch": true,
+      "selectionReason": "Strongest near-frontal and hairline evidence",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
+      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "NONE_VISIBLE",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Selected only for the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-006",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "right three-quarter face",
+        "hair",
+        "wardrobe reference",
+        "full-body proportion"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "GOOD",
+        "perspectiveAndLensDistortion": "LOW",
+        "retouching": "MODERATE editorial retouch",
+        "obstruction": "Face unobstructed; towel obscures torso",
+        "bodyProportionValue": "LOW_MEDIUM",
+        "motionValue": "NONE",
+        "continuityValue": "HIGH for jaw, ear, three-quarter face, and damp hair context",
+        "identityModelSuitability": "MEDIUM_HIGH as face-only crop"
+      },
+      "selectedForIdentityBatch": true,
+      "selectionReason": "Strongest unobstructed three-quarter jaw/ear evidence",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
+      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Selected only for the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-007",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "expression",
+        "hair"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "4108x5477",
+        "facialVisibility": "GOOD but expression-dependent",
+        "perspectiveAndLensDistortion": "LOW",
+        "retouching": "HEAVY skincare/beauty retouch",
+        "obstruction": "Hand covers cheek/jaw; open-mouth smile changes neutral geometry",
+        "bodyProportionValue": "NONE",
+        "motionValue": "NONE",
+        "continuityValue": "MEDIUM for expression only",
+        "identityModelSuitability": "MEDIUM for later expression sheet; LOW for neutral face master"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: non-neutral expression and cheek/jaw obstruction",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-008",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "full-body proportion",
+        "motion",
+        "hair",
+        "runway aesthetic",
+        "wardrobe reference"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2250x3000",
+        "facialVisibility": "MEDIUM_LOW; face is small and strongly tilted",
+        "perspectiveAndLensDistortion": "LOW lens distortion; non-neutral body/head pose",
+        "retouching": "MODERATE_TO_HEAVY plus monochrome grade",
+        "obstruction": "Hair motion partially crosses face",
+        "bodyProportionValue": "MEDIUM",
+        "motionValue": "HIGH for hair only; not gait evidence",
+        "continuityValue": "HIGH for later hair-motion exploration; LOW for neutral face",
+        "identityModelSuitability": "LOW for first identity batch"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: monochrome, tilted, motion-heavy face",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "NONE_VISIBLE",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-009",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "right three-quarter face",
+        "hair",
+        "wardrobe reference",
+        "runway aesthetic"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "GOOD",
+        "perspectiveAndLensDistortion": "MILD_TO_MODERATE from reclined pose",
+        "retouching": "MODERATE editorial retouch",
+        "obstruction": "Face unobstructed",
+        "bodyProportionValue": "LOW_MEDIUM",
+        "motionValue": "NONE",
+        "continuityValue": "MEDIUM_HIGH for three-quarter face; redundant with selected evidence",
+        "identityModelSuitability": "MEDIUM_HIGH as face-only crop"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected from minimal subset: redundant with SRC-SAGE-006 and more prominent branding",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-010",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "full-body proportion",
+        "hair",
+        "wardrobe reference",
+        "runway aesthetic",
+        "unsuitable or rights-restricted"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "LOW; face is small",
+        "perspectiveAndLensDistortion": "SEVERE pose foreshortening",
+        "retouching": "MODERATE editorial retouch",
+        "obstruction": "Pose and furniture obscure neutral body measurement",
+        "bodyProportionValue": "LOW",
+        "motionValue": "LOW; staged pose, not gait",
+        "continuityValue": "LOW for identity and neutral proportion",
+        "identityModelSuitability": "LOW"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: small face, severe foreshortening, brand cue",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-011",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "full-body proportion",
+        "hair",
+        "wardrobe reference",
+        "runway aesthetic",
+        "unsuitable or rights-restricted"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "POOR; eyewear and hair obscure face",
+        "perspectiveAndLensDistortion": "LOW; standing lean is non-neutral",
+        "retouching": "MODERATE editorial retouch",
+        "obstruction": "Eyewear, hair, jacket, and pose",
+        "bodyProportionValue": "MEDIUM_LOW",
+        "motionValue": "NONE",
+        "continuityValue": "LOW for identity; MEDIUM for later styled body context only",
+        "identityModelSuitability": "LOW"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: face obscured and multiple visible brands",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-012",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "full-body proportion",
+        "neutral front face",
+        "hair",
+        "wardrobe reference",
+        "runway aesthetic",
+        "unsuitable or rights-restricted"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "MEDIUM; unobstructed but too small for precise identity",
+        "perspectiveAndLensDistortion": "LOW; raised knee prevents neutral measurement",
+        "retouching": "MODERATE editorial retouch",
+        "obstruction": "No central face obstruction; jacket/pose obscure neutral body lines",
+        "bodyProportionValue": "MEDIUM",
+        "motionValue": "LOW; staged pose, not gait",
+        "continuityValue": "MEDIUM for later body context; LOW for face master",
+        "identityModelSuitability": "MEDIUM_LOW"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: face too small and branded styling",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Retained privately but excluded from the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-013",
+      "kind": "original_photo",
+      "sourceStatus": "HASHED",
+      "duplicateOf": null,
+      "classifications": [
+        "facial identity",
+        "neutral front face",
+        "hair",
+        "full-body proportion",
+        "wardrobe reference",
+        "runway aesthetic",
+        "unsuitable or rights-restricted"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH",
+        "resolution": "2001x3000",
+        "facialVisibility": "GOOD",
+        "perspectiveAndLensDistortion": "LOW",
+        "retouching": "MODERATE editorial retouch",
+        "obstruction": "Central face unobstructed",
+        "bodyProportionValue": "MEDIUM_HIGH for partial standing context",
+        "motionValue": "NONE",
+        "continuityValue": "HIGH for cross-session near-frontal face and hair",
+        "identityModelSuitability": "HIGH as face-only crop"
+      },
+      "selectedForIdentityBatch": true,
+      "selectionReason": "Cross-session near-frontal continuity anchor",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
+      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "Selected only for the controlled face-identity diagnostic batch.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "updatedAt": "2026-07-16"
+    },
+    {
+      "id": "SRC-SAGE-014",
+      "kind": "media_kit",
+      "sourceStatus": "UNSUITABLE",
+      "duplicateOf": null,
+      "classifications": [
+        "media-kit context",
+        "unsuitable or rights-restricted"
+      ],
+      "technicalAssessment": {
+        "focus": "HIGH for document rendering",
+        "resolution": "1024x1536",
+        "facialVisibility": "COMPOSITE PORTRAIT; not independent photographic evidence",
+        "perspectiveAndLensDistortion": "NOT_APPLICABLE",
+        "retouching": "AI-generated promotional composite",
+        "obstruction": "Typography, metrics, logos, and layout surround portrait",
+        "bodyProportionValue": "NONE",
+        "motionValue": "NONE",
+        "continuityValue": "NONE as verified identity evidence",
+        "identityModelSuitability": "UNSUITABLE"
+      },
+      "selectedForIdentityBatch": false,
+      "selectionReason": "Rejected: AI-generated media-kit artifact, text/brand contamination, no independent identity evidence",
+      "sageLikenessConsent": "CONFIRMED",
+      "copyrightLicenseStatus": "UNKNOWN",
+      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
+      "openAIGenerationPermission": "NOT_SUBMITTED",
+      "higgsfieldUploadPermission": "CONSENT_CONFIRMED_OPERATION_NOT_AUTHORIZED",
+      "commercialWebsitePermission": "UNKNOWN",
+      "visibleBranding": "PRESENT_RESTRICTED",
+      "restrictions": [
+        "PRIVATE_PREPRODUCTION_ONLY",
+        "NO_PUBLICATION",
+        "NO_SOURCE_BRAND_REPRODUCTION",
+        "NO_FINAL_APPROVAL_CLAIM"
+      ],
+      "confidence": {
+        "technicalAndVisual": "HIGH",
+        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+      },
+      "notes": "AI-generated promotional composite; not verified photographic identity evidence.",
+      "privacyStatus": "SANITIZED_TEXT_ONLY",
+      "provenanceStatus": "C2PA_TRAINED_ALGORITHMIC_MEDIA_NOT_IDENTITY_EVIDENCE",
+      "updatedAt": "2026-07-16"
+    }
+  ]
+}

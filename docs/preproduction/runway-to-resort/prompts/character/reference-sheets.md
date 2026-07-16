@@ -1,29 +1,71 @@
 # Character Reference-Sheet Prompt Specifications
 
-All specifications inherit the identity/style/continuity/negative blocks in ../../07-image-prompts.md. They are NON-RUNNABLE while APPROVED_SOURCE_IDS or the evidence-linked identity profile is missing.
+All specifications inherit the identity/style/continuity/negative blocks in ../../07-image-prompts.md. Only the first private diagnostic batch for CHR-SAGE-FACE-001 is runnable under the explicit 2026-07-16 OpenAI authorization and the selected source set below. That authorization does not promote any source to APPROVED_SOURCE for commercial publication. Every body, expression, hair, gait, wardrobe, environment, keyframe, video, and Higgsfield specification remains non-runnable.
 
 ## CHR-SAGE-FACE-001 — face identity master
 
-1. Asset/purpose: five-view neutral face identity control.
-2. Inputs/controls: approved neutral front, left/right three-quarter, and left/right profile SRC-SAGE IDs; each controls only its evidenced view and stable identity.
-3. Identity lock: use the global block; no averaging, idealization, or invented unseen feature.
-4. Scene: neutral studio reference capture, not an editorial scene.
-5. Placement/scale: five equal head-and-shoulder panels at matched head size and eye line.
-6. Performance: neutral mouth/eyes, relaxed jaw, direct or view-correct gaze, resting approved hair.
-7. Wardrobe: plain unbranded neutral neckline; no obstructing jewelry.
-8. Camera: eye-height, fixed distance, level, approximately 85–105 mm full-frame equivalent, f/8-like depth, crisp shutter, identical crop.
-9. Output: 5:2 sheet master or five same-size files; minimum useful face detail; no website crop.
-10. Geometry: neutral mid-gray background and fixed eye/nose/chin guide positions.
-11. Light: soft neutral key, low-ratio fill, no colored spill, approximately daylight neutral, consistent exposure.
-12. Palette/grade: neutral colorimetric reference, no cinematic grade.
-13. Layers: clean background, subject only, no props.
-14. Continuity: canonical input for all later character assets.
-15. Preserve: every approved stable identity feature, hairline, apparent age, skin tone, left/right orientation.
-16. Prevent: face reshaping, beauty retouch, makeup invention, asymmetry corruption, duplicate accessories, labels.
-17. Output requirements: separate lossless views plus contact sheet; file/version metadata; no baked captions in image.
-18. Downstream: likeness review and future identity-anchor stills.
-19. Review: matched-crop comparison against at least three originals; 100% inspection of eyes, ears, hairline, lips, jaw.
-20. Provenance/rights/state: private; source-linked; RIGHTS_UNKNOWN until G2; output begins GENERATED, never automatically approved.
+1. Asset/purpose: CHR-SAGE-FACE-001 v1, a photorealistic-natural five-view neutral identity diagnostic for private likeness review; this is not an editorial portrait or public asset.
+2. Inputs/controls: Image 1 / SRC-SAGE-001 is the primary near-frontal geometry and hair anchor; Image 2 / SRC-SAGE-004 supplies the best available opposing three-quarter evidence but not its head tilt, braids, accessories, grade, or source lighting; Image 3 / SRC-SAGE-005 supplies near-frontal hairline, brow, eye, nose, and lip relationships but not the hand, cream, skincare treatment, or beauty smoothing; Image 4 / SRC-SAGE-006 supplies unobstructed three-quarter jaw and ear evidence from a private face-only crop but not wet styling, towel, wardrobe, or source lighting; Image 5 / SRC-SAGE-013 supplies cross-session near-frontal face and resting-hair continuity from a private face-only crop but not wardrobe, branding, or grade.
+3. Identity lock: depict one consistent real person controlled only by the five cited references. Preserve features where the sources agree; resolve styling and retouch differences conservatively; do not average toward a generic face, idealize, beautify, reshape, change apparent age, or copy a single source's distortion. Because no true profiles exist, both generated profiles are explicitly PROPOSED inferred rotations rather than verified identity evidence.
+4. Scene: a plain neutral studio reference capture with a seamless light neutral-gray background; no runway, resort, set, architecture, props, or decorative environment.
+5. Placement/scale: five equal head-and-shoulder panels with identical head size, eye line, shoulder crop, camera distance, and background; ordered front, nose toward frame-left at approximately 45 degrees, nose toward frame-right at approximately 45 degrees, nose toward frame-left at 90-degree profile, nose toward frame-right at 90-degree profile.
+6. Pose/gait/hands/gaze/expression/hair: upright neutral posture; no gait; hands fully outside frame; closed-mouth neutral expression; relaxed jaw and brows; front gaze to camera and view-correct gaze for rotated views; the same resting long hair in every panel, near-center part, down and tucked behind the ears enough to reveal both side contours; no braids, wet look, wind, flyaway drama, or hair across facial landmarks.
+7. Wardrobe/material: fitted opaque matte charcoal-gray crew-neck long-sleeve top with a simple neckline below the collarbones; no logos, stripes, trade dress, lace, sheer panels, jewelry, accessories, fasteners, or visible text.
+8. Camera: eye-height and level; locked camera position, height, distance, and angle; fixed approximately 100 mm full-frame-equivalent portrait lens within the approved 85–105 mm family; f/8-like depth so the full face, ears, and hairline remain crisp; crisp 1/160-second-like shutter intent; no wide-angle perspective, dutch roll, or crop change.
+9. Aspect/resolution/crop/safe zones: one wide 5:2 diagnostic sheet with five identical vertical portrait panels, each using the same head-and-shoulder crop and generous hair/ear margin; highest useful built-in output detail; no website crop, copy zone, CTA zone, or publication safe area.
+10. Geometry/anchors: identical seamless background and invisible alignment anchors for pupils, nose base, mouth, chin, ears, head height, and shoulder line; no visible guide marks or panel dividers beyond clean spacing.
+11. Lighting: the same broad soft key in every panel, approximately 5200 K daylight neutral, low-ratio frontal fill, subtle natural facial modeling, even background, consistent exposure and white balance, minimal contact shadow, and no colored spill, rim-light drama, or beauty-light flattening.
+12. Palette/grade: neutral colorimetric reference with restrained natural saturation and realistic skin texture; no cinematic grade, monochrome treatment, warm fashion cast, cool cast, glow, bloom, diffusion, or plastic smoothing.
+13. Layering: clean background and one subject only; no foreground, middle-ground props, atmosphere, reflections, products, furniture, typography, labels, or environmental layers.
+14. Adjacent relationship: all five panels must read as one locked same-session capture with the same identity, hair, wardrobe, camera, crop, light, exposure, and color; only yaw and view-correct gaze change.
+15. Must preserve: source-consensus face shape and proportions, eye shape and color relationship, eyebrows, nose, lips, jaw, chin, ears, hairline, hair color, apparent age, skin tone, natural asymmetry, and correct left/right orientation; retain ordinary pores and small human irregularities instead of retouching them away.
+16. Negative/artifact prevention: no mixed identity, face averaging, eye-color change, age shift, face reshaping, mirrored asymmetry, invented profile certainty, extra/missing features, warped ears, uneven panel scale, double hairline, duplicate accessories, heavy makeup, beauty filter, smoothing, logos, brand marks, stripes, typography, captions, labels, watermarks, UI, runway, resort, or decorative scene.
+17. Output requirements: one high-detail five-panel diagnostic sheet per candidate, with no baked text or labels; generated binary stays in private controlled storage; candidate receives a separate sanitized attempt ID and begins as GENERATED / PROPOSED.
+18. Downstream use: first identity-review checkpoint only. Do not use as an approved body, gait, wardrobe, runway, resort, keyframe, video, Higgsfield Soul, public website, portfolio, or publication asset.
+19. Review: compare every panel at matched crop against SRC-SAGE-001, 004, 005, 006, and 013 for overall likeness, face shape, eye shape/color relationship, brows, nose, lips, jaw/chin, hairline/color, apparent age, skin tone, natural asymmetry, profile plausibility, anatomy, generation artifacts, and cross-panel identity drift; profiles cannot be approved as verified without true profile photographs.
+20. Provenance/rights/privacy/approval: private source-linked OpenAI diagnostic authorized by the project owner and Sage likeness consent for this phase; photographer copyright/license, client/agency approval, trademark permission, and commercial website permission remain UNKNOWN; no Higgsfield upload, publication, production deploy, or final-approval claim; every candidate remains GENERATED / PROPOSED until exact-version review by the owner and Sage.
+
+### Resolved provider prompt used for Batch 001
+
+The following sanitized prompt was used unchanged for all three Image Creator submissions. Each referenced image was a private metadata-stripped face crop mapped to its stable ID. No private filename, path, source fingerprint, or consent text was included in the prompt.
+
+```text
+Create one private, photorealistic-natural five-view neutral identity diagnostic sheet for likeness review. This is not an editorial portrait and not a public or approved asset.
+
+INPUT CONTROL MAP
+Image 1 / SRC-SAGE-001: primary near-frontal geometry and hair anchor.
+Image 2 / SRC-SAGE-004: best available opposing three-quarter evidence; do not copy its head tilt, braids, accessories, grade, or source lighting.
+Image 3 / SRC-SAGE-005: near-frontal hairline, brow, eye, nose, and lip relationships; do not include the hand, cream, skincare treatment, or beauty smoothing.
+Image 4 / SRC-SAGE-006: unobstructed three-quarter jaw and ear evidence from a face-only crop; do not copy wet styling, towel, wardrobe, or source lighting.
+Image 5 / SRC-SAGE-013: cross-session near-frontal face and resting-hair continuity from a face-only crop; do not copy wardrobe, branding, or grade.
+
+IDENTITY LOCK
+Depict one consistent real person controlled only by these five references. Preserve features where the sources agree and resolve styling or retouch differences conservatively. Do not average toward a generic face, idealize, beautify, reshape, change apparent age, or copy any one source's lens distortion. There are no true profile photographs: both profile panels are explicitly proposed inferred rotations, not verified identity evidence.
+
+SCENE AND COMPOSITION
+Use a plain seamless light neutral-gray studio background. Make one wide 5:2 sheet with five equal head-and-shoulder portrait panels, identical head size, eye line, shoulder crop, camera distance, background, and generous margin around hair and ears. From left to right: straight front; nose toward frame-left at about 45 degrees; nose toward frame-right at about 45 degrees; nose toward frame-left at 90-degree profile; nose toward frame-right at 90-degree profile. Use clean spacing only; no visible guides, labels, text, or decorative dividers.
+
+PERFORMANCE AND HAIR
+Upright neutral posture, hands outside frame, closed-mouth neutral expression, relaxed jaw and brows. Front gaze to camera and view-correct gaze for rotated views. Keep exactly the same resting long hair in all panels: near-center part, down, tucked behind both ears enough to reveal side contours. No braids, wet look, wind, flyaway drama, or hair across facial landmarks.
+
+WARDROBE
+Fitted opaque matte charcoal-gray crew-neck long-sleeve top with a simple neckline below the collarbones. No logos, stripes, trade dress, lace, sheer areas, jewelry, accessories, fasteners, or visible text.
+
+CAMERA
+Eye-height, level, and locked. Fixed approximately 100 mm full-frame-equivalent portrait perspective within an 85–105 mm family, f/8-like depth with face, ears, and hairline crisp, and crisp 1/160-second-like shutter intent. No wide-angle distortion, dutch angle, or crop changes.
+
+LIGHT AND COLOR
+Same broad soft key and low-ratio frontal fill in every panel, approximately 5200 K daylight neutral, subtle natural modeling, even background, consistent exposure and white balance, minimal contact shadow. Restrained natural saturation, realistic skin texture, ordinary pores, and small human irregularities. No colored spill, rim-light drama, beauty-light flattening, cinematic grade, monochrome, warm or cool fashion cast, glow, bloom, diffusion, or plastic smoothing.
+
+CONTINUITY AND PRESERVATION
+All five panels must read as one locked same-session capture. Only yaw and view-correct gaze change. Preserve source-consensus face shape and proportions, eye shape and color relationship, eyebrows, nose, lips, jaw, chin, ears, hairline, hair color, apparent age, skin tone, natural asymmetry, and correct left/right orientation.
+
+NEGATIVE CONSTRAINTS
+No mixed identity, face averaging, eye-color change, age shift, face reshaping, mirrored asymmetry, invented profile certainty, extra or missing features, warped ears, uneven panel scale, double hairline, duplicate accessories, heavy makeup, beauty filter, smoothing, logos, brand marks, stripes, typography, captions, labels, watermarks, UI, products, props, reflections, furniture, runway, resort, architecture, or decorative environment.
+
+OUTPUT STATE
+Return exactly one high-detail five-panel diagnostic sheet with no baked text. It remains a private GENERATED / PROPOSED candidate for first identity review only, not a final approval claim, body/gait/wardrobe/keyframe/video/Higgsfield/publication asset.
+```
 
 ## CHR-SAGE-BODY-001 — proportion master
 
