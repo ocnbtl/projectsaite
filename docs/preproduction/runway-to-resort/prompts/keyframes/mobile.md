@@ -1,6 +1,6 @@
 # Mobile 9:16 Keyframe Prompt Specifications
 
-Status: NON-RUNNABLE until approved sources and bracketed variables are resolved. These are separate 9:16 compositions in the same physical worlds; they are not desktop crops.
+Status: EXECUTED / ARCHIVED RECIPE. The selected mobile anchors are KF-01 v2, KF-02 v2, deterministic KF-03 v2, deterministic KF-04 v2, KF-05 v2, and KF-06 v5. These remain separately authored 9:16 compositions, never desktop crops; complete resolved private provider recipes remain outside Git.
 
 Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, explicit top browser allowance, and clear lower 16% for CTA/gesture area. No baked text/logo/UI/audio. Every prompt inherits the global blocks and twenty-field contract in ../../07-image-prompts.md.
 
@@ -25,7 +25,7 @@ Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, e
 17. Output: single logged 9:16 boundary candidate.
 18. Downstream: mobile segment 1 start.
 19. Review: identity at scale, feet, vertical geometry, safe areas, KF-02 feasibility.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; controlled GPT Image 2 correction; selected for protected-preview assembly.
 
 ## KF-02 mobile — Runway Ignition
 
@@ -48,7 +48,7 @@ Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, e
 17. Output: stable-hash 9:16 boundary still.
 18. Downstream: mobile runway segments 1/2.
 19. Review: overlay KF-01, face/body/gait/light, KF-03 coverage feasibility.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; controlled GPT Image 2 correction; selected for protected-preview assembly.
 
 ## KF-03 mobile — Lens Occlusion
 
@@ -71,7 +71,7 @@ Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, e
 17. Output: stable boundary still plus coverage reference.
 18. Downstream: mobile segment 2 end/hidden cut.
 19. Review: border coverage, black/edge/motion, anatomy, edit hold.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; deterministic full-black transition boundary; zero provider credits.
 
 ## KF-04 mobile — Resort Light Leak
 
@@ -94,7 +94,7 @@ Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, e
 17. Output: stable-hash 9:16 boundary still.
 18. Downstream: mobile segment 3 start.
 19. Review: black/edge A/B, face/wardrobe, geometry, KF-05 feasibility.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; deterministic matched-black/light-leak boundary; zero provider credits.
 
 ## KF-05 mobile — Resort Reveal
 
@@ -117,7 +117,7 @@ Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, e
 17. Output: stable-hash 9:16 boundary still.
 18. Downstream: mobile resort segments 3/4.
 19. Review: likeness/anatomy, anchors/light, context, safe zones, adjacency.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; controlled GPT Image 2 correction; selected for protected-preview assembly.
 
 ## KF-06 mobile — Resort Resolve
 
@@ -140,4 +140,4 @@ Shared output: 2160×3840 master target; 8% side safety, 6% top action safety, e
 17. Output: lossless candidate plus later separately optimized mobile poster.
 18. Downstream: mobile segment 4 end and static fallback.
 19. Review: 100% likeness/anatomy/material/anchor inspection and real mobile copy/CTA preview.
-20. State: private PROPOSED; exact Sage/owner approval required.
+20. State: private APPROVED anchor v5; accepted Resort Resolve poster/motion endpoint for protected preview.

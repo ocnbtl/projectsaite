@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:cinematic": "node scripts/verify-runway-resort-media.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",

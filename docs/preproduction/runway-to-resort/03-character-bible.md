@@ -1,6 +1,6 @@
 # Sage Character and Continuity Bible
 
-Status: PARTIALLY EVIDENCE-LINKED. The thirteen original photographs collectively are the authoritative identity and proportion set. The first synthetic face diagnostic is historical comparison evidence only; no generated result is an authoritative identity source or Soul input. Soul execution is blocked before upload.
+Status: SOURCE-LINKED / SOUL DIAGNOSTIC APPROVED FOR KEYFRAME DEVELOPMENT. The thirteen original photographs collectively remain the authoritative identity and proportion set. The first synthetic face diagnostic is historical comparison evidence only; no generated result is an authoritative identity source or Soul input.
 
 Identity rule: Identity and body-proportion decisions must resolve against SRC-SAGE-001 through SRC-SAGE-013 collectively. Candidate 003 may be consulted only as a secondary clue to the user's stated likeness preference. It may not override an original, enter training, or supply an otherwise unsupported trait.
 
@@ -133,17 +133,19 @@ Review identity before style:
 
 Batch 001 generated three CHR-SAGE-FACE-001 candidates from five private metadata-stripped face references. This historical source reduction was specific to the synthetic five-panel experiment and does not control the Soul input set.
 
-All three candidates remain PROPOSED. The earlier Codex recommendation of GEN-CHR-SAGE-FACE-001-002 as a revision baseline is superseded by the user's preference for GEN-CHR-SAGE-FACE-001-003. Candidate 003 may be retained as a useful comparison showing which facial interpretation felt closest, but it is not authoritative evidence, a Soul input, a body/proportion reference, or an approval of its inferred profiles. No candidate unlocks keyframes, video, publication, or production.
+All three candidates remain PROPOSED. The earlier Codex recommendation of GEN-CHR-SAGE-FACE-001-002 as a revision baseline is superseded by the user's preference for GEN-CHR-SAGE-FACE-001-003. Candidate 003 may be retained as a useful comparison showing which facial interpretation felt closest, but it is not authoritative evidence, a Soul input, a body/proportion reference, or an approval of its inferred profiles. The later keyframe authorization comes from the all-original Soul diagnostic, never from these candidates.
 
 ## Soul Run 001 and diagnostic gate
 
-The bounded plan is one private `--soul-cinematic` Soul trained directly from SRC-SAGE-001 through SRC-SAGE-013 as original, unchanged files. Preserve small faces, full-body compositions, unusual poses, expressions, hairstyles, sessions, posture, clothing, and visible source branding under owner/project input policy; provider acceptance remains unverified and may be filtered or rejected. Do not crop, retouch, recolor, upscale, reshape, normalize, remove backgrounds, add synthetic filler, duplicate files, or submit SRC-SAGE-014 or any generated candidate.
+One private `--soul-cinematic` Soul completed from SRC-SAGE-001 through SRC-SAGE-013 as original, unchanged files. The run preserved small faces, full-body compositions, unusual poses, expressions, hairstyles, sessions, posture, clothing, and visible source branding. No crop, retouch, recolor, upscale, reshape, normalization, background removal, synthetic filler, duplicate, SRC-SAGE-014, or generated candidate entered training.
 
-Official Soul skill v0.12.0 accepts 5–20 photos with a 5+ unique-face threshold; the photo guide gives 8–12 as a sweet spot and JPEG/PNG with 1024 x 1024 or greater ideal. All thirteen originals are JPEG and 2001 x 3000 or larger, so the published operational input gate passes and no additional photo is required for count, format, or resolution. Execution still did not begin: photographer/source rights remain UNKNOWN and do not currently satisfy the provider's broad upload/license and identity-processing grant, while the authenticated account UI needed to confirm exact file acceptance, paid Basic+ plan eligibility, balance/final charge, provider handling of branded inputs, and explicit private visibility/terms was unavailable. Current counts are zero uploads, zero Souls, zero Higgsfield diagnostics, and zero recorded Higgsfield credits.
+All thirteen originals were accepted, exact duplicates remained zero, one Soul completed, and training spent 25 credits. Seven private Soul Cinema diagnostics then completed at 0.84 gross credits. A separate concurrent 10-credit provider reward is recorded without storing an account balance.
 
-If those gates are cleared, create exactly one Soul and only the seven outputs specified in prompts/character/soul-diagnostic.md, compare them against all thirteen originals, and stop with one decision:
+The seven outputs in prompts/character/soul-diagnostic.md were compared against all thirteen originals. The allowed decision vocabulary remains:
 
 - `APPROVED FOR KEYFRAME DEVELOPMENT`;
 - `RETRAIN WITH ALL ORIGINALS PLUS ADDITIONAL REAL PHOTOS`;
 - `NEEDS CONTROLLED FULL-BODY OR PROFILE CAPTURE`; or
 - `REJECTED`.
+
+Recorded decision: `APPROVED FOR KEYFRAME DEVELOPMENT`. DIAG-04 is rejected as downstream reference because it invented tattoos. Slight face lengthening and eye narrowing are standing frame-level rejection constraints. Keyframe, video, and site-preview work is authorized; production deployment and merge remain pending the release gate.

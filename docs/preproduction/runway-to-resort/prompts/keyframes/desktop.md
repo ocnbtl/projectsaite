@@ -1,6 +1,6 @@
 # Desktop 16:9 Keyframe Prompt Specifications
 
-Status: NON-RUNNABLE until bracketed variables and approved source/character/environment versions are resolved. All six prompts inherit the global blocks and twenty-field contract in ../../07-image-prompts.md.
+Status: EXECUTED / ARCHIVED RECIPE. The selected desktop anchors are KF-01 v2, KF-02 v2, deterministic KF-03 v2, deterministic KF-04 v2, KF-05 v2, and KF-06 v4. Bracketed fields below preserve the planning contract; the complete resolved private provider recipes remain outside Git.
 
 Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/logo/UI/audio, lossless review file, prompt/settings/hash manifest record. Low-cost tests may use lower 16:9 resolution.
 
@@ -25,7 +25,7 @@ Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/lo
 17. Output: one clean candidate per logged attempt; no contact sheet as final anchor.
 18. Downstream: keyframe review, segment 1 start, possible loading poster only if later approved.
 19. Review: identity at available pixels, body/feet, geometry, shadow, safety, KF-02 interpolation.
-20. State: private PROPOSED; no provider upload/generation until G1–G3.
+20. State: private APPROVED anchor v2; controlled GPT Image 2 correction; selected for protected-preview assembly.
 
 ## KF-02 desktop — Runway Ignition
 
@@ -48,7 +48,7 @@ Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/lo
 17. Output: exact single boundary still version with stable hash.
 18. Downstream: segment 1 end, segment 2 start.
 19. Review: matched overlay to KF-01, face/body, gait, lights/reflections, KF-03 feasibility.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; controlled GPT Image 2 correction; selected for protected-preview assembly.
 
 ## KF-03 desktop — Lens Occlusion
 
@@ -71,7 +71,7 @@ Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/lo
 17. Output: boundary still plus separate approved coverage reference; no text.
 18. Downstream: segment 2 end, hidden-cut outgoing side.
 19. Review: 100% edge/anatomy, black coverage/level, motion direction, editorial hold.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; deterministic full-black transition boundary; zero provider credits.
 
 ## KF-04 desktop — Resort Light Leak
 
@@ -94,7 +94,7 @@ Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/lo
 17. Output: exact boundary still with stable hash.
 18. Downstream: hidden-cut incoming side, segment 3 start.
 19. Review: A/B against KF-03 at black/edge; identity, geometry, wardrobe, KF-05 interpolation.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; deterministic matched-black/light-leak boundary; zero provider credits.
 
 ## KF-05 desktop — Resort Reveal
 
@@ -117,7 +117,7 @@ Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/lo
 17. Output: exact boundary still with stable hash.
 18. Downstream: segment 3 end, segment 4 start.
 19. Review: identity/anatomy, anchors/light, wardrobe, copy safety, KF-04/06 adjacency.
-20. State: private PROPOSED; G1–G3 required.
+20. State: private APPROVED anchor v2; controlled GPT Image 2 correction; selected for protected-preview assembly.
 
 ## KF-06 desktop — Resort Resolve
 
@@ -140,4 +140,4 @@ Shared output: 3840×2160 16:9 master target, 5% action safety, no baked text/lo
 17. Output: lossless approved-candidate master plus later separately optimized poster derivative.
 18. Downstream: segment 4 end, master poster/reduced-motion source.
 19. Review: 100% likeness/anatomy/material/anchor inspection, static composition, copy/CTA accessibility preview.
-20. State: private PROPOSED; exact version needs Sage/owner approval before motion or web use.
+20. State: private APPROVED anchor v4; accepted Resort Resolve poster/motion endpoint for protected preview.

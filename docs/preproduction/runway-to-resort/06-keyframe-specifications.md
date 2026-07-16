@@ -1,10 +1,20 @@
 # Six-Keyframe Specifications
 
-Status: PROPOSED. No keyframe file exists and no keyframe is APPROVED. KF identifiers describe narrative positions; desktop and mobile are separately generated variants.
+Status: COMPLETE / SELECTED FOR PREVIEW ASSEMBLY. Twelve private keyframe anchors exist and passed visual review: six controlled GPT Image 2 corrections, four deterministic transition anchors, and the two accepted Resort Resolve poster anchors. KF identifiers describe narrative positions; desktop and mobile remain separately authored variants.
+
+## Executed anchor set
+
+| Anchors | Method | Selected versions | Gross provider credits | Review result |
+|---|---|---|---:|---|
+| KF-01, KF-02, KF-05 — desktop and mobile | GPT Image 2, high quality, 2k controlled correction | v2 for all six | 42 | APPROVED for protected-preview motion assembly |
+| KF-03, KF-04 — desktop and mobile | Deterministic full-black / matched-light-leak derivation | v2 for all four | 0 | APPROVED as transition boundaries |
+| KF-06 — desktop and mobile | Controlled Resort Resolve poster generation | desktop v4; mobile v5 | Included in the earlier bounded poster tranche | APPROVED as final anchors and poster/reduced-motion sources |
+
+The selected set contains exactly twelve anchors. Private output fingerprints and locations remain outside Git. These approvals are scoped to nonproduction preview assembly; they do not record a production deployment or merge.
 
 ## Shared locked dependencies
 
-- Character: CHR-SAGE-CONT-001, plus approved face/body/expression/hair/gait sheets.
+- Character: CHR-SAGE-SOUL-001 and CHR-SAGE-SOUL-DIAG-001, with the thirteen original photographs authoritative and the approved continuity constraints applied during review.
 - Runway wardrobe: WARD-RUNWAY-001.
 - Resort wardrobe: WARD-RESORT-001.
 - Runway environment: ENV-RUNWAY-001 through 007.
@@ -12,9 +22,9 @@ Status: PROPOSED. No keyframe file exists and no keyframe is APPROVED. KF identi
 - Runway lights: LIGHT-RUNWAY-001 through 003.
 - Resort lights: LIGHT-RESORT-001 through 003.
 - Transition: TRANS-OCCLUSION-001.
-- Exact source IDs: blocked until the intake register reaches APPROVED_SOURCE.
+- Exact authoritative source IDs: SRC-SAGE-001 through SRC-SAGE-013 collectively; generated identity diagnostics are comparison-only.
 
-All dimensions below are master targets. Candidate cost tests may use lower resolution while preserving aspect ratio and composition.
+All dimensions below remain archival master targets. The selected private anchors preserve the required aspect/composition contract and feed the executed 1080p segment workflow.
 
 ## Composition rules
 
@@ -29,7 +39,7 @@ Subject-height and exact foot/eye coordinates remain variables until the approve
 
 Narrative: Sage is centered at the far entrance in near darkness. The frame establishes the fixed runway, dormant practicals, camera axis, black wardrobe, and initial gait.
 
-Dependencies: CHR-SAGE-FACE-001, CHR-SAGE-BODY-001, CHR-SAGE-GAIT-001, WARD-RUNWAY-001, ENV-RUNWAY-001/006/007, LIGHT-RUNWAY-001.
+Dependencies: CHR-SAGE-SOUL-001, CHR-SAGE-SOUL-DIAG-001, CHR-SAGE-CONT-001, WARD-RUNWAY-001, ENV-RUNWAY-001/006/007, LIGHT-RUNWAY-001.
 
 Desktop:
 
@@ -55,7 +65,7 @@ Adjacent compatibility:
 
 Narrative: Sage is substantially closer as practicals activate in a controlled progression. Editorial confidence rises without identity change.
 
-Dependencies: CHR-SAGE-FACE-001, CHR-SAGE-BODY-001, CHR-SAGE-EXPR-001, CHR-SAGE-HAIR-001, CHR-SAGE-GAIT-001, WARD-RUNWAY-001, ENV-RUNWAY-001/006/007, LIGHT-RUNWAY-002.
+Dependencies: CHR-SAGE-SOUL-001, CHR-SAGE-SOUL-DIAG-001, CHR-SAGE-CONT-001, WARD-RUNWAY-001, ENV-RUNWAY-001/006/007, LIGHT-RUNWAY-002.
 
 Desktop:
 
@@ -81,7 +91,7 @@ Adjacent compatibility:
 
 Narrative: Sage reaches the near-camera zone and approved black fabric, optionally supported by an approved hair edge, covers the lens enough to conceal an editorial cut.
 
-Dependencies: all runway character sheets, WARD-RUNWAY-001, ENV-RUNWAY-001/004/006/007, LIGHT-RUNWAY-003, TRANS-OCCLUSION-001.
+Dependencies: selected KF-02 variant, TRANS-OCCLUSION-001, and the matched desktop/mobile transition contract. The selected KF-03 files are deterministic full-black boundaries rather than generated identity evidence.
 
 Desktop:
 
@@ -108,7 +118,7 @@ Adjacent compatibility:
 
 Narrative: Matched darkness opens with a warm directional light leak while resort geometry and the same moving person emerge.
 
-Dependencies: approved character continuity, WARD-RESORT-001, ENV-RESORT-001/003/006/007, LIGHT-RESORT-001, TRANS-OCCLUSION-001.
+Dependencies: selected KF-05 variant, TRANS-OCCLUSION-001, and the matched desktop/mobile transition contract. The selected KF-04 files are deterministic matched-black/light-leak boundaries.
 
 Desktop:
 
@@ -134,7 +144,7 @@ Adjacent compatibility:
 
 Narrative: The full premium tropical resort is clear while Sage continues moving in the approved resort wardrobe and light.
 
-Dependencies: all approved character sheets, WARD-RESORT-001, ENV-RESORT-001/002/005/006/007, LIGHT-RESORT-002.
+Dependencies: CHR-SAGE-SOUL-001, CHR-SAGE-SOUL-DIAG-001, CHR-SAGE-CONT-001, WARD-RESORT-001, ENV-RESORT-001/002/005/006/007, LIGHT-RESORT-002.
 
 Desktop:
 
@@ -159,7 +169,7 @@ Adjacent compatibility:
 
 Narrative: Camera and Sage settle into the final hero composition. A source-approved warm glance back is allowed. The image must work as poster and reduced-motion fallback.
 
-Dependencies: all approved character sheets, WARD-RESORT-001, ENV-RESORT-001/002/006/007, LIGHT-RESORT-003.
+Dependencies: CHR-SAGE-SOUL-001, CHR-SAGE-SOUL-DIAG-001, CHR-SAGE-CONT-001, WARD-RESORT-001, ENV-RESORT-001/002/006/007, LIGHT-RESORT-003.
 
 Desktop:
 

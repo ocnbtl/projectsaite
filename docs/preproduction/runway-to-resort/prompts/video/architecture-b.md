@@ -1,6 +1,6 @@
 # Architecture B Motion Prompt Specifications
 
-These prompts are model-neutral source specifications. Convert them only after an exact model/schema/cost preflight. Current public video schemas have no universal negative-prompt or seed field, so negative constraints remain in the main prompt when supported.
+These prompts are the archived model-neutral source specifications for the executed Seedance 2.0 segment workflow. The exact model/schema/cost preflight passed, and all eight successful five-second 1080p silent segments passed structural and contact-sheet review. Current public video schemas have no universal negative-prompt or seed field, so negative constraints remain in the main prompt when supported.
 
 Every attempt uses the exact approved start/end image hashes, no audio, the composition’s native aspect ratio, and the continuity block from ../../07-image-prompts.md.
 
@@ -48,6 +48,14 @@ No generative interpolation. Place the editorial cut only inside matched full bl
 - Preserve: identity, expression range, hands/feet, garment, CTA-safe background, final frame.
 - Prevent: pose teleport, exaggerated smile/teeth defects, foot slide, camera orbit, anchor drift, busy CTA region, audio.
 - Test: 3–5 s.
+
+## Delivery and editorial assembly
+
+- COMPLETE — four accepted segments per composition were assembled into separate 20.125-second, 24 fps silent deliveries.
+- Cut between KF-03 and KF-04 only inside matched full black.
+- Apply a deterministic full-black finish at the hidden cut so the assembly does not depend on residual provider interpolation.
+- COMPLETE — H264 and VP9 preview derivatives were produced without audio; all four are under 4.3 MB and the six-asset delivery contract is verified.
+- Keep masters and derivatives protected-preview-only until the production release gate passes.
 
 ## Attempt review
 

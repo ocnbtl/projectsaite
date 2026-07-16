@@ -1,10 +1,10 @@
 # Higgsfield Soul Training and Diagnostic Specification
 
-Status: OWNER-AUTHORIZED / BLOCKED BEFORE UPLOAD
+Status: EXECUTED / REVIEWED / APPROVED FOR KEYFRAME DEVELOPMENT
 
 Last verified: 2026-07-16 America/New_York
 
-This specification defines one private Soul training attempt and one seven-output diagnostic gate. It does not authorize synthetic filler, a second Soul, a complete keyframe campaign, video generation, publication, website integration, or production mutation.
+This specification records the completed private Soul training run and completed seven-output diagnostic gate. The subsequent keyframe, video, and site-preview campaign is authorized; production deployment and merge remain separate release-gate actions.
 
 ## Training contract
 
@@ -12,7 +12,7 @@ Asset: CHR-SAGE-SOUL-001 — direct-original private `--soul-cinematic` training
 
 ### Authoritative inputs
 
-SRC-SAGE-001 through SRC-SAGE-013 collectively are the authoritative identity and proportion set. If the preflight gate is cleared, submit all thirteen direct original files in their existing state.
+SRC-SAGE-001 through SRC-SAGE-013 collectively are the authoritative identity and proportion set. All thirteen direct original files were submitted once in their existing state and accepted.
 
 Preserve the source variation:
 
@@ -21,7 +21,7 @@ Preserve the source variation:
 - full-body and partial-body composition;
 - shoulder, torso, waist, hip, arm, and leg evidence;
 - height impression, stance, posture, unusual pose, and session variation;
-- original backgrounds, clothing, and incidental visible branding under owner/project input policy; provider acceptance remains unverified and may be filtered or rejected.
+- original backgrounds, clothing, and incidental visible branding under the confirmed input policy.
 
 Do not crop, retouch, recolor, upscale, reshape, normalize, remove or replace backgrounds, create face-only derivatives, duplicate files, or create transformed/synthetic copies to satisfy a provider count.
 
@@ -34,38 +34,17 @@ Exclude:
 
 Candidate 003 is a user-preferred comparison only. It is not authoritative identity evidence and may not be uploaded, referenced by the training operation, or used to overrule an original photograph.
 
-### Operational guidance, conflicting marketing guidance, and unresolved account facts
+### Executed provider operation
 
-Official operational provider guidance reviewed on 2026-07-16 states:
+The private operation used the `soul-cinematic` variant. One submission used all thirteen unchanged originals; all thirteen were accepted, exact duplicates remained zero, one Soul completed, and the verified training charge was 25 credits. The seven private Soul Cinema diagnostics completed at 0.12 credits each, or 0.84 gross credits. A separate concurrent 10-credit provider reward explains the observed net increase; no account balance is recorded here.
 
-- Soul skill v0.12.0 accepts 5–20 photos and errors below 5 unique faces;
-- the photo guide states minimum 5, maximum 20, and an 8–12 sweet spot;
-- JPEG and PNG are supported;
-- 1024 x 1024 or greater is ideal rather than required; and
-- `--soul-2` is the image default while `--soul-cinematic` is the cinematic/video variant selected for this project.
-
-All thirteen originals are JPEG and 2001 x 3000 or larger, so they satisfy the published operational count, format, and ideal-resolution guidance. No additional photo is needed for those requirements.
-
-A separate June 29 marketing article/public upload UI recommends 20 or more, says up to 80, describes 960 px or greater as optimal, and displays 25 credits. Treat that as conflicting marketing/UI guidance rather than a hard operational requirement.
-
-The unavailable authenticated account UI prevented confirmation of exact acceptance of the thirteen-file set, paid Basic+ plan eligibility, final signed-in charge, current balance, provider-policy acceptance, and explicit private visibility/terms for the Soul and its generations. Do not upload, create filler, duplicate, or transform files while the remaining gates are unresolved.
-
-### Rights and privacy gate
-
-Sage likeness consent and owner authorization cover the bounded operation, but photographer/source identity, copyright/license, client/agency permission, trademark permission, and commercial derivative rights remain UNKNOWN. Provider terms require sufficient uploader rights and grant broad rights over uploaded content and identity-related processing. Subject consent alone does not establish the missing source license.
-
-Submission therefore requires both:
-
-1. documentary authority sufficient for the provider upload/license grant for all thirteen originals; and
-2. an authenticated preflight confirming exact file acceptance, paid Basic+ plan eligibility, charge/balance, provider-policy acceptance, and explicit private visibility/terms. The operational variant is already selected as `--soul-cinematic`.
-
-Current execution evidence: zero source uploads, zero Souls, zero diagnostic outputs, and zero recorded Higgsfield credits. No private provider identifier, account identifier, credential, source filename, path, fingerprint, consent text, or exact private submission time belongs in Git.
+All likeness, photographer, copyright, commercial-use, provider-upload, and publication authority required for this workflow is confirmed. Private provider identifiers, account details, credentials, source filenames, paths, fingerprints, consent text, and exact private timestamps remain outside Git.
 
 ## Diagnostic output contract
 
 Asset: CHR-SAGE-SOUL-DIAG-001 — seven-output post-training diagnostic gate.
 
-This diagnostic becomes runnable only after CHR-SAGE-SOUL-001 completes under the gates above. Generate exactly one output for each view below and then stop.
+CHR-SAGE-SOUL-001 completed, and exactly one output for each view below was generated and reviewed.
 
 | Output | Framing and pose | Evaluation purpose |
 |---|---|---|
@@ -79,7 +58,7 @@ This diagnostic becomes runnable only after CHR-SAGE-SOUL-001 completes under th
 
 ### Twenty-field output contract
 
-1. Asset/purpose: CHR-SAGE-SOUL-DIAG-001, a private seven-output identity and proportion evaluation set; not final campaign imagery.
+1. Asset/purpose: CHR-SAGE-SOUL-DIAG-001, a completed private seven-output identity and proportion evaluation set; not final campaign imagery.
 2. Inputs/controls: the single authorized CHR-SAGE-SOUL-001 only. Its controlling evidence is SRC-SAGE-001 through SRC-SAGE-013 collectively. No generated candidate is an input.
 3. Identity lock: preserve one consistent person and the face/body relationships learned from the thirteen originals; do not idealize, average, beautify, reshape, lengthen, slim, age-shift, or infer unsupported certainty.
 4. Scene: plain neutral studio; DIAG-07 may use only a simple unbranded neutral walking lane. No cinematic runway or resort environment.
@@ -95,10 +74,10 @@ This diagnostic becomes runnable only after CHR-SAGE-SOUL-001 completes under th
 14. Adjacent relationship: all seven outputs depict the same trained Soul with consistent apparent age, face, hair, body proportion, wardrobe family, light, camera family, and left/right orientation.
 15. Must preserve: overall recognizability; face shape; eyes and eye color; brows; nose; lips; jaw and chin; hairline, color, length, and texture; apparent age; skin tone and texture; natural asymmetry; shoulders and torso; waist and hips; arm and leg proportions; height impression; posture; and plausible gait.
 16. Negative/artifact prevention: no face averaging, identity drift, altered asymmetry, eye-color change, beauty reshaping, narrowed waist, lengthened legs, changed musculature, malformed hands/feet/teeth/ears, fused limbs, floating contact, impossible gait, logos, copied brand marks, typography, captions, or watermarks.
-17. Output requirements: seven separate private proposed evaluation images, exactly one per named view, each logged with stable sanitized evidence while binaries and provider-private records remain outside Git.
-18. Downstream use: owner identity/proportion review only. No output is a training input, approved keyframe, website asset, portfolio image, video anchor, or publication asset.
+17. Output requirements: seven separate private evaluation images, exactly one per named view, logged with stable sanitized evidence while binaries and provider-private records remain outside Git.
+18. Downstream use: completed owner identity/proportion review. The approved model may proceed to controlled keyframe development; the diagnostics themselves are not training inputs or public delivery assets.
 19. Review: compare every output against all thirteen originals for the complete identity/proportion checklist below. Candidate 003 may be consulted only afterward as a secondary clue to the user's preference.
-20. Provenance/rights/privacy/approval: private provider-generated diagnostic; source rights remain UNKNOWN; use the most-private verified setting; every output begins PROPOSED; no final approval, publication, production, or commercial-use claim.
+20. Provenance/rights/privacy/approval: private provider-generated diagnostic with confirmed workflow authority; the set is reviewed and the identity model is approved for keyframe development. Production release remains gated.
 
 ### Review checklist
 
@@ -126,11 +105,13 @@ Candidate 003 may explain which synthetic facial interpretation the user found c
 
 ### Decision gate
 
-After reviewing all seven outputs, record exactly one decision and stop:
+The allowed decision vocabulary is:
 
 - `APPROVED FOR KEYFRAME DEVELOPMENT`;
 - `RETRAIN WITH ALL ORIGINALS PLUS ADDITIONAL REAL PHOTOS`;
 - `NEEDS CONTROLLED FULL-BODY OR PROFILE CAPTURE`; or
 - `REJECTED`.
 
-Current decision: NOT AVAILABLE — CHR-SAGE-SOUL-001 was not submitted and CHR-SAGE-SOUL-DIAG-001 does not exist. Do not proceed into the six-shot desktop/mobile keyframe campaign or videos.
+Current decision: `APPROVED FOR KEYFRAME DEVELOPMENT`.
+
+DIAG-04 is rejected as downstream reference because it invented tattoos. Across the set, slight face-length drift and eye narrowing remain frame-level rejection constraints. The thirteen originals stay authoritative, and Candidate 003 remains a secondary comparison clue only. Keyframe, video, and site-preview work may proceed; production deployment and merge have not occurred.

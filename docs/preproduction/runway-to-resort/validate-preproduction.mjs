@@ -23,7 +23,9 @@ const allowedSourceStates = new Set([
 const stableAssetId = /^(CHR-SAGE-(FACE|BODY|EXPR|HAIR|GAIT|CONT|SOUL)-\d{3}|CHR-SAGE-SOUL-DIAG-\d{3}|WARD-(RUNWAY|RESORT)-\d{3}|ENV-(RUNWAY|RESORT)-\d{3}|LIGHT-(RUNWAY|RESORT)-\d{3}|TRANS-OCCLUSION-\d{3}|VID-(RWY|RST|MASTER)-[DM]?(?:-)?\d{3})$/;
 const stableKeyframeId = /^KF-0[1-6]$/;
 const stableSourceId = /^SRC-SAGE-\d{3}$/;
-const stableAttemptId = /^GEN-CHR-SAGE-FACE-001-\d{3}$/;
+const stableHistoricalAttemptId = /^GEN-CHR-SAGE-FACE-001-\d{3}$/;
+const stableSoulDiagnosticAttemptId = /^GEN-CHR-SAGE-SOUL-DIAG-001-\d{3}$/;
+const stableSoulRunId = /^RUN-CHR-SAGE-SOUL-001-\d{3}$/;
 const errors = [];
 
 function readJson(relativePath) {
@@ -111,6 +113,10 @@ function validateSanitizedJson(label, value, path = []) {
     "consentrecord",
     "provideridentifier",
     "accountidentifier",
+    "accountbalance",
+    "creditsbefore",
+    "creditsafter",
+    "netbalance",
     "jobidentifier",
     "soulidentifier",
   ];
@@ -148,6 +154,12 @@ if (assetsManifest.schemaVersion !== "1.0.0") errors.push("assets.json: unexpect
 if (keyframeManifest.schemaVersion !== "1.0.0") errors.push("keyframes.json: unexpected schemaVersion");
 if (generationManifest.schemaVersion !== "1.0.0") errors.push("generations.json: unexpected schemaVersion");
 if (sourcesManifest.schemaVersion !== "1.0.0") errors.push("sources.json: unexpected schemaVersion");
+if (
+  assetsManifest.recordDefaults?.rightsStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+  assetsManifest.recordDefaults?.consentStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW"
+) {
+  errors.push("asset defaults must preserve confirmed workflow authority");
+}
 
 const assetIds = new Set();
 const assetRecords = new Map();
@@ -216,7 +228,7 @@ const expectedOpenAIDiagnosticSourceIds = new Set([
 const expectedSoulTrainingSourceIds = new Set(
   Array.from({ length: 13 }, (_, index) => `SRC-SAGE-${String(index + 1).padStart(3, "0")}`),
 );
-const plannedSoulSourceIds = new Set(
+const executedSoulSourceIds = new Set(
   (sourcesManifest.sources ?? [])
     .filter((source) => source.selectedForFirstSoulTraining)
     .map((source) => source.id),
@@ -225,27 +237,27 @@ if (sourceIds.size !== 14) errors.push("sources.json: expected exactly 14 source
 if (!setsEqual(historicalOpenAISourceIds, expectedOpenAIDiagnosticSourceIds)) {
   errors.push("sources.json: selected identity source set does not match the reviewed five-source subset");
 }
-if (!setsEqual(plannedSoulSourceIds, expectedSoulTrainingSourceIds)) {
-  errors.push("sources.json: planned Soul set must contain exactly the thirteen original photographs");
+if (!setsEqual(executedSoulSourceIds, expectedSoulTrainingSourceIds)) {
+  errors.push("sources.json: executed Soul set must contain exactly the thirteen original photographs");
 }
 for (const source of sourcesManifest.sources ?? []) {
   const label = "source " + source.id;
   if (expectedSoulTrainingSourceIds.has(source.id)) {
     if (
       source.kind !== "original_photo" ||
-      source.sourceStatus !== "HASHED" ||
+      source.sourceStatus !== "APPROVED_SOURCE" ||
       source.duplicateOf !== null ||
       source.selectedForFirstSoulTraining !== true ||
       source.soulTrainingInputMode !== "ORIGINAL_FILE_UNCHANGED" ||
-      source.ownerHiggsfieldAuthorization !== "AUTHORIZED_ONE_PRIVATE_SOUL_RUN" ||
-      source.providerComplianceState !== "BLOCKED_BEFORE_UPLOAD" ||
-      source.copyrightLicenseStatus !== "UNKNOWN" ||
-      source.commercialWebsitePermission !== "UNKNOWN" ||
-      !String(source.higgsfieldUploadPermission ?? "").startsWith("OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED") ||
-      !(source.restrictions ?? []).includes("OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED") ||
-      !(source.restrictions ?? []).includes("NO_OUTPUT_BRAND_REPRODUCTION")
+      source.ownerHiggsfieldAuthorization !== "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN" ||
+      source.providerComplianceState !== "ACCEPTED_AND_EXECUTED" ||
+      source.copyrightLicenseStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+      source.commercialWebsitePermission !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+      source.higgsfieldUploadPermission !== "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN" ||
+      !(source.restrictions ?? []).includes("ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN") ||
+      !(source.restrictions ?? []).includes("NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS")
     ) {
-      errors.push(label + ": invalid unchanged-original Soul authorization or rights state");
+      errors.push(label + ": invalid executed unchanged-original Soul authorization or rights state");
     }
   } else if (source.id === "SRC-SAGE-014") {
     if (
@@ -274,60 +286,48 @@ if (
   sourceSummary.exactDuplicateFiles !== 0 ||
   sourceSummary.perceptualNearDuplicateCandidates !== 0 ||
   sourceSummary.selectedForFirstIdentityBatch !== historicalOpenAISourceIds.size ||
-  sourceSummary.selectedOriginalInputsForPlannedSoul !== plannedSoulSourceIds.size ||
-  sourceSummary.excludedInputsForPlannedSoul !== 1 ||
+  sourceSummary.selectedOriginalInputsForFirstSoulRun !== executedSoulSourceIds.size ||
+  sourceSummary.submittedOriginalInputsForFirstSoulRun !== 13 ||
+  sourceSummary.acceptedOriginalInputsForFirstSoulRun !== 13 ||
+  sourceSummary.excludedInputsForFirstSoulRun !== 1 ||
   sourceSummary.trueProfileViewsAvailable !== 0
 ) {
   errors.push("sources.json: summary does not match the reviewed intake totals");
 }
-const plannedSoulInputSet = sourcesManifest.plannedSoulInputSet ?? {};
+const soulInputSet = sourcesManifest.soulInputSet ?? {};
 if (
-  plannedSoulInputSet.state !== "BLOCKED_BEFORE_UPLOAD" ||
-  plannedSoulInputSet.selectionMode !== "ORIGINAL_FILE_UNCHANGED" ||
-  !setsEqual(new Set(plannedSoulInputSet.selectedSourceIds ?? []), expectedSoulTrainingSourceIds) ||
-  !setsEqual(new Set(plannedSoulInputSet.excludedSourceIds ?? []), new Set(["SRC-SAGE-014"])) ||
-  plannedSoulInputSet.generatedDerivativesAllowed !== false ||
-  plannedSoulInputSet.historicalFirstIdentityBatchSelectionPreserved !== true ||
-  plannedSoulInputSet.rightsStatus !== "RIGHTS_UNKNOWN" ||
-  plannedSoulInputSet.commercialWebsitePermission !== "UNKNOWN" ||
-  plannedSoulInputSet.uploadState !== "NOT_UPLOADED" ||
-  plannedSoulInputSet.ownerHiggsfieldAuthorization !== "AUTHORIZED_ONE_PRIVATE_SOUL_RUN" ||
-  plannedSoulInputSet.providerComplianceState !== "BLOCKED_BEFORE_UPLOAD" ||
-  plannedSoulInputSet.inputBrandingPolicy !== "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED" ||
-  plannedSoulInputSet.outputBrandingPolicy !== "PROHIBITED" ||
-  plannedSoulInputSet.authenticatedUiState !== "UNAVAILABLE" ||
-  plannedSoulInputSet.operationalEvidence?.version !== "0.12.0" ||
-  plannedSoulInputSet.operationalEvidence?.minimumInputCount !== 5 ||
-  plannedSoulInputSet.operationalEvidence?.maximumInputCount !== 20 ||
-  plannedSoulInputSet.operationalEvidence?.sweetSpotInputCount !== "8_TO_12" ||
-  !setsEqual(new Set(plannedSoulInputSet.operationalEvidence?.acceptedFormats ?? []), new Set(["JPEG", "PNG"])) ||
-  plannedSoulInputSet.operationalEvidence?.idealMinimumDimensionsPixels !== "1024x1024" ||
-  plannedSoulInputSet.operationalEvidence?.paidBasicOrHigherPlanRequired !== true ||
-  plannedSoulInputSet.operationalEvidence?.selectedVariant !== "soul-cinematic" ||
-  plannedSoulInputSet.marketingAndPublicUiEvidence?.recommendedInputCount !== "20_OR_MORE" ||
-  plannedSoulInputSet.marketingAndPublicUiEvidence?.maximumInputCount !== 80 ||
-  plannedSoulInputSet.marketingAndPublicUiEvidence?.optimalMinimumResolutionPixels !== 960 ||
-  plannedSoulInputSet.marketingAndPublicUiEvidence?.displayedReferenceCostCredits !== 25 ||
-  plannedSoulInputSet.marketingAndPublicUiEvidence?.signedInChargeConfirmed !== false ||
-  plannedSoulInputSet.operationalEligibility?.selectedInputCount !== 13 ||
-  plannedSoulInputSet.operationalEligibility?.countWithinPublishedOperationalRange !== true ||
-  plannedSoulInputSet.operationalEligibility?.allSelectedInputsUseAcceptedFormats !== true ||
-  plannedSoulInputSet.operationalEligibility?.allSelectedInputsMeetIdealDimensions !== true ||
-  plannedSoulInputSet.operationalEligibility?.noAdditionalPhotosRequiredByPublishedOperationalCount !== true ||
-  plannedSoulInputSet.operationalEligibility?.exactThirteenFileAcceptance !== "UNKNOWN_UNTIL_AUTHENTICATED_PREFLIGHT" ||
-  plannedSoulInputSet.selectedVariant !== "soul-cinematic"
+  soulInputSet.state !== "EXECUTED_COMPLETED" ||
+  soulInputSet.selectionMode !== "ORIGINAL_FILE_UNCHANGED" ||
+  !setsEqual(new Set(soulInputSet.selectedSourceIds ?? []), expectedSoulTrainingSourceIds) ||
+  !setsEqual(new Set(soulInputSet.excludedSourceIds ?? []), new Set(["SRC-SAGE-014"])) ||
+  soulInputSet.generatedDerivativesAllowed !== false ||
+  soulInputSet.historicalFirstIdentityBatchSelectionPreserved !== true ||
+  soulInputSet.rightsStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+  soulInputSet.commercialWebsitePermission !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+  soulInputSet.uploadState !== "SUBMITTED_ONCE_ALL_ACCEPTED" ||
+  soulInputSet.submittedInputCount !== 13 ||
+  soulInputSet.acceptedInputCount !== 13 ||
+  soulInputSet.exactDuplicateCount !== 0 ||
+  soulInputSet.ownerHiggsfieldAuthorization !== "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN" ||
+  soulInputSet.providerComplianceState !== "ACCEPTED_AND_EXECUTED" ||
+  soulInputSet.executionEvidence?.allSelectedInputsSubmittedUnchanged !== true ||
+  soulInputSet.executionEvidence?.allSelectedInputsAccepted !== true ||
+  soulInputSet.executionEvidence?.selectedVariant !== "soul-cinematic" ||
+  soulInputSet.executionEvidence?.soulRunsSubmitted !== 1 ||
+  soulInputSet.executionEvidence?.soulsCompleted !== 1 ||
+  soulInputSet.executionEvidence?.trainingCreditsSpent !== 25
 ) {
-  errors.push("sources.json: planned Soul input contract is inconsistent or overbroad");
+  errors.push("sources.json: completed Soul input contract is inconsistent");
 }
 
+let approvedRequiredSources = 0;
 for (const source of assetsManifest.requiredSources ?? []) {
   if (!allowedSourceStates.has(source.sourceStatus)) {
     errors.push("required source " + source.slot + ": invalid sourceStatus");
   }
-  if (source.sourceStatus === "APPROVED_SOURCE") {
-    errors.push("required source " + source.slot + ": no supplied source is approved for commercial/public use");
-  }
+  if (source.sourceStatus === "APPROVED_SOURCE") approvedRequiredSources += 1;
 }
+if (approvedRequiredSources !== 3) errors.push("assets.json: exactly three original-source families must be approved");
 
 for (const raw of assetsManifest.assets ?? []) {
   const label = "asset " + raw.id;
@@ -406,67 +406,60 @@ if (
   errors.push("assets.json: historical face diagnostic must record Candidate 003 preference without approval or Soul eligibility");
 }
 
-const plannedSoulAsset = assetRecords.get("CHR-SAGE-SOUL-001") ?? {};
+const completedSoulAsset = assetRecords.get("CHR-SAGE-SOUL-001") ?? {};
 if (
-  plannedSoulAsset.provider !== "Higgsfield" ||
-  plannedSoulAsset.model !== "Soul ID — cinematic variant" ||
-  plannedSoulAsset.workflow !== "ONE_PRIVATE_SOUL_CINEMATIC_TRAINING_RUN" ||
-  plannedSoulAsset.promptSpecPath !== "prompts/character/soul-diagnostic.md#training-contract" ||
-  !setsEqual(new Set(plannedSoulAsset.sourceAssetIds ?? []), expectedSoulTrainingSourceIds) ||
-  plannedSoulAsset.rightsStatus !== "RIGHTS_UNKNOWN" ||
-  plannedSoulAsset.privacyStatus !== "REQUIRED_BUT_NOT_VERIFIED" ||
-  plannedSoulAsset.provenanceStatus !== "PLANNED_BLOCKED_BEFORE_UPLOAD" ||
-  plannedSoulAsset.reviewState !== "PROPOSED" ||
-  plannedSoulAsset.settings?.authorizedPrivateRunCount !== 1 ||
-  plannedSoulAsset.settings?.selectedOriginalInputCount !== 13 ||
-  plannedSoulAsset.settings?.inputPolicy !== "ORIGINAL_SOURCE_FILES_UNCHANGED" ||
-  plannedSoulAsset.settings?.uploadedInputCount !== 0 ||
-  plannedSoulAsset.settings?.submittedRunCount !== 0 ||
-  plannedSoulAsset.settings?.createdSoulCount !== 0 ||
-  plannedSoulAsset.settings?.creditsSpent !== 0 ||
-  plannedSoulAsset.settings?.generatedCandidatesEligibleAsInputs !== false ||
-  plannedSoulAsset.settings?.operationalEvidence?.version !== "0.12.0" ||
-  plannedSoulAsset.settings?.operationalEvidence?.minimumInputCount !== 5 ||
-  plannedSoulAsset.settings?.operationalEvidence?.maximumInputCount !== 20 ||
-  plannedSoulAsset.settings?.operationalEvidence?.paidBasicOrHigherPlanRequired !== true ||
-  plannedSoulAsset.settings?.operationalEvidence?.selectedVariant !== "soul-cinematic" ||
-  plannedSoulAsset.settings?.operationalEligibility?.countWithinPublishedOperationalRange !== true ||
-  plannedSoulAsset.settings?.operationalEligibility?.allSelectedInputsUseAcceptedFormats !== true ||
-  plannedSoulAsset.settings?.operationalEligibility?.allSelectedInputsMeetIdealDimensions !== true ||
-  plannedSoulAsset.settings?.operationalEligibility?.noAdditionalPhotosRequiredByPublishedOperationalCount !== true ||
-  plannedSoulAsset.settings?.operationalEligibility?.exactThirteenFileAcceptance !== "UNKNOWN_UNTIL_AUTHENTICATED_PREFLIGHT" ||
-  plannedSoulAsset.settings?.marketingAndPublicUiEvidence?.displayedReferenceCostCredits !== 25 ||
-  plannedSoulAsset.settings?.marketingAndPublicUiEvidence?.signedInChargeConfirmed !== false ||
-  plannedSoulAsset.settings?.accountPlanStatus !== "UNKNOWN" ||
-  plannedSoulAsset.settings?.inputBrandingPolicy !== "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED"
+  completedSoulAsset.provider !== "Higgsfield" ||
+  completedSoulAsset.model !== "Soul ID — cinematic variant" ||
+  completedSoulAsset.workflow !== "ONE_PRIVATE_SOUL_CINEMATIC_TRAINING_RUN" ||
+  completedSoulAsset.promptSpecPath !== "prompts/character/soul-diagnostic.md#training-contract" ||
+  !setsEqual(new Set(completedSoulAsset.sourceAssetIds ?? []), expectedSoulTrainingSourceIds) ||
+  completedSoulAsset.rightsStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+  completedSoulAsset.privacyStatus !== "PRIVATE" ||
+  completedSoulAsset.provenanceStatus !== "COMPLETED_SOURCE_LINKED_PRIVATE_PROVIDER_RUN" ||
+  completedSoulAsset.reviewState !== "APPROVED" ||
+  completedSoulAsset.settings?.authorizedPrivateRunCount !== 1 ||
+  completedSoulAsset.settings?.selectedOriginalInputCount !== 13 ||
+  completedSoulAsset.settings?.inputPolicy !== "ORIGINAL_SOURCE_FILES_UNCHANGED" ||
+  completedSoulAsset.settings?.uploadedInputCount !== 13 ||
+  completedSoulAsset.settings?.acceptedInputCount !== 13 ||
+  completedSoulAsset.settings?.submittedRunCount !== 1 ||
+  completedSoulAsset.settings?.createdSoulCount !== 1 ||
+  completedSoulAsset.settings?.trainingCreditsSpent !== 25 ||
+  completedSoulAsset.settings?.generatedCandidatesEligibleAsInputs !== false ||
+  completedSoulAsset.settings?.selectedVariant !== "soul-cinematic"
 ) {
-  errors.push("assets.json: planned Soul asset is missing the bounded blocked-before-upload contract");
+  errors.push("assets.json: completed Soul asset is missing verified execution fields");
 }
 
-const plannedSoulDiagnosticAsset = assetRecords.get("CHR-SAGE-SOUL-DIAG-001") ?? {};
+const completedSoulDiagnosticAsset = assetRecords.get("CHR-SAGE-SOUL-DIAG-001") ?? {};
 if (
-  plannedSoulDiagnosticAsset.provider !== "Higgsfield" ||
-  plannedSoulDiagnosticAsset.model !== "Soul Cinema" ||
-  plannedSoulDiagnosticAsset.workflow !== "PRIVATE_SOUL_CINEMA_IDENTITY_DIAGNOSTICS" ||
-  plannedSoulDiagnosticAsset.promptSpecPath !== "prompts/character/soul-diagnostic.md#diagnostic-output-contract" ||
-  !setsEqual(new Set(plannedSoulDiagnosticAsset.sourceAssetIds ?? []), expectedSoulTrainingSourceIds) ||
-  !setsEqual(new Set(plannedSoulDiagnosticAsset.continuityDependencies ?? []), new Set(["CHR-SAGE-SOUL-001"])) ||
-  plannedSoulDiagnosticAsset.rightsStatus !== "RIGHTS_UNKNOWN" ||
-  plannedSoulDiagnosticAsset.privacyStatus !== "REQUIRED_BUT_NOT_VERIFIED" ||
-  plannedSoulDiagnosticAsset.reviewState !== "PROPOSED" ||
-  plannedSoulDiagnosticAsset.settings?.authorizedMaximumDiagnostics !== 7 ||
-  plannedSoulDiagnosticAsset.settings?.submittedDiagnostics !== 0 ||
-  plannedSoulDiagnosticAsset.settings?.completedDiagnostics !== 0 ||
-  plannedSoulDiagnosticAsset.settings?.creditsSpent !== 0 ||
-  !setsEqual(new Set(plannedSoulDiagnosticAsset.settings?.orderedDiagnosticViewKeys ?? []), new Set(expectedDiagnosticViewKeys)) ||
-  !setsEqual(new Set(plannedSoulDiagnosticAsset.settings?.allowedDecisionValues ?? []), new Set(allowedSoulDecisionValues)) ||
-  plannedSoulDiagnosticAsset.settings?.keyframeCampaignAuthorized !== false ||
-  plannedSoulDiagnosticAsset.settings?.videoCampaignAuthorized !== false ||
-  plannedSoulDiagnosticAsset.settings?.publicationAuthorized !== false ||
-  plannedSoulDiagnosticAsset.settings?.productionMutationAuthorized !== false ||
-  plannedSoulDiagnosticAsset.settings?.inputBrandingPolicy !== "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED"
+  completedSoulDiagnosticAsset.provider !== "Higgsfield" ||
+  completedSoulDiagnosticAsset.model !== "Soul Cinema" ||
+  completedSoulDiagnosticAsset.workflow !== "PRIVATE_SOUL_CINEMA_IDENTITY_DIAGNOSTICS" ||
+  completedSoulDiagnosticAsset.promptSpecPath !== "prompts/character/soul-diagnostic.md#diagnostic-output-contract" ||
+  !setsEqual(new Set(completedSoulDiagnosticAsset.sourceAssetIds ?? []), expectedSoulTrainingSourceIds) ||
+  !setsEqual(new Set(completedSoulDiagnosticAsset.continuityDependencies ?? []), new Set(["CHR-SAGE-SOUL-001"])) ||
+  completedSoulDiagnosticAsset.rightsStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+  completedSoulDiagnosticAsset.privacyStatus !== "PRIVATE" ||
+  completedSoulDiagnosticAsset.reviewState !== "APPROVED" ||
+  completedSoulDiagnosticAsset.settings?.authorizedMaximumDiagnostics !== 7 ||
+  completedSoulDiagnosticAsset.settings?.submittedDiagnostics !== 7 ||
+  completedSoulDiagnosticAsset.settings?.completedDiagnostics !== 7 ||
+  completedSoulDiagnosticAsset.settings?.diagnosticCreditsSpent !== 0.84 ||
+  completedSoulDiagnosticAsset.settings?.concurrentProviderRewardGrantCredits !== 10 ||
+  !setsEqual(new Set(completedSoulDiagnosticAsset.settings?.orderedDiagnosticViewKeys ?? []), new Set(expectedDiagnosticViewKeys)) ||
+  !setsEqual(new Set(completedSoulDiagnosticAsset.settings?.allowedDecisionValues ?? []), new Set(allowedSoulDecisionValues)) ||
+  completedSoulDiagnosticAsset.settings?.decision !== "APPROVED FOR KEYFRAME DEVELOPMENT" ||
+  completedSoulDiagnosticAsset.settings?.originalPhotosRemainAuthoritative !== true ||
+  completedSoulDiagnosticAsset.settings?.candidate003Role !== "SECONDARY_COMPARISON_ONLY" ||
+  completedSoulDiagnosticAsset.settings?.keyframeCampaignAuthorized !== true ||
+  completedSoulDiagnosticAsset.settings?.videoCampaignAuthorized !== true ||
+  completedSoulDiagnosticAsset.settings?.sitePreviewCampaignAuthorized !== true ||
+  completedSoulDiagnosticAsset.settings?.productionDeploymentPerformed !== false ||
+  completedSoulDiagnosticAsset.settings?.mainMergePerformed !== false ||
+  !(completedSoulDiagnosticAsset.knownDefects ?? []).includes("DIAG_04_INVENTED_TATTOOS_REJECTED")
 ) {
-  errors.push("assets.json: planned Soul diagnostic asset is missing the exact seven-view blocked gate");
+  errors.push("assets.json: completed Soul diagnostic asset is missing the approved seven-view gate");
 }
 
 for (const [assetId, record] of assetRecords) {
@@ -551,6 +544,117 @@ if (keyframeKeys.size !== expectedKeyframes.size) {
   errors.push("keyframes.json: expected exactly 12 desktop/mobile keyframe records");
 }
 
+const expectedCorrectedKeyframes = new Set([
+  "KF-01::desktop",
+  "KF-01::mobile",
+  "KF-02::desktop",
+  "KF-02::mobile",
+  "KF-05::desktop",
+  "KF-05::mobile",
+]);
+const expectedDeterministicKeyframes = new Set([
+  "KF-03::desktop",
+  "KF-03::mobile",
+  "KF-04::desktop",
+  "KF-04::mobile",
+]);
+for (const raw of keyframeManifest.keyframes ?? []) {
+  const record = effective(keyframeManifest.recordDefaults ?? {}, raw);
+  const key = record.id + "::" + record.variant;
+  if (
+    record.reviewState !== "APPROVED" ||
+    record.provenanceStatus !== "COMPLETED_PRIVATE_GENERATION_REVIEWED" ||
+    record.rightsStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+    record.consentStatus !== "CONFIRMED_COMPLETE_PROJECT_WORKFLOW" ||
+    record.privacyStatus !== "PRIVATE"
+  ) {
+    errors.push("keyframe " + key + ": selected-keyframe review boundary is incomplete");
+  }
+  if (
+    expectedCorrectedKeyframes.has(key) &&
+    (record.version !== 2 ||
+      record.model !== "GPT Image 2" ||
+      record.settings?.quality !== "high" ||
+      record.settings?.sizeClass !== "2k" ||
+      record.settings?.method !== "CONTROLLED_KEYFRAME_CORRECTION")
+  ) {
+    errors.push("keyframe " + key + ": controlled correction recipe is inconsistent");
+  }
+  if (
+    expectedDeterministicKeyframes.has(key) &&
+    (record.version !== 2 ||
+      record.model !== "Deterministic raster derivation" ||
+      record.settings?.providerCreditsSpent !== 0)
+  ) {
+    errors.push("keyframe " + key + ": deterministic transition recipe is inconsistent");
+  }
+}
+const selectedKeyframeRecords = new Map(
+  (keyframeManifest.keyframes ?? []).map((raw) => {
+    const record = effective(keyframeManifest.recordDefaults ?? {}, raw);
+    return [record.id + "::" + record.variant, record];
+  }),
+);
+if (
+  selectedKeyframeRecords.get("KF-06::desktop")?.version !== 4 ||
+  selectedKeyframeRecords.get("KF-06::mobile")?.version !== 5
+) {
+  errors.push("keyframes.json: expected accepted KF-06 desktop v4 and mobile v5");
+}
+
+const expectedMotionAssets = new Map([
+  ["VID-RWY-D-001", "16:9"],
+  ["VID-RWY-D-002", "16:9"],
+  ["VID-RST-D-001", "16:9"],
+  ["VID-RST-D-002", "16:9"],
+  ["VID-RWY-M-001", "9:16"],
+  ["VID-RWY-M-002", "9:16"],
+  ["VID-RST-M-001", "9:16"],
+  ["VID-RST-M-002", "9:16"],
+]);
+for (const [assetId, aspectRatio] of expectedMotionAssets) {
+  const record = assetRecords.get(assetId) ?? {};
+  if (
+    record.provider !== "Higgsfield" ||
+    record.model !== "Seedance 2.0" ||
+    record.settings?.durationSeconds !== 5 ||
+    record.settings?.resolution !== "1080p" ||
+    record.settings?.quality !== "standard" ||
+    record.settings?.bitrate !== "high" ||
+    record.settings?.audio !== false ||
+    record.settings?.grossCreditsSpent !== 45 ||
+    record.dimensions?.aspectRatio !== aspectRatio ||
+    record.dimensions?.durationSeconds !== 5 ||
+    record.reviewState !== "APPROVED" ||
+    record.provenanceStatus !== "COMPLETED_PRIVATE_PROVIDER_SEGMENT_REVIEWED"
+  ) {
+    errors.push("assets.json: reviewed motion segment is inconsistent for " + assetId);
+  }
+}
+for (const [assetId, aspectRatio] of [
+  ["VID-MASTER-D-001", "16:9"],
+  ["VID-MASTER-M-001", "9:16"],
+]) {
+  const record = assetRecords.get(assetId) ?? {};
+  if (
+    record.settings?.targetDurationSeconds !== 20 ||
+    record.settings?.actualDurationSeconds !== 20.125 ||
+    record.settings?.frameRate !== 24 ||
+    record.settings?.audio !== false ||
+    !setsEqual(new Set(record.settings?.previewCodecs ?? []), new Set(["H264", "VP9"])) ||
+    record.settings?.previewDerivativeCount !== 2 ||
+    record.settings?.individualDerivativeSizeResult !== "BOTH_UNDER_4_3_MB" ||
+    record.settings?.visibility !== "PROTECTED_PREVIEW_ONLY" ||
+    record.settings?.verificationResult !== "DELIVERY_ASSETS_VERIFIED" ||
+    record.dimensions?.aspectRatio !== aspectRatio ||
+    record.dimensions?.durationSeconds !== 20.125 ||
+    record.provenanceStatus !== "COMPLETED_VERIFIED_PROTECTED_PREVIEW_DELIVERY" ||
+    record.reviewState !== "APPROVED"
+  ) {
+    errors.push("assets.json: preview master assembly record is inconsistent for " + assetId);
+  }
+}
+
 const generationAuthorization = generationManifest.historicalOpenAIBatchAuthorization ?? {};
 if (generationManifest.generationAuthorized !== true) {
   errors.push("generations.json: the bounded first OpenAI diagnostic authorization must be recorded");
@@ -572,16 +676,88 @@ if (!setsEqual(authorizedSourceIds, expectedOpenAIDiagnosticSourceIds)) {
   errors.push("generations.json: authorization source set does not match the selected source set");
 }
 if (
-  generationManifest.providerSubmissionsPerformed !== 3 ||
+  generationManifest.openAIProviderSubmissionsPerformed !== 3 ||
   generationManifest.distinctReferenceAssetsSubmitted !== 5 ||
   generationManifest.referenceAssetsPerSubmission !== 5 ||
-  generationManifest.higgsfieldUploadsPerformed !== 0 ||
+  generationManifest.higgsfieldUploadsPerformed !== 13 ||
   generationManifest.productionAssetUploadsPerformed !== 0 ||
   generationManifest.generatedOutputPublicationUploadsPerformed !== 0 ||
-  generationManifest.creditsSpent !== 0 ||
-  generationManifest.approvedGeneratedAssets !== 0
+  generationManifest.grossHiggsfieldCreditsCharged !== 472.84 ||
+  generationManifest.higgsfieldCreditsRefunded !== 45 ||
+  generationManifest.grossHiggsfieldCreditsSpent !== 427.84 ||
+  generationManifest.concurrentProviderRewardGrantCredits !== 10 ||
+  generationManifest.approvedPublicDeliveryAssets !== 0 ||
+  generationManifest.verifiedProtectedPreviewDeliveryAssets !== 6
 ) {
   errors.push("generations.json: provider-submission, upload, credit, or approval counts are inconsistent");
+}
+
+const keyframeWorkflow = generationManifest.keyframeWorkflow ?? {};
+if (
+  keyframeWorkflow.executionState !== "TWELVE_SELECTED_ANCHORS_REVIEWED" ||
+  keyframeWorkflow.selectedKeyframeCount !== 12 ||
+  keyframeWorkflow.selectedDesktopCount !== 6 ||
+  keyframeWorkflow.selectedMobileCount !== 6 ||
+  keyframeWorkflow.controlledCorrectionBatch?.provider !== "Higgsfield" ||
+  keyframeWorkflow.controlledCorrectionBatch?.model !== "GPT Image 2" ||
+  keyframeWorkflow.controlledCorrectionBatch?.acceptedCount !== 6 ||
+  keyframeWorkflow.controlledCorrectionBatch?.grossCreditsSpent !== 42 ||
+  !setsEqual(new Set(keyframeWorkflow.controlledCorrectionBatch?.selectedKeys ?? []), expectedCorrectedKeyframes) ||
+  keyframeWorkflow.deterministicTransitionBatch?.acceptedCount !== 4 ||
+  keyframeWorkflow.deterministicTransitionBatch?.grossCreditsSpent !== 0 ||
+  !setsEqual(new Set(keyframeWorkflow.deterministicTransitionBatch?.selectedKeys ?? []), expectedDeterministicKeyframes) ||
+  keyframeWorkflow.reviewState !== "APPROVED_FOR_PROTECTED_PREVIEW_ASSEMBLY" ||
+  keyframeWorkflow.privateOperationalRecordsPreservedOutsideGit !== true
+) {
+  errors.push("generations.json: selected keyframe workflow is inconsistent");
+}
+
+const motionWorkflow = generationManifest.motionWorkflow ?? {};
+const motionSettings = motionWorkflow.successfulSegmentSettings ?? {};
+const failedMotionAttempt = motionWorkflow.failedRefundedAttempt ?? {};
+const motionAssembly = motionWorkflow.assembly ?? {};
+if (
+  motionWorkflow.executionState !== "EIGHT_SEGMENTS_REVIEWED_DELIVERY_ASSEMBLY_COMPLETE_VERIFIED" ||
+  motionWorkflow.provider !== "Higgsfield" ||
+  motionWorkflow.model !== "Seedance 2.0" ||
+  motionWorkflow.successfulSegmentCount !== 8 ||
+  motionWorkflow.desktopSegmentCount !== 4 ||
+  motionWorkflow.mobileSegmentCount !== 4 ||
+  !setsEqual(new Set(motionWorkflow.successfulSegmentAssetIds ?? []), new Set(expectedMotionAssets.keys())) ||
+  motionSettings.durationSeconds !== 5 ||
+  motionSettings.resolution !== "1080p" ||
+  motionSettings.quality !== "standard" ||
+  motionSettings.bitrate !== "high" ||
+  motionSettings.audio !== false ||
+  motionSettings.grossCreditsPerSuccessfulSegment !== 45 ||
+  motionWorkflow.grossSuccessfulSegmentCreditsSpent !== 360 ||
+  motionWorkflow.failedRefundedAttemptCount !== 1 ||
+  failedMotionAttempt.segmentAssetId !== "VID-RST-M-002" ||
+  failedMotionAttempt.chargedCredits !== 45 ||
+  failedMotionAttempt.refundedCredits !== 45 ||
+  failedMotionAttempt.replacementSubmitted !== true ||
+  failedMotionAttempt.replacementReviewState !== "APPROVED" ||
+  motionWorkflow.visualReview?.structuralChecksPassed !== 8 ||
+  motionWorkflow.visualReview?.contactSheetChecksPassed !== 8 ||
+  motionWorkflow.visualReview?.successfulSegmentsApprovedForAssembly !== 8 ||
+  motionAssembly.targetDurationSeconds !== 20 ||
+  motionAssembly.actualDurationSeconds !== 20.125 ||
+  motionAssembly.targetFrameRate !== 24 ||
+  motionAssembly.audio !== false ||
+  !setsEqual(new Set(motionAssembly.previewDerivativeCodecs ?? []), new Set(["H264", "VP9"])) ||
+  motionAssembly.previewDerivativeCount !== 4 ||
+  motionAssembly.posterAssetCount !== 2 ||
+  motionAssembly.verifiedProtectedPreviewAssetCount !== 6 ||
+  motionAssembly.individualDerivativeSizeResult !== "ALL_FOUR_UNDER_4_3_MB" ||
+  motionAssembly.verificationResult !== "DELIVERY_ASSETS_VERIFIED" ||
+  motionAssembly.hiddenCutTreatment !== "DETERMINISTIC_FULL_BLACK_FINISH_AT_HIDDEN_CUT" ||
+  motionAssembly.visibility !== "PROTECTED_PREVIEW_ONLY" ||
+  motionAssembly.state !== "COMPLETE_VERIFIED" ||
+  motionWorkflow.productionDeploymentPerformed !== false ||
+  motionWorkflow.mainMergePerformed !== false ||
+  motionWorkflow.privateOperationalRecordsPreservedOutsideGit !== true
+) {
+  errors.push("generations.json: motion execution or preview assembly record is inconsistent");
 }
 if (!Array.isArray(generationManifest.attempts) || generationManifest.attempts.length !== 3) {
   errors.push("generations.json: expected exactly three authorized attempts");
@@ -593,7 +769,7 @@ const attemptIds = new Set();
 const attemptRecords = new Map();
 for (const attempt of generationManifest.attempts ?? []) {
   const label = "attempt " + attempt.attemptId;
-  if (!stableAttemptId.test(attempt.attemptId ?? "")) errors.push(label + ": unstable attempt ID");
+  if (!stableHistoricalAttemptId.test(attempt.attemptId ?? "")) errors.push(label + ": unstable attempt ID");
   if (attemptIds.has(attempt.attemptId)) errors.push(label + ": duplicate attempt ID");
   attemptIds.add(attempt.attemptId);
   attemptRecords.set(attempt.attemptId, attempt);
@@ -644,14 +820,10 @@ if (
 }
 
 const soulWorkflow = generationManifest.soulWorkflow ?? {};
-const soulOperationalEvidence = soulWorkflow.operationalSkillEvidence ?? {};
-const soulMarketingEvidence = soulWorkflow.marketingAndPublicUiEvidence ?? {};
-const soulOperationalEligibility = soulWorkflow.operationalEligibility ?? {};
-const unresolvedSoulFacts = soulWorkflow.unresolvedPreflightFacts ?? {};
 const soulExecutionCounts = soulWorkflow.executionCounts ?? {};
 if (
-  soulWorkflow.authorizationScope !== "ONE_PRIVATE_SOUL_RUN_AND_MAXIMUM_SEVEN_PRIVATE_DIAGNOSTICS" ||
-  soulWorkflow.preflightState !== "BLOCKED_BEFORE_UPLOAD" ||
+  soulWorkflow.authorizationScope !== "COMPLETED_ONE_PRIVATE_SOUL_RUN_AND_SEVEN_PRIVATE_DIAGNOSTICS_KEYFRAME_VIDEO_SITE_PREVIEW_AUTHORIZED" ||
+  soulWorkflow.preflightState !== "PASSED_AND_EXECUTED" ||
   soulWorkflow.provider !== "Higgsfield" ||
   soulWorkflow.soulAssetId !== "CHR-SAGE-SOUL-001" ||
   soulWorkflow.diagnosticAssetId !== "CHR-SAGE-SOUL-DIAG-001" ||
@@ -665,75 +837,104 @@ if (
   soulWorkflow.diagnosticModel !== "Soul Cinema" ||
   soulWorkflow.selectedVariant !== "soul-cinematic" ||
   soulWorkflow.selectedVariantFlag !== "--soul-cinematic" ||
-  soulWorkflow.authenticatedUiState !== "UNAVAILABLE" ||
-  soulWorkflow.privacyState !== "REQUIRED_BUT_NOT_VERIFIED" ||
+  soulWorkflow.privacyState !== "PRIVATE_PROVIDER_WORKFLOW" ||
   JSON.stringify(soulWorkflow.orderedDiagnosticViewKeys ?? []) !== JSON.stringify(expectedDiagnosticViewKeys) ||
   !setsEqual(new Set(soulWorkflow.allowedDecisionValues ?? []), new Set(allowedSoulDecisionValues)) ||
-  soulWorkflow.keyframeCampaignAuthorized !== false ||
-  soulWorkflow.videoCampaignAuthorized !== false ||
-  soulWorkflow.publicationAuthorized !== false ||
-  soulWorkflow.productionMutationAuthorized !== false ||
-  soulWorkflow.inputBrandingPolicy !== "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED" ||
-  soulWorkflow.outputBrandingPolicy !== "PROHIBITED" ||
-  soulWorkflow.publicDisplayedCostCredits !== 25 ||
-  soulWorkflow.signedInChargeConfirmed !== false ||
-  soulWorkflow.noAdditionalPhotosRequiredByPublishedOperationalCount !== true
+  soulWorkflow.diagnosticDecision !== "APPROVED FOR KEYFRAME DEVELOPMENT" ||
+  soulWorkflow.originalPhotosRemainAuthoritative !== true ||
+  soulWorkflow.candidate003Role !== "SECONDARY_COMPARISON_ONLY_NOT_TRAINING_INPUT" ||
+  soulWorkflow.keyframeCampaignAuthorized !== true ||
+  soulWorkflow.videoCampaignAuthorized !== true ||
+  soulWorkflow.sitePreviewCampaignAuthorized !== true ||
+  soulWorkflow.publicationRightsConfirmed !== true ||
+  soulWorkflow.productionDeploymentPerformed !== false ||
+  soulWorkflow.mainMergePerformed !== false ||
+  soulWorkflow.signedInTrainingChargeConfirmed !== true
 ) {
-  errors.push("generations.json: Soul authorization exceeds or contradicts the bounded owner instruction");
+  errors.push("generations.json: completed Soul workflow or downstream authorization is inconsistent");
 }
 if (
-  soulOperationalEvidence.version !== "0.12.0" ||
-  soulOperationalEvidence.minimumInputCount !== 5 ||
-  soulOperationalEvidence.maximumInputCount !== 20 ||
-  soulOperationalEvidence.sweetSpotInputCount !== "8_TO_12" ||
-  !setsEqual(new Set(soulOperationalEvidence.acceptedFormats ?? []), new Set(["JPEG", "PNG"])) ||
-  soulOperationalEvidence.idealMinimumDimensionsPixels !== "1024x1024" ||
-  soulOperationalEvidence.trainingFailureThreshold !== "FIVE_OR_MORE_UNIQUE_FACES" ||
-  soulOperationalEvidence.paidBasicOrHigherPlanRequired !== true ||
-  soulOperationalEvidence.selectedVariant !== "soul-cinematic" ||
-  soulMarketingEvidence.recommendedInputCount !== "20_OR_MORE" ||
-  soulMarketingEvidence.maximumInputCount !== 80 ||
-  soulMarketingEvidence.optimalMinimumResolutionPixels !== 960 ||
-  soulMarketingEvidence.displayedReferenceCostCredits !== 25 ||
-  soulMarketingEvidence.signedInChargeConfirmed !== false ||
-  soulOperationalEligibility.selectedInputCount !== 13 ||
-  soulOperationalEligibility.countWithinPublishedOperationalRange !== true ||
-  soulOperationalEligibility.allSelectedInputsUseAcceptedFormats !== true ||
-  soulOperationalEligibility.allSelectedInputsMeetIdealDimensions !== true ||
-  soulOperationalEligibility.noAdditionalPhotosRequiredByPublishedOperationalCount !== true ||
-  unresolvedSoulFacts.exactThirteenFileAcceptance !== "UNKNOWN" ||
-  unresolvedSoulFacts.exactSignedInCostOrPlan !== "UNKNOWN" ||
-  unresolvedSoulFacts.accountPlanStatus !== "UNKNOWN" ||
-  unresolvedSoulFacts.accountCreditBalance !== "UNKNOWN" ||
-  unresolvedSoulFacts.privacyTermsAcceptance !== "UNKNOWN" ||
-  unresolvedSoulFacts.providerPolicyAcceptance !== "UNKNOWN" ||
-  unresolvedSoulFacts.authenticationState !== "AUTHENTICATED_UI_UNAVAILABLE"
+  soulExecutionCounts.uploadsPerformed !== 13 ||
+  soulExecutionCounts.soulRunsSubmitted !== 1 ||
+  soulExecutionCounts.soulsCreated !== 1 ||
+  soulExecutionCounts.diagnosticsSubmitted !== 7 ||
+  soulExecutionCounts.diagnosticsCompleted !== 7 ||
+  soulExecutionCounts.trainingCreditsSpent !== 25 ||
+  soulExecutionCounts.diagnosticCreditsSpent !== 0.84 ||
+  soulExecutionCounts.grossCreditsSpent !== 25.84 ||
+  soulExecutionCounts.concurrentProviderRewardGrantCredits !== 10
 ) {
-  errors.push("generations.json: public Soul guidance or unresolved signed-in facts are misstated");
+  errors.push("generations.json: Soul execution counts or gross cost reconciliation is inconsistent");
 }
-const requiredSoulBlockers = [
-  "SOURCE_COPYRIGHT_AND_LICENSE_UNRESOLVED",
-  "PROVIDER_POLICY_AND_PRIVACY_ACCEPTANCE_REQUIRED",
-  "PROVIDER_AUTHENTICATION_REQUIRED",
-  "EXACT_THIRTEEN_FILE_ACCEPTANCE_UNKNOWN",
-  "EXACT_SIGNED_IN_COST_PLAN_AND_BALANCE_UNKNOWN",
-];
-if (requiredSoulBlockers.some((blocker) => !(soulWorkflow.blockers ?? []).includes(blocker))) {
-  errors.push("generations.json: required provider, rights, privacy, or account blocker is missing");
-}
+
+const soulTrainingRuns = generationManifest.soulTrainingRuns ?? [];
+const trainingRun = soulTrainingRuns[0] ?? {};
 if (
-  soulExecutionCounts.uploadsPerformed !== 0 ||
-  soulExecutionCounts.soulRunsSubmitted !== 0 ||
-  soulExecutionCounts.soulsCreated !== 0 ||
-  soulExecutionCounts.diagnosticsSubmitted !== 0 ||
-  soulExecutionCounts.diagnosticsCompleted !== 0 ||
-  soulExecutionCounts.creditsSpent !== 0 ||
-  !Array.isArray(generationManifest.soulTrainingRuns) ||
-  generationManifest.soulTrainingRuns.length !== 0 ||
-  !Array.isArray(generationManifest.soulDiagnosticAttempts) ||
-  generationManifest.soulDiagnosticAttempts.length !== 0
+  soulTrainingRuns.length !== 1 ||
+  !stableSoulRunId.test(trainingRun.runId ?? "") ||
+  trainingRun.assetId !== "CHR-SAGE-SOUL-001" ||
+  trainingRun.provider !== "Higgsfield" ||
+  trainingRun.selectedVariant !== "soul-cinematic" ||
+  trainingRun.submissionCount !== 1 ||
+  trainingRun.uploadedInputCount !== 13 ||
+  trainingRun.acceptedInputCount !== 13 ||
+  trainingRun.exactDuplicateCount !== 0 ||
+  trainingRun.inputPolicy !== "ORIGINAL_SOURCE_FILES_UNCHANGED" ||
+  !setsEqual(new Set(trainingRun.sourceAssetIds ?? []), expectedSoulTrainingSourceIds) ||
+  !setsEqual(new Set(trainingRun.excludedSourceAssetIds ?? []), new Set(["SRC-SAGE-014"])) ||
+  !setsEqual(new Set(trainingRun.excludedAttemptIds ?? []), attemptIds) ||
+  trainingRun.trainingCreditsSpent !== 25 ||
+  trainingRun.privacyStatus !== "PRIVATE" ||
+  trainingRun.reviewState !== "APPROVED"
 ) {
-  errors.push("generations.json: blocked preflight must have zero Soul execution, outputs, and spend");
+  errors.push("generations.json: expected one completed sanitized Soul training run");
+}
+
+const soulDiagnosticAttempts = generationManifest.soulDiagnosticAttempts ?? [];
+let diagnosticGrossSpend = 0;
+for (const [index, attempt] of soulDiagnosticAttempts.entries()) {
+  const label = "Soul diagnostic " + attempt.attemptId;
+  if (!stableSoulDiagnosticAttemptId.test(attempt.attemptId ?? "")) errors.push(label + ": unstable attempt ID");
+  if (attempt.assetId !== "CHR-SAGE-SOUL-DIAG-001" || attempt.provider !== "Higgsfield" || attempt.model !== "Soul Cinema") {
+    errors.push(label + ": unexpected provider, model, or asset");
+  }
+  if (attempt.viewKey !== expectedDiagnosticViewKeys[index]) errors.push(label + ": diagnostic view order mismatch");
+  if (!setsEqual(new Set(attempt.authoritativeComparisonSourceIds ?? []), expectedSoulTrainingSourceIds)) {
+    errors.push(label + ": originals must remain the authoritative comparison set");
+  }
+  if (attempt.grossCreditsSpent !== 0.12) errors.push(label + ": expected gross cost 0.12 credits");
+  diagnosticGrossSpend += attempt.grossCreditsSpent ?? 0;
+  const rejectedTattooFrame = index === 3;
+  if (
+    attempt.reviewState !== (rejectedTattooFrame ? "REJECTED" : "REVIEWED") ||
+    attempt.eligibleForKeyframeIdentityReview !== !rejectedTattooFrame ||
+    (rejectedTattooFrame && !(attempt.knownDefects ?? []).includes("INVENTED_TATTOOS")) ||
+    attempt.privateEvaluationAsset !== true ||
+    attempt.publicDeliveryAsset !== false
+  ) {
+    errors.push(label + ": review state or private evaluation boundary is incorrect");
+  }
+}
+if (soulDiagnosticAttempts.length !== 7 || Math.abs(diagnosticGrossSpend - 0.84) > 1e-9) {
+  errors.push("generations.json: expected seven Soul diagnostics with 0.84 gross credits spent");
+}
+
+const soulDiagnosticDecision = generationManifest.soulDiagnosticDecision ?? {};
+if (
+  soulDiagnosticDecision.decision !== "APPROVED FOR KEYFRAME DEVELOPMENT" ||
+  !setsEqual(new Set(soulDiagnosticDecision.authoritativeIdentitySourceIds ?? []), expectedSoulTrainingSourceIds) ||
+  soulDiagnosticDecision.candidate003Role !== "SECONDARY_COMPARISON_ONLY" ||
+  !setsEqual(new Set(soulDiagnosticDecision.rejectedDiagnosticAttemptIds ?? []), new Set(["GEN-CHR-SAGE-SOUL-DIAG-001-004"])) ||
+  !(soulDiagnosticDecision.frameLevelConstraints ?? []).includes("CHECK_FACE_LENGTH_AGAINST_ORIGINALS") ||
+  !(soulDiagnosticDecision.frameLevelConstraints ?? []).includes("CHECK_EYE_OPENNESS_AND_AVOID_NARROWING_AGAINST_ORIGINALS") ||
+  !(soulDiagnosticDecision.frameLevelConstraints ?? []).includes("NO_INVENTED_TATTOOS") ||
+  soulDiagnosticDecision.keyframeCampaignAuthorized !== true ||
+  soulDiagnosticDecision.videoCampaignAuthorized !== true ||
+  soulDiagnosticDecision.sitePreviewCampaignAuthorized !== true ||
+  soulDiagnosticDecision.productionDeploymentPerformed !== false ||
+  soulDiagnosticDecision.mainMergePerformed !== false
+) {
+  errors.push("generations.json: Soul diagnostic decision or downstream gate is inconsistent");
 }
 
 const expectedDocs = [
@@ -772,17 +973,27 @@ console.log(
       ok: true,
       sources: sourceIds.size,
       historicalOpenAIDiagnosticSources: historicalOpenAISourceIds.size,
-      plannedUnchangedSoulSources: plannedSoulSourceIds.size,
+      executedUnchangedSoulSources: executedSoulSourceIds.size,
       assets: assetIds.size,
       keyframes: keyframeKeys.size,
       generationAttempts: generationManifest.attempts.length,
-      openAIProviderSubmissions: generationManifest.providerSubmissionsPerformed,
+      openAIProviderSubmissions: generationManifest.openAIProviderSubmissionsPerformed,
       higgsfieldUploadsPerformed: generationManifest.higgsfieldUploadsPerformed,
       soulRunsSubmitted: soulExecutionCounts.soulRunsSubmitted,
       soulsCreated: soulExecutionCounts.soulsCreated,
       soulDiagnosticOutputs: soulExecutionCounts.diagnosticsCompleted,
       productionAssetUploadsPerformed: generationManifest.productionAssetUploadsPerformed,
-      creditsSpent: generationManifest.creditsSpent + soulExecutionCounts.creditsSpent,
+      selectedKeyframes: keyframeWorkflow.selectedKeyframeCount,
+      successfulMotionSegments: motionWorkflow.successfulSegmentCount,
+      refundedMotionAttempts: motionWorkflow.failedRefundedAttemptCount,
+      verifiedProtectedPreviewDeliveryAssets: generationManifest.verifiedProtectedPreviewDeliveryAssets,
+      deliveryVerificationResult: motionAssembly.verificationResult,
+      grossHiggsfieldCreditsSpent: generationManifest.grossHiggsfieldCreditsSpent,
+      higgsfieldCreditsRefunded: generationManifest.higgsfieldCreditsRefunded,
+      concurrentProviderRewardGrantCredits: soulExecutionCounts.concurrentProviderRewardGrantCredits,
+      diagnosticDecision: soulDiagnosticDecision.decision,
+      keyframeCampaignAuthorized: soulDiagnosticDecision.keyframeCampaignAuthorized,
+      productionDeploymentPerformed: soulDiagnosticDecision.productionDeploymentPerformed,
       textOnly: true,
     },
     null,

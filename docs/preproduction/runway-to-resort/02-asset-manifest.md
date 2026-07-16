@@ -28,12 +28,16 @@ The machine-readable records in manifests/ are the canonical preproduction index
 
 IDs never encode mutable review state. Versions are positive integers, and derivatives link to parents.
 
-Current bounded identity records:
+Current executed identity and cinematic records:
 
 - CHR-SAGE-SOUL-001 uses prompts/character/soul-diagnostic.md#training-contract and the selected cinematic workflow variant `--soul-cinematic`.
 - CHR-SAGE-SOUL-DIAG-001 uses prompts/character/soul-diagnostic.md#diagnostic-output-contract.
 
-Both records remain planned/blocked with zero provider output; neither identifier is a private provider Soul or job identifier.
+Both records are complete and sanitized: one private Soul Cinematic model and one reviewed seven-output diagnostic set. Their stable IDs are project asset IDs, never private provider Soul or job identifiers.
+
+- KF-01 through KF-06 each have selected desktop and mobile variants: twelve selected keyframe anchors total.
+- VID-RWY-D-001 through VID-RST-D-002 and VID-RWY-M-001 through VID-RST-M-002 are the eight reviewed five-second Seedance 2.0 segments.
+- VID-MASTER-D-001 and VID-MASTER-M-001 are the completed, verified 20.125-second, 24 fps silent protected-preview deliveries. Each has H264 and VP9 derivatives; all four derivatives are under 4.3 MB.
 
 ## Required record
 
@@ -118,8 +122,8 @@ An asset cannot become APPROVED unless:
 
 - manifests/assets.json — planned source, character, wardrobe, environment, lighting, transition, and video asset families.
 - manifests/sources.json — sanitized source identities, technical classifications, scoped operation decisions, and unresolved rights states.
-- manifests/keyframes.json — the twelve desktop/mobile keyframe specifications and adjacency dependencies.
-- manifests/generations.json — append-only provider attempts and review decisions. It records the completed three-candidate OpenAI diagnostic; the authorized Higgsfield Soul route remains unperformed with zero upload, Soul, diagnostic, or credit counts.
+- manifests/keyframes.json — the twelve selected desktop/mobile keyframes, exact accepted versions, generation/derivation methods, and adjacency dependencies.
+- manifests/generations.json — append-only provider attempts and review decisions. It records the historical three-candidate OpenAI diagnostic, completed thirteen-original Soul run, seven diagnostics, twelve selected keyframes, eight successful motion segments, the fully refunded failed attempt and bounded replacement, credit reconciliation, and six verified protected-preview delivery assets without private provider identifiers or account balance.
 
 Validation command:
 

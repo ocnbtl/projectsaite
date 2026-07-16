@@ -1,12 +1,12 @@
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { ButtonLink } from "@/components/site/button-link";
+import { CinematicHero } from "@/components/site/cinematic-hero";
 import { ContactCta } from "@/components/site/contact-cta";
 import { Reveal } from "@/components/site/reveal";
 import { SectionIntro } from "@/components/site/section-intro";
-import { Wordmark } from "@/components/site/wordmark";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
@@ -17,41 +17,13 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="home-hero">
-        <div className="home-hero__content">
-          <div className="home-hero__content-inner">
-            <p className="home-hero__kicker">{content.hero.kicker}</p>
-            <Wordmark className="home-hero__wordmark" />
-            <p className="home-hero__lead">{content.hero.lead}</p>
-            <div className="home-hero__actions">
-              <ButtonLink href="/contact" variant="light">
-                Work With Sage
-              </ButtonLink>
-              <ButtonLink href="/portfolio" variant="outline">
-                View portfolio
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-
-        <div className="home-hero__media">
-          <Image src={content.hero.image} alt={content.hero.imageAlt} fill priority sizes="(max-width: 800px) 100vw, 48vw" />
-          <div className="home-hero__media-note">
-            <span>Independent creative</span>
-            <span>Available worldwide</span>
-          </div>
-        </div>
-
-        <a href="#practice" className="home-hero__scroll" aria-label="Continue to the next section">
-          <ArrowDown size={17} />
-        </a>
-      </section>
+      <CinematicHero hero={content.hero} />
 
       <section id="practice" className="practice-intro">
         <div className="container practice-intro__grid">
           <Reveal>
             <p className="ui-label">One creative practice</p>
-            <h1>Different disciplines. One clear point of view.</h1>
+            <h2>Different disciplines. One clear point of view.</h2>
           </Reveal>
           <Reveal className="practice-intro__copy">
             <p>

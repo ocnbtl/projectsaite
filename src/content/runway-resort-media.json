@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "v1",
+  "posterEnabled": true,
+  "enabled": true,
+  "scrollLengthVh": 600,
+  "review": {
+    "state": "internal-qa-approved",
+    "publicationScope": "protected-preview-only",
+    "authorizationRecord": "owner-production-authorization-2026-07-16"
+  },
+  "rightsScope": "project-saite-commercial-web",
+  "deliveryBudgets": {
+    "posterMaxBytes": 1500000,
+    "videoMaxBytes": 12000000
+  },
+  "beats": [
+    { "key": "runway-dormant", "start": 0, "end": 15 },
+    { "key": "runway-ignition", "start": 15, "end": 45 },
+    { "key": "lens-occlusion", "start": 45, "end": 58 },
+    { "key": "resort-light-leak", "start": 58, "end": 64 },
+    { "key": "resort-reveal", "start": 64, "end": 88 },
+    { "key": "resort-resolve", "start": 88, "end": 100 }
+  ],
+  "desktop": {
+    "width": 1920,
+    "height": 1080,
+    "durationSeconds": 20.125,
+    "frameRate": 24,
+    "sourceVersion": "VID-HERO-D-v1",
+    "poster": {
+      "src": "/media/runway-to-resort/v1/poster-desktop.webp",
+      "bytes": 80472,
+      "sha256": "26de1e161adc77bcf9cbf4469f0a300a11ec10d7ee4fab11c25264c5c4a08000",
+      "codec": "webp"
+    },
+    "webm": {
+      "src": "/media/runway-to-resort/v1/cinematic-desktop.webm",
+      "bytes": 2486741,
+      "sha256": "01aea570a1c460f0c85dd051f894660862e6a5dd5d803829c7cc70320c76b373",
+      "codec": "vp9"
+    },
+    "mp4": {
+      "src": "/media/runway-to-resort/v1/cinematic-desktop.mp4",
+      "bytes": 4047633,
+      "sha256": "cbbc6ff8b0bbbeabc9e06d28e81ec336ead46a49dfc8c8e5588bec057ac9359c",
+      "codec": "h264"
+    }
+  },
+  "mobile": {
+    "width": 1080,
+    "height": 1920,
+    "durationSeconds": 20.125,
+    "frameRate": 24,
+    "sourceVersion": "VID-HERO-M-v1",
+    "poster": {
+      "src": "/media/runway-to-resort/v1/poster-mobile.webp",
+      "bytes": 122680,
+      "sha256": "b8551e175a1708700ac8c46ff972e279658b0760d2c90bd67f0e737354d9aad2",
+      "codec": "webp"
+    },
+    "webm": {
+      "src": "/media/runway-to-resort/v1/cinematic-mobile.webm",
+      "bytes": 2862176,
+      "sha256": "6ec196ef67d2e9b5f0a97e1433021e685722eb00ae23bb864d796e5e6d8b5b72",
+      "codec": "vp9"
+    },
+    "mp4": {
+      "src": "/media/runway-to-resort/v1/cinematic-mobile.mp4",
+      "bytes": 4265796,
+      "sha256": "632e35edcaf6f28481c901a63d4291c0edc9479f6c543856e216b49fa727609e",
+      "codec": "h264"
+    }
+  }
+}

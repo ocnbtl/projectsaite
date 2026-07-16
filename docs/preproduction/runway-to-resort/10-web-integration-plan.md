@@ -1,21 +1,21 @@
-# Future Web Integration Plan
+# Web Integration Plan and Execution State
 
-Status: NOT AUTHORIZED FOR IMPLEMENTATION. This document defines a later engineering contract; no application file is changed in the current preproduction batch.
+Status: IN IMPLEMENTATION FOR LOCAL AND PROTECTED NONPRODUCTION PREVIEW. The static poster path is accepted, eight motion segments passed review, and the desktop/mobile delivery derivatives are complete and verified. Production deployment and merge remain pending the formal release gate.
 
 ## Current implementation surface
 
 - Next.js App Router homepage is a force-dynamic Server Component.
 - Vercel Blob-backed getSiteContent() supplies the current hero and owner-editable site content.
-- Current hero is a responsive split-grid next/image composition.
+- The prior responsive split-grid hero remains the semantic/content fallback contract.
 - Existing motion is limited to lightweight reveal/header behavior.
 - prefers-reduced-motion CSS already exists.
-- No GSAP, Framer Motion, video sequence model, or public asset directory is currently present.
+- Runtime motion remains pre-rendered and silent; no runtime AI generation is introduced.
 
 The cinematic should enter through a narrow client-component boundary while content retrieval remains server-side.
 
-## Proposed component boundary
+## Authorized component boundary
 
-Future names are illustrative:
+The implementation should use this boundary:
 
 - HomePage server component continues loading SiteContent.
 - CinematicHero client component receives approved media/poster metadata and current hero copy.
@@ -34,6 +34,15 @@ Expected approved derivatives:
 - Mobile poster.
 - Optional lightweight preload/poster derivative.
 - Private archival masters outside public delivery.
+
+Executed delivery state:
+
+- KF-06 desktop v4 and mobile v5 are the accepted poster/reduced-motion anchor sources.
+- Eight silent five-second 1080p Seedance 2.0 segments passed structural and contact-sheet review.
+- Separate 20.125-second, 24 fps desktop/mobile H264/VP9 derivatives are complete; all four are under 4.3 MB.
+- The delivery validator reports `DELIVERY_ASSETS_VERIFIED` across two posters and four video derivatives.
+- The hidden cut receives a deterministic full-black finish during assembly.
+- All current motion delivery is protected-preview-only.
 
 Every public derivative must link to an approved source asset/version and include dimensions, duration, frame rate, codec, byte size, SHA-256, rights scope, and approval evidence.
 
@@ -76,7 +85,7 @@ Preferred initial spike:
 - Controls meet current focus, contrast, target-size, and keyboard standards.
 - Normal browser scrolling, selection, zoom, history, and assistive navigation remain intact.
 
-## Performance budget to approve before implementation
+## Performance budget to verify before preview completion
 
 Measure against the current production baseline, then set explicit targets. Proposed starting constraints, not promises:
 
@@ -119,17 +128,18 @@ Use separate desktop and mobile screenshots/video evidence at beginning, transit
 
 ## Rollout approach
 
-1. Approve final media assets and rights.
-2. Create a new isolated implementation branch/worktree from current reconciled base.
-3. Add a static poster/fallback contract first.
-4. Add media source selection/loading/error handling.
-5. Add scroll mapping and Skip/reduced-motion states.
-6. Extend validated content/admin behavior only if the owner needs media editing.
-7. Run focused and broad validation plus browser QA.
-8. Review exact diff and media weights.
-9. Commit/push only after applicable checks and authorization.
-10. Run production-launch-gate before any production action.
-11. Deploy only after explicit approval; verify immutable deployment and live aliases.
+1. COMPLETE — workflow rights and the Soul identity gate are approved.
+2. COMPLETE — use the current isolated implementation branch/worktree from the reconciled base.
+3. COMPLETE — twelve desktop/mobile keyframe anchors selected.
+4. COMPLETE — eight silent 1080p motion segments generated and reviewed.
+5. COMPLETE — 20.125-second, 24 fps desktop/mobile H264/VP9 preview derivatives verified; all four are under 4.3 MB.
+6. IN PROGRESS — integrate poster/media source selection, loading/error handling, scroll mapping, Skip, and reduced-motion states.
+7. Extend validated content/admin behavior only if the owner needs media editing.
+8. Run focused and broad validation plus browser QA.
+9. Review exact diff and media weights.
+10. Commit/push only after applicable checks; nonproduction preview is authorized.
+11. Run production-launch-gate before any production action.
+12. Deploy only after explicit approval; verify immutable deployment and live aliases.
 
 ## Production/provider boundaries
 
@@ -140,4 +150,4 @@ This plan does not authorize:
 - production Blob writes;
 - Resend/Workspace configuration or email sends;
 - public release or production deployment;
-- replacement/removal of the current hero.
+- production replacement/removal of the current hero before the launch gate passes.

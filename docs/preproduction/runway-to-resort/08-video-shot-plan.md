@@ -4,7 +4,7 @@ Research date: 2026-07-16
 
 Decision: Architecture B — four start/end interpolated segments per composition, with a hidden editorial cut between KF-03 and KF-04.
 
-Status: Evidence-backed video plan plus a blocked Soul preflight. No authenticated account UI, provider upload, cost reservation, Soul creation, Higgsfield diagnostic, or credit spend occurred.
+Status: EXECUTED AND VERIFIED THROUGH PROTECTED-PREVIEW DELIVERY. Architecture B produced eight accepted silent 1080p segments—four desktop and four mobile—from the twelve selected anchors. Separate H264/VP9 desktop and mobile deliveries verify at 20.125 seconds and 24 fps; production release remains gated.
 
 ## Official evidence
 
@@ -24,14 +24,12 @@ Official schemas expose start-image and, on selected models, end-image roles. Th
 
 ## Local integration state
 
-- No higgsfield executable on PATH.
-- No installed Higgsfield skill or configured Higgsfield MCP connector.
-- Official remote MCP exists but requires account OAuth.
-- The authenticated account surface needed to confirm the current Soul form, file acceptance, visibility, balance, and signed-in charge was unavailable.
-- Exact authenticated account schema and current per-job cost were not accessed.
+- The official Higgsfield CLI was used through an authenticated private provider session; credentials and provider-private identifiers remain outside Git.
+- Authenticated provider execution accepted all thirteen unchanged originals, completed one Soul Cinematic model, and completed seven private Soul Cinema diagnostics.
+- Private provider identifiers and account details remain outside Git.
 - Official CLI current release observed in the audit: v1.1.13, dated 2026-07-11.
 
-No local integration was installed and no provider state was changed.
+Provider state was changed only within the explicitly authorized private workflow. No production website, domain, Blob, email, or deployment state was changed.
 
 ## Compatibility matrix
 
@@ -62,15 +60,15 @@ Current official operational Soul guidance reviewed on 2026-07-16 is internally 
 - The default is `--soul-2` for image-focused work and `--soul-cinematic` for cinematic/video work. Project Saite selects `--soul-cinematic`.
 - All thirteen originals are JPEG and 2001 x 3000 or larger. They fit the operational count, format, and ideal-resolution guidance without additional photos or transformation.
 
-A separate June 29 marketing article/public upload UI says 20 or more are recommended, up to 80 may be used, 960 px or greater is optimal, and 25 credits are displayed. That conflicting marketing guidance is not the versioned operational minimum or maximum. The unavailable authenticated interface still prevented confirmation of exact signed-in file acceptance, paid Basic+ plan eligibility, balance/final charge, and explicit private visibility/terms.
+A separate June 29 marketing article/public upload UI says 20 or more are recommended, up to 80 may be used, 960 px or greater is optimal, and 25 credits are displayed. That conflicting marketing guidance is not the versioned operational minimum or maximum. Execution established that all thirteen supplied originals were accepted and that the completed training charge was 25 credits.
 
-The owner-authorized input contract selects SRC-SAGE-001 through SRC-SAGE-013 collectively as original, unchanged photographs. Small faces, full-body compositions, unusual poses, expressions, hairstyles, postures, and different sessions remain part of the intended evidence. Owner/project policy also permits incidental visible branding in the intended private input set, but provider acceptance remains unverified and may be filtered or rejected. SRC-SAGE-014 and every generated candidate are excluded. Candidate 003 is a secondary human-review clue only.
+The executed input contract used SRC-SAGE-001 through SRC-SAGE-013 collectively as original, unchanged photographs. Small faces, full-body compositions, unusual poses, expressions, hairstyles, postures, different sessions, and incidental source branding remained part of the accepted evidence. SRC-SAGE-014 and every generated candidate were excluded. Candidate 003 is a secondary human-review clue only.
 
-The evidence-backed path is therefore:
+The executed path is:
 
-thirteen unchanged originals → one private Soul → seven source-reviewed diagnostics → owner decision → later anchor stills → start/end video segments
+thirteen unchanged originals → one private Soul → seven source-reviewed diagnostics → twelve selected anchors → eight reviewed start/end segments → protected-preview delivery assembly
 
-One `--soul-cinematic` Soul and the seven-output diagnostic are authorized, but the path is blocked before upload. Photographer/source identity and copyright/license remain UNKNOWN, while Higgsfield's terms require sufficient uploader rights and grant the provider broad rights to uploaded content and identity-related processing. Sage's likeness consent does not by itself resolve that source-license conflict. Exact signed-in file acceptance, paid Basic+ plan eligibility, balance/final charge, branded-input handling, provider-policy acceptance, and explicit private visibility/terms also remain unverified. Current totals are zero uploads, zero Souls, zero diagnostics, and zero recorded Higgsfield credits.
+One `--soul-cinematic` Soul completed from all thirteen direct unchanged originals at 25 credits. Seven private Soul Cinema diagnostics completed at 0.84 gross credits. A separate concurrent 10-credit provider reward explains the net increase without recording any account balance. Complete workflow authority is confirmed. The diagnostic decision is `APPROVED FOR KEYFRAME DEVELOPMENT`; original photos remain authoritative, Candidate 003 remains comparison-only, and DIAG-04 is rejected as a downstream reference because it invented tattoos.
 
 ## Why Architecture A is rejected
 
@@ -87,35 +85,33 @@ Each exact boundary still is reused byte-for-byte where two adjacent segments me
 
 | Segment ID | Composition | Start → end | Initial test length | Motion purpose |
 |---|---|---|---|---|
-| VID-RWY-D-001 | desktop 16:9 | KF-01 desktop → KF-02 desktop | 4–6 s | Far approach and light ignition |
-| VID-RWY-D-002 | desktop 16:9 | KF-02 desktop → KF-03 desktop | 3–5 s | Near approach and full black occlusion |
+| VID-RWY-D-001 | desktop 16:9 | KF-01 desktop → KF-02 desktop | 5 s / PASSED | Far approach and light ignition |
+| VID-RWY-D-002 | desktop 16:9 | KF-02 desktop → KF-03 desktop | 5 s / PASSED | Near approach and full black occlusion |
 | hidden desktop cut | desktop | KF-03 black → KF-04 matched black | editorial | Wardrobe/world change concealed only in full coverage |
-| VID-RST-D-001 | desktop 16:9 | KF-04 desktop → KF-05 desktop | 4–6 s | Warm leak into full resort reveal |
-| VID-RST-D-002 | desktop 16:9 | KF-05 desktop → KF-06 desktop | 3–5 s | Continue and settle/glance-back |
-| VID-RWY-M-001 | mobile 9:16 | KF-01 mobile → KF-02 mobile | 4–6 s | Mobile-authored far approach/ignition |
-| VID-RWY-M-002 | mobile 9:16 | KF-02 mobile → KF-03 mobile | 3–5 s | Mobile-authored approach/occlusion |
+| VID-RST-D-001 | desktop 16:9 | KF-04 desktop → KF-05 desktop | 5 s / PASSED | Warm leak into full resort reveal |
+| VID-RST-D-002 | desktop 16:9 | KF-05 desktop → KF-06 desktop | 5 s / PASSED | Continue and settle/glance-back |
+| VID-RWY-M-001 | mobile 9:16 | KF-01 mobile → KF-02 mobile | 5 s / PASSED | Mobile-authored far approach/ignition |
+| VID-RWY-M-002 | mobile 9:16 | KF-02 mobile → KF-03 mobile | 5 s / PASSED | Mobile-authored approach/occlusion |
 | hidden mobile cut | mobile | KF-03 black → KF-04 matched black | editorial | Full-height concealed change |
-| VID-RST-M-001 | mobile 9:16 | KF-04 mobile → KF-05 mobile | 4–6 s | Mobile warm reveal |
-| VID-RST-M-002 | mobile 9:16 | KF-05 mobile → KF-06 mobile | 3–5 s | Mobile settle |
+| VID-RST-M-001 | mobile 9:16 | KF-04 mobile → KF-05 mobile | 5 s / PASSED | Mobile warm reveal |
+| VID-RST-M-002 | mobile 9:16 | KF-05 mobile → KF-06 mobile | 5 s / PASSED replacement | Mobile settle; one prior provider failure was fully refunded |
 
 Although six anchor moments exist, the hidden cut separates two three-anchor groups. Four generated segments per composition are correct: two runway intervals and two resort intervals.
 
 ## Test order
 
-1. Resolve documentary upload rights for all thirteen originals.
-2. Regain the authenticated account UI and confirm exact acceptance of all thirteen unchanged files, paid Basic+ plan eligibility, balance/final charge, branded-input handling, provider-policy acceptance, and explicit private visibility/terms.
-3. Create no more than one `--soul-cinematic` Soul and generate only the seven diagnostics in prompts/character/soul-diagnostic.md.
-4. Compare the diagnostic against all thirteen originals and record one allowed decision. Candidate 003 is secondary preference evidence only.
-5. Stop for owner review. Do not create keyframes or videos unless the diagnostic is approved.
-6. After later keyframe authority and approval, run a read-only cost preflight for one 720p or 1080p desktop segment using the exact selected model/settings.
-7. Obtain explicit credit approval for that video amount and test scope.
-8. Test VID-RWY-D-001 only, review it, and change one documented variable group per rerun.
-9. Test remaining desktop segments only after the first passes; test mobile separately and never reframe desktop as its master.
+1. COMPLETE — all thirteen unchanged originals accepted; one `--soul-cinematic` Soul completed.
+2. COMPLETE — seven diagnostics generated and compared against all thirteen originals.
+3. COMPLETE — decision recorded as `APPROVED FOR KEYFRAME DEVELOPMENT`; Candidate 003 remained secondary preference evidence only.
+4. COMPLETE — twelve desktop/mobile keyframes selected: six controlled GPT Image 2 corrections, four deterministic transition anchors, and KF-06 desktop v4/mobile v5.
+5. COMPLETE — exact Seedance 2.0 cost preflight established 45 credits per five-second 1080p silent segment.
+6. COMPLETE — four desktop and four separately authored mobile segments generated and reviewed.
+7. COMPLETE — one mobile resort-resolve provider failure was fully refunded; one bounded replacement passed.
+8. COMPLETE — separate 20.125-second, 24 fps silent desktop/mobile H264 and VP9 derivatives verified; all four are under 4.3 MB and remain protected-preview-only.
 
 ## Editorial and delivery hypothesis
 
-- Silent 24 fps master.
-- Final scroll-controlled duration target: approximately 12–18 seconds after retiming, not the raw sum of generated durations.
+- Separate silent 20.125-second, 24 fps desktop and mobile deliveries.
 - Cut only inside matched full black.
 - Offline operations: trim, retime, stabilize, defect paintover/composite, boundary blending, color match, and grain/texture coherence.
 - No generated audio; no audio-dependent storytelling.
@@ -127,10 +123,10 @@ Current public video schemas expose no seed field and no universal negative-prom
 
 ## Cost, rights, and privacy
 
-- The separate marketing/public UI displays 25 credits, but the exact signed-in one-run charge, current balance, and diagnostic-generation charges remain account-gated. Use the authenticated cost display before submission; no provider operation is confirmed affordable until that evidence is available.
+- Executed spend is 427.84 credits: 25 Soul training, 0.84 diagnostics, 42 controlled keyframe corrections, and 360 across eight accepted motion segments. One additional 45-credit failed motion attempt was fully refunded. A separate concurrent provider reward granted 10 credits; no account balance is stored in Git.
 - Higgsfield’s terms state it does not claim ownership of inputs/outputs or restrict commercial output use.
 - The same terms grant broad rights over uploaded/generated content and permit uses including model development/training and marketing/promotion.
 - The user remains responsible for likeness, copyright, trademark, and third-party rights.
 - Commercial-use language is not a warranty of originality or non-infringement.
 
-Result: Architecture B remains technically credible as a later video plan. The newly authorized Soul route is BLOCKED before upload by UNKNOWN photographer/source rights, the provider license/identity-processing conflict, and unavailable authenticated preflight. Nothing was uploaded, trained, generated, or charged.
+Result: Architecture B is validated through delivery. All eight successful segments passed structural and contact-sheet visual review, deterministic full black is applied at the hidden cut, and the six-asset poster/video contract reports `DELIVERY_ASSETS_VERIFIED`. The H264/VP9 derivatives remain protected-preview-only; production deployment and merge remain unperformed pending the release gate.

@@ -1,6 +1,6 @@
 # Image Prompt System
 
-Status: PROPOSED. The three-candidate CHR-SAGE-FACE-001 OpenAI diagnostic is complete historical evidence. A separate one-Soul/seven-output Higgsfield route is owner-authorized but currently non-runnable because upload rights and authenticated provider preflight are blocked. No character sheet is a prerequisite for Soul training, no generated candidate may enter training, and no keyframe, video, website, publication, or production work is unlocked.
+Status: ACTIVE FOR AUTHORIZED KEYFRAME DEVELOPMENT. The three-candidate CHR-SAGE-FACE-001 OpenAI diagnostic is historical comparison evidence. The all-original Soul Cinematic run and seven-view diagnostic are complete, and the decision is `APPROVED FOR KEYFRAME DEVELOPMENT`. No generated candidate entered training; production release remains gated.
 
 ## Assembly order
 
@@ -18,7 +18,7 @@ No production prompt asks for typography, logos, watermarks, interface elements,
 
 ## Global identity prefix
 
-Use for production-bound work only after G1–G3 and only with operation-authorized inputs:
+Use for authorized keyframe and video work with the completed Soul and source-linked controls:
 
 > Depict the single real person controlled by [OPERATION_AUTHORIZED_SOURCE_IDS] and the reviewed identity constraints in CHR-SAGE-CONT-001. Preserve the evidence-linked face geometry, skin tone under the specified physical light, apparent age, hairline, hair texture/color/length, body proportions, stable distinguishing features, and left/right orientation. References control identity rather than wardrobe, location, brand marks, background, lens distortion, retouching, or source lighting. Do not average with another identity, idealize facial geometry, change apparent age, reshape the body, copy source logos, or infer traits not documented in CHR-SAGE-CONT-001.
 
@@ -33,7 +33,7 @@ If any variable is unfilled, the prompt is not runnable.
 
 Completed diagnostic exception: CHR-SAGE-FACE-001 v1 used five selected face references for Batch 001. Candidate 003 is the user-preferred comparison, but Candidate 002's earlier recommendation and every other synthetic interpretation remain non-authoritative. No Batch 001 candidate is a Soul input.
 
-Blocked Soul exception: one `--soul-cinematic` Soul from SRC-SAGE-001 through SRC-SAGE-013 as direct, unchanged originals and the seven outputs in prompts/character/soul-diagnostic.md are bounded and owner-authorized. The thirteen JPEG originals satisfy the published 5–20 operational count and ideal-resolution guidance. This exception becomes runnable only after documentary upload rights and the remaining authenticated provider checks pass. Candidate 003 may be consulted during human review only after comparison against all originals; it may not be supplied to the provider as an identity reference.
+Completed Soul route: one `--soul-cinematic` Soul was trained from SRC-SAGE-001 through SRC-SAGE-013 as direct, unchanged originals, followed by the seven outputs in prompts/character/soul-diagnostic.md. Candidate 003 may be consulted during human review only after comparison against all originals; it was not supplied to the provider as an identity reference and remains non-authoritative.
 
 ## Global visual-style prefix
 
@@ -47,7 +47,7 @@ Blocked Soul exception: one `--soul-cinematic` Soul from SRC-SAGE-001 through SR
 
 - No second person, crowd mutation, duplicate body, face swap, mixed identity, or apparent-age change.
 - No extra/missing fingers, fused limbs, broken feet, floating heel, malformed teeth, asymmetric eye corruption, or fabric-through-body artifacts.
-- No logos, brand marks, typography, captions, watermarks, UI, QR codes, or audio cues in generated outputs. Owner/project policy permits incidental branding as context in the intended unchanged private training inputs, but provider acceptance remains unverified and may be filtered or rejected; it is never a prompt target or reproduction license.
+- No unintended logos, copied brand marks, typography, captions, watermarks, UI, QR codes, or audio cues in generated outputs. Incidental branding was accepted as context in the completed unchanged private training inputs; it is never a prompt target.
 - No impossible architecture, changing anchor geometry, horizon jump, lens warp, dutch roll, random furniture, or incoherent reflection.
 - No source-image background, branded garment, jewelry, retouching artifact, or source lighting unless explicitly approved.
 - No excessive skin smoothing, orange/gray skin, color-contaminated teeth/eyes, or identity-changing beauty edit.
@@ -83,7 +83,7 @@ Official public schemas do not document a universal character limit or negative-
 ## Library index
 
 - prompts/character/reference-sheets.md — face, body, expression, hair, gait, and continuity sheets.
-- prompts/character/soul-diagnostic.md — blocked one-Soul input contract and exact seven-output post-training diagnostic gate.
+- prompts/character/soul-diagnostic.md — completed one-Soul input contract and reviewed seven-output diagnostic gate.
 - prompts/wardrobe/wardrobe-sheets.md — runway and resort wardrobe turnarounds.
 - prompts/runway/environment-system.md — runway plates, maps, materials, lights, and transition controls.
 - prompts/resort/environment-system.md — resort plates, maps, materials, and lights.

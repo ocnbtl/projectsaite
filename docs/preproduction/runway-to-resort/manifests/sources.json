@@ -10,82 +10,17 @@
     "exactDuplicateFiles": 0,
     "perceptualNearDuplicateCandidates": 0,
     "selectedForFirstIdentityBatch": 5,
-    "selectedOriginalInputsForPlannedSoul": 13,
-    "excludedInputsForPlannedSoul": 1,
+    "selectedOriginalInputsForFirstSoulRun": 13,
+    "submittedOriginalInputsForFirstSoulRun": 13,
+    "acceptedOriginalInputsForFirstSoulRun": 13,
+    "excludedInputsForFirstSoulRun": 1,
     "trueProfileViewsAvailable": 0
-  },
-  "plannedSoulInputSet": {
-    "state": "BLOCKED_BEFORE_UPLOAD",
-    "selectionMode": "ORIGINAL_FILE_UNCHANGED",
-    "selectedSourceIds": [
-      "SRC-SAGE-001",
-      "SRC-SAGE-002",
-      "SRC-SAGE-003",
-      "SRC-SAGE-004",
-      "SRC-SAGE-005",
-      "SRC-SAGE-006",
-      "SRC-SAGE-007",
-      "SRC-SAGE-008",
-      "SRC-SAGE-009",
-      "SRC-SAGE-010",
-      "SRC-SAGE-011",
-      "SRC-SAGE-012",
-      "SRC-SAGE-013"
-    ],
-    "excludedSourceIds": [
-      "SRC-SAGE-014"
-    ],
-    "generatedDerivativesAllowed": false,
-    "historicalFirstIdentityBatchSelectionPreserved": true,
-    "rightsStatus": "RIGHTS_UNKNOWN",
-    "commercialWebsitePermission": "UNKNOWN",
-    "uploadState": "NOT_UPLOADED",
-    "notes": "The planned Soul input set is the thirteen original photographs unchanged. The AI-generated media-kit artifact and every generated identity candidate are excluded. Selection does not resolve source copyright, license, provider-policy, or commercial-use uncertainty.",
-    "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-    "providerComplianceState": "BLOCKED_BEFORE_UPLOAD",
-    "inputBrandingPolicy": "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-    "outputBrandingPolicy": "PROHIBITED",
-    "authenticatedUiState": "UNAVAILABLE",
-    "operationalEvidence": {
-      "authority": "HIGGSFIELD_OPERATIONAL_SKILL",
-      "version": "0.12.0",
-      "minimumInputCount": 5,
-      "maximumInputCount": 20,
-      "sweetSpotInputCount": "8_TO_12",
-      "acceptedFormats": [
-        "JPEG",
-        "PNG"
-      ],
-      "idealMinimumDimensionsPixels": "1024x1024",
-      "trainingFailureThreshold": "FIVE_OR_MORE_UNIQUE_FACES",
-      "paidBasicOrHigherPlanRequired": true,
-      "selectedVariant": "soul-cinematic",
-      "selectedVariantFlag": "--soul-cinematic"
-    },
-    "marketingAndPublicUiEvidence": {
-      "authority": "MARKETING_ARTICLE_AND_PUBLIC_UI",
-      "recommendedInputCount": "20_OR_MORE",
-      "maximumInputCount": 80,
-      "optimalMinimumResolutionPixels": 960,
-      "displayedReferenceCostCredits": 25,
-      "signedInChargeConfirmed": false
-    },
-    "operationalEligibility": {
-      "selectedInputCount": 13,
-      "countWithinPublishedOperationalRange": true,
-      "allSelectedInputsUseAcceptedFormats": true,
-      "allSelectedInputsMeetIdealDimensions": true,
-      "noAdditionalPhotosRequiredByPublishedOperationalCount": true,
-      "exactThirteenFileAcceptance": "UNKNOWN_UNTIL_AUTHENTICATED_PREFLIGHT"
-    },
-    "selectedVariant": "soul-cinematic",
-    "selectedVariantFlag": "--soul-cinematic"
   },
   "sources": [
     {
       "id": "SRC-SAGE-001",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -107,38 +42,36 @@
       },
       "selectedForIdentityBatch": true,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Primary large, sharp, near-frontal identity anchor; separately selected as an original, unchanged Soul input.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
-      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "NONE_VISIBLE",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-002",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "hair",
@@ -159,38 +92,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: small face and severe foreshortening; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "NONE_VISIBLE",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-003",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "full-body proportion",
@@ -213,38 +144,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: face too small and non-neutral; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "NONE_VISIBLE",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-004",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -266,38 +195,36 @@
       },
       "selectedForIdentityBatch": true,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Best available opposing three-quarter facial evidence; separately selected as an original, unchanged Soul input.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
-      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "NONE_VISIBLE",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-005",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -319,38 +246,36 @@
       },
       "selectedForIdentityBatch": true,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Strongest near-frontal and hairline evidence; separately selected as an original, unchanged Soul input.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
-      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "NONE_VISIBLE",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-006",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -373,38 +298,36 @@
       },
       "selectedForIdentityBatch": true,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Strongest unobstructed three-quarter jaw/ear evidence; separately selected as an original, unchanged Soul input.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
-      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-007",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -425,38 +348,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: non-neutral expression and cheek/jaw obstruction; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-008",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "full-body proportion",
@@ -479,38 +400,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: monochrome, tilted, motion-heavy face; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "NONE_VISIBLE",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-009",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -533,38 +452,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected from minimal subset: redundant with SRC-SAGE-006 and more prominent branding; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-010",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "full-body proportion",
@@ -587,38 +504,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: small face, severe foreshortening, brand cue; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-011",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "full-body proportion",
@@ -641,38 +556,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: face obscured and multiple visible brands; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-012",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "full-body proportion",
@@ -696,38 +609,36 @@
       },
       "selectedForIdentityBatch": false,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Rejected: face too small and branded styling; that narrow five-source decision does not exclude this original from Soul training.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "NOT_SELECTED_FOR_FIRST_IDENTITY_BATCH",
-      "openAIGenerationPermission": "NOT_SUBMITTED",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: excluded from the five-source face diagnostic for the recorded reason. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-013",
       "kind": "original_photo",
-      "sourceStatus": "HASHED",
+      "sourceStatus": "APPROVED_SOURCE",
       "duplicateOf": null,
       "classifications": [
         "facial identity",
@@ -752,33 +663,31 @@
       },
       "selectedForIdentityBatch": true,
       "selectionReason": "Historical OpenAI Batch 001 judgment: Cross-session near-frontal continuity anchor; separately selected as an original, unchanged Soul input.",
-      "sageLikenessConsent": "CONFIRMED",
-      "copyrightLicenseStatus": "UNKNOWN",
-      "aiReferencePermission": "AUTHORIZED_PRIVATE_OPENAI_PHASE_WITH_THIRD_PARTY_RIGHTS_UNRESOLVED",
-      "openAIGenerationPermission": "AUTHORIZED_PRIVATE_PHASE",
-      "higgsfieldUploadPermission": "OWNER_AUTHORIZED_ONE_PRIVATE_SOUL_RUN_PROVIDER_SUBMISSION_BLOCKED_PENDING_RIGHTS_POLICY_PRIVACY_AUTHENTICATION_AND_ACCOUNT_PREFLIGHT",
-      "commercialWebsitePermission": "UNKNOWN",
+      "sageLikenessConsent": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "copyrightLicenseStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "aiReferencePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "openAIGenerationPermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+      "higgsfieldUploadPermission": "CONFIRMED_AND_EXECUTED_ONE_UNCHANGED_SOUL_RUN",
+      "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
       "visibleBranding": "PRESENT_RESTRICTED",
       "restrictions": [
-        "PRIVATE_PREPRODUCTION_ONLY",
-        "NO_PUBLICATION",
-        "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
-        "NO_OUTPUT_BRAND_REPRODUCTION",
-        "NO_FINAL_APPROVAL_CLAIM"
+        "ORIGINAL_FILE_SUBMITTED_UNCHANGED_FOR_FIRST_SOUL_RUN",
+        "NOT_A_PUBLIC_DELIVERY_ASSET",
+        "NO_UNINTENDED_OUTPUT_LOGOS_OR_COPIED_BRAND_MARKS"
       ],
       "confidence": {
         "technicalAndVisual": "HIGH",
-        "thirdPartyRights": "LOW_MISSING_EVIDENCE"
+        "thirdPartyRights": "HIGH_OWNER_CONFIRMED"
       },
-      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Separately included unchanged in the thirteen-original Soul input set.",
+      "notes": "Historical OpenAI Batch 001: selected for the five-source face diagnostic. Included unchanged in the completed thirteen-original Soul run; original photographs remain authoritative.",
       "privacyStatus": "SANITIZED_TEXT_ONLY",
-      "provenanceStatus": "PRIVATE_HASH_VERIFIED_FILE_ORIGINATING_PHOTOGRAPHER_UNKNOWN",
+      "provenanceStatus": "PRIVATE_HASH_VERIFIED_RIGHTS_AND_WORKFLOW_AUTHORITY_CONFIRMED",
       "updatedAt": "2026-07-16",
       "selectedForFirstSoulTraining": true,
       "soulTrainingInputMode": "ORIGINAL_FILE_UNCHANGED",
-      "soulTrainingSelectionReason": "Selected with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment does not control this Soul plan.",
-      "ownerHiggsfieldAuthorization": "AUTHORIZED_ONE_PRIVATE_SOUL_RUN",
-      "providerComplianceState": "BLOCKED_BEFORE_UPLOAD"
+      "soulTrainingSelectionReason": "Submitted with all thirteen original photographs to preserve collective face, body, pose, session, expression, hair, wardrobe, proportion, and visible source-brand evidence; the historical OpenAI five-source judgment did not control the Soul run.",
+      "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+      "providerComplianceState": "ACCEPTED_AND_EXECUTED"
     },
     {
       "id": "SRC-SAGE-014",
@@ -832,5 +741,50 @@
       "ownerHiggsfieldAuthorization": "NOT_AUTHORIZED_EXCLUDED_AI_MEDIA_KIT",
       "providerComplianceState": "EXCLUDED_NOT_SUBMITTABLE"
     }
-  ]
+  ],
+  "soulInputSet": {
+    "state": "EXECUTED_COMPLETED",
+    "selectionMode": "ORIGINAL_FILE_UNCHANGED",
+    "selectedSourceIds": [
+      "SRC-SAGE-001",
+      "SRC-SAGE-002",
+      "SRC-SAGE-003",
+      "SRC-SAGE-004",
+      "SRC-SAGE-005",
+      "SRC-SAGE-006",
+      "SRC-SAGE-007",
+      "SRC-SAGE-008",
+      "SRC-SAGE-009",
+      "SRC-SAGE-010",
+      "SRC-SAGE-011",
+      "SRC-SAGE-012",
+      "SRC-SAGE-013"
+    ],
+    "excludedSourceIds": [
+      "SRC-SAGE-014"
+    ],
+    "generatedDerivativesAllowed": false,
+    "historicalFirstIdentityBatchSelectionPreserved": true,
+    "rightsStatus": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+    "commercialWebsitePermission": "CONFIRMED_COMPLETE_PROJECT_WORKFLOW",
+    "uploadState": "SUBMITTED_ONCE_ALL_ACCEPTED",
+    "submittedInputCount": 13,
+    "acceptedInputCount": 13,
+    "exactDuplicateCount": 0,
+    "ownerHiggsfieldAuthorization": "AUTHORIZED_AND_EXECUTED_ONE_PRIVATE_SOUL_RUN",
+    "providerComplianceState": "ACCEPTED_AND_EXECUTED",
+    "inputBrandingPolicy": "VISIBLE_SOURCE_BRANDING_ACCEPTED_IN_UNCHANGED_PRIVATE_TRAINING_INPUTS",
+    "outputBrandingPolicy": "NO_UNINTENDED_LOGOS_OR_COPIED_BRAND_MARKS",
+    "privacyState": "PRIVATE_PROVIDER_WORKFLOW",
+    "executionEvidence": {
+      "selectedInputCount": 13,
+      "allSelectedInputsSubmittedUnchanged": true,
+      "allSelectedInputsAccepted": true,
+      "selectedVariant": "soul-cinematic",
+      "soulRunsSubmitted": 1,
+      "soulsCompleted": 1,
+      "trainingCreditsSpent": 25
+    },
+    "notes": "All thirteen original photographs were submitted once, directly and unchanged, to one private Soul Cinematic training run. The AI-generated media-kit artifact and every generated identity candidate remained excluded."
+  }
 }
