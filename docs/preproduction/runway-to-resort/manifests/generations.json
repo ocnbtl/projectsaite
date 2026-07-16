@@ -3,22 +3,6 @@
   "project": "runway-to-resort",
   "updatedAt": "2026-07-16",
   "generationAuthorized": true,
-  "authorization": {
-    "scope": "FIRST_PRIVATE_OPENAI_IDENTITY_DIAGNOSTIC_ONLY",
-    "assetId": "CHR-SAGE-FACE-001",
-    "provider": "OpenAI Image Creator",
-    "maxCandidates": 3,
-    "sourceAssetIds": [
-      "SRC-SAGE-001",
-      "SRC-SAGE-004",
-      "SRC-SAGE-005",
-      "SRC-SAGE-006",
-      "SRC-SAGE-013"
-    ],
-    "publicationAuthorized": false,
-    "higgsfieldOperationallyAuthorized": false,
-    "productionMutationAuthorized": false
-  },
   "providerSubmissionsPerformed": 3,
   "distinctReferenceAssetsSubmitted": 5,
   "referenceAssetsPerSubmission": 5,
@@ -28,6 +12,133 @@
   "creditsSpent": 0,
   "providerUsageCost": "NOT_EXPOSED_BY_BUILT_IN_TOOL",
   "approvedGeneratedAssets": 0,
+  "identityComparisonDecision": {
+    "userPreferredAttemptId": "GEN-CHR-SAGE-FACE-001-003",
+    "supersededAttemptId": "GEN-CHR-SAGE-FACE-001-002",
+    "preferenceScope": "COMPARISON_DIRECTION_ONLY",
+    "approvalState": "NOT_APPROVED",
+    "eligibleForPlannedSoulInput": false,
+    "notes": "The user prefers Candidate 003 for comparison. Candidate 002 is superseded as the prior revision baseline. No generated candidate is eligible for the planned Soul input set."
+  },
+  "soulWorkflow": {
+    "authorizationScope": "ONE_PRIVATE_SOUL_RUN_AND_MAXIMUM_SEVEN_PRIVATE_DIAGNOSTICS",
+    "preflightState": "BLOCKED_BEFORE_UPLOAD",
+    "provider": "Higgsfield",
+    "soulAssetId": "CHR-SAGE-SOUL-001",
+    "diagnosticAssetId": "CHR-SAGE-SOUL-DIAG-001",
+    "authorizedPrivateRunCount": 1,
+    "authorizedMaximumDiagnostics": 7,
+    "selectedSourceAssetIds": [
+      "SRC-SAGE-001",
+      "SRC-SAGE-002",
+      "SRC-SAGE-003",
+      "SRC-SAGE-004",
+      "SRC-SAGE-005",
+      "SRC-SAGE-006",
+      "SRC-SAGE-007",
+      "SRC-SAGE-008",
+      "SRC-SAGE-009",
+      "SRC-SAGE-010",
+      "SRC-SAGE-011",
+      "SRC-SAGE-012",
+      "SRC-SAGE-013"
+    ],
+    "selectedInputPolicy": "ORIGINAL_SOURCE_FILES_UNCHANGED",
+    "excludedSourceAssetIds": [
+      "SRC-SAGE-014"
+    ],
+    "excludedAttemptIds": [
+      "GEN-CHR-SAGE-FACE-001-001",
+      "GEN-CHR-SAGE-FACE-001-002",
+      "GEN-CHR-SAGE-FACE-001-003"
+    ],
+    "unresolvedPreflightFacts": {
+      "exactThirteenFileAcceptance": "UNKNOWN",
+      "exactSignedInCostOrPlan": "UNKNOWN",
+      "accountPlanStatus": "UNKNOWN",
+      "accountCreditBalance": "UNKNOWN",
+      "privacyTermsAcceptance": "UNKNOWN",
+      "providerPolicyAcceptance": "UNKNOWN",
+      "authenticationState": "AUTHENTICATED_UI_UNAVAILABLE"
+    },
+    "blockers": [
+      "SOURCE_COPYRIGHT_AND_LICENSE_UNRESOLVED",
+      "COMMERCIAL_DERIVATIVE_AND_WEBSITE_RIGHTS_UNRESOLVED",
+      "PROVIDER_POLICY_AND_PRIVACY_ACCEPTANCE_REQUIRED",
+      "PROVIDER_AUTHENTICATION_REQUIRED",
+      "EXACT_THIRTEEN_FILE_ACCEPTANCE_UNKNOWN",
+      "EXACT_SIGNED_IN_COST_PLAN_AND_BALANCE_UNKNOWN"
+    ],
+    "executionCounts": {
+      "uploadsPerformed": 0,
+      "soulRunsSubmitted": 0,
+      "soulsCreated": 0,
+      "diagnosticsSubmitted": 0,
+      "diagnosticsCompleted": 0,
+      "creditsSpent": 0
+    },
+    "publicationAuthorized": false,
+    "productionMutationAuthorized": false,
+    "identityModel": "Soul ID — cinematic variant",
+    "diagnosticModel": "Soul Cinema",
+    "authenticatedUiState": "UNAVAILABLE",
+    "privacyState": "REQUIRED_BUT_NOT_VERIFIED",
+    "orderedDiagnosticViewKeys": [
+      "CLOSE_NEUTRAL_PORTRAIT",
+      "WAIST_UP_NEUTRAL",
+      "FULL_BODY_FRONT",
+      "FULL_BODY_THREE_QUARTER_LEFT",
+      "FULL_BODY_THREE_QUARTER_RIGHT",
+      "FULL_BODY_SIDE",
+      "SIMPLE_RUNWAY_WALK"
+    ],
+    "allowedDecisionValues": [
+      "APPROVED FOR KEYFRAME DEVELOPMENT",
+      "RETRAIN WITH ALL ORIGINALS PLUS ADDITIONAL REAL PHOTOS",
+      "NEEDS CONTROLLED FULL-BODY OR PROFILE CAPTURE",
+      "REJECTED"
+    ],
+    "keyframeCampaignAuthorized": false,
+    "videoCampaignAuthorized": false,
+    "inputBrandingPolicy": "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
+    "outputBrandingPolicy": "PROHIBITED",
+    "operationalSkillEvidence": {
+      "authority": "HIGGSFIELD_OPERATIONAL_SKILL",
+      "version": "0.12.0",
+      "minimumInputCount": 5,
+      "maximumInputCount": 20,
+      "sweetSpotInputCount": "8_TO_12",
+      "acceptedFormats": [
+        "JPEG",
+        "PNG"
+      ],
+      "idealMinimumDimensionsPixels": "1024x1024",
+      "trainingFailureThreshold": "FIVE_OR_MORE_UNIQUE_FACES",
+      "paidBasicOrHigherPlanRequired": true,
+      "selectedVariant": "soul-cinematic",
+      "selectedVariantFlag": "--soul-cinematic"
+    },
+    "marketingAndPublicUiEvidence": {
+      "authority": "MARKETING_ARTICLE_AND_PUBLIC_UI",
+      "recommendedInputCount": "20_OR_MORE",
+      "maximumInputCount": 80,
+      "optimalMinimumResolutionPixels": 960,
+      "displayedReferenceCostCredits": 25,
+      "signedInChargeConfirmed": false
+    },
+    "operationalEligibility": {
+      "selectedInputCount": 13,
+      "countWithinPublishedOperationalRange": true,
+      "allSelectedInputsUseAcceptedFormats": true,
+      "allSelectedInputsMeetIdealDimensions": true,
+      "noAdditionalPhotosRequiredByPublishedOperationalCount": true
+    },
+    "selectedVariant": "soul-cinematic",
+    "selectedVariantFlag": "--soul-cinematic",
+    "publicDisplayedCostCredits": 25,
+    "signedInChargeConfirmed": false,
+    "noAdditionalPhotosRequiredByPublishedOperationalCount": true
+  },
   "attempts": [
     {
       "attemptId": "GEN-CHR-SAGE-FACE-001-001",
@@ -68,6 +179,8 @@
         "TRUE_PROFILE_ACCURACY_CANNOT_BE_VERIFIED"
       ],
       "disposition": "REJECT_AS_DIRECTION_BASELINE",
+      "comparisonStatus": "REJECTED_DIRECTION_BASELINE",
+      "eligibleForPlannedSoulInput": false,
       "privateOutputFingerprintRecorded": true,
       "publicOrProductionUseAuthorized": false
     },
@@ -111,7 +224,10 @@
         "LEFT_RIGHT_PROFILE_GEOMETRY_IS_INTERNALLY_INCONSISTENT",
         "TRUE_PROFILE_ACCURACY_CANNOT_BE_VERIFIED"
       ],
-      "disposition": "RECOMMENDED_REVISION_BASELINE_NOT_APPROVED",
+      "disposition": "SUPERSEDED_REVISION_BASELINE_NOT_APPROVED",
+      "comparisonStatus": "SUPERSEDED_BY_USER_PREFERRED_ATTEMPT",
+      "supersededByAttemptId": "GEN-CHR-SAGE-FACE-001-003",
+      "eligibleForPlannedSoulInput": false,
       "privateOutputFingerprintRecorded": true,
       "publicOrProductionUseAuthorized": false
     },
@@ -155,9 +271,32 @@
         "SKIN_REMAINS_MORE_UNIFORM_THAN_THE_NATURAL_TARGET",
         "TRUE_PROFILE_ACCURACY_CANNOT_BE_VERIFIED"
       ],
-      "disposition": "REJECT_AS_DIRECTION_BASELINE",
+      "disposition": "USER_PREFERRED_COMPARISON_NOT_APPROVED",
+      "comparisonStatus": "USER_PREFERRED_COMPARISON",
+      "supersedesAttemptId": "GEN-CHR-SAGE-FACE-001-002",
+      "eligibleForPlannedSoulInput": false,
       "privateOutputFingerprintRecorded": true,
       "publicOrProductionUseAuthorized": false
     }
-  ]
+  ],
+  "soulTrainingRuns": [],
+  "soulDiagnosticAttempts": [],
+  "historicalOpenAIBatchAuthorization": {
+    "scope": "FIRST_PRIVATE_OPENAI_IDENTITY_DIAGNOSTIC_ONLY",
+    "assetId": "CHR-SAGE-FACE-001",
+    "provider": "OpenAI Image Creator",
+    "maxCandidates": 3,
+    "sourceAssetIds": [
+      "SRC-SAGE-001",
+      "SRC-SAGE-004",
+      "SRC-SAGE-005",
+      "SRC-SAGE-006",
+      "SRC-SAGE-013"
+    ],
+    "publicationAuthorized": false,
+    "productionMutationAuthorized": false,
+    "executionState": "COMPLETED_HISTORICAL_BATCH",
+    "higgsfieldOperationalAuthorizationAtExecution": "NOT_APPLICABLE_TO_OPENAI_BATCH"
+  },
+  "generationAuthorizationState": "HISTORICAL_OPENAI_BATCH_COMPLETE_CURRENT_SOUL_WORKFLOW_BLOCKED_BEFORE_UPLOAD"
 }

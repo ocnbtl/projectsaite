@@ -12,6 +12,8 @@ The machine-readable records in manifests/ are the canonical preproduction index
 | CHR-SAGE-EXPR-### | Expression sheets |
 | CHR-SAGE-HAIR-### | Hair and movement sheets |
 | CHR-SAGE-GAIT-### | Gait sheets |
+| CHR-SAGE-SOUL-### | Private provider-trained identity model records; provider-private identifiers remain outside Git |
+| CHR-SAGE-SOUL-DIAG-### | Bounded post-training identity and proportion diagnostic sets |
 | WARD-RUNWAY-### | Unbranded runway wardrobe |
 | WARD-RESORT-### | Unbranded resort wardrobe |
 | ENV-RUNWAY-### | Runway geometry, plates, materials, and camera maps |
@@ -25,6 +27,13 @@ The machine-readable records in manifests/ are the canonical preproduction index
 | VID-MASTER-### | Stitched masters and delivery derivatives |
 
 IDs never encode mutable review state. Versions are positive integers, and derivatives link to parents.
+
+Current bounded identity records:
+
+- CHR-SAGE-SOUL-001 uses prompts/character/soul-diagnostic.md#training-contract and the selected cinematic workflow variant `--soul-cinematic`.
+- CHR-SAGE-SOUL-DIAG-001 uses prompts/character/soul-diagnostic.md#diagnostic-output-contract.
+
+Both records remain planned/blocked with zero provider output; neither identifier is a private provider Soul or job identifier.
 
 ## Required record
 
@@ -90,6 +99,7 @@ Only APPROVED exact versions may feed an approved downstream asset. Unseen angle
 - Controlled generation storage: generated masters and failed outputs, subject to approved provider/export retention.
 - Public delivery: optimized, approved, provenance-linked poster/video derivatives only.
 - Never put reusable identity-model secrets, provider tokens, consent documents, or private source URIs in Git.
+- Never put private Soul identifiers, provider job identifiers, source filenames, exact private submission timestamps, or account identifiers in Git.
 - Local absolute paths may exist in a private intake ledger; committed manifests use controlled aliases such as private-intake://SRC-SAGE-001.
 
 ## Quality gates
@@ -107,8 +117,9 @@ An asset cannot become APPROVED unless:
 ## Machine-readable files
 
 - manifests/assets.json — planned source, character, wardrobe, environment, lighting, transition, and video asset families.
+- manifests/sources.json — sanitized source identities, technical classifications, scoped operation decisions, and unresolved rights states.
 - manifests/keyframes.json — the twelve desktop/mobile keyframe specifications and adjacency dependencies.
-- manifests/generations.json — append-only generation attempts; currently empty because generation is not authorized.
+- manifests/generations.json — append-only provider attempts and review decisions. It records the completed three-candidate OpenAI diagnostic; the authorized Higgsfield Soul route remains unperformed with zero upload, Soul, diagnostic, or credit counts.
 
 Validation command:
 

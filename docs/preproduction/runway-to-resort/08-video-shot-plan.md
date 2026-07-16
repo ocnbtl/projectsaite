@@ -1,10 +1,10 @@
 # Video Shot Plan and Higgsfield Compatibility
 
-Research date: 2026-07-15
+Research date: 2026-07-16
 
 Decision: Architecture B — four start/end interpolated segments per composition, with a hidden editorial cut between KF-03 and KF-04.
 
-Status: Evidence-backed plan; no account authentication, provider upload, cost reservation, generation, or spend occurred.
+Status: Evidence-backed video plan plus a blocked Soul preflight. No authenticated account UI, provider upload, cost reservation, Soul creation, Higgsfield diagnostic, or credit spend occurred.
 
 ## Official evidence
 
@@ -13,7 +13,7 @@ Primary operational sources:
 - Current CLI model schemas: https://github.com/higgsfield-ai/cli/blob/main/MODELS.md
 - Current generation skill and media-role rules: https://github.com/higgsfield-ai/skills/blob/main/higgsfield-generate/SKILL.md and https://github.com/higgsfield-ai/skills/blob/main/higgsfield-generate/references/media-inputs.md
 - Workflow catalog: https://github.com/higgsfield-ai/skills/blob/main/higgsfield-generate/references/workflows.md
-- Soul ID skill: https://github.com/higgsfield-ai/skills/blob/main/higgsfield-soul-id/SKILL.md
+- Soul ID skill v0.12.0: https://github.com/higgsfield-ai/skills/blob/main/higgsfield-soul-id/SKILL.md
 - Kling 3 product information: https://higgsfield.ai/kling-3.0
 - Popcorn storyboard information: https://higgsfield.ai/storyboard-generator
 - Camera-control catalog: https://higgsfield.ai/camera-controls
@@ -27,10 +27,11 @@ Official schemas expose start-image and, on selected models, end-image roles. Th
 - No higgsfield executable on PATH.
 - No installed Higgsfield skill or configured Higgsfield MCP connector.
 - Official remote MCP exists but requires account OAuth.
+- The authenticated account surface needed to confirm the current Soul form, file acceptance, visibility, balance, and signed-in charge was unavailable.
 - Exact authenticated account schema and current per-job cost were not accessed.
 - Official CLI current release observed in the audit: v1.1.13, dated 2026-07-11.
 
-No installation or authentication is needed for this text-only phase.
+No local integration was installed and no provider state was changed.
 
 ## Compatibility matrix
 
@@ -54,13 +55,22 @@ Other current video schemas audited either provide only a start image, unordered
 
 ## Soul ID and identity route
 
-Current official Soul guidance requires a paid Basic+ plan and 5–20 varied, well-lit face photos. Soul 2 is the default still-image identity workflow; Soul Cinematic is intended for cinematic/video-related image work. Current model schemas expose Soul ID on still-image identity routes, not directly on the shortlisted video schemas.
+Current official operational Soul guidance reviewed on 2026-07-16 is internally sufficient for input planning:
+
+- Soul skill v0.12.0 accepts 5–20 photos and reports an error below 5 unique faces.
+- The official photo guide states minimum 5, maximum 20, and an 8–12 sweet spot; it accepts JPEG/PNG and describes 1024 x 1024 or greater as ideal, not mandatory.
+- The default is `--soul-2` for image-focused work and `--soul-cinematic` for cinematic/video work. Project Saite selects `--soul-cinematic`.
+- All thirteen originals are JPEG and 2001 x 3000 or larger. They fit the operational count, format, and ideal-resolution guidance without additional photos or transformation.
+
+A separate June 29 marketing article/public upload UI says 20 or more are recommended, up to 80 may be used, 960 px or greater is optimal, and 25 credits are displayed. That conflicting marketing guidance is not the versioned operational minimum or maximum. The unavailable authenticated interface still prevented confirmation of exact signed-in file acceptance, paid Basic+ plan eligibility, balance/final charge, and explicit private visibility/terms.
+
+The owner-authorized input contract selects SRC-SAGE-001 through SRC-SAGE-013 collectively as original, unchanged photographs. Small faces, full-body compositions, unusual poses, expressions, hairstyles, postures, and different sessions remain part of the intended evidence. Owner/project policy also permits incidental visible branding in the intended private input set, but provider acceptance remains unverified and may be filtered or rejected. SRC-SAGE-014 and every generated candidate are excluded. Candidate 003 is a secondary human-review clue only.
 
 The evidence-backed path is therefore:
 
-approved originals → authorized Soul/identity setup → source-reviewed anchor stills → start/end video segments
+thirteen unchanged originals → one private Soul → seven source-reviewed diagnostics → owner decision → later anchor stills → start/end video segments
 
-This does not authorize that path. Source rights, Sage’s consent to the named provider and its retention/training terms, account access, cost preflight, and explicit spend remain gates.
+One `--soul-cinematic` Soul and the seven-output diagnostic are authorized, but the path is blocked before upload. Photographer/source identity and copyright/license remain UNKNOWN, while Higgsfield's terms require sufficient uploader rights and grant the provider broad rights to uploaded content and identity-related processing. Sage's likeness consent does not by itself resolve that source-license conflict. Exact signed-in file acceptance, paid Basic+ plan eligibility, balance/final charge, branded-input handling, provider-policy acceptance, and explicit private visibility/terms also remain unverified. Current totals are zero uploads, zero Souls, zero diagnostics, and zero recorded Higgsfield credits.
 
 ## Why Architecture A is rejected
 
@@ -92,16 +102,15 @@ Although six anchor moments exist, the hidden cut separates two three-anchor gro
 
 ## Test order
 
-1. Approve exact six desktop and six mobile keyframe versions.
-2. Authenticate/install only after explicit provider authority.
-3. Run read-only cost preflight for one 720p or 1080p desktop segment using the exact selected model/settings.
-4. Obtain explicit credit approval for that amount and test scope.
-5. Test VID-RWY-D-001 only.
-6. Review identity, gait, geometry, camera, lighting, temporal artifacts, and boundary adherence.
-7. Adjust a documented variable group; never overwrite the attempt.
-8. Test the remaining desktop segments only after the first passes.
-9. Test mobile separately; do not reframe desktop as the master.
-10. Compare shortlisted models only when a diagnosed limitation justifies the spend.
+1. Resolve documentary upload rights for all thirteen originals.
+2. Regain the authenticated account UI and confirm exact acceptance of all thirteen unchanged files, paid Basic+ plan eligibility, balance/final charge, branded-input handling, provider-policy acceptance, and explicit private visibility/terms.
+3. Create no more than one `--soul-cinematic` Soul and generate only the seven diagnostics in prompts/character/soul-diagnostic.md.
+4. Compare the diagnostic against all thirteen originals and record one allowed decision. Candidate 003 is secondary preference evidence only.
+5. Stop for owner review. Do not create keyframes or videos unless the diagnostic is approved.
+6. After later keyframe authority and approval, run a read-only cost preflight for one 720p or 1080p desktop segment using the exact selected model/settings.
+7. Obtain explicit credit approval for that video amount and test scope.
+8. Test VID-RWY-D-001 only, review it, and change one documented variable group per rerun.
+9. Test remaining desktop segments only after the first passes; test mobile separately and never reframe desktop as its master.
 
 ## Editorial and delivery hypothesis
 
@@ -118,10 +127,10 @@ Current public video schemas expose no seed field and no universal negative-prom
 
 ## Cost, rights, and privacy
 
-- Exact credits are dynamic/account-gated. Use the official cost preflight before submission; no test is “cheap” until an exact amount is shown and approved.
+- The separate marketing/public UI displays 25 credits, but the exact signed-in one-run charge, current balance, and diagnostic-generation charges remain account-gated. Use the authenticated cost display before submission; no provider operation is confirmed affordable until that evidence is available.
 - Higgsfield’s terms state it does not claim ownership of inputs/outputs or restrict commercial output use.
 - The same terms grant broad rights over uploaded/generated content and permit uses including model development/training and marketing/promotion.
 - The user remains responsible for likeness, copyright, trademark, and third-party rights.
 - Commercial-use language is not a warranty of originality or non-infringement.
 
-Result: Architecture B is technically credible. Execution remains BLOCKED at source/rights/provider/spend gates.
+Result: Architecture B remains technically credible as a later video plan. The newly authorized Soul route is BLOCKED before upload by UNKNOWN photographer/source rights, the provider license/identity-processing conflict, and unavailable authenticated preflight. Nothing was uploaded, trained, generated, or charged.

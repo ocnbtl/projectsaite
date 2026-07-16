@@ -1,10 +1,10 @@
 # Character Reference-Sheet Prompt Specifications
 
-All specifications inherit the identity/style/continuity/negative blocks in ../../07-image-prompts.md. Only the first private diagnostic batch for CHR-SAGE-FACE-001 is runnable under the explicit 2026-07-16 OpenAI authorization and the selected source set below. That authorization does not promote any source to APPROVED_SOURCE for commercial publication. Every body, expression, hair, gait, wardrobe, environment, keyframe, video, and Higgsfield specification remains non-runnable.
+All specifications inherit the identity/style/continuity/negative blocks in ../../07-image-prompts.md. The CHR-SAGE-FACE-001 private OpenAI diagnostic is complete historical evidence. Candidate 003 is the user-preferred comparison, Candidate 002 is not the preferred baseline, and no generated candidate is authoritative or eligible for Soul input. The current operational route is the blocked CHR-SAGE-SOUL-001 / CHR-SAGE-SOUL-DIAG-001 contract in soul-diagnostic.md. No generated reference sheet is a prerequisite for Soul training; every later character sheet, wardrobe, environment, keyframe, and video remains non-runnable.
 
-## CHR-SAGE-FACE-001 — face identity master
+## CHR-SAGE-FACE-001 — archived synthetic face diagnostic
 
-1. Asset/purpose: CHR-SAGE-FACE-001 v1, a photorealistic-natural five-view neutral identity diagnostic for private likeness review; this is not an editorial portrait or public asset.
+1. Asset/purpose: CHR-SAGE-FACE-001 v1, the completed photorealistic-natural five-view diagnostic retained for private comparison history; this is not a controlling identity asset, training input, editorial portrait, or public asset.
 2. Inputs/controls: Image 1 / SRC-SAGE-001 is the primary near-frontal geometry and hair anchor; Image 2 / SRC-SAGE-004 supplies the best available opposing three-quarter evidence but not its head tilt, braids, accessories, grade, or source lighting; Image 3 / SRC-SAGE-005 supplies near-frontal hairline, brow, eye, nose, and lip relationships but not the hand, cream, skincare treatment, or beauty smoothing; Image 4 / SRC-SAGE-006 supplies unobstructed three-quarter jaw and ear evidence from a private face-only crop but not wet styling, towel, wardrobe, or source lighting; Image 5 / SRC-SAGE-013 supplies cross-session near-frontal face and resting-hair continuity from a private face-only crop but not wardrobe, branding, or grade.
 3. Identity lock: depict one consistent real person controlled only by the five cited references. Preserve features where the sources agree; resolve styling and retouch differences conservatively; do not average toward a generic face, idealize, beautify, reshape, change apparent age, or copy a single source's distortion. Because no true profiles exist, both generated profiles are explicitly PROPOSED inferred rotations rather than verified identity evidence.
 4. Scene: a plain neutral studio reference capture with a seamless light neutral-gray background; no runway, resort, set, architecture, props, or decorative environment.
@@ -21,11 +21,11 @@ All specifications inherit the identity/style/continuity/negative blocks in ../.
 15. Must preserve: source-consensus face shape and proportions, eye shape and color relationship, eyebrows, nose, lips, jaw, chin, ears, hairline, hair color, apparent age, skin tone, natural asymmetry, and correct left/right orientation; retain ordinary pores and small human irregularities instead of retouching them away.
 16. Negative/artifact prevention: no mixed identity, face averaging, eye-color change, age shift, face reshaping, mirrored asymmetry, invented profile certainty, extra/missing features, warped ears, uneven panel scale, double hairline, duplicate accessories, heavy makeup, beauty filter, smoothing, logos, brand marks, stripes, typography, captions, labels, watermarks, UI, runway, resort, or decorative scene.
 17. Output requirements: one high-detail five-panel diagnostic sheet per candidate, with no baked text or labels; generated binary stays in private controlled storage; candidate receives a separate sanitized attempt ID and begins as GENERATED / PROPOSED.
-18. Downstream use: first identity-review checkpoint only. Do not use as an approved body, gait, wardrobe, runway, resort, keyframe, video, Higgsfield Soul, public website, portfolio, or publication asset.
+18. Downstream use: historical likeness comparison only. Do not use as an approved identity, body, gait, wardrobe, runway, resort, keyframe, video, Higgsfield Soul, public website, portfolio, or publication asset.
 19. Review: compare every panel at matched crop against SRC-SAGE-001, 004, 005, 006, and 013 for overall likeness, face shape, eye shape/color relationship, brows, nose, lips, jaw/chin, hairline/color, apparent age, skin tone, natural asymmetry, profile plausibility, anatomy, generation artifacts, and cross-panel identity drift; profiles cannot be approved as verified without true profile photographs.
 20. Provenance/rights/privacy/approval: private source-linked OpenAI diagnostic authorized by the project owner and Sage likeness consent for this phase; photographer copyright/license, client/agency approval, trademark permission, and commercial website permission remain UNKNOWN; no Higgsfield upload, publication, production deploy, or final-approval claim; every candidate remains GENERATED / PROPOSED until exact-version review by the owner and Sage.
 
-### Resolved provider prompt used for Batch 001
+### Historical resolved provider prompt used for Batch 001
 
 The following sanitized prompt was used unchanged for all three Image Creator submissions. Each referenced image was a private metadata-stripped face crop mapped to its stable ID. No private filename, path, source fingerprint, or consent text was included in the prompt.
 
@@ -67,11 +67,17 @@ OUTPUT STATE
 Return exactly one high-detail five-panel diagnostic sheet with no baked text. It remains a private GENERATED / PROPOSED candidate for first identity review only, not a final approval claim, body/gait/wardrobe/keyframe/video/Higgsfield/publication asset.
 ```
 
+## Current operational route
+
+The planned CHR-SAGE-SOUL-001 input is SRC-SAGE-001 through SRC-SAGE-013 collectively, submitted only as direct unchanged originals with `--soul-cinematic` if the upload gate is cleared. SRC-SAGE-014, CHR-SAGE-FACE-001 candidates 001 through 003, and every other generated image are excluded. Owner/project policy retains visible branding, smaller faces, full-body compositions, unusual poses, expressions, hairstyles, posture, and session variation in the intended private inputs; provider acceptance remains unverified and may be filtered or rejected, while output prompts still prohibit unintended logos and copied marks.
+
+The exact seven-output CHR-SAGE-SOUL-DIAG-001 specification and decision gate are defined in soul-diagnostic.md. The thirteen originals satisfy the official 5–20 operational count, JPEG format, and ideal-resolution guidance. Execution is currently blocked before upload by UNKNOWN photographer/source rights, the provider input-license/identity-processing conflict, and unavailable authenticated confirmation of exact file acceptance, paid Basic+ plan eligibility, balance/final charge, branded-input handling, and explicit private visibility/terms. Current counts remain zero uploads, zero Souls, zero diagnostics, and zero recorded Higgsfield credits.
+
 ## CHR-SAGE-BODY-001 — proportion master
 
 1. Asset/purpose: six-view full-body proportion control.
-2. Inputs/controls: approved full-body front/side/rear and three-quarter SRC-SAGE IDs; face sheet controls identity.
-3. Identity lock: global block plus CHR-SAGE-FACE-001 exact approved version.
+2. Inputs/controls: all thirteen originals collectively control available body evidence; an approved CHR-SAGE-SOUL-DIAG-001 may later assist continuity but cannot replace the originals.
+3. Identity lock: source-controlled original set plus an exact later approved Soul diagnostic decision; CHR-SAGE-FACE-001 is comparison-only.
 4. Scene: neutral studio/floor grid.
 5. Placement/scale: full body, consistent head and foot coordinates, no perspective size changes.
 6. Performance: neutral stance, relaxed hands visible, view-correct gaze, resting hair.
@@ -82,24 +88,24 @@ Return exactly one high-detail five-panel diagnostic sheet with no baked text. I
 11. Light: broad neutral front/side modeling with consistent contact shadow.
 12. Palette/grade: neutral; no body-sculpting contrast.
 13. Layers: clean studio, subject, floor/contact shadow only.
-14. Continuity: must match face and source-established height/proportions; feeds gait/wardrobe/keyframes.
+14. Continuity: must match the original-source identity and proportions plus any later approved CHR-SAGE-SOUL-DIAG-001 evidence; feeds gait/wardrobe/keyframes.
 15. Preserve: head/body ratio, shoulder/torso/hip/limb proportions, stance traits, skin tone.
 16. Prevent: lengthened legs, narrowed waist, changed musculature, floating feet, extra limbs, source logos.
 17. Output requirements: individual views plus grid; exact camera/settings record.
 18. Downstream: subject-scale calculation, wardrobe fit, gait, and full-body keyframes.
 19. Review: overlay silhouette against usable originals; inspect hands/feet/joints/contact.
-20. Provenance/rights/state: private; source-linked; BLOCKED until approved full-body evidence.
+20. Provenance/rights/state: private; source-linked; BLOCKED pending the Soul diagnostic decision or a later controlled-capture decision, not CHR-SAGE-FACE-001.
 
 ## CHR-SAGE-EXPR-001 — expression master
 
 1. Asset/purpose: six source-bounded expressions.
-2. Inputs/controls: approved facial originals controlling neutral, focused, smiles, and glance-back; face master locks identity.
+2. Inputs/controls: the thirteen originals control available expression evidence; an approved CHR-SAGE-SOUL-DIAG-001 may later assist continuity but cannot replace the originals.
 3. Identity lock: face geometry/apparent age cannot move with expression.
 4. Scene: neutral consistent portrait reference.
 5. Placement/scale: equal head-and-shoulder scale and eye line.
 6. Performance: neutral, focused, confident runway, soft smile, warm smile, and glance-back; natural hands outside crop.
 7. Wardrobe: same plain neckline and hair state unless the expression requires approved glance movement.
-8. Camera: same lens/height/distance/depth as face master.
+8. Camera: use the approved diagnostic camera family and document any deliberate change; CHR-SAGE-FACE-001 does not control this asset.
 9. Output: six matched portraits; enough detail for teeth/eye review.
 10. Geometry: identical neutral background and crop guides.
 11. Light: identical neutral portrait rig.
@@ -110,13 +116,13 @@ Return exactly one high-detail five-panel diagnostic sheet with no baked text. I
 16. Prevent: exaggerated grin, invented dimples/teeth, eye-color change, age shift, face reshaping.
 17. Output requirements: individual views plus contact sheet.
 18. Downstream: expression selection for KF-01–06.
-19. Review: A/B against neutral face and source evidence; teeth/eyes/cheeks/jaw at 100%.
+19. Review: A/B against all relevant originals and any approved Soul diagnostic; teeth/eyes/cheeks/jaw at 100%.
 20. Provenance/rights/state: private and source-linked; every unseen expression remains PROPOSED until Sage approves.
 
 ## CHR-SAGE-HAIR-001 — hair and movement master
 
 1. Asset/purpose: six controlled hair states for walk, transition, and resort breeze.
-2. Inputs/controls: approved hair references; face/body masters control identity/proportion.
+2. Inputs/controls: the thirteen originals control available hair evidence; any approved Soul diagnostic/body record may assist continuity without replacing the originals.
 3. Identity lock: hair motion cannot change hairline, texture class, length, volume, color, or face.
 4. Scene: neutral studio with explicit air/motion direction.
 5. Placement/scale: matched three-quarter upper-body or full-body views as needed.
@@ -134,13 +140,13 @@ Return exactly one high-detail five-panel diagnostic sheet with no baked text. I
 17. Output requirements: individual states plus contact sheet; alpha/matte tests only if later authorized.
 18. Downstream: KF-02–06 hair continuity and transition planning.
 19. Review: hairline/ears/face, strand direction, silhouette, and temporal plausibility.
-20. Provenance/rights/state: private/source-linked; BLOCKED pending hair references and consent.
+20. Provenance/rights/state: private/source-linked; BLOCKED pending the Soul diagnostic decision and later batch authority, not CHR-SAGE-FACE-001.
 
 ## CHR-SAGE-GAIT-001 — runway gait master
 
 1. Asset/purpose: six physically adjacent walking phases.
-2. Inputs/controls: approved walking/full-body sources; face/body/hair masters lock person.
-3. Identity lock: global block with exact approved character versions.
+2. Inputs/controls: the original full-body/posed evidence plus any later approved Soul diagnostic, body, and hair records; CHR-SAGE-FACE-001 is not a dependency.
+3. Identity lock: all thirteen originals remain authoritative; exact approved later character records may constrain continuity without replacing them.
 4. Scene: neutral runway-length studio lane and floor grid.
 5. Placement/scale: same camera and subject scale per phase or a documented progression series.
 6. Performance: initial stance, contact, passing, mid-swing, opposite contact, near-camera stride; hands naturally controlled; focused gaze.
@@ -162,7 +168,7 @@ Return exactly one high-detail five-panel diagnostic sheet with no baked text. I
 ## CHR-SAGE-CONT-001 — continuity control sheet
 
 1. Asset/purpose: reviewed reference board of approved identity constraints and allowed variation.
-2. Inputs/controls: exact approved versions of face/body/expression/hair/gait sheets and their source IDs.
+2. Inputs/controls: all thirteen original source IDs plus exact approved versions of CHR-SAGE-SOUL-DIAG-001 and any later body/expression/hair/gait records; CHR-SAGE-FACE-001 is archived comparison only.
 3. Identity lock: evidence-linked text plus matched approved crops; no generative completion.
 4. Scene: documentation layout, not a story image.
 5. Placement/scale: consistent diagnostic crops and silhouettes.

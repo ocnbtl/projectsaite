@@ -78,8 +78,8 @@
     {
       "id": "CHR-SAGE-FACE-001",
       "category": "character",
-      "purpose": "Five-view neutral face identity master",
-      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-face-001--face-identity-master",
+      "purpose": "Archived synthetic five-view face diagnostic",
+      "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-face-001--archived-synthetic-face-diagnostic",
       "sourceAssetIds": [
         "SRC-SAGE-001",
         "SRC-SAGE-004",
@@ -97,7 +97,10 @@
       "settings": {
         "attemptCount": 3,
         "samePromptAllAttempts": true,
-        "selectedRevisionBaselineAttemptId": "GEN-CHR-SAGE-FACE-001-002"
+        "historicalCodexRecommendedRevisionBaselineAttemptId": "GEN-CHR-SAGE-FACE-001-002",
+        "userPreferredComparisonAttemptId": "GEN-CHR-SAGE-FACE-001-003",
+        "supersededComparisonAttemptId": "GEN-CHR-SAGE-FACE-001-002",
+        "allGeneratedAttemptsExcludedFromPlannedSoulInput": true
       },
       "generatedAt": "2026-07-16",
       "dimensions": {
@@ -115,42 +118,264 @@
         "MATCHED_NEUTRAL_THREE_QUARTER_PAIR_MISSING",
         "SOURCE_RETOUCHING_VARIABILITY",
         "NO_GENERATED_CANDIDATE_APPROVED",
-        "CANDIDATE_002_IRIS_BROW_CHIN_AND_SKIN_REVISION_REQUIRED",
-        "CANDIDATE_002_PROFILE_GEOMETRY_INTERNALLY_INCONSISTENT"
+        "CANDIDATE_002_COMPARISON_BASELINE_SUPERSEDED",
+        "CANDIDATE_003_USER_PREFERRED_COMPARISON_NOT_APPROVED",
+        "CANDIDATE_003_FACE_GEOMETRY_AND_CROSS_PANEL_CONTINUITY_REVISION_REQUIRED",
+        "CANDIDATE_003_PROFILE_GEOMETRY_UNVERIFIED"
       ],
       "updatedAt": "2026-07-16",
-      "intendedDownstreamUse": "Identity review only until an exact version is approved; no downstream character or keyframe use yet"
+      "intendedDownstreamUse": "Historical comparison only; not authoritative identity evidence, a Soul input, or a prerequisite for later character, keyframe, video, publication, website, or production work"
+    },
+    {
+      "id": "CHR-SAGE-SOUL-001",
+      "category": "character",
+      "purpose": "Planned private Higgsfield Soul identity model from unchanged original source photographs",
+      "promptSpecPath": "prompts/character/soul-diagnostic.md#training-contract",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-002",
+        "SRC-SAGE-003",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-007",
+        "SRC-SAGE-008",
+        "SRC-SAGE-009",
+        "SRC-SAGE-010",
+        "SRC-SAGE-011",
+        "SRC-SAGE-012",
+        "SRC-SAGE-013"
+      ],
+      "rightsStatus": "RIGHTS_UNKNOWN",
+      "consentStatus": "SUBJECT_CONSENT_CONFIRMED_OPERATION_BLOCKED",
+      "privacyStatus": "REQUIRED_BUT_NOT_VERIFIED",
+      "provenanceStatus": "PLANNED_BLOCKED_BEFORE_UPLOAD",
+      "provider": "Higgsfield",
+      "model": "Soul ID — cinematic variant",
+      "workflow": "ONE_PRIVATE_SOUL_CINEMATIC_TRAINING_RUN",
+      "settings": {
+        "authorizedPrivateRunCount": 1,
+        "selectedOriginalInputCount": 13,
+        "inputPolicy": "ORIGINAL_SOURCE_FILES_UNCHANGED",
+        "operationalEvidence": {
+          "authority": "HIGGSFIELD_OPERATIONAL_SKILL",
+          "version": "0.12.0",
+          "minimumInputCount": 5,
+          "maximumInputCount": 20,
+          "sweetSpotInputCount": "8_TO_12",
+          "acceptedFormats": [
+            "JPEG",
+            "PNG"
+          ],
+          "idealMinimumDimensionsPixels": "1024x1024",
+          "trainingFailureThreshold": "FIVE_OR_MORE_UNIQUE_FACES",
+          "paidBasicOrHigherPlanRequired": true,
+          "selectedVariant": "soul-cinematic",
+          "selectedVariantFlag": "--soul-cinematic"
+        },
+        "marketingAndPublicUiEvidence": {
+          "authority": "MARKETING_ARTICLE_AND_PUBLIC_UI",
+          "recommendedInputCount": "20_OR_MORE",
+          "maximumInputCount": 80,
+          "optimalMinimumResolutionPixels": 960,
+          "displayedReferenceCostCredits": 25,
+          "signedInChargeConfirmed": false
+        },
+        "operationalEligibility": {
+          "selectedInputCount": 13,
+          "countWithinPublishedOperationalRange": true,
+          "allSelectedInputsUseAcceptedFormats": true,
+          "allSelectedInputsMeetIdealDimensions": true,
+          "noAdditionalPhotosRequiredByPublishedOperationalCount": true,
+          "exactThirteenFileAcceptance": "UNKNOWN_UNTIL_AUTHENTICATED_PREFLIGHT"
+        },
+        "exactSignedInChargeOrPlan": "UNKNOWN",
+        "accountPlanStatus": "UNKNOWN",
+        "accountCreditBalance": "UNKNOWN",
+        "privacyTermsAcceptance": "UNKNOWN",
+        "providerPolicyAcceptance": "UNKNOWN",
+        "authenticationState": "AUTHENTICATED_UI_UNAVAILABLE",
+        "uploadedInputCount": 0,
+        "submittedRunCount": 0,
+        "createdSoulCount": 0,
+        "creditsSpent": 0,
+        "generatedCandidatesEligibleAsInputs": false,
+        "authenticatedUiState": "UNAVAILABLE",
+        "identityModel": "Soul ID — cinematic variant",
+        "selectedVariant": "soul-cinematic",
+        "selectedVariantFlag": "--soul-cinematic",
+        "inputBrandingPolicy": "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
+        "outputBrandingPolicy": "PROHIBITED"
+      },
+      "reviewState": "PROPOSED",
+      "knownDefects": [
+        "SOURCE_COPYRIGHT_AND_LICENSE_UNRESOLVED",
+        "COMMERCIAL_RIGHTS_UNRESOLVED",
+        "PROVIDER_POLICY_AND_PRIVACY_ACCEPTANCE_UNKNOWN",
+        "PROVIDER_AUTHENTICATION_NOT_ESTABLISHED",
+        "EXACT_THIRTEEN_FILE_ACCEPTANCE_UNKNOWN",
+        "EXACT_SIGNED_IN_COST_PLAN_AND_BALANCE_UNKNOWN",
+        "NO_UPLOAD_OR_SOUL_CREATION_PERFORMED"
+      ],
+      "updatedAt": "2026-07-16",
+      "intendedDownstreamUse": "Private identity diagnostics only after every preflight blocker is resolved; no publication, commercial website, or production use"
+    },
+    {
+      "id": "CHR-SAGE-SOUL-DIAG-001",
+      "category": "character",
+      "purpose": "Planned post-Soul private identity diagnostic series",
+      "promptSpecPath": "prompts/character/soul-diagnostic.md#diagnostic-output-contract",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-002",
+        "SRC-SAGE-003",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-007",
+        "SRC-SAGE-008",
+        "SRC-SAGE-009",
+        "SRC-SAGE-010",
+        "SRC-SAGE-011",
+        "SRC-SAGE-012",
+        "SRC-SAGE-013"
+      ],
+      "rightsStatus": "RIGHTS_UNKNOWN",
+      "consentStatus": "SUBJECT_CONSENT_CONFIRMED_OPERATION_BLOCKED",
+      "privacyStatus": "REQUIRED_BUT_NOT_VERIFIED",
+      "provenanceStatus": "PLANNED_BLOCKED_BEFORE_UPLOAD",
+      "provider": "Higgsfield",
+      "model": "Soul Cinema",
+      "workflow": "PRIVATE_SOUL_CINEMA_IDENTITY_DIAGNOSTICS",
+      "settings": {
+        "authorizedMaximumDiagnostics": 7,
+        "submittedDiagnostics": 0,
+        "completedDiagnostics": 0,
+        "creditsSpent": 0,
+        "generatedIdentityBatchAttemptsEligibleAsInputs": false,
+        "publicationAuthorized": false,
+        "productionMutationAuthorized": false,
+        "authenticatedUiState": "UNAVAILABLE",
+        "authenticationState": "AUTHENTICATED_UI_UNAVAILABLE",
+        "orderedDiagnosticViewKeys": [
+          "CLOSE_NEUTRAL_PORTRAIT",
+          "WAIST_UP_NEUTRAL",
+          "FULL_BODY_FRONT",
+          "FULL_BODY_THREE_QUARTER_LEFT",
+          "FULL_BODY_THREE_QUARTER_RIGHT",
+          "FULL_BODY_SIDE",
+          "SIMPLE_RUNWAY_WALK"
+        ],
+        "allowedDecisionValues": [
+          "APPROVED FOR KEYFRAME DEVELOPMENT",
+          "RETRAIN WITH ALL ORIGINALS PLUS ADDITIONAL REAL PHOTOS",
+          "NEEDS CONTROLLED FULL-BODY OR PROFILE CAPTURE",
+          "REJECTED"
+        ],
+        "keyframeCampaignAuthorized": false,
+        "videoCampaignAuthorized": false,
+        "inputBrandingPolicy": "OWNER_POLICY_ALLOWS_BRANDING_IN_PRIVATE_SOUL_INPUT_PROVIDER_ACCEPTANCE_UNVERIFIED",
+        "outputBrandingPolicy": "PROHIBITED"
+      },
+      "reviewState": "PROPOSED",
+      "continuityDependencies": [
+        "CHR-SAGE-SOUL-001"
+      ],
+      "knownDefects": [
+        "SOUL_NOT_CREATED",
+        "SOURCE_RIGHTS_UNRESOLVED",
+        "PROVIDER_POLICY_AND_PRIVACY_ACCEPTANCE_UNKNOWN",
+        "PROVIDER_AUTHENTICATION_NOT_ESTABLISHED",
+        "EXACT_DIAGNOSTIC_COST_UNKNOWN",
+        "NO_DIAGNOSTIC_GENERATION_PERFORMED"
+      ],
+      "updatedAt": "2026-07-16",
+      "intendedDownstreamUse": "Private identity comparison only after Soul preflight and creation; maximum seven diagnostics, none approved for downstream use"
     },
     {
       "id": "CHR-SAGE-BODY-001",
       "category": "character",
       "purpose": "Six-view full-body proportion master",
       "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-body-001--proportion-master",
-      "continuityDependencies": ["CHR-SAGE-FACE-001"],
-      "intendedDownstreamUse": "Scale, gait, wardrobe, and full-body keyframes"
+      "continuityDependencies": [
+        "CHR-SAGE-SOUL-DIAG-001"
+      ],
+      "intendedDownstreamUse": "Scale, gait, wardrobe, and full-body keyframes",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-002",
+        "SRC-SAGE-003",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-007",
+        "SRC-SAGE-008",
+        "SRC-SAGE-009",
+        "SRC-SAGE-010",
+        "SRC-SAGE-011",
+        "SRC-SAGE-012",
+        "SRC-SAGE-013"
+      ]
     },
     {
       "id": "CHR-SAGE-EXPR-001",
       "category": "character",
       "purpose": "Source-bounded expression master",
       "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-expr-001--expression-master",
-      "continuityDependencies": ["CHR-SAGE-FACE-001"],
-      "intendedDownstreamUse": "Keyframe emotional progression"
+      "continuityDependencies": [
+        "CHR-SAGE-SOUL-DIAG-001"
+      ],
+      "intendedDownstreamUse": "Keyframe emotional progression",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-002",
+        "SRC-SAGE-003",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-007",
+        "SRC-SAGE-008",
+        "SRC-SAGE-009",
+        "SRC-SAGE-010",
+        "SRC-SAGE-011",
+        "SRC-SAGE-012",
+        "SRC-SAGE-013"
+      ]
     },
     {
       "id": "CHR-SAGE-HAIR-001",
       "category": "character",
       "purpose": "Hair and movement master",
       "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-hair-001--hair-and-movement-master",
-      "continuityDependencies": ["CHR-SAGE-FACE-001"],
-      "intendedDownstreamUse": "Walk, transition, and resort breeze continuity"
+      "continuityDependencies": [
+        "CHR-SAGE-SOUL-DIAG-001"
+      ],
+      "intendedDownstreamUse": "Walk, transition, and resort breeze continuity",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-002",
+        "SRC-SAGE-003",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-007",
+        "SRC-SAGE-008",
+        "SRC-SAGE-009",
+        "SRC-SAGE-010",
+        "SRC-SAGE-011",
+        "SRC-SAGE-012",
+        "SRC-SAGE-013"
+      ]
     },
     {
       "id": "CHR-SAGE-GAIT-001",
       "category": "character",
       "purpose": "Six-phase runway gait master",
       "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-gait-001--runway-gait-master",
-      "continuityDependencies": ["CHR-SAGE-BODY-001", "CHR-SAGE-HAIR-001"],
+      "continuityDependencies": [
+        "CHR-SAGE-BODY-001",
+        "CHR-SAGE-HAIR-001"
+      ],
       "intendedDownstreamUse": "Runway and resort motion continuity"
     },
     {
@@ -159,20 +384,37 @@
       "purpose": "Canonical approved continuity constraints",
       "promptSpecPath": "prompts/character/reference-sheets.md#chr-sage-cont-001--continuity-control-sheet",
       "continuityDependencies": [
-        "CHR-SAGE-FACE-001",
+        "CHR-SAGE-SOUL-DIAG-001",
         "CHR-SAGE-BODY-001",
         "CHR-SAGE-EXPR-001",
         "CHR-SAGE-HAIR-001",
         "CHR-SAGE-GAIT-001"
       ],
-      "intendedDownstreamUse": "Prompt compilation and review"
+      "intendedDownstreamUse": "Prompt compilation and review",
+      "sourceAssetIds": [
+        "SRC-SAGE-001",
+        "SRC-SAGE-002",
+        "SRC-SAGE-003",
+        "SRC-SAGE-004",
+        "SRC-SAGE-005",
+        "SRC-SAGE-006",
+        "SRC-SAGE-007",
+        "SRC-SAGE-008",
+        "SRC-SAGE-009",
+        "SRC-SAGE-010",
+        "SRC-SAGE-011",
+        "SRC-SAGE-012",
+        "SRC-SAGE-013"
+      ]
     },
     {
       "id": "WARD-RUNWAY-001",
       "category": "wardrobe",
       "purpose": "Unbranded black architectural runway look",
       "promptSpecPath": "prompts/wardrobe/wardrobe-sheets.md#ward-runway-001--black-architectural-runway-turnaround",
-      "continuityDependencies": ["CHR-SAGE-BODY-001"],
+      "continuityDependencies": [
+        "CHR-SAGE-BODY-001"
+      ],
       "intendedDownstreamUse": "KF-01 through KF-03 and occlusion"
     },
     {
@@ -180,7 +422,9 @@
       "category": "wardrobe",
       "purpose": "Unbranded warm-neutral resort look",
       "promptSpecPath": "prompts/wardrobe/wardrobe-sheets.md#ward-resort-001--warm-neutral-resort-turnaround",
-      "continuityDependencies": ["CHR-SAGE-BODY-001"],
+      "continuityDependencies": [
+        "CHR-SAGE-BODY-001"
+      ],
       "intendedDownstreamUse": "KF-04 through KF-06"
     },
     {
@@ -195,7 +439,9 @@
       "category": "environment",
       "purpose": "Runway top-down floor plan",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001"
+      ],
       "intendedDownstreamUse": "Subject, fixture, and occlusion marks"
     },
     {
@@ -203,7 +449,10 @@
       "category": "environment",
       "purpose": "Runway side elevation",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RUNWAY-001", "ENV-RUNWAY-002"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001",
+        "ENV-RUNWAY-002"
+      ],
       "intendedDownstreamUse": "Scale and camera-height control"
     },
     {
@@ -211,7 +460,11 @@
       "category": "environment",
       "purpose": "Runway camera and subject path diagram",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RUNWAY-001", "ENV-RUNWAY-002", "ENV-RUNWAY-003"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001",
+        "ENV-RUNWAY-002",
+        "ENV-RUNWAY-003"
+      ],
       "intendedDownstreamUse": "KF-01 through KF-03 motion"
     },
     {
@@ -219,7 +472,9 @@
       "category": "environment",
       "purpose": "Runway material sheet",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001"
+      ],
       "intendedDownstreamUse": "World and transition material locking"
     },
     {
@@ -234,7 +489,9 @@
         "durationSeconds": null,
         "frameRate": null
       },
-      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001"
+      ],
       "intendedDownstreamUse": "Desktop keyframes"
     },
     {
@@ -249,7 +506,9 @@
         "durationSeconds": null,
         "frameRate": null
       },
-      "continuityDependencies": ["ENV-RUNWAY-001"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001"
+      ],
       "intendedDownstreamUse": "Mobile keyframes"
     },
     {
@@ -264,7 +523,9 @@
       "category": "environment",
       "purpose": "Resort path plan",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RESORT-001"],
+      "continuityDependencies": [
+        "ENV-RESORT-001"
+      ],
       "intendedDownstreamUse": "Subject route and marks"
     },
     {
@@ -272,7 +533,10 @@
       "category": "environment",
       "purpose": "Resort forward reveal view",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RESORT-001", "ENV-RESORT-002"],
+      "continuityDependencies": [
+        "ENV-RESORT-001",
+        "ENV-RESORT-002"
+      ],
       "intendedDownstreamUse": "KF-04 and KF-05"
     },
     {
@@ -280,7 +544,10 @@
       "category": "environment",
       "purpose": "Resort reverse spatial check",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RESORT-001", "ENV-RESORT-002"],
+      "continuityDependencies": [
+        "ENV-RESORT-001",
+        "ENV-RESORT-002"
+      ],
       "intendedDownstreamUse": "Spatial plausibility review"
     },
     {
@@ -288,7 +555,9 @@
       "category": "environment",
       "purpose": "Resort material sheet",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RESORT-001"],
+      "continuityDependencies": [
+        "ENV-RESORT-001"
+      ],
       "intendedDownstreamUse": "World material locking"
     },
     {
@@ -303,7 +572,9 @@
         "durationSeconds": null,
         "frameRate": null
       },
-      "continuityDependencies": ["ENV-RESORT-001"],
+      "continuityDependencies": [
+        "ENV-RESORT-001"
+      ],
       "intendedDownstreamUse": "Desktop keyframes"
     },
     {
@@ -318,7 +589,9 @@
         "durationSeconds": null,
         "frameRate": null
       },
-      "continuityDependencies": ["ENV-RESORT-001"],
+      "continuityDependencies": [
+        "ENV-RESORT-001"
+      ],
       "intendedDownstreamUse": "Mobile keyframes"
     },
     {
@@ -326,7 +599,10 @@
       "category": "lighting",
       "purpose": "Dormant runway lighting state",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RUNWAY-001", "ENV-RUNWAY-005"],
+      "continuityDependencies": [
+        "ENV-RUNWAY-001",
+        "ENV-RUNWAY-005"
+      ],
       "intendedDownstreamUse": "KF-01"
     },
     {
@@ -334,7 +610,9 @@
       "category": "lighting",
       "purpose": "Partially activated runway lighting state",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["LIGHT-RUNWAY-001"],
+      "continuityDependencies": [
+        "LIGHT-RUNWAY-001"
+      ],
       "intendedDownstreamUse": "KF-02"
     },
     {
@@ -342,7 +620,9 @@
       "category": "lighting",
       "purpose": "Near-camera runway transition lighting",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["LIGHT-RUNWAY-002"],
+      "continuityDependencies": [
+        "LIGHT-RUNWAY-002"
+      ],
       "intendedDownstreamUse": "KF-03"
     },
     {
@@ -350,7 +630,9 @@
       "category": "lighting",
       "purpose": "Warm resort emergence state",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["ENV-RESORT-001"],
+      "continuityDependencies": [
+        "ENV-RESORT-001"
+      ],
       "intendedDownstreamUse": "KF-04"
     },
     {
@@ -358,7 +640,9 @@
       "category": "lighting",
       "purpose": "Full resort reveal lighting",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["LIGHT-RESORT-001"],
+      "continuityDependencies": [
+        "LIGHT-RESORT-001"
+      ],
       "intendedDownstreamUse": "KF-05"
     },
     {
@@ -366,7 +650,9 @@
       "category": "lighting",
       "purpose": "Settled resort poster lighting",
       "promptSpecPath": "prompts/resort/environment-system.md#individual-specifications",
-      "continuityDependencies": ["LIGHT-RESORT-002"],
+      "continuityDependencies": [
+        "LIGHT-RESORT-002"
+      ],
       "intendedDownstreamUse": "KF-06"
     },
     {
@@ -374,7 +660,11 @@
       "category": "transition",
       "purpose": "Matched black fabric occlusion and warm-leak edge",
       "promptSpecPath": "prompts/runway/environment-system.md#individual-specifications",
-      "continuityDependencies": ["WARD-RUNWAY-001", "LIGHT-RUNWAY-003", "LIGHT-RESORT-001"],
+      "continuityDependencies": [
+        "WARD-RUNWAY-001",
+        "LIGHT-RUNWAY-003",
+        "LIGHT-RESORT-001"
+      ],
       "intendedDownstreamUse": "Hidden cut between KF-03 and KF-04"
     },
     {
@@ -382,7 +672,10 @@
       "category": "video",
       "purpose": "Desktop runway approach and ignition",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-001--kf-01-to-kf-02",
-      "continuityDependencies": ["KF-01::desktop", "KF-02::desktop"],
+      "continuityDependencies": [
+        "KF-01::desktop",
+        "KF-02::desktop"
+      ],
       "intendedDownstreamUse": "Desktop cinematic master"
     },
     {
@@ -390,7 +683,10 @@
       "category": "video",
       "purpose": "Desktop runway approach and occlusion",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-002--kf-02-to-kf-03",
-      "continuityDependencies": ["KF-02::desktop", "KF-03::desktop"],
+      "continuityDependencies": [
+        "KF-02::desktop",
+        "KF-03::desktop"
+      ],
       "intendedDownstreamUse": "Desktop cinematic master"
     },
     {
@@ -398,7 +694,10 @@
       "category": "video",
       "purpose": "Desktop resort emergence and reveal",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-001--kf-04-to-kf-05",
-      "continuityDependencies": ["KF-04::desktop", "KF-05::desktop"],
+      "continuityDependencies": [
+        "KF-04::desktop",
+        "KF-05::desktop"
+      ],
       "intendedDownstreamUse": "Desktop cinematic master"
     },
     {
@@ -406,7 +705,10 @@
       "category": "video",
       "purpose": "Desktop resort reveal and resolve",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-002--kf-05-to-kf-06",
-      "continuityDependencies": ["KF-05::desktop", "KF-06::desktop"],
+      "continuityDependencies": [
+        "KF-05::desktop",
+        "KF-06::desktop"
+      ],
       "intendedDownstreamUse": "Desktop cinematic master"
     },
     {
@@ -414,7 +716,10 @@
       "category": "video",
       "purpose": "Mobile runway approach and ignition",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-001--kf-01-to-kf-02",
-      "continuityDependencies": ["KF-01::mobile", "KF-02::mobile"],
+      "continuityDependencies": [
+        "KF-01::mobile",
+        "KF-02::mobile"
+      ],
       "intendedDownstreamUse": "Mobile cinematic master"
     },
     {
@@ -422,7 +727,10 @@
       "category": "video",
       "purpose": "Mobile runway approach and occlusion",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rwy-dm-002--kf-02-to-kf-03",
-      "continuityDependencies": ["KF-02::mobile", "KF-03::mobile"],
+      "continuityDependencies": [
+        "KF-02::mobile",
+        "KF-03::mobile"
+      ],
       "intendedDownstreamUse": "Mobile cinematic master"
     },
     {
@@ -430,7 +738,10 @@
       "category": "video",
       "purpose": "Mobile resort emergence and reveal",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-001--kf-04-to-kf-05",
-      "continuityDependencies": ["KF-04::mobile", "KF-05::mobile"],
+      "continuityDependencies": [
+        "KF-04::mobile",
+        "KF-05::mobile"
+      ],
       "intendedDownstreamUse": "Mobile cinematic master"
     },
     {
@@ -438,7 +749,10 @@
       "category": "video",
       "purpose": "Mobile resort reveal and resolve",
       "promptSpecPath": "prompts/video/architecture-b.md#vid-rst-dm-002--kf-05-to-kf-06",
-      "continuityDependencies": ["KF-05::mobile", "KF-06::mobile"],
+      "continuityDependencies": [
+        "KF-05::mobile",
+        "KF-06::mobile"
+      ],
       "intendedDownstreamUse": "Mobile cinematic master"
     }
   ]

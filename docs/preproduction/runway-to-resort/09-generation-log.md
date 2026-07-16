@@ -10,6 +10,10 @@ Distinct reference assets submitted: 5
 
 Current Higgsfield uploads: 0
 
+Current Higgsfield Souls: 0
+
+Current Higgsfield diagnostic outputs: 0
+
 Current production/publication uploads: 0
 
 Current recorded credits spent: 0
@@ -18,7 +22,7 @@ Built-in Image Creator usage cost: NOT EXPOSED BY THE TOOL
 
 Current approved generated assets: 0
 
-The owner-authorized first CHR-SAGE-FACE-001 diagnostic batch is complete. All three binaries, complete private fingerprints, and private comparison artifacts remain outside Git. This sanitized log records stable IDs and review conclusions only. No candidate is approved for identity lock, Higgsfield, body or gait expansion, keyframes, publication, website use, portfolio use, or production.
+The owner-authorized first CHR-SAGE-FACE-001 diagnostic batch is complete. All three binaries, complete private fingerprints, and private comparison artifacts remain outside Git. This sanitized log records stable IDs and review conclusions only. The user prefers Candidate 003 as the closest facial interpretation; the earlier Candidate-002 recommendation is superseded. No candidate is authoritative, approved for identity lock, eligible for Soul input, or authorized for keyframes, publication, website use, portfolio use, or production.
 
 ## Batch 001 controls
 
@@ -35,12 +39,38 @@ The owner-authorized first CHR-SAGE-FACE-001 diagnostic batch is complete. All t
 | Attempt | Overall likeness | Face and feature review | Continuity / artifacts | Disposition |
 |---|---|---|---|---|
 | GEN-CHR-SAGE-FACE-001-001 | MODERATE | Eyes are plausibly gray-green but slightly narrower/duller; brows are too light/thin; face, nose, and chin trend longer, narrower, and more angular than the source consensus; lips are slightly flattened; skin is over-smoothed and apparent age trends older. | Both three-quarter panels turn toward frame-left, so the opposing view is absent. Profiles disagree in nose/chin projection; ear and shoulder geometry vary. No gross anatomy failure. | Reject as direction baseline. |
-| GEN-CHR-SAGE-FACE-001-002 | MODERATE_HIGH | Frontal geometry best preserves the available oval/soft-heart shape, eye spacing, nose/lip relationships, jaw, hairline, and highlighted dark-blonde color. Irises are too bright/cyan and slightly enlarged; brows are too groomed, arched, and symmetric; chin is over-tapered; skin is too pale/uniform; natural asymmetry is suppressed. | All five requested views appear in the requested order. Panel three drifts in styling/identity and hair is not consistently tucked. The two inferred profiles disagree in nasal length/tip, lip projection, chin, and ear form. No gross anatomy failure. | Recommended revision baseline only; not approved. |
-| GEN-CHR-SAGE-FACE-001-003 | MODERATE | Eye color is more restrained, but the frontal face trends too broad/rounded, the nose fuller/longer, and lips/brows more simplified than the source consensus. Jaw/chin proportions and apparent age vary by panel. | Both three-quarter directions exist but their order is reversed. Nose, cheek, chin, ear, neck, parting, and highlight balance drift across views. Profiles remain unverified. No gross anatomy failure. | Reject as direction baseline. |
+| GEN-CHR-SAGE-FACE-001-002 | MODERATE_HIGH | Frontal geometry best preserves the available oval/soft-heart shape, eye spacing, nose/lip relationships, jaw, hairline, and highlighted dark-blonde color. Irises are too bright/cyan and slightly enlarged; brows are too groomed, arched, and symmetric; chin is over-tapered; skin is too pale/uniform; natural asymmetry is suppressed. | All five requested views appear in the requested order. Panel three drifts in styling/identity and hair is not consistently tucked. The two inferred profiles disagree in nasal length/tip, lip projection, chin, and ear form. No gross anatomy failure. | Initial Codex revision recommendation superseded; not user-preferred, authoritative, approved, or training-eligible. |
+| GEN-CHR-SAGE-FACE-001-003 | MODERATE | Eye color is more restrained, but the frontal face trends too broad/rounded, the nose fuller/longer, and lips/brows more simplified than the source consensus. Jaw/chin proportions and apparent age vary by panel. | Both three-quarter directions exist but their order is reversed. Nose, cheek, chin, ear, neck, parting, and highlight balance drift across views. Profiles remain unverified. No gross anatomy failure. | User-preferred comparison showing the closest felt interpretation; not authoritative, approved, or training-eligible. |
 
-## Revision direction
+## User preference correction
 
-Retain GEN-CHR-SAGE-FACE-001-002 only as a diagnostic baseline anchored to its frontal geometry. A future owner-authorized revision should reduce iris size/saturation, soften brow grooming, restore subtle asymmetry and source-consistent cheek/jaw proportions, preserve one nose/chin/ear construction across all views, keep the same hair tuck and crop, and reduce beauty smoothing. Do not promote either inferred profile to identity evidence without true source profiles.
+The user's likeness judgment supersedes the earlier Codex recommendation: retain GEN-CHR-SAGE-FACE-001-003 as the preferred Batch 001 comparison, and do not treat GEN-CHR-SAGE-FACE-001-002 as the preferred baseline. This correction changes only comparative preference. The authoritative identity and proportion set is SRC-SAGE-001 through SRC-SAGE-013 collectively. Candidate 003 cannot override a discrepancy against an original, establish an unseen profile, replace body evidence, or enter Soul training.
+
+## Soul Run 001 — authorized plan and blocked result
+
+- Authorized bound: one private Soul, one normal existing-account training charge, and seven proposed diagnostic outputs.
+- Selected training set: SRC-SAGE-001 through SRC-SAGE-013, each as its direct original file without crop, retouch, recolor, upscale, reshape, normalization, or background replacement.
+- Required variation retained: facial scale/angle, expression, hairstyle, posture, unusual poses, full-body compositions, sessions, clothing, visible source branding, and available body-proportion evidence. Branding is allowed by owner/project input policy; provider acceptance remains unverified and may be filtered or rejected.
+- Excluded: every generated candidate, all other generated imagery, SRC-SAGE-014, and any exact duplicate.
+- Official operational preflight evidence: Soul skill v0.12.0 accepts 5–20 photos with a 5+ unique-face threshold; the photo guide gives an 8–12 sweet spot, JPEG/PNG, and 1024 x 1024 or greater as ideal; all thirteen JPEG originals at 2001 x 3000 or larger qualify. Selected variant: `--soul-cinematic`.
+- Conflicting marketing/UI evidence: a June 29 marketing article/public upload UI recommends 20 or more, says up to 80, describes 960 px or greater as optimal, and displays 25 credits. It is not the operational count/format requirement.
+- Unverified signed-in account facts: exact acceptance of the thirteen-file set, paid Basic+ plan eligibility, final charge, balance, provider-policy acceptance, and explicit private visibility/terms.
+- Rights blocker: photographer/source identity and copyright/license remain UNKNOWN, while the provider terms require sufficient uploader rights and a broad upload/identity-processing license.
+- Access blocker: authenticated account UI unavailable.
+- Performed result: zero source uploads, zero Souls, zero Higgsfield diagnostic outputs, and zero recorded Higgsfield credits.
+
+No additional photo is needed to satisfy the published operational count, format, or ideal-resolution guidance. No synthetic filler, duplicate, crop, transformed copy, or generated candidate was created or used.
+
+## Post-training diagnostic gate
+
+If the rights and authenticated-account gates are later cleared, generate exactly the seven views in prompts/character/soul-diagnostic.md, compare every view against all thirteen originals, use Candidate 003 only as secondary preference evidence, and stop with one decision:
+
+- `APPROVED FOR KEYFRAME DEVELOPMENT`;
+- `RETRAIN WITH ALL ORIGINALS PLUS ADDITIONAL REAL PHOTOS`;
+- `NEEDS CONTROLLED FULL-BODY OR PROFILE CAPTURE`; or
+- `REJECTED`.
+
+Current diagnostic decision: NOT AVAILABLE — no Soul or diagnostic output exists. This is a blocked operation state, not an approval or rejection of a trained identity.
 
 ## Append-only rule
 
@@ -87,4 +117,4 @@ Never record tokens, passwords, OAuth secrets, private consent contents, source 
 
 ## Human review record
 
-Approval evidence must identify the exact private file fingerprint/version and approved downstream use. A generation attempt may be REVIEWED while its asset remains PROPOSED. CHR-SAGE-FACE-001 stays PROPOSED until the owner and Sage accept an exact version for a stated purpose. This batch stops at identity review; no automatic continuation is authorized.
+Approval evidence must identify the exact private file fingerprint/version and approved downstream use. A generation attempt may be REVIEWED while its asset remains PROPOSED. CHR-SAGE-FACE-001 remains an archived comparison only; it is not a controlling source or future prerequisite. The Soul route stops before upload until its blockers are resolved and, if later performed, stops again after the seven-output diagnostic. No automatic continuation to keyframes, video, publication, or production is authorized.
