@@ -631,6 +631,16 @@ for (const [assetId, aspectRatio] of expectedMotionAssets) {
     errors.push("assets.json: reviewed motion segment is inconsistent for " + assetId);
   }
 }
+const acceptedReplacementSegment = assetRecords.get("VID-RST-M-001") ?? {};
+const ordinaryMobileResolveSegment = assetRecords.get("VID-RST-M-002") ?? {};
+if (
+  acceptedReplacementSegment.workflow !== "START_END_INTERPOLATED_SILENT_SEGMENT_REPLACEMENT" ||
+  acceptedReplacementSegment.settings?.acceptedReplacementForRefundedFailedAttempt !== true ||
+  ordinaryMobileResolveSegment.workflow !== "START_END_INTERPOLATED_SILENT_SEGMENT" ||
+  ordinaryMobileResolveSegment.settings?.acceptedReplacementForRefundedFailedAttempt != null
+) {
+  errors.push("assets.json: refunded failure and bounded replacement must be attached only to VID-RST-M-001");
+}
 for (const [assetId, aspectRatio] of [
   ["VID-MASTER-D-001", "16:9"],
   ["VID-MASTER-M-001", "9:16"],
@@ -682,17 +692,39 @@ if (
   generationManifest.higgsfieldUploadsPerformed !== 13 ||
   generationManifest.productionAssetUploadsPerformed !== 0 ||
   generationManifest.generatedOutputPublicationUploadsPerformed !== 0 ||
-  generationManifest.grossHiggsfieldCreditsCharged !== 472.84 ||
+  generationManifest.grossHiggsfieldCreditsCharged !== 523.76 ||
   generationManifest.higgsfieldCreditsRefunded !== 45 ||
-  generationManifest.grossHiggsfieldCreditsSpent !== 427.84 ||
+  generationManifest.grossHiggsfieldCreditsSpent !== 478.76 ||
   generationManifest.concurrentProviderRewardGrantCredits !== 10 ||
   generationManifest.approvedPublicDeliveryAssets !== 0 ||
   generationManifest.verifiedProtectedPreviewDeliveryAssets !== 6
 ) {
   errors.push("generations.json: provider-submission, upload, credit, or approval counts are inconsistent");
 }
+if (
+  Math.abs(
+    generationManifest.grossHiggsfieldCreditsSpent +
+      generationManifest.higgsfieldCreditsRefunded -
+      generationManifest.grossHiggsfieldCreditsCharged,
+  ) > 1e-9
+) {
+  errors.push("generations.json: successful spend plus refund does not reconcile to total charged");
+}
 
 const keyframeWorkflow = generationManifest.keyframeWorkflow ?? {};
+const privateSupportingSpend = keyframeWorkflow.successfulPrivateExploratoryControlRevisionBatches ?? {};
+const expectedPrivateSupportingBatches = new Map([
+  ["INITIAL_TWO_OUTPUT_TRANCHE", 0.24],
+  ["TWO_OUTPUT_REVISION", 0.24],
+  ["TEN_OUTPUT_TRANCHE", 1.2],
+  ["LAYOUT_CONTROLS_AND_POSTER_EXPLORATION", 14.24],
+  ["MOBILE_HAIR_CONTINUITY_REVISION", 7],
+  ["POSTER_WARDROBE_EDITS", 14],
+  ["RUNWAY_LAYOUT_CONTROLS", 14],
+]);
+const actualPrivateSupportingBatches = new Map(
+  (privateSupportingSpend.batches ?? []).map((batch) => [batch.batchType, batch.grossCreditsSpent]),
+);
 if (
   keyframeWorkflow.executionState !== "TWELVE_SELECTED_ANCHORS_REVIEWED" ||
   keyframeWorkflow.selectedKeyframeCount !== 12 ||
@@ -706,6 +738,13 @@ if (
   keyframeWorkflow.deterministicTransitionBatch?.acceptedCount !== 4 ||
   keyframeWorkflow.deterministicTransitionBatch?.grossCreditsSpent !== 0 ||
   !setsEqual(new Set(keyframeWorkflow.deterministicTransitionBatch?.selectedKeys ?? []), expectedDeterministicKeyframes) ||
+  privateSupportingSpend.grossCreditsSpent !== 50.92 ||
+  actualPrivateSupportingBatches.size !== expectedPrivateSupportingBatches.size ||
+  [...expectedPrivateSupportingBatches].some(([batchType, spend]) => actualPrivateSupportingBatches.get(batchType) !== spend) ||
+  privateSupportingSpend.assetScope !== "PRIVATE_EXPLORATORY_CONTROL_AND_REVISION_ONLY" ||
+  privateSupportingSpend.eligibleAsSoulInputs !== false ||
+  privateSupportingSpend.publicDeliveryAssets !== false ||
+  privateSupportingSpend.privateOperationalRecordsPreservedOutsideGit !== true ||
   keyframeWorkflow.reviewState !== "APPROVED_FOR_PROTECTED_PREVIEW_ASSEMBLY" ||
   keyframeWorkflow.privateOperationalRecordsPreservedOutsideGit !== true
 ) {
@@ -732,7 +771,7 @@ if (
   motionSettings.grossCreditsPerSuccessfulSegment !== 45 ||
   motionWorkflow.grossSuccessfulSegmentCreditsSpent !== 360 ||
   motionWorkflow.failedRefundedAttemptCount !== 1 ||
-  failedMotionAttempt.segmentAssetId !== "VID-RST-M-002" ||
+  failedMotionAttempt.segmentAssetId !== "VID-RST-M-001" ||
   failedMotionAttempt.chargedCredits !== 45 ||
   failedMotionAttempt.refundedCredits !== 45 ||
   failedMotionAttempt.replacementSubmitted !== true ||
@@ -758,6 +797,18 @@ if (
   motionWorkflow.privateOperationalRecordsPreservedOutsideGit !== true
 ) {
   errors.push("generations.json: motion execution or preview assembly record is inconsistent");
+}
+const successfulSpendFromRecordedComponents =
+  25 +
+  0.84 +
+  (privateSupportingSpend.grossCreditsSpent ?? 0) +
+  (keyframeWorkflow.controlledCorrectionBatch?.grossCreditsSpent ?? 0) +
+  (motionWorkflow.grossSuccessfulSegmentCreditsSpent ?? 0);
+if (
+  Math.abs(successfulSpendFromRecordedComponents - 478.76) > 1e-9 ||
+  Math.abs(successfulSpendFromRecordedComponents - generationManifest.grossHiggsfieldCreditsSpent) > 1e-9
+) {
+  errors.push("generations.json: successful provider-spend components do not reconcile to 478.76 credits");
 }
 if (!Array.isArray(generationManifest.attempts) || generationManifest.attempts.length !== 3) {
   errors.push("generations.json: expected exactly three authorized attempts");
@@ -988,6 +1039,7 @@ console.log(
       refundedMotionAttempts: motionWorkflow.failedRefundedAttemptCount,
       verifiedProtectedPreviewDeliveryAssets: generationManifest.verifiedProtectedPreviewDeliveryAssets,
       deliveryVerificationResult: motionAssembly.verificationResult,
+      grossHiggsfieldCreditsCharged: generationManifest.grossHiggsfieldCreditsCharged,
       grossHiggsfieldCreditsSpent: generationManifest.grossHiggsfieldCreditsSpent,
       higgsfieldCreditsRefunded: generationManifest.higgsfieldCreditsRefunded,
       concurrentProviderRewardGrantCredits: soulExecutionCounts.concurrentProviderRewardGrantCredits,

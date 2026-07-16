@@ -93,8 +93,8 @@ Each exact boundary still is reused byte-for-byte where two adjacent segments me
 | VID-RWY-M-001 | mobile 9:16 | KF-01 mobile → KF-02 mobile | 5 s / PASSED | Mobile-authored far approach/ignition |
 | VID-RWY-M-002 | mobile 9:16 | KF-02 mobile → KF-03 mobile | 5 s / PASSED | Mobile-authored approach/occlusion |
 | hidden mobile cut | mobile | KF-03 black → KF-04 matched black | editorial | Full-height concealed change |
-| VID-RST-M-001 | mobile 9:16 | KF-04 mobile → KF-05 mobile | 5 s / PASSED | Mobile warm reveal |
-| VID-RST-M-002 | mobile 9:16 | KF-05 mobile → KF-06 mobile | 5 s / PASSED replacement | Mobile settle; one prior provider failure was fully refunded |
+| VID-RST-M-001 | mobile 9:16 | KF-04 mobile → KF-05 mobile | 5 s / PASSED replacement | Mobile warm reveal; one prior provider failure was fully refunded |
+| VID-RST-M-002 | mobile 9:16 | KF-05 mobile → KF-06 mobile | 5 s / PASSED | Mobile settle |
 
 Although six anchor moments exist, the hidden cut separates two three-anchor groups. Four generated segments per composition are correct: two runway intervals and two resort intervals.
 
@@ -106,7 +106,7 @@ Although six anchor moments exist, the hidden cut separates two three-anchor gro
 4. COMPLETE — twelve desktop/mobile keyframes selected: six controlled GPT Image 2 corrections, four deterministic transition anchors, and KF-06 desktop v4/mobile v5.
 5. COMPLETE — exact Seedance 2.0 cost preflight established 45 credits per five-second 1080p silent segment.
 6. COMPLETE — four desktop and four separately authored mobile segments generated and reviewed.
-7. COMPLETE — one mobile resort-resolve provider failure was fully refunded; one bounded replacement passed.
+7. COMPLETE — one VID-RST-M-001 mobile resort-reveal provider failure was fully refunded; one bounded replacement passed.
 8. COMPLETE — separate 20.125-second, 24 fps silent desktop/mobile H264 and VP9 derivatives verified; all four are under 4.3 MB and remain protected-preview-only.
 
 ## Editorial and delivery hypothesis
@@ -123,7 +123,7 @@ Current public video schemas expose no seed field and no universal negative-prom
 
 ## Cost, rights, and privacy
 
-- Executed spend is 427.84 credits: 25 Soul training, 0.84 diagnostics, 42 controlled keyframe corrections, and 360 across eight accepted motion segments. One additional 45-credit failed motion attempt was fully refunded. A separate concurrent provider reward granted 10 credits; no account balance is stored in Git.
+- Successful executed spend is 478.76 credits: 25 Soul training, 0.84 diagnostics, 50.92 private exploratory/control/poster/revision work, 42 controlled keyframe corrections, and 360 across eight accepted motion segments. Total charged was 523.76 including one 45-credit failed motion attempt that was fully refunded. A separate concurrent provider reward granted 10 credits; no account balance is stored in Git.
 - Higgsfield’s terms state it does not claim ownership of inputs/outputs or restrict commercial output use.
 - The same terms grant broad rights over uploaded/generated content and permit uses including model development/training and marketing/promotion.
 - The user remains responsible for likeness, copyright, trademark, and third-party rights.

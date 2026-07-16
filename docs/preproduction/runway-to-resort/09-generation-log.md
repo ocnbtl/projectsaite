@@ -18,13 +18,13 @@ Current selected keyframe anchors: 12 — six corrected, four deterministic tran
 
 Current accepted Higgsfield motion segments: 8 — four desktop and four mobile
 
-Current refunded Higgsfield motion attempts: 1 — one failed mobile resort-resolve attempt, fully refunded and replaced once
+Current refunded Higgsfield motion attempts: 1 — one failed mobile resort-reveal / VID-RST-M-001 attempt, fully refunded and replaced once
 
 Current production/publication uploads: 0
 
-Current Higgsfield credits spent after refunds: 427.84 total — 25 training, 0.84 diagnostics, 42 controlled keyframe corrections, and 360 accepted motion segments
+Current successful Higgsfield spend: 478.76 total — 25 training, 0.84 diagnostics, 50.92 private exploratory/control/poster/revision work, 42 controlled keyframe corrections, and 360 accepted motion segments
 
-Current Higgsfield credits charged then refunded: 45 for one failed motion attempt
+Current Higgsfield credits charged: 523.76 total; 45 was fully refunded for one failed motion attempt
 
 Concurrent provider reward grant: 10 credits; account balance intentionally omitted
 
@@ -88,6 +88,8 @@ Diagnostic spend was 0.84 gross credits at 0.12 per output. A separate concurren
 - Controlled correction batch: KF-01, KF-02, and KF-05 in both compositions; GPT Image 2, high quality, 2k; six accepted outputs; 42 gross credits.
 - Deterministic transition batch: KF-03 full-black and KF-04 matched-black/light-leak in both compositions; four accepted outputs; zero provider credits.
 - Terminal poster anchors: KF-06 desktop v4 and mobile v5 accepted.
+- Earlier successful private exploratory/control/poster/revision spend: 50.92 credits, reconciled as 0.24 initial two-output tranche + 0.24 two-output revision + 1.20 ten-output tranche + 14.24 layout-controls/poster exploration + 7 mobile hair-continuity revision + 14 poster wardrobe edits + 14 runway layout controls.
+- Those earlier artifacts remain private exploratory/control/revision evidence only; they are not public delivery assets or Soul inputs.
 - Private binary locations, hashes, and operational attempt details remain outside Git.
 
 ## Motion segment execution — completed
@@ -97,7 +99,7 @@ Diagnostic spend was 0.84 gross credits at 0.12 per output. A separate concurren
 - Common accepted settings: five seconds, 1080p, standard quality, high bitrate, silent; 16:9 desktop or 9:16 mobile.
 - Accepted-segment spend: 45 credits each, 360 credits total.
 - Review: eight structural checks passed and eight contact-sheet visual reviews passed.
-- Failure record: one mobile resort-resolve provider attempt failed and its 45-credit charge was fully refunded. One bounded replacement was submitted and passed; no repeated campaign or additional Soul was created.
+- Failure record: one mobile resort-reveal / VID-RST-M-001 provider attempt failed and its 45-credit charge was fully refunded. One bounded replacement was submitted and passed; no repeated campaign or additional Soul was created.
 
 ## Protected-preview delivery assembly — complete and verified
 

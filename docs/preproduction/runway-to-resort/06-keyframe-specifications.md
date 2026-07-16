@@ -12,6 +12,8 @@ Status: COMPLETE / SELECTED FOR PREVIEW ASSEMBLY. Twelve private keyframe anchor
 
 The selected set contains exactly twelve anchors. Private output fingerprints and locations remain outside Git. These approvals are scoped to nonproduction preview assembly; they do not record a production deployment or merge.
 
+Before the six-output 42-credit correction batch, successful private exploratory/control/poster/revision work spent 50.92 credits: 0.24 initial tranche, 0.24 revision, 1.20 ten-output tranche, 14.24 layout-control/poster exploration, 7 mobile hair-continuity revision, 14 poster wardrobe edits, and 14 runway layout controls. Those private assets are not Soul inputs or public delivery assets.
+
 ## Shared locked dependencies
 
 - Character: CHR-SAGE-SOUL-001 and CHR-SAGE-SOUL-DIAG-001, with the thirteen original photographs authoritative and the approved continuity constraints applied during review.

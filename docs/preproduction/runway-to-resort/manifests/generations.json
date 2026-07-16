@@ -127,6 +127,22 @@
       ],
       "grossCreditsSpent": 0
     },
+    "successfulPrivateExploratoryControlRevisionBatches": {
+      "grossCreditsSpent": 50.92,
+      "batches": [
+        {"batchType": "INITIAL_TWO_OUTPUT_TRANCHE", "grossCreditsSpent": 0.24},
+        {"batchType": "TWO_OUTPUT_REVISION", "grossCreditsSpent": 0.24},
+        {"batchType": "TEN_OUTPUT_TRANCHE", "grossCreditsSpent": 1.2},
+        {"batchType": "LAYOUT_CONTROLS_AND_POSTER_EXPLORATION", "grossCreditsSpent": 14.24},
+        {"batchType": "MOBILE_HAIR_CONTINUITY_REVISION", "grossCreditsSpent": 7},
+        {"batchType": "POSTER_WARDROBE_EDITS", "grossCreditsSpent": 14},
+        {"batchType": "RUNWAY_LAYOUT_CONTROLS", "grossCreditsSpent": 14}
+      ],
+      "assetScope": "PRIVATE_EXPLORATORY_CONTROL_AND_REVISION_ONLY",
+      "eligibleAsSoulInputs": false,
+      "publicDeliveryAssets": false,
+      "privateOperationalRecordsPreservedOutsideGit": true
+    },
     "acceptedTerminalAnchors": [
       {"key": "KF-06::desktop", "version": 4},
       {"key": "KF-06::mobile", "version": 5}
@@ -164,7 +180,7 @@
     "grossSuccessfulSegmentCreditsSpent": 360,
     "failedRefundedAttemptCount": 1,
     "failedRefundedAttempt": {
-      "segmentAssetId": "VID-RST-M-002",
+      "segmentAssetId": "VID-RST-M-001",
       "failureState": "PROVIDER_FAILED",
       "chargedCredits": 45,
       "refundedCredits": 45,
@@ -605,9 +621,9 @@
   },
   "generationAuthorizationState": "SOUL_DIAGNOSTIC_KEYFRAMES_MOTION_AND_PROTECTED_PREVIEW_DELIVERY_COMPLETE_VERIFIED_PRODUCTION_RELEASE_PENDING_GATE",
   "openAIProviderSubmissionsPerformed": 3,
-  "grossHiggsfieldCreditsCharged": 472.84,
+  "grossHiggsfieldCreditsCharged": 523.76,
   "higgsfieldCreditsRefunded": 45,
-  "grossHiggsfieldCreditsSpent": 427.84,
+  "grossHiggsfieldCreditsSpent": 478.76,
   "concurrentProviderRewardGrantCredits": 10,
   "soulDiagnosticDecision": {
     "decision": "APPROVED FOR KEYFRAME DEVELOPMENT",
