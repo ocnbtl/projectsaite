@@ -14,7 +14,24 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-const serviceImages = [portfolioMedia[7], portfolioMedia[4], portfolioMedia[3], portfolioMedia[2]];
+const serviceImages = [
+  { ...portfolioMedia[7], orientation: "vertical" },
+  {
+    src: "/media/services/face-painting-candid.webp",
+    alt: "Child with detailed blue and coral celestial face paint at an outdoor event.",
+    width: 1536,
+    height: 1024,
+    orientation: "horizontal",
+  },
+  { ...portfolioMedia[3], orientation: "vertical" },
+  {
+    src: "/media/services/travel-resort-candid.webp",
+    alt: "Tropical resort terrace overlooking an infinity pool and a coastal cove.",
+    width: 1536,
+    height: 1024,
+    orientation: "horizontal",
+  },
+] as const;
 
 export default async function ServicesPage() {
   const content = await getSiteContent();
@@ -22,15 +39,20 @@ export default async function ServicesPage() {
   return (
     <>
       <section className="editorial-page-hero editorial-page-hero--services">
-        <p>Services</p>
         <h1>Bring the idea to life.</h1>
       </section>
 
       <section className="editorial-services-list" aria-label="Sage Burress services">
         {content.services.map((service, index) => {
-          const media = serviceImages[index] ?? portfolioMedia[index];
+          const media =
+            serviceImages[index] ??
+            ({ ...portfolioMedia[index % portfolioMedia.length], orientation: "vertical" } as const);
           return (
-            <article id={service.slug} className="editorial-service-detail" key={service.slug}>
+            <article
+              id={service.slug}
+              className={`editorial-service-detail editorial-service-detail--${media.orientation}`}
+              key={service.slug}
+            >
               <div className="editorial-service-detail__number">{service.number}</div>
               <div className="editorial-service-detail__copy">
                 <h2>{service.title}</h2>
@@ -51,6 +73,7 @@ export default async function ServicesPage() {
                   width={media.width}
                   height={media.height}
                   sizes="(max-width: 799px) 100vw, 42vw"
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
               </figure>
             </article>

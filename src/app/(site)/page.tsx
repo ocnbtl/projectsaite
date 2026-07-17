@@ -84,12 +84,15 @@ export default async function HomePage() {
 
       <section className="editorial-service-index" aria-labelledby="home-services-heading">
         <div className="editorial-service-index__heading">
-          <p>Ways to work together</p>
           <h2 id="home-services-heading">Services</h2>
         </div>
         <div className="editorial-service-index__grid">
           {content.services.map((service) => (
-            <Link key={service.slug} href={`/services#${service.slug}`}>
+            <Link
+              className={`editorial-service-card editorial-service-card--${service.slug}`}
+              key={service.slug}
+              href={`/services#${service.slug}`}
+            >
               <span>{service.number}</span>
               <h3>{service.title}</h3>
               <p>{service.summary}</p>

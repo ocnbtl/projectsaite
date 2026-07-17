@@ -89,7 +89,7 @@ export const seedContent: SiteContent = {
   contact: {
     title: "Let’s work together.",
     intro:
-      "Tell Sage what you have in mind—even if it’s still just an idea. A little context is helpful, but you don’t need every detail figured out. Sage will reply with availability within 48 hours.",
+      "Tell me what you have in mind, even if it’s still just an idea. A little context is helpful, but you don’t need every detail figured out. Life’s busy, but I typically reply with my availability within 48 hours.",
     email: "contact@sageburress.com",
   },
   services: [
@@ -128,7 +128,7 @@ export const seedContent: SiteContent = {
       number: "03",
       title: "Content Creation",
       shortTitle: "Content Creation",
-      summary: "Photo and short-form storytelling built for the platform and brief.",
+      summary: "Photo, short-form, and long-form storytelling created for social platforms.",
       description:
         "Original storytelling that feels natural on social while still delivering the polish, intention, and creative perspective brands need.",
       deliverables: [
@@ -143,7 +143,7 @@ export const seedContent: SiteContent = {
       number: "04",
       title: "Travel Collaborations",
       shortTitle: "Travel Collaborations",
-      summary: "Photo-led stories for stays, destinations, and memorable experiences.",
+      summary: "Reels, stories, and short-form video for destinations and experiences.",
       description:
         "Collaborative travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
       deliverables: [

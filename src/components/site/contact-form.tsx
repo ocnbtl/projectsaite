@@ -93,7 +93,7 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
           rows={7}
           minLength={20}
           maxLength={5000}
-          placeholder="Tell Sage what you’re imagining. Share as much—or as little—as you know right now."
+          placeholder="Tell me what you have in mind. Share whatever you know right now, and I can help shape the rest."
           required
         />
       </label>
@@ -108,7 +108,6 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
           {state === "sending" ? <LoaderCircle className="spin" size={18} /> : <ArrowUpRight size={18} />}
           {state === "sending" ? "Sending" : "Send inquiry"}
         </button>
-        <p>Sage replies with availability within 48 hours.</p>
       </div>
 
       {state === "fallback" && (

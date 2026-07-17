@@ -18,7 +18,6 @@ export default async function PortfolioPage() {
   return (
     <>
       <section className="editorial-page-hero editorial-page-hero--portfolio">
-        <p>Selected work</p>
         <h1>Portfolio</h1>
       </section>
 
@@ -26,8 +25,7 @@ export default async function PortfolioPage() {
         <PortfolioMosaic projects={content.projects} showCaptions />
       </section>
 
-      <section className="editorial-contact-callout">
-        <p>Bookings and collaborations</p>
+      <section className="editorial-contact-callout editorial-contact-callout--portfolio">
         <h2>Let’s make something memorable.</h2>
         <Link className="editorial-button" href="/contact">
           Work with Sage
