@@ -40,9 +40,9 @@ export function ContentEditor({ initialContent }: { initialContent: SiteContent 
 
       <div className="admin-editor__section">
         <div>
-          <p className="ui-label">About</p>
-          <h2>Story and positioning</h2>
-          <p>The short introduction appears early. The story supports the full About page.</p>
+          <p className="ui-label">Profile</p>
+          <h2>Saved positioning</h2>
+          <p>Keep a concise profile on hand for future page and pitch-kit use.</p>
         </div>
         <div className="admin-fields">
           <label><span>Heading</span><input value={content.about.title} onChange={(event) => setContent({ ...content, about: { ...content.about, title: event.target.value } })} /></label>

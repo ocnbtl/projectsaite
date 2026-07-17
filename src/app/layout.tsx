@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, Hanken_Grotesk } from "next/font/google";
 
+import { siteUrl } from "@/lib/site-url";
+
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -20,18 +22,19 @@ const sans = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://sageburress.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Sage Burress | Model, Creator, Scout & Artist",
+    default: "Sage Burress | Model & Creative",
     template: "%s | Sage Burress",
   },
   description:
-    "Sage Burress is a model, content creator, model scout, face painter, and hospitality creative partner.",
+    "Portfolio and bookings for Sage Burress: modeling, face painting, content creation, and travel collaborations.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "Sage Burress",
-    title: "Sage Burress | Model, Creator, Scout & Artist",
-    description: "Creative work, thoughtful partnerships, and bookings with Sage Burress.",
+    title: "Sage Burress | Model & Creative",
+    description: "Selected work and bookings with Sage Burress.",
   },
   robots: { index: true, follow: true },
 };

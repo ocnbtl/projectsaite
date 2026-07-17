@@ -1,48 +1,51 @@
-import { ArrowDownRight, Clock3, Mail, MapPin } from "lucide-react";
+import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/site/contact-form";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact",
-  description: "Start a modeling, content, scouting, face painting, or hospitality collaboration with Sage Burress.",
+  description:
+    "Start a modeling, face painting, content creation, or travel collaboration with Sage Burress.",
+  alternates: { canonical: "/contact" },
 };
 
-export default async function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ inquiry?: string | string[] }>;
+}) {
   const content = await getSiteContent();
+  const params = await searchParams;
+  const initialInquiry = typeof params.inquiry === "string" ? params.inquiry : undefined;
 
   return (
-    <div className="contact-page">
-      <section className="contact-hero">
-        <div className="container contact-hero__grid">
-          <div>
-            <p className="ui-label">Start a conversation</p>
-            <h1>{content.contact.title}</h1>
-          </div>
-          <div className="contact-hero__intro">
-            <p>{content.contact.intro}</p>
-            <ArrowDownRight size={34} strokeWidth={1.2} />
-          </div>
-        </div>
+    <>
+      <section className="editorial-page-hero editorial-page-hero--contact">
+        <p>Contact</p>
+        <h1>{content.contact.title}</h1>
+        <p>{content.contact.intro}</p>
       </section>
 
-      <section className="contact-workspace">
-        <div className="container contact-workspace__grid">
-          <aside className="contact-details">
-            <p className="ui-label">Direct details</p>
-            <a href={`mailto:${content.contact.email}`}><Mail size={18} />{content.contact.email}</a>
-            <p><MapPin size={18} />Based in Ohio, available worldwide</p>
-            <p><Clock3 size={18} />Replies within two business days</p>
-            <div className="contact-details__note">
-              <span>Helpful to include</span>
-              <p>Dates, location, creative direction, usage, deliverables, and budget range.</p>
+      <section className="editorial-contact-layout">
+        <aside>
+          <p>Direct email</p>
+          <a href={`mailto:${content.contact.email}`}>{content.contact.email}</a>
+          <dl>
+            <div>
+              <dt>Useful details</dt>
+              <dd>Dates, location, creative direction, intended use, deliverables, and budget.</dd>
             </div>
-          </aside>
-          <ContactForm />
-        </div>
+            <div>
+              <dt>Services</dt>
+              <dd>Modeling, face painting, content creation, and travel collaborations.</dd>
+            </div>
+          </dl>
+        </aside>
+        <ContactForm initialInquiry={initialInquiry} />
       </section>
-    </div>
+    </>
   );
 }

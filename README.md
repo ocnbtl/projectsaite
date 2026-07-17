@@ -15,11 +15,10 @@ The public site works from the checked-in seed content. Direct contact delivery 
 ## Core routes
 
 - `/` home
-- `/about`
 - `/services`
 - `/portfolio`
 - `/contact`
-- `/links`
+- `/privacy`
 - `/admin/login`
 - `/admin`
 - `/admin/pitch-kit`

@@ -36,8 +36,8 @@ export default async function AdminOverviewPage() {
       </section>
       <section className="admin-note">
         <p className="ui-label">Recommended next step</p>
-        <h2>Replace staging photography with Sage&apos;s final portfolio selections.</h2>
-        <p>The structure is ready. Use Portfolio and Site Content to add the approved images and final project details before connecting the production domain.</p>
+        <h2>Keep the portfolio and booking details current.</h2>
+        <p>Use Portfolio and Site Content to update the public selections, service language, and contact invitation as new work is approved.</p>
       </section>
     </div>
   );

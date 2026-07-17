@@ -1,4 +1,8 @@
-export const metadata = { title: "Privacy" };
+export const metadata = {
+  title: "Privacy",
+  description: "How the Sage Burress website handles contact-form information and analytics.",
+  alternates: { canonical: "/privacy" },
+};
 
 export default function PrivacyPage() {
   return (
@@ -11,7 +15,7 @@ export default function PrivacyPage() {
         <p>This site uses Vercel Analytics to understand aggregate website usage and improve the experience. It does not create advertising profiles.</p>
         <h2>Contact and deletion</h2>
         <p>To ask about, update, or delete information submitted through this website, email <a href="mailto:contact@sageburress.com">contact@sageburress.com</a>.</p>
-        <p className="legal-page__date">Last updated July 14, 2026.</p>
+        <p className="legal-page__date">Last updated July 17, 2026.</p>
       </article>
     </div>
   );

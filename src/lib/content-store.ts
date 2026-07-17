@@ -2,7 +2,9 @@ import "server-only";
 
 import { isSiteContent, seedContent, type SiteContent } from "@/lib/content";
 
-const CONTENT_PATH = "project-saite/site-content.json";
+// The v2 document keeps the redesigned public-site content separate from the
+// previous placeholder-era document without deleting or overwriting owner data.
+const CONTENT_PATH = "project-saite/site-content-v2.json";
 
 export function isPersistentContentConfigured() {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);

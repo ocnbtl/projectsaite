@@ -25,7 +25,7 @@ export function PortfolioManager({ initialContent }: { initialContent: SiteConte
       location: "",
       summary: "Add a concise project summary.",
       story: "Add the story, brief, and outcome.",
-      image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1400&q=88",
+      image: "/media/sage/v1/sage-001.webp",
       alt: "Project image",
       tags: ["Campaign"],
       featured: false,

@@ -1,81 +1,74 @@
 import type { Metadata } from "next";
-import { Check, MoveDown } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-import { ButtonLink } from "@/components/site/button-link";
-import { ContactCta } from "@/components/site/contact-cta";
-import { Reveal } from "@/components/site/reveal";
+import { portfolioMedia } from "@/content/portfolio-media";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Modeling, content creation, scouting, face painting, and hospitality collaborations with Sage Burress.",
+  description:
+    "Work with Sage Burress for modeling, face painting, content creation, and travel collaborations.",
+  alternates: { canonical: "/services" },
 };
 
-const serviceImages = [
-  "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=1200&q=88",
-  "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=88",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=88",
-  "https://images.unsplash.com/photo-1542596594-649edbc13630?auto=format&fit=crop&w=1200&q=88",
-  "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=88",
-  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=88",
-];
+const serviceImages = [portfolioMedia[7], portfolioMedia[4], portfolioMedia[3], portfolioMedia[2]];
 
 export default async function ServicesPage() {
   const content = await getSiteContent();
 
   return (
     <>
-      <section className="page-hero services-hero">
-        <div className="container services-hero__grid">
-          <div>
-            <p className="ui-label">Services</p>
-            <h1>Built around the story, not a rigid package.</h1>
-          </div>
-          <div className="services-hero__aside">
-            <p>
-              Choose one discipline or combine several into a more complete collaboration. Every scope is shaped around the audience, usage, timing, and setting.
-            </p>
-            <a href="#service-list" aria-label="Explore services">
-              <MoveDown size={20} />
-            </a>
-          </div>
-        </div>
+      <section className="editorial-page-hero editorial-page-hero--services">
+        <p>Services</p>
+        <h1>Four ways to work together.</h1>
+        <p>
+          Each collaboration starts with the brief, intended use, timing, and the kind of presence the
+          project needs.
+        </p>
       </section>
 
-      <section id="service-list" className="services-list">
-        {content.services.map((service, index) => (
-          <article id={service.slug} key={service.slug} className={`service-detail service-detail--${service.accent}`}>
-            <div className="container service-detail__grid">
-              <Reveal className="service-detail__number">
-                <span>{service.number}</span>
-                <p className="ui-label">{service.shortTitle}</p>
-              </Reveal>
-              <Reveal className="service-detail__content">
+      <section className="editorial-services-list" aria-label="Sage Burress services">
+        {content.services.map((service, index) => {
+          const media = serviceImages[index] ?? portfolioMedia[index];
+          return (
+            <article id={service.slug} className="editorial-service-detail" key={service.slug}>
+              <div className="editorial-service-detail__number">{service.number}</div>
+              <div className="editorial-service-detail__copy">
                 <h2>{service.title}</h2>
                 <p>{service.description}</p>
                 <ul>
-                  {service.deliverables.map((item) => (
-                    <li key={item}>
-                      <Check size={16} aria-hidden="true" /> {item}
-                    </li>
+                  {service.deliverables.map((deliverable) => (
+                    <li key={deliverable}>{deliverable}</li>
                   ))}
                 </ul>
-                <ButtonLink href={`/contact?inquiry=${encodeURIComponent(service.title)}`} variant="outline">
-                  Ask about {service.shortTitle.toLowerCase()}
-                </ButtonLink>
-              </Reveal>
-              <Reveal className="service-detail__media">
-                <Image src={serviceImages[index]} alt={`${service.title} editorial placeholder`} fill sizes="(max-width: 800px) 100vw, 36vw" />
-              </Reveal>
-            </div>
-          </article>
-        ))}
+                <Link href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>
+                  Ask about {service.title.toLowerCase()} <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+              <figure className="editorial-service-detail__image">
+                <Image
+                  src={media.src}
+                  alt={media.alt}
+                  width={media.width}
+                  height={media.height}
+                  sizes="(max-width: 799px) 100vw, 42vw"
+                />
+              </figure>
+            </article>
+          );
+        })}
       </section>
 
-      <ContactCta title="Need more than one deliverable?" copy="Sage can combine modeling, content, and location storytelling into one coordinated scope with clear usage and handoff." tone="cocoa" />
+      <section className="editorial-contact-callout">
+        <p>Not sure where the project fits?</p>
+        <h2>Start with the idea.</h2>
+        <Link className="editorial-button" href="/contact">
+          Contact Sage
+        </Link>
+      </section>
     </>
   );
 }

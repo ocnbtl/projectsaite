@@ -1,15 +1,13 @@
 import Link from "next/link";
 
-import { Wordmark } from "@/components/site/wordmark";
-
 export default function NotFound() {
   return (
     <main className="not-found">
       <div>
-        <p className="ui-label">404 · Page not found</p>
-        <Wordmark />
-        <h1>This page wandered off set.</h1>
-        <Link className="button button--light" href="/">Return home</Link>
+        <Link className="not-found__brand" href="/">Sage Burress</Link>
+        <p>404 · Page not found</p>
+        <h1>This page is not part of the portfolio.</h1>
+        <Link className="not-found__return" href="/">Return home</Link>
       </div>
     </main>
   );

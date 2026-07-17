@@ -1922,10 +1922,12 @@ img {
 .legal-page p { font-size: 1.05rem; line-height: 1.85; }
 .legal-page a { text-decoration: underline; }
 .legal-page__date { margin-top: 60px; color: var(--warm-gray); font-size: 0.82rem !important; }
-.not-found { min-height: 100svh; display: grid; place-items: center; padding: 100px 28px; color: var(--cream); text-align: center; background: var(--cocoa); }
-.not-found .wordmark { margin: 36px auto; color: var(--sage); font-size: 7rem; }
-.not-found h1 { margin: 0 0 38px; font-family: var(--font-display), Georgia, serif; font-size: 2.8rem; font-weight: 400; }
-.not-found .button { margin-inline: auto; }
+.not-found { min-height: 100svh; display: grid; place-items: center; padding: 100px 28px; color: #373a40; text-align: center; background: #f6f1f1; }
+.not-found > div { width: min(100%, 820px); }
+.not-found__brand { display: inline-block; margin-bottom: 80px; font-family: var(--font-display), Georgia, serif; font-size: 1.8rem; font-style: italic; }
+.not-found > div > p { margin: 0 0 30px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.not-found h1 { margin: 0 0 48px; font-family: var(--font-display), Georgia, serif; font-size: clamp(4rem, 9vw, 8.2rem); font-style: italic; font-weight: 400; line-height: 0.82; letter-spacing: -0.05em; }
+.not-found__return { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 24px; border: 1px solid currentColor; border-radius: 3px; font-family: var(--font-display), Georgia, serif; font-size: 1.1rem; font-style: italic; }
 
 /* Owner studio */
 .admin-shell { min-height: 100svh; color: var(--cocoa); background: #f4f1eb; }
@@ -2103,7 +2105,6 @@ img {
   .links-page__inner > .wordmark { font-size: 4.8rem; }
   .links-page nav span { align-items: flex-start; flex-direction: column; }
   .legal-page h1 { font-size: 3rem; }
-  .not-found .wordmark { font-size: 5rem; }
   .admin-page__heading h1 { font-size: 2.9rem; }
   .admin-action-grid > a { grid-template-columns: 28px 1fr 18px; }
   .admin-fields--two { grid-template-columns: 1fr; }

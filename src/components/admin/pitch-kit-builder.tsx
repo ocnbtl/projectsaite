@@ -15,23 +15,11 @@ type Pitch = {
 };
 
 const templates: Record<string, Pick<Pitch, "concept" | "audience" | "deliverables" | "closing">> = {
-  "Content creation": {
+  "Content Creation": {
     concept: "A warm, editorial content series that introduces the experience through a credible personal point of view.",
     audience: "Design-minded women interested in travel, style, beauty, and considered experiences.",
     deliverables: "1 short-form video, 1 photo carousel, 5 edited story frames, and 30-day organic usage.",
     closing: "I would love to shape the concept around your upcoming priorities and create work that feels natural to both audiences.",
-  },
-  "Airbnb partnership": {
-    concept: "A guest-perspective stay story focused on the details, atmosphere, and local moments that make the property memorable.",
-    audience: "Experience-led travelers looking for visually distinctive stays and trusted recommendations.",
-    deliverables: "1 property reel, 12 edited images, 6 story frames, and a written stay recommendation.",
-    closing: "I would be glad to align the stay dates and creative plan with your availability and current booking goals.",
-  },
-  "Hotel or resort": {
-    concept: "An editorial hospitality campaign following the emotional arc of arrival, experience, and escape.",
-    audience: "Travelers who choose properties through design, atmosphere, service, and a strong sense of place.",
-    deliverables: "2 short-form videos, 20 edited images, daily story coverage, and 60-day organic usage.",
-    closing: "I would welcome a conversation about your seasonal priorities, target guest, and the story you want the property to tell.",
   },
   Modeling: {
     concept: "A refined image series built around the campaign mood, product, and intended customer.",
@@ -39,26 +27,26 @@ const templates: Record<string, Pick<Pitch, "concept" | "audience" | "deliverabl
     deliverables: "Half-day shoot, agreed look count, and campaign usage to be scoped with the brief.",
     closing: "Please share the brief, usage, dates, and location so I can confirm availability and provide an exact quote.",
   },
-  "Model scouting": {
-    concept: "A focused talent search and evaluation process designed around the campaign, market, and casting priorities.",
-    audience: "Emerging and established talent aligned with your creative direction.",
-    deliverables: "Talent outreach, shortlist, initial evaluation, and coordinated introductions.",
-    closing: "I would be happy to review the casting criteria and recommend a scouting approach that fits the assignment.",
-  },
-  "Face painting": {
+  "Face Painting": {
     concept: "A polished, guest-friendly face painting experience tailored to the event theme and age range.",
     audience: "Event guests and families looking for a memorable interactive detail.",
     deliverables: "On-site service, custom design menu, professional materials, and event setup.",
     closing: "Please share the date, guest count, age range, and theme so I can recommend the right package.",
   },
+  "Travel Collaborations": {
+    concept: "A guest-perspective travel story focused on the details, atmosphere, and local moments that make the experience memorable.",
+    audience: "Experience-led travelers looking for distinctive places and thoughtful recommendations.",
+    deliverables: "Short-form travel content, edited photography, story coverage, and usage scoped to the brief.",
+    closing: "I would be glad to align the travel dates and creative plan with your availability and current priorities.",
+  },
 };
 
 const initialPitch: Pitch = {
-  service: "Content creation",
+  service: "Content Creation",
   brand: "Brand name",
   contactName: "Partnerships team",
   fee: "Available upon scope confirmation",
-  ...templates["Content creation"],
+  ...templates["Content Creation"],
 };
 
 export function PitchKitBuilder() {

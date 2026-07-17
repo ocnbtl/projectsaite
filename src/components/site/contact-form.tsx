@@ -5,19 +5,20 @@ import { FormEvent, useState } from "react";
 
 const inquiryOptions = [
   "Modeling",
-  "Content creation",
-  "Model scouting",
-  "Face painting",
-  "Airbnb partnership",
-  "Hotel or resort",
+  "Face Painting",
+  "Content Creation",
+  "Travel Collaborations",
   "Something else",
 ] as const;
 
 type FormState = "idle" | "sending" | "sent" | "fallback" | "error";
 
-export function ContactForm() {
+export function ContactForm({ initialInquiry = "Content Creation" }: { initialInquiry?: string }) {
   const [state, setState] = useState<FormState>("idle");
   const [fallbackHref, setFallbackHref] = useState("mailto:contact@sageburress.com");
+  const selectedInquiry = inquiryOptions.includes(initialInquiry as (typeof inquiryOptions)[number])
+    ? initialInquiry
+    : "Content Creation";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -80,7 +81,7 @@ export function ContactForm() {
 
       <label>
         <span>What can Sage help with?</span>
-        <select name="inquiry" defaultValue="Content creation" required>
+        <select name="inquiry" defaultValue={selectedInquiry} required>
           {inquiryOptions.map((option) => <option key={option}>{option}</option>)}
         </select>
       </label>

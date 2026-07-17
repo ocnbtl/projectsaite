@@ -6,7 +6,13 @@ import { z } from "zod";
 export const contactSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.email().max(254),
-  inquiry: z.enum(["Modeling", "Content creation", "Model scouting", "Face painting", "Airbnb partnership", "Hotel or resort", "Something else"]),
+  inquiry: z.enum([
+    "Modeling",
+    "Face Painting",
+    "Content Creation",
+    "Travel Collaborations",
+    "Something else",
+  ]),
   message: z.string().trim().min(20).max(5000),
   website: z.string().max(0).optional().default(""),
 });

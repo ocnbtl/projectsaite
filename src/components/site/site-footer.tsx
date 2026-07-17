@@ -1,39 +1,26 @@
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-import { seedContent } from "@/lib/content";
-import { Wordmark } from "@/components/site/wordmark";
+import { publicNavigation } from "@/lib/content";
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
-      <div className="site-footer__top container">
-        <div>
-          <Wordmark className="site-footer__wordmark" />
-          <p>Creative work rooted in attention, warmth, and a clear point of view.</p>
-        </div>
-
-        <div className="site-footer__nav">
-          <p className="ui-label">Explore</p>
-          <Link href="/about">About</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/portfolio">Portfolio</Link>
-          <Link href="/contact">Contact</Link>
-        </div>
-
-        <div className="site-footer__nav">
-          <p className="ui-label">Follow</p>
-          {seedContent.social.map((item) => (
-            <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
-              {item.label} <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
+    <footer className="editorial-footer">
+      <div className="editorial-footer__top">
+        <Link className="editorial-brand" href="/">
+          Sage Burress
+        </Link>
+        <nav aria-label="Footer navigation">
+          {publicNavigation.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
           ))}
-        </div>
+        </nav>
       </div>
-
-      <div className="site-footer__bottom container">
+      <div className="editorial-footer__bottom">
         <p>© {new Date().getFullYear()} Sage Burress</p>
         <div>
+          <a href="mailto:contact@sageburress.com">contact@sageburress.com</a>
           <Link href="/privacy">Privacy</Link>
           <Link href="/admin/login">Client workspace</Link>
         </div>
