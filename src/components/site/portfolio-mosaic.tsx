@@ -17,40 +17,31 @@ export function PortfolioMosaic({
     .filter((project): project is Project => Boolean(project));
   const remaining = projects.filter((project) => !ordered.includes(project));
   const complete = [...ordered, ...remaining];
-  const columns = [
-    complete.filter((_, index) => index % 2 === 0),
-    complete.filter((_, index) => index % 2 === 1),
-  ];
 
   return (
     <div className="editorial-mosaic">
-      {columns.map((column, columnIndex) => (
-        <div className="editorial-mosaic__column" key={columnIndex}>
-          {column.map((project, itemIndex) => {
-            const media = portfolioMedia.find((item) => item.src === project.image);
-            const position = columnIndex + itemIndex * 2 + 1;
+      {complete.map((project, index) => {
+        const media = portfolioMedia.find((item) => item.src === project.image);
 
-            return (
-              <figure className="editorial-mosaic__item" key={project.slug}>
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  width={media?.width ?? 1600}
-                  height={media?.height ?? 2000}
-                  loading={showCaptions && itemIndex === 0 ? "eager" : "lazy"}
-                  sizes="(max-width: 699px) 100vw, (max-width: 1099px) 50vw, 46vw"
-                />
-                {showCaptions ? (
-                  <figcaption>
-                    <span>{String(position).padStart(2, "0")}</span>
-                    <span>{project.category}</span>
-                  </figcaption>
-                ) : null}
-              </figure>
-            );
-          })}
-        </div>
-      ))}
+        return (
+          <figure className="editorial-mosaic__item" key={project.slug}>
+            <Image
+              src={project.image}
+              alt={project.alt}
+              width={media?.width ?? 1600}
+              height={media?.height ?? 2000}
+              loading={showCaptions && index < 4 ? "eager" : "lazy"}
+              sizes="(max-width: 759px) 100vw, (max-width: 1099px) 33vw, 25vw"
+            />
+            {showCaptions ? (
+              <figcaption>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{project.category}</span>
+              </figcaption>
+            ) : null}
+          </figure>
+        );
+      })}
     </div>
   );
 }

@@ -51,6 +51,24 @@ export type SiteContent = {
   social: Array<{ label: string; href: string; handle: string }>;
 };
 
+export type FeaturedBrand = {
+  name: string;
+  logo?: string;
+  invert?: boolean;
+};
+
+export const featuredBrands: FeaturedBrand[] = [
+  { name: "Saks Fifth Avenue", logo: "/media/brands/saks-fifth-avenue.svg" },
+  { name: "Rebel Magazine" },
+  { name: "Westcott Lighting", logo: "/media/brands/westcott.png" },
+  { name: "NOOON", logo: "/media/brands/nooon.svg", invert: true },
+  { name: "Ocean Savage", logo: "/media/brands/ocean-savage.svg", invert: true },
+  { name: "Heyman Talent", logo: "/media/brands/heyman-talent.png" },
+  { name: "Timeless" },
+  { name: "Macy's", logo: "/media/brands/macys.svg" },
+  { name: "BeautyStat Cosmetics", logo: "/media/brands/beautystat.png" },
+];
+
 export const seedContent: SiteContent = {
   hero: {
     kicker: "Hi, my name is",
@@ -71,7 +89,7 @@ export const seedContent: SiteContent = {
   contact: {
     title: "Let’s work together.",
     intro:
-      "Share the project, timing, location, intended use, and deliverables. Sage will reply with availability and next steps.",
+      "Tell Sage what you have in mind—even if it’s still just an idea. A little context is helpful, but you don’t need every detail figured out. Sage will reply with availability within 48 hours.",
     email: "contact@sageburress.com",
   },
   services: [
@@ -87,7 +105,6 @@ export const seedContent: SiteContent = {
         "Editorial and campaign shoots",
         "Lifestyle and commercial imagery",
         "On-location creative work",
-        "Usage-aware booking conversations",
       ],
       accent: "olive",
     },
@@ -98,12 +115,11 @@ export const seedContent: SiteContent = {
       shortTitle: "Face Painting",
       summary: "Expressive, camera-ready artistry for people, events, and concepts.",
       description:
-        "Creative face painting shaped to the setting, from private bookings and live events to editorials and visual activations.",
+        "Creative face painting shaped to the setting, from private bookings and live events to editorials and one-of-a-kind concepts.",
       deliverables: [
         "Private and public events",
         "Editorial concepts",
-        "Creative activations",
-        "Custom visual themes",
+        "Custom creative concepts",
       ],
       accent: "blush",
     },
@@ -114,12 +130,11 @@ export const seedContent: SiteContent = {
       shortTitle: "Content Creation",
       summary: "Photo and short-form storytelling built for the platform and brief.",
       description:
-        "Concept-led content that can move between polished brand imagery and natural social storytelling without losing a clear visual point of view.",
+        "Original storytelling that feels natural on social while still delivering the polish, intention, and creative perspective brands need.",
       deliverables: [
-        "Short-form video",
+        "Short-form and long-form video",
         "Photography and carousels",
-        "Social-first brand stories",
-        "Creative direction and scripting",
+        "UGC and sponsored brand content",
       ],
       accent: "clay",
     },
@@ -133,7 +148,6 @@ export const seedContent: SiteContent = {
         "Collaborative travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
       deliverables: [
         "Destination storytelling",
-        "Property and experience imagery",
         "Short-form travel content",
         "Cross-platform content packages",
       ],

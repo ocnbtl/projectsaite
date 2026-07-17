@@ -36,7 +36,7 @@ export default async function ContactPage({
           <dl>
             <div>
               <dt>Useful details</dt>
-              <dd>Dates, location, creative direction, intended use, deliverables, and budget.</dd>
+              <dd>Share whatever you know so far. The idea, timing, location, goals, and budget are all helpful—but none are required to start.</dd>
             </div>
             <div>
               <dt>Services</dt>

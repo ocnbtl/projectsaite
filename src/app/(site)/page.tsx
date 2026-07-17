@@ -2,15 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
+import { featuredBrands } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const content = await getSiteContent();
-  const railItems = content.featuredBy.length
-    ? content.featuredBy
-    : content.services.map((service) => service.title);
 
   return (
     <>
@@ -48,12 +46,25 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-rail" aria-label={content.featuredBy.length ? "Featured by" : "Creative work across"}>
-        <p>{content.featuredBy.length ? "Featured by" : "Creative work across"}</p>
+      <section className="editorial-rail" aria-label="Featured clients and collaborators">
+        <p>Featured by</p>
         <div className="editorial-rail__viewport">
           <div className="editorial-rail__track">
-            {[...railItems, ...railItems].map((item, index) => (
-              <span key={`${item}-${index}`}>{item}</span>
+            {[...featuredBrands, ...featuredBrands].map((brand, index) => (
+              <span className="editorial-brandmark" key={`${brand.name}-${index}`}>
+                {brand.logo ? (
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    width={220}
+                    height={56}
+                    className={brand.invert ? "is-inverted" : undefined}
+                    sizes="220px"
+                  />
+                ) : (
+                  <strong>{brand.name}</strong>
+                )}
+              </span>
             ))}
           </div>
         </div>

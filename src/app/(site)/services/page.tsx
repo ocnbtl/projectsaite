@@ -23,11 +23,7 @@ export default async function ServicesPage() {
     <>
       <section className="editorial-page-hero editorial-page-hero--services">
         <p>Services</p>
-        <h1>Four ways to work together.</h1>
-        <p>
-          Each collaboration starts with the brief, intended use, timing, and the kind of presence the
-          project needs.
-        </p>
+        <h1>Bring the idea to life.</h1>
       </section>
 
       <section className="editorial-services-list" aria-label="Sage Burress services">

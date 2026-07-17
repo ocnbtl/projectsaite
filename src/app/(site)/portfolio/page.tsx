@@ -20,7 +20,6 @@ export default async function PortfolioPage() {
       <section className="editorial-page-hero editorial-page-hero--portfolio">
         <p>Selected work</p>
         <h1>Portfolio</h1>
-        <p>A selection of portrait, beauty, fashion, studio, and athletic work.</p>
       </section>
 
       <section className="editorial-portfolio-page" aria-label="Sage Burress portfolio">
