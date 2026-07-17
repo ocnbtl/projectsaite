@@ -5,6 +5,7 @@
   --editorial-rule: rgba(55, 58, 64, 0.34);
   --editorial-soft-rule: rgba(55, 58, 64, 0.18);
   min-height: 100svh;
+  overflow-x: clip;
   color: var(--editorial-ink);
   background: var(--editorial-canvas);
   font-family: var(--font-sans), Arial, sans-serif;
@@ -262,6 +263,7 @@
 }
 
 .editorial-rail__viewport {
+  min-width: 0;
   overflow: hidden;
 }
 
