@@ -3,13 +3,14 @@
 import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { publicNavigation, type Service } from "@/lib/content";
 
 export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" | "title">> }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function closeServiceMenus() {
@@ -19,8 +20,10 @@ export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" 
     }
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
+        const returnFocus = menuButtonRef.current?.getAttribute("aria-expanded") === "true";
         setOpen(false);
         closeServiceMenus();
+        if (returnFocus) window.requestAnimationFrame(() => menuButtonRef.current?.focus());
       }
     }
     function onPointerDown(event: PointerEvent) {
@@ -75,6 +78,7 @@ export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" 
         </nav>
 
         <button
+          ref={menuButtonRef}
           className="editorial-menu-button"
           type="button"
           onClick={() => setOpen((value) => !value)}
