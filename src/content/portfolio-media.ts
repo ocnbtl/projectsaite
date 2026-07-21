@@ -61,16 +61,6 @@ export const portfolioMedia: PortfolioMedia[] = [
     sha256: "fa948485b29855f36c3ef4009c300b3833b8e8b11b9c9e9452dfac7004871cae",
   },
   {
-    id: "SRC-SAGE-006",
-    src: "/media/sage/v1/sage-006.webp",
-    width: 2001,
-    height: 3000,
-    alt: "Sage Burress holding a lavender towel in a studio swimwear portrait.",
-    label: "Swim",
-    bytes: 393718,
-    sha256: "57f3edefcf19885cc758106afe08d5b72f36ce6f03d4998e17b977035c26b498",
-  },
-  {
     id: "SRC-SAGE-007",
     src: "/media/sage/v1/sage-007.webp",
     width: 2250,

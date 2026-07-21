@@ -1,4 +1,4 @@
-import { ArrowUpRight, BarChart3, FileText, FolderKanban, Sparkles } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, FileText, FolderKanban, Link2 } from "lucide-react";
 import Link from "next/link";
 
 import { getSiteContent } from "@/lib/content-store";
@@ -7,11 +7,11 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminOverviewPage() {
   const content = await getSiteContent();
-  const cards = [
-    { href: "/admin/content", title: "Update site copy", detail: "Home, About, and contact messaging", icon: FileText },
-    { href: "/admin/portfolio", title: "Manage portfolio", detail: `${content.projects.length} published projects`, icon: FolderKanban },
-    { href: "/admin/pitch-kit", title: "Create a pitch", detail: "Six tailored partnership templates", icon: Sparkles },
-    { href: "/admin/analytics", title: "Review analytics", detail: "Traffic and deployment reporting", icon: BarChart3 },
+  const rows = [
+    { href: "/admin/content", title: "Home and contact", detail: "Core public copy and hero image", icon: FileText },
+    { href: "/admin/services", title: "Services", detail: `${content.services.length} service pages and galleries`, icon: BriefcaseBusiness },
+    { href: "/admin/portfolio", title: "Portfolio", detail: `${content.projects.length} public images`, icon: FolderKanban },
+    { href: "/admin/links", title: "Links and brands", detail: `${content.links.length} link slot and ${content.featuredBrands.length} featured brands`, icon: Link2 },
   ];
 
   return (
@@ -20,16 +20,12 @@ export default async function AdminOverviewPage() {
         <div><p className="ui-label">Studio overview</p><h1>Everything important, close at hand.</h1></div>
         <Link className="button button--outline" href="/" target="_blank">View website<ArrowUpRight size={17} /></Link>
       </header>
-      <section className="admin-stat-row">
-        <div><span>Published work</span><strong>{content.projects.length}</strong></div>
-        <div><span>Service areas</span><strong>{content.services.length}</strong></div>
-        <div><span>Contact destination</span><strong className="admin-stat-row__email">{content.contact.email}</strong></div>
-      </section>
-      <section className="admin-action-grid">
-        {cards.map((card) => { const Icon = card.icon; return (
-          <Link href={card.href} key={card.href}>
-            <Icon size={21} />
-            <div><h2>{card.title}</h2><p>{card.detail}</p></div>
+      <section className="admin-publication-board" aria-labelledby="publication-board-title">
+        <header><div><p className="ui-label">Publication desk</p><h2 id="publication-board-title">The public site, route by route.</h2></div><span>{content.services.length} services</span></header>
+        {rows.map((row) => { const Icon = row.icon; return (
+          <Link href={row.href} key={row.href}>
+            <Icon size={20} />
+            <div><h3>{row.title}</h3><p>{row.detail}</p></div>
             <ArrowUpRight size={18} />
           </Link>
         ); })}
@@ -37,7 +33,7 @@ export default async function AdminOverviewPage() {
       <section className="admin-note">
         <p className="ui-label">Recommended next step</p>
         <h2>Keep the portfolio and booking details current.</h2>
-        <p>Use Portfolio and Site Content to update the public selections, service language, and contact invitation as new work is approved.</p>
+        <p>Use Services to fill the prepared gallery slots, or Links and Brands to activate the Amazon storefront once its destination is ready.</p>
       </section>
     </div>
   );

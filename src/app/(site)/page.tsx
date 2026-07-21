@@ -1,11 +1,22 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
-import { featuredBrands } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getSiteContent();
+  return {
+    description: content.hero.lead,
+    openGraph: {
+      title: `${content.hero.title} | Model & Creative`,
+      description: content.hero.lead,
+    },
+  };
+}
 
 export default async function HomePage() {
   const content = await getSiteContent();
@@ -14,15 +25,14 @@ export default async function HomePage() {
     <>
       <section className="editorial-hero">
         <div className="editorial-hero__copy">
-          <p className="editorial-hero__intro">Hi, my name is</p>
+          <p className="editorial-hero__intro">{content.hero.kicker}</p>
           <h1>
-            <span>Sage</span>
-            <span>Burress</span>
+            {content.hero.title.split(/\s+/).map((part) => <span key={part}>{part}</span>)}
           </h1>
 
           <div className="editorial-hero__services" aria-label="Services">
             {content.services.map((service) => (
-              <Link key={service.slug} href={`/services#${service.slug}`}>
+              <Link key={service.slug} href={`/services/${service.slug}`}>
                 <span>{service.title}</span>
                 <span aria-hidden="true">→</span>
               </Link>
@@ -47,10 +57,9 @@ export default async function HomePage() {
       </section>
 
       <section className="editorial-rail" aria-label="Featured clients and collaborators">
-        <p>Featured by</p>
         <div className="editorial-rail__viewport">
           <div className="editorial-rail__track">
-            {[...featuredBrands, ...featuredBrands].map((brand, index) => (
+            {[...content.featuredBrands, ...content.featuredBrands].map((brand, index) => (
               <span className="editorial-brandmark" key={`${brand.name}-${index}`}>
                 {brand.logo ? (
                   <Image
@@ -59,6 +68,7 @@ export default async function HomePage() {
                     width={220}
                     height={56}
                     className={brand.invert ? "is-inverted" : undefined}
+                    loading={brand.id === "saks-fifth-avenue" ? "eager" : "lazy"}
                     sizes="220px"
                   />
                 ) : (
@@ -91,7 +101,7 @@ export default async function HomePage() {
             <Link
               className={`editorial-service-card editorial-service-card--${service.slug}`}
               key={service.slug}
-              href={`/services#${service.slug}`}
+              href={`/services/${service.slug}`}
             >
               <span>{service.number}</span>
               <h3>{service.title}</h3>

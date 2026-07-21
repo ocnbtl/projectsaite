@@ -9,6 +9,8 @@ export const contactSchema = z.object({
   inquiry: z.enum([
     "Modeling",
     "Face Painting",
+    "Henna",
+    "Makeup Artist",
     "Content Creation",
     "Travel Collaborations",
     "Something else",

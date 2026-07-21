@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Sage Burress",
   },
   description:
-    "Portfolio and bookings for Sage Burress: modeling, face painting, content creation, and travel collaborations.",
+    "Portfolio and bookings for Sage Burress: modeling, face painting, henna, makeup artistry, content creation, and travel collaborations.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

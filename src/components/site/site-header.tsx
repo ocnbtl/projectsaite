@@ -1,22 +1,39 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { publicNavigation } from "@/lib/content";
+import { publicNavigation, type Service } from "@/lib/content";
 
-export function SiteHeader() {
+export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" | "title">> }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    function closeServiceMenus() {
+      document.querySelectorAll<HTMLDetailsElement>(".editorial-nav__services[open]").forEach((menu) => {
+        menu.open = false;
+      });
+    }
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        closeServiceMenus();
+      }
+    }
+    function onPointerDown(event: PointerEvent) {
+      if (!(event.target instanceof Element) || !event.target.closest(".editorial-nav__services")) {
+        closeServiceMenus();
+      }
     }
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
   }, []);
 
   return (
@@ -29,6 +46,22 @@ export function SiteHeader() {
         <nav className="editorial-nav" aria-label="Primary navigation">
           {publicNavigation.map((item) => {
             const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            if (item.href === "/services") {
+              return (
+                <details className="editorial-nav__services" key={`${item.href}-${pathname}`}>
+                  <summary className={active ? "is-active" : undefined}>
+                    <span>{item.label}</span>
+                    <ChevronDown size={15} aria-hidden="true" />
+                  </summary>
+                  <div className="editorial-nav__dropdown">
+                    <Link href="/services">All services</Link>
+                    {services.map((service) => (
+                      <Link key={service.slug} href={`/services/${service.slug}`}>{service.title}</Link>
+                    ))}
+                  </div>
+                </details>
+              );
+            }
             return (
               <Link
                 key={item.href}
@@ -61,6 +94,26 @@ export function SiteHeader() {
       >
         {publicNavigation.map((item) => {
           const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+          if (item.href === "/services") {
+            return (
+              <details className="editorial-mobile-nav__services" key={`${item.href}-${pathname}`}>
+                <summary>
+                  <span>{item.label}</span>
+                  <ChevronDown size={18} aria-hidden="true" />
+                </summary>
+                <div>
+                  <Link href="/services" onClick={() => setOpen(false)} tabIndex={open ? undefined : -1}>
+                    <span>All services</span><span aria-hidden="true">↗</span>
+                  </Link>
+                  {services.map((service) => (
+                    <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setOpen(false)} tabIndex={open ? undefined : -1}>
+                      <span>{service.title}</span><span aria-hidden="true">↗</span>
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            );
+          }
           return (
             <Link
               key={item.href}

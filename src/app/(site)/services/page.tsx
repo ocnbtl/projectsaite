@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { portfolioMedia } from "@/content/portfolio-media";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
@@ -10,28 +9,9 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Work with Sage Burress for modeling, face painting, content creation, and travel collaborations.",
+    "Work with Sage Burress for modeling, face painting, henna, makeup artistry, content creation, and travel collaborations.",
   alternates: { canonical: "/services" },
 };
-
-const serviceImages = [
-  { ...portfolioMedia[7], orientation: "vertical" },
-  {
-    src: "/media/services/face-painting-candid.webp",
-    alt: "Child with detailed blue and coral celestial face paint at an outdoor event.",
-    width: 1536,
-    height: 1024,
-    orientation: "horizontal",
-  },
-  { ...portfolioMedia[3], orientation: "vertical" },
-  {
-    src: "/media/services/travel-resort-candid.webp",
-    alt: "Tropical resort terrace overlooking an infinity pool and a coastal cove.",
-    width: 1536,
-    height: 1024,
-    orientation: "horizontal",
-  },
-] as const;
 
 export default async function ServicesPage() {
   const content = await getSiteContent();
@@ -42,41 +22,33 @@ export default async function ServicesPage() {
         <h1>Bring the idea to life.</h1>
       </section>
 
-      <section className="editorial-services-list" aria-label="Sage Burress services">
+      <section className="editorial-service-directory" aria-label="Sage Burress services">
         {content.services.map((service, index) => {
-          const media =
-            serviceImages[index] ??
-            ({ ...portfolioMedia[index % portfolioMedia.length], orientation: "vertical" } as const);
+          const image = service.images.find((item) => item.src && !item.placeholder);
           return (
-            <article
-              id={service.slug}
-              className={`editorial-service-detail editorial-service-detail--${media.orientation}`}
+            <Link
+              className={`editorial-service-directory__card editorial-service-card--${service.slug}`}
+              href={`/services/${service.slug}`}
               key={service.slug}
             >
-              <div className="editorial-service-detail__number">{service.number}</div>
-              <div className="editorial-service-detail__copy">
+              <div className="editorial-service-directory__number">{service.number}</div>
+              <div>
                 <h2>{service.title}</h2>
-                <p>{service.description}</p>
-                <ul>
-                  {service.deliverables.map((deliverable) => (
-                    <li key={deliverable}>{deliverable}</li>
-                  ))}
-                </ul>
-                <Link href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>
-                  Ask about {service.title.toLowerCase()} <span aria-hidden="true">↗</span>
-                </Link>
+                <p>{service.summary}</p>
+                <span>Explore the service <span aria-hidden="true">↗</span></span>
               </div>
-              <figure className="editorial-service-detail__image">
-                <Image
-                  src={media.src}
-                  alt={media.alt}
-                  width={media.width}
-                  height={media.height}
-                  sizes="(max-width: 799px) 100vw, 42vw"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-              </figure>
-            </article>
+              {image ? (
+                <figure>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    loading={index === 0 ? "eager" : "lazy"}
+                    sizes="(max-width: 799px) 100vw, 32vw"
+                  />
+                </figure>
+              ) : null}
+            </Link>
           );
         })}
       </section>
@@ -84,9 +56,7 @@ export default async function ServicesPage() {
       <section className="editorial-contact-callout">
         <p>Not sure where the project fits?</p>
         <h2>Start with the idea.</h2>
-        <Link className="editorial-button" href="/contact">
-          Contact Sage
-        </Link>
+        <Link className="editorial-button" href="/contact">Contact Sage</Link>
       </section>
     </>
   );

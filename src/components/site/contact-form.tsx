@@ -6,6 +6,8 @@ import { FormEvent, useState } from "react";
 const inquiryOptions = [
   "Modeling",
   "Face Painting",
+  "Henna",
+  "Makeup Artist",
   "Content Creation",
   "Travel Collaborations",
   "Something else",

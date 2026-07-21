@@ -3,7 +3,20 @@ import Image from "next/image";
 import { portfolioMedia } from "@/content/portfolio-media";
 import type { Project } from "@/lib/content";
 
-const preferredOrder = [0, 2, 7, 3, 9, 4, 10, 1, 6, 11, 5, 8, 12];
+const preferredImages = [
+  "/media/sage/v1/sage-001.webp",
+  "/media/sage/v1/sage-003.webp",
+  "/media/sage/v1/sage-008.webp",
+  "/media/sage/v1/sage-004.webp",
+  "/media/sage/v1/sage-010.webp",
+  "/media/sage/v1/sage-005.webp",
+  "/media/sage/v1/sage-011.webp",
+  "/media/sage/v1/sage-002.webp",
+  "/media/sage/v1/sage-007.webp",
+  "/media/sage/v1/sage-012.webp",
+  "/media/sage/v1/sage-009.webp",
+  "/media/sage/v1/sage-013.webp",
+];
 
 export function PortfolioMosaic({
   projects,
@@ -12,8 +25,8 @@ export function PortfolioMosaic({
   projects: Project[];
   showCaptions?: boolean;
 }) {
-  const ordered = preferredOrder
-    .map((index) => projects[index])
+  const ordered = preferredImages
+    .map((image) => projects.find((project) => project.image === image))
     .filter((project): project is Project => Boolean(project));
   const remaining = projects.filter((project) => !ordered.includes(project));
   const complete = [...ordered, ...remaining];
