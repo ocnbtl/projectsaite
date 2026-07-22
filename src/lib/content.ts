@@ -79,6 +79,7 @@ export type SiteLink = {
 export const defaultFeaturedBrands: FeaturedBrand[] = [
   { id: "saks-fifth-avenue", name: "Saks Fifth Avenue", logo: "/media/brands/saks-fifth-avenue.svg" },
   { id: "rebel-magazine", name: "Rebel Magazine", logo: "/media/brands/rebel-magazine.svg" },
+  { id: "loveland-lifestyle", name: "Loveland Lifestyle Magazine", logo: "/media/brands/loveland-lifestyle.png" },
   { id: "westcott-lighting", name: "Westcott Lighting", logo: "/media/brands/westcott.png" },
   { id: "nooon", name: "NOOON", logo: "/media/brands/nooon.svg", invert: true },
   { id: "ocean-savage", name: "Ocean Savage", logo: "/media/brands/ocean-savage.svg", invert: true },
@@ -92,7 +93,7 @@ export const defaultFeaturedBrands: FeaturedBrand[] = [
   { id: "red-light-method", name: "Red Light Method Montgomery", logo: "/media/brands/red-light-method.svg" },
   { id: "romantic-adventure-getaways", name: "Romantic Adventure Getaways", logo: "/media/brands/romantic-adventure-getaways.svg" },
   { id: "versed-skincare", name: "Versed Skincare", logo: "/media/brands/versed.png" },
-  { id: "black-opal-aesthetics", name: "Black Opal Aesthetics", logo: "/media/brands/black-opal-aesthetics.svg" },
+  { id: "black-opal-aesthetics", name: "Black Opal Esthetics", logo: "/media/brands/black-opal-aesthetics.svg" },
 ];
 
 function media(id: string) {
@@ -358,8 +359,22 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
   const featuredBrands = [
     ...defaultFeaturedBrands.map((fallback) => {
       const stored = storedFeaturedBrands.find((brand) => brand.id === fallback.id);
+      const hasLegacyRomanticLogo = fallback.id === "romantic-adventure-getaways" && [
+        "/media/brands/romantic-adventure-getaways.png",
+        "/media/brands/romantic-adventure-getaways-clean.svg",
+        "/media/brands/romantic-adventure-getaways-transparent.png",
+        "/media/brands/romantic-adventure-getaways-transparent-v2.png",
+      ].includes(stored?.logo ?? "");
+      const hasLegacyBlackOpalName = fallback.id === "black-opal-aesthetics" &&
+        stored?.name === "Black Opal Aesthetics";
       return stored
-        ? { ...fallback, ...stored, logo: stored.logo || fallback.logo }
+        ? {
+            ...fallback,
+            ...stored,
+            name: hasLegacyBlackOpalName ? fallback.name : stored.name,
+            logo: hasLegacyRomanticLogo ? fallback.logo : stored.logo || fallback.logo,
+            invert: hasLegacyRomanticLogo ? fallback.invert : stored.invert,
+          }
         : fallback;
     }),
     ...storedFeaturedBrands.filter((brand) => !featuredBrandIds.has(brand.id)),

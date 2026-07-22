@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Rebel Corporate";
+  src: url("/media/brands/rebel-corporate-bold.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Romantic Flowery";
+  src: url("/media/brands/romantic-flowery.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 html:has(.editorial-site),
 body:has(.editorial-site) {
   background: #f6f1f1;
@@ -6,9 +22,12 @@ body:has(.editorial-site) {
 .editorial-site {
   --editorial-canvas: #f6f1f1;
   --editorial-ink: #373a40;
-  --editorial-muted: #74747a;
+  --editorial-muted: #64666d;
   --editorial-rule: rgba(55, 58, 64, 0.34);
   --editorial-soft-rule: rgba(55, 58, 64, 0.18);
+  --editorial-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --editorial-motion-fast: 160ms;
+  --editorial-motion-base: 240ms;
   min-height: 100svh;
   overflow-x: clip;
   color: var(--editorial-ink);
@@ -152,6 +171,18 @@ body:has(.editorial-site) {
   backdrop-filter: blur(16px);
 }
 
+.editorial-nav__services[open] .editorial-nav__dropdown {
+  animation: editorial-menu-in var(--editorial-motion-base) var(--editorial-ease-out) both;
+  transform-origin: top right;
+}
+
+@keyframes editorial-menu-in {
+  from {
+    opacity: 0.72;
+    transform: translateY(-6px) scale(0.985);
+  }
+}
+
 .editorial-nav__dropdown a {
   min-height: 40px;
   padding: 11px 12px;
@@ -217,6 +248,7 @@ body:has(.editorial-site) {
   font-style: italic;
   line-height: 1;
   letter-spacing: -0.035em;
+  animation: editorial-rise-in 520ms var(--editorial-ease-out) 40ms both;
 }
 
 .editorial-hero h1 {
@@ -225,13 +257,18 @@ body:has(.editorial-site) {
   font-size: clamp(5.7rem, 10.2vw, 10.4rem);
   font-weight: 400;
   line-height: 0.69;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
   text-wrap: balance;
 }
 
 .editorial-hero h1 span {
   display: block;
+  animation: editorial-rise-in 560ms var(--editorial-ease-out) 90ms both;
+}
+
+.editorial-hero h1 span:nth-child(2) {
+  animation-delay: 140ms;
 }
 
 .editorial-hero__services {
@@ -240,6 +277,7 @@ body:has(.editorial-site) {
   gap: 0 36px;
   max-width: 640px;
   margin-top: clamp(30px, 4.2vw, 58px);
+  animation: editorial-rise-in 560ms var(--editorial-ease-out) 190ms both;
 }
 
 .editorial-hero__services a {
@@ -291,6 +329,10 @@ body:has(.editorial-site) {
   transform: scale(0.97);
 }
 
+.editorial-hero__copy > .editorial-button {
+  animation: editorial-rise-in 560ms var(--editorial-ease-out) 240ms both;
+}
+
 .editorial-hero__image {
   position: relative;
   width: min(100%, 560px);
@@ -298,6 +340,7 @@ body:has(.editorial-site) {
   justify-self: end;
   max-height: min(64svh, 620px);
   border: 0;
+  animation: editorial-image-in 700ms var(--editorial-ease-out) 110ms both;
 }
 
 .editorial-hero__image img {
@@ -319,6 +362,20 @@ body:has(.editorial-site) {
   filter: blur(18px);
 }
 
+@keyframes editorial-rise-in {
+  from {
+    opacity: 0.68;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes editorial-image-in {
+  from {
+    opacity: 0.74;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
 .editorial-rail {
   display: block;
   align-items: center;
@@ -331,6 +388,8 @@ body:has(.editorial-site) {
 .editorial-rail__viewport {
   min-width: 0;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 
 .editorial-rail__track {
@@ -338,6 +397,10 @@ body:has(.editorial-site) {
   align-items: center;
   width: max-content;
   animation: editorial-marquee 52s linear infinite;
+}
+
+.editorial-rail:is(:hover, :focus-within) .editorial-rail__track {
+  animation-play-state: paused;
 }
 
 .editorial-brandmark {
@@ -354,8 +417,8 @@ body:has(.editorial-site) {
 
 .editorial-brandmark img {
   width: auto;
-  max-width: 178px;
-  height: 30px;
+  max-width: 190px;
+  height: 32px;
   object-fit: contain;
   mix-blend-mode: multiply;
   filter: grayscale(1) contrast(1.15);
@@ -371,6 +434,134 @@ body:has(.editorial-site) {
   font-style: italic;
   font-weight: 500;
   letter-spacing: -0.025em;
+}
+
+.editorial-brandmark--rebel-magazine {
+  min-width: 190px;
+}
+
+.editorial-brandmark__rebel {
+  font-family: "Rebel Corporate", Georgia, serif !important;
+  font-size: 2.1rem !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
+
+.editorial-brandmark--loveland-lifestyle,
+.editorial-brandmark--red-light-method,
+.editorial-brandmark--black-opal-aesthetics {
+  min-width: 286px;
+}
+
+.editorial-brandmark--loveland-lifestyle img {
+  max-width: 212px;
+  height: 36px;
+  filter: grayscale(1) brightness(0.28) contrast(1.2);
+}
+
+.editorial-brandmark--elaine-b-jewelry {
+  min-width: 196px;
+}
+
+.editorial-brandmark--elaine-b-jewelry img {
+  max-width: 118px;
+  height: 44px;
+  filter: grayscale(1) brightness(0.22) contrast(1.35);
+}
+
+.editorial-brandmark__red-light {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+}
+
+.editorial-brandmark__red-light img {
+  max-width: 224px;
+  height: 38px;
+  filter: grayscale(1) brightness(0.24) contrast(1.28);
+}
+
+.editorial-brandmark__red-light small {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.editorial-brandmark--romantic-adventure-getaways {
+  min-width: 286px;
+}
+
+.editorial-brandmark__romantic {
+  font-family: "Romantic Flowery", var(--font-display), Georgia, serif !important;
+  font-size: 1.72rem !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+}
+
+.editorial-brandmark__black-opal {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  line-height: 1;
+}
+
+.editorial-brandmark__black-opal strong {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.08rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+}
+
+.editorial-brandmark__black-opal small {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.editorial-brandmark--wooden-cask {
+  min-width: 284px;
+}
+
+.editorial-brandmark__wooden-cask {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.editorial-brandmark__wooden-cask > img {
+  width: 46px;
+  max-width: none;
+  height: 46px;
+  flex: 0 0 46px;
+  filter: grayscale(1) brightness(0.22) contrast(1.35);
+}
+
+.editorial-brandmark__wooden-cask > span {
+  display: grid;
+  gap: 4px;
+}
+
+.editorial-brandmark__wooden-cask strong,
+.editorial-brandmark__wooden-cask small {
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+.editorial-brandmark__wooden-cask strong {
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+
+.editorial-brandmark__wooden-cask small {
+  font-size: 0.54rem;
+  font-weight: 650;
 }
 
 @keyframes editorial-marquee {
@@ -399,7 +590,7 @@ body:has(.editorial-site) {
   font-style: italic;
   font-weight: 400;
   line-height: 0.9;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .editorial-mosaic {
@@ -416,13 +607,29 @@ body:has(.editorial-site) {
   margin: 0 0 10px;
   padding: 10px;
   border: 1px solid var(--editorial-soft-rule);
+  overflow: hidden;
   break-inside: avoid;
+  transition:
+    border-color var(--editorial-motion-base) ease,
+    box-shadow var(--editorial-motion-base) ease,
+    transform var(--editorial-motion-base) var(--editorial-ease-out);
 }
 
 .editorial-mosaic__item img {
   display: block;
   width: 100%;
   height: auto;
+  transition: transform 420ms var(--editorial-ease-out);
+}
+
+.editorial-mosaic__item:is(:hover, :focus-within) {
+  border-color: var(--editorial-rule);
+  box-shadow: 0 18px 44px rgba(55, 58, 64, 0.08);
+  transform: translateY(-2px);
+}
+
+.editorial-mosaic__item:is(:hover, :focus-within) img {
+  transform: scale(1.012);
 }
 
 .editorial-mosaic__item figcaption {
@@ -477,7 +684,12 @@ body:has(.editorial-site) {
   border-bottom: 1px solid var(--editorial-rule);
   transition:
     color 180ms cubic-bezier(0.23, 1, 0.32, 1),
-    background-color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+    background-color 180ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 180ms var(--editorial-ease-out);
+}
+
+.editorial-service-index__grid > a:is(:hover, :focus-visible) {
+  transform: translateY(-2px);
 }
 
 .editorial-service-index__grid > a:nth-child(3n) {
@@ -1642,6 +1854,25 @@ body:has(.editorial-site) {
   .editorial-brandmark img {
     max-width: 145px;
     height: 25px;
+  }
+
+  .editorial-brandmark--loveland-lifestyle,
+  .editorial-brandmark--red-light-method,
+  .editorial-brandmark--romantic-adventure-getaways,
+  .editorial-brandmark--black-opal-aesthetics,
+  .editorial-brandmark--wooden-cask {
+    min-width: 250px;
+  }
+
+  .editorial-brandmark--elaine-b-jewelry img,
+  .editorial-brandmark__red-light img {
+    height: 38px;
+  }
+
+  .editorial-brandmark--loveland-lifestyle img,
+  .editorial-brandmark--romantic-adventure-getaways img {
+    max-width: 190px;
+    height: 32px;
   }
 
   .editorial-portfolio-preview {
