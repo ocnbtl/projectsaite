@@ -5,11 +5,11 @@ import { FormEvent, useState } from "react";
 
 const inquiryOptions = [
   "Modeling",
-  "Face Painting",
-  "Henna",
-  "Makeup Artist",
   "Content Creation",
-  "Travel Collaborations",
+  "Makeup Artist",
+  "Travel Promotions",
+  "Henna",
+  "Face Painting",
   "Something else",
 ] as const;
 
@@ -18,8 +18,9 @@ type FormState = "idle" | "sending" | "sent" | "fallback" | "error";
 export function ContactForm({ initialInquiry = "Content Creation" }: { initialInquiry?: string }) {
   const [state, setState] = useState<FormState>("idle");
   const [fallbackHref, setFallbackHref] = useState("mailto:contact@sageburress.com");
-  const selectedInquiry = inquiryOptions.includes(initialInquiry as (typeof inquiryOptions)[number])
-    ? initialInquiry
+  const normalizedInitialInquiry = initialInquiry === "Travel Collaborations" ? "Travel Promotions" : initialInquiry;
+  const selectedInquiry = inquiryOptions.includes(normalizedInitialInquiry as (typeof inquiryOptions)[number])
+    ? normalizedInitialInquiry
     : "Content Creation";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {

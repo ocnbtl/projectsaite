@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Start a modeling, face painting, henna, makeup, content creation, or travel collaboration with Sage Burress.",
+    "Start a modeling, content creation, makeup, travel promotion, henna, or face painting project with Sage Burress.",
   alternates: { canonical: "/contact" },
 };
 
@@ -42,7 +42,16 @@ export default async function ContactPage({
             </div>
             <div>
               <dt>Services</dt>
-              <dd>Modeling, face painting, henna, makeup artistry, content creation, and travel collaborations.</dd>
+              <dd>
+                <ul className="editorial-contact-services">
+                  <li>Modeling</li>
+                  <li>Content Creation</li>
+                  <li>Makeup Artist</li>
+                  <li>Travel Promotions</li>
+                  <li>Henna</li>
+                  <li>Face Painting</li>
+                </ul>
+              </dd>
             </div>
           </dl>
         </aside>

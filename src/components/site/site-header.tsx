@@ -57,7 +57,6 @@ export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" 
                     <ChevronDown size={15} aria-hidden="true" />
                   </summary>
                   <div className="editorial-nav__dropdown">
-                    <Link href="/services">All services</Link>
                     {services.map((service) => (
                       <Link key={service.slug} href={`/services/${service.slug}`}>{service.title}</Link>
                     ))}
@@ -106,9 +105,6 @@ export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" 
                   <ChevronDown size={18} aria-hidden="true" />
                 </summary>
                 <div>
-                  <Link href="/services" onClick={() => setOpen(false)} tabIndex={open ? undefined : -1}>
-                    <span>All services</span><span aria-hidden="true">↗</span>
-                  </Link>
                   {services.map((service) => (
                     <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setOpen(false)} tabIndex={open ? undefined : -1}>
                       <span>{service.title}</span><span aria-hidden="true">↗</span>

@@ -21,9 +21,11 @@ const preferredImages = [
 export function PortfolioMosaic({
   projects,
   showCaptions = false,
+  eagerCount = 0,
 }: {
   projects: Project[];
   showCaptions?: boolean;
+  eagerCount?: number;
 }) {
   const ordered = preferredImages
     .map((image) => projects.find((project) => project.image === image))
@@ -43,7 +45,7 @@ export function PortfolioMosaic({
               alt={project.alt}
               width={media?.width ?? 1600}
               height={media?.height ?? 2000}
-              loading={showCaptions && index < 4 ? "eager" : "lazy"}
+              loading={index < eagerCount || (showCaptions && index < 4) ? "eager" : "lazy"}
               sizes="(max-width: 759px) 100vw, (max-width: 1099px) 33vw, 25vw"
             />
             {showCaptions ? (

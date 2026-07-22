@@ -31,7 +31,7 @@ export default async function LinksPage() {
 
       <section className="editorial-links-page" aria-label="Sage Burress links">
         <div className="editorial-links-page__intro">
-          <p>Storefronts, recommendations, and places to follow along.</p>
+          <p>Shop my favorites or follow my latest work.</p>
         </div>
         <div className="editorial-links-list">
           {content.links.map((item, index) => {

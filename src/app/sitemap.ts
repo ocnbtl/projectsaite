@@ -5,13 +5,12 @@ import { siteUrl } from "@/lib/site-url";
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "",
-    "/services",
     "/services/modeling",
-    "/services/face-painting",
-    "/services/henna",
-    "/services/makeup-artist",
     "/services/content-creation",
+    "/services/makeup-artist",
     "/services/travel-collaborations",
+    "/services/henna",
+    "/services/face-painting",
     "/portfolio",
     "/links",
     "/contact",

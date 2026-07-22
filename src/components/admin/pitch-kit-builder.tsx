@@ -33,7 +33,7 @@ const templates: Record<string, Pick<Pitch, "concept" | "audience" | "deliverabl
     deliverables: "On-site service, custom design menu, professional materials, and event setup.",
     closing: "Please share the date, guest count, age range, and theme so I can recommend the right package.",
   },
-  "Travel Collaborations": {
+  "Travel Promotions": {
     concept: "A guest-perspective travel story focused on the details, atmosphere, and local moments that make the experience memorable.",
     audience: "Experience-led travelers looking for distinctive places and thoughtful recommendations.",
     deliverables: "Short-form travel content, edited photography, story coverage, and usage scoped to the brief.",
@@ -57,7 +57,13 @@ export function PitchKitBuilder() {
   function loadDraft() {
     const stored = window.localStorage.getItem("saite-pitch-kit");
     if (stored) {
-      try { setPitch(JSON.parse(stored) as Pitch); } catch { /* Ignore malformed local drafts. */ }
+      try {
+        const draft = JSON.parse(stored) as Pitch;
+        setPitch({
+          ...draft,
+          service: draft.service === "Travel Collaborations" ? "Travel Promotions" : draft.service,
+        });
+      } catch { /* Ignore malformed local drafts. */ }
     }
   }
 

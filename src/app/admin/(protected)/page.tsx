@@ -11,7 +11,7 @@ export default async function AdminOverviewPage() {
     { href: "/admin/content", title: "Home and contact", detail: "Core public copy and hero image", icon: FileText },
     { href: "/admin/services", title: "Services", detail: `${content.services.length} service pages and galleries`, icon: BriefcaseBusiness },
     { href: "/admin/portfolio", title: "Portfolio", detail: `${content.projects.length} public images`, icon: FolderKanban },
-    { href: "/admin/links", title: "Links and brands", detail: `${content.links.length} link slot and ${content.featuredBrands.length} featured brands`, icon: Link2 },
+    { href: "/admin/links", title: "Links and brands", detail: `${content.links.length} links and ${content.featuredBrands.length} featured brands`, icon: Link2 },
   ];
 
   return (
@@ -33,7 +33,7 @@ export default async function AdminOverviewPage() {
       <section className="admin-note">
         <p className="ui-label">Recommended next step</p>
         <h2>Keep the portfolio and booking details current.</h2>
-        <p>Use Services to fill the prepared gallery slots, or Links and Brands to activate the Amazon storefront once its destination is ready.</p>
+        <p>Use Services to keep each gallery current, and Links and Brands to manage storefronts, profiles, and featured collaborators.</p>
       </section>
     </div>
   );
