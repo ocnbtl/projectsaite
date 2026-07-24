@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroIntro } from "@/components/site/hero-intro";
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
 import type { FeaturedBrand } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
@@ -76,10 +77,7 @@ export default async function HomePage() {
     <>
       <section className="editorial-hero">
         <div className="editorial-hero__copy">
-          <p className="editorial-hero__intro">{content.hero.kicker}</p>
-          <h1>
-            {content.hero.title.split(/\s+/).map((part) => <span key={part}>{part}</span>)}
-          </h1>
+          <HeroIntro kicker={content.hero.kicker} title={content.hero.title} />
 
           <div className="editorial-hero__services" aria-label="Services">
             {content.services.map((service) => (

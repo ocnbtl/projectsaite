@@ -10,12 +10,12 @@ const preferredImages = [
   "/media/sage/v1/sage-004.webp",
   "/media/sage/v1/sage-010.webp",
   "/media/sage/v1/sage-005.webp",
-  "/media/sage/v1/sage-011.webp",
-  "/media/sage/v1/sage-002.webp",
-  "/media/sage/v1/sage-007.webp",
-  "/media/sage/v1/sage-012.webp",
-  "/media/sage/v1/sage-009.webp",
   "/media/sage/v1/sage-013.webp",
+  "/media/sage/v1/sage-002.webp",
+  "/media/sage/v1/sage-012.webp",
+  "/media/sage/v1/sage-007.webp",
+  "/media/sage/v1/sage-011.webp",
+  "/media/sage/v1/sage-009.webp",
 ];
 
 export function PortfolioMosaic({

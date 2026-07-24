@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -107,7 +107,7 @@ export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" 
                 <div>
                   {services.map((service) => (
                     <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setOpen(false)} tabIndex={open ? undefined : -1}>
-                      <span>{service.title}</span><span aria-hidden="true">↗</span>
+                      <span>{service.title}</span><ArrowUpRight size={15} strokeWidth={1.5} aria-hidden="true" />
                     </Link>
                   ))}
                 </div>
@@ -123,7 +123,7 @@ export function SiteHeader({ services }: { services: Array<Pick<Service, "slug" 
               tabIndex={open ? undefined : -1}
             >
               <span>{item.label}</span>
-              <span aria-hidden="true">↗</span>
+              <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
             </Link>
           );
         })}

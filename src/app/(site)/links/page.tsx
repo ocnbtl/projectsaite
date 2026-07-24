@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import {
+  Aperture,
+  ArrowUpRight,
+  AtSign,
+  BriefcaseBusiness,
+  MessageCircle,
+  Shirt,
+  ShoppingBag,
+  Sparkles,
+  Users,
+} from "lucide-react";
 
 import { getSiteContent } from "@/lib/content-store";
 
@@ -17,6 +27,31 @@ function getExternalHref(value: string) {
     return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : null;
   } catch {
     return null;
+  }
+}
+
+function LinkIcon({ id }: { id: string }) {
+  const props = { size: 23, strokeWidth: 1.35, "aria-hidden": true as const };
+
+  switch (id) {
+    case "heyman-talent":
+      return <BriefcaseBusiness {...props} />;
+    case "talent-fusion":
+      return <Users {...props} />;
+    case "invu-model-talent":
+      return <Aperture {...props} />;
+    case "amazon-storefront":
+      return <ShoppingBag {...props} />;
+    case "depop":
+      return <Shirt {...props} />;
+    case "shopmy":
+      return <Sparkles {...props} />;
+    case "instagram":
+      return <AtSign {...props} />;
+    case "facebook":
+      return <MessageCircle {...props} />;
+    default:
+      return <ArrowUpRight {...props} />;
   }
 }
 
@@ -38,25 +73,21 @@ export default async function LinksPage() {
             const href = item.active ? getExternalHref(item.href) : null;
             return href ? (
               <a href={href} key={item.id} target="_blank" rel="noopener noreferrer">
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span className="editorial-links-list__number">{String(index + 1).padStart(2, "0")}</span>
+                <span className="editorial-links-list__icon"><LinkIcon id={item.id} /></span>
                 <div><h2>{item.label}</h2><p>{item.description}</p></div>
-                <span aria-hidden="true">↗</span>
+                <ArrowUpRight className="editorial-links-list__arrow" size={27} strokeWidth={1.25} aria-hidden="true" />
               </a>
             ) : (
               <div className="editorial-links-list__pending" key={item.id}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span className="editorial-links-list__number">{String(index + 1).padStart(2, "0")}</span>
+                <span className="editorial-links-list__icon"><LinkIcon id={item.id} /></span>
                 <div><h2>{item.label}</h2><p>{item.description}</p></div>
                 <span>Coming soon</span>
               </div>
             );
           })}
         </div>
-      </section>
-
-      <section className="editorial-contact-callout">
-        <p>Partnership inquiries</p>
-        <h2>Let’s work together.</h2>
-        <Link className="editorial-button" href="/contact">Contact Sage</Link>
       </section>
     </>
   );

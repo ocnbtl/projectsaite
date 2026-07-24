@@ -11,16 +11,49 @@ export const dynamic = "force-dynamic";
 
 const contentCreationReels = [
   {
-    id: "fourth-of-july-makeup",
-    title: "Fourth of July makeup reel",
-    href: "https://www.instagram.com/reel/C9ArW7Wp2zF/",
-    embed: "https://www.instagram.com/reel/C9ArW7Wp2zF/embed/",
+    id: "vacation-pose-ideas",
+    title: "Vacation photo pose ideas",
+    href: "https://www.instagram.com/sage_burress/reel/Da3XPT1pm-w/",
+    embed: "https://www.instagram.com/reel/Da3XPT1pm-w/embed/",
   },
   {
-    id: "outfit-walk",
-    title: "Outfit and movement reel",
-    href: "https://www.instagram.com/reel/C9Pt9GdujsC/",
-    embed: "https://www.instagram.com/reel/C9Pt9GdujsC/embed/",
+    id: "beach-day-grwm",
+    title: "Beach-day GRWM",
+    href: "https://www.instagram.com/sage_burress/reel/DbBBnLaxJVK/",
+    embed: "https://www.instagram.com/reel/DbBBnLaxJVK/embed/",
+  },
+  {
+    id: "runway-walk",
+    title: "Runway walk reel",
+    href: "https://www.instagram.com/sage_burress/reel/DNTjfV4p1Mh/",
+    embed: "https://www.instagram.com/reel/DNTjfV4p1Mh/embed/",
+  },
+  {
+    id: "vanlife-story",
+    title: "Vanlife storytelling reel",
+    href: "https://www.instagram.com/sage_burress/reel/DaGrAJgpGwr/",
+    embed: "https://www.instagram.com/reel/DaGrAJgpGwr/embed/",
+  },
+  {
+    id: "cayman-dinner-grwm",
+    title: "Cayman Islands dinner GRWM",
+    href: "https://www.instagram.com/sage_burress/reel/DaynlZrpXuQ/",
+    embed: "https://www.instagram.com/reel/DaynlZrpXuQ/embed/",
+  },
+];
+
+const travelPromotionReels = [
+  {
+    id: "cayman-islands-arrival",
+    title: "Cayman Islands travel reel",
+    href: "https://www.instagram.com/sage_burress/reel/DayADfvx_qD/",
+    embed: "https://www.instagram.com/reel/DayADfvx_qD/embed/",
+  },
+  {
+    id: "beach-day-grwm",
+    title: "Beach-day travel creator reel",
+    href: "https://www.instagram.com/sage_burress/reel/DbBBnLaxJVK/",
+    embed: "https://www.instagram.com/reel/DbBBnLaxJVK/embed/",
   },
 ];
 
@@ -44,20 +77,32 @@ export async function generateMetadata({
   };
 }
 
-function ContentCreationShowcase() {
+function ReelShowcase({
+  eyebrow,
+  heading,
+  headingId,
+  reels,
+  accentClass,
+}: {
+  eyebrow: string;
+  heading: string;
+  headingId: string;
+  reels: typeof contentCreationReels;
+  accentClass?: string;
+}) {
   return (
-    <section className="editorial-reel-showcase" aria-labelledby="reel-showcase-heading">
+    <section className={`editorial-reel-showcase${accentClass ? ` ${accentClass}` : ""}`} aria-labelledby={headingId}>
       <header>
         <div>
-          <p>Selected social work</p>
-          <h2 id="reel-showcase-heading">Reels in motion.</h2>
+          <p>{eyebrow}</p>
+          <h2 id={headingId}>{heading}</h2>
         </div>
         <a href="https://www.instagram.com/sage_burress/" target="_blank" rel="noopener noreferrer">
           Follow on Instagram <span aria-hidden="true">↗</span>
         </a>
       </header>
       <div className="editorial-reel-showcase__viewport" tabIndex={0} aria-label="Scrollable Instagram reel showcase">
-        {contentCreationReels.map((reel) => (
+        {reels.map((reel) => (
           <article className="editorial-reel-phone" key={reel.id}>
             <div className="editorial-reel-phone__speaker" aria-hidden="true" />
             <iframe
@@ -83,6 +128,45 @@ function ContentCreationShowcase() {
   );
 }
 
+function ContentCreationShowcase() {
+  return (
+    <ReelShowcase
+      eyebrow="Selected social work"
+      heading="Reels in motion."
+      headingId="content-reel-showcase-heading"
+      reels={contentCreationReels}
+    />
+  );
+}
+
+function TravelPromotionsShowcase({ service }: { service: Service }) {
+  return (
+    <>
+      <section className="editorial-travel-collage" aria-label="Travel promotion photography">
+        {service.images.map((image, index) => (
+          <figure key={image.id}>
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={index === 2 ? 1536 : 1120}
+              height={index === 2 ? 1024 : 1400}
+              loading={index < 2 ? "eager" : "lazy"}
+              sizes="(max-width: 759px) 92vw, 48vw"
+            />
+          </figure>
+        ))}
+      </section>
+      <ReelShowcase
+        eyebrow="Travel and lifestyle motion"
+        heading="Places, in motion."
+        headingId="travel-reel-showcase-heading"
+        reels={travelPromotionReels}
+        accentClass="editorial-reel-showcase--travel"
+      />
+    </>
+  );
+}
+
 function ServiceGallery({ service, content }: { service: Service; content: SiteContent }) {
   if (service.slug === "modeling") {
     return (
@@ -93,6 +177,7 @@ function ServiceGallery({ service, content }: { service: Service; content: SiteC
   }
 
   if (service.slug === "content-creation") return <ContentCreationShowcase />;
+  if (service.slug === "travel-collaborations") return <TravelPromotionsShowcase service={service} />;
 
   return (
     <section className={`editorial-service-gallery editorial-service-gallery--${service.slug}`} aria-label={`${service.title} examples`}>

@@ -20,11 +20,16 @@ export async function SiteFooter() {
         </nav>
       </div>
       <div className="editorial-footer__bottom">
-        <p>© {new Date().getFullYear()} Sage Burress</p>
-        <div>
+        <div className="editorial-footer__contact">
           <a href={`mailto:${content.contact.email}`}>{content.contact.email}</a>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/admin/login">Client workspace</Link>
+          <p>© {new Date().getFullYear()} Sage Burress</p>
+        </div>
+        <div className="editorial-footer__meta">
+          <div>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/admin/login">Admin</Link>
+          </div>
+          <p>Website Design by Sunder Das</p>
         </div>
       </div>
     </footer>

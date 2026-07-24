@@ -106,14 +106,14 @@ export const seedContent: SiteContent = {
   hero: {
     kicker: "Hi, my name is",
     title: "Sage Burress",
-    lead: "Modeling, content creation, makeup artistry, travel promotions, henna, and face painting.",
+    lead: "Modeling, content creation, makeup artistry, henna, travel promotions, and face painting.",
     image: "/media/sage/hero-cutout-v2.webp",
     imageAlt: media("SRC-SAGE-003").alt,
   },
   about: {
     title: "Creative work with presence, personality, and a clear point of view.",
     intro:
-      "Sage works across modeling, content creation, makeup artistry, travel promotions, henna, and face painting.",
+      "Sage works across modeling, content creation, makeup artistry, henna, travel promotions, and face painting.",
     story:
       "Each project begins with the brief and the people it needs to reach, then builds a visual approach that feels natural to the setting.",
     image: media("SRC-SAGE-001").src,
@@ -121,8 +121,7 @@ export const seedContent: SiteContent = {
   },
   contact: {
     title: "Let’s work together.",
-    intro:
-      "Tell me what you have in mind, even if it’s still just an idea. A little context is helpful, but you don’t need every detail figured out. I typically reply within 48 hours.",
+    intro: "Tell me what you have in mind, even if it’s still an idea. I typically reply within 48 hours.",
     email: "contact@sageburress.com",
   },
   services: [
@@ -133,7 +132,7 @@ export const seedContent: SiteContent = {
       shortTitle: "Modeling",
       summary: "Editorial, commercial, lifestyle, and creative bookings.",
       description:
-        "A focused, collaborative presence for still photography, campaign work, lifestyle imagery, events, and other camera-facing assignments.",
+        "With ten years of modeling experience and current representation by three agencies, Sage brings expert posing instincts and a professional on-camera presence to photography, campaigns, lifestyle imagery, editorial, runway, events, and film.",
       deliverables: [
         "Editorial and campaign shoots",
         "Lifestyle and commercial imagery",
@@ -153,7 +152,7 @@ export const seedContent: SiteContent = {
       shortTitle: "Content Creation",
       summary: "Photo, short-form, and long-form storytelling created for social platforms.",
       description:
-        "Original storytelling that feels natural on social while still delivering the polish, intention, and creative perspective brands need.",
+        "Original storytelling that feels natural on social platforms while still delivering the polish, intention, and creativity that brands need.",
       deliverables: [
         "Short-form and long-form video",
         "Photography and carousels",
@@ -184,36 +183,17 @@ export const seedContent: SiteContent = {
         { id: "makeup-artist-01", src: "/media/services/makeup-artist-01.webp", alt: "Runway model wearing polished makeup with a burnt-orange look.", placeholder: false },
         { id: "makeup-artist-02", src: "/media/services/makeup-artist-02.webp", alt: "Creative black eye makeup photographed under vivid blue lighting.", placeholder: false },
         { id: "makeup-artist-03", src: "/media/services/makeup-artist-03.webp", alt: "Creative theatrical makeup with deep black and red details.", placeholder: false },
-      ],
-    },
-    {
-      slug: "travel-collaborations",
-      number: "04",
-      title: "Travel Promotions",
-      shortTitle: "Travel Promotions",
-      summary: "Reels, stories, and short-form video for destinations, stays, and experiences.",
-      description:
-        "Promotional travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
-      deliverables: [
-        "Destination storytelling",
-        "Short-form travel content",
-        "Cross-platform content packages",
-      ],
-      accent: "bronze",
-      images: [
-        { id: "travel-collaborations-01", src: "/media/services/travel-resort-candid.webp", alt: "Tropical resort terrace overlooking an infinity pool and a coastal cove.", placeholder: false },
-        { id: "travel-collaborations-02", src: "", alt: "Additional travel promotion work will appear here.", placeholder: true },
-        { id: "travel-collaborations-03", src: "", alt: "Additional travel promotion work will appear here.", placeholder: true },
+        { id: "makeup-artist-04", src: "/media/services/makeup-artist-04.webp", alt: "Sage applying eye makeup to a model backstage.", placeholder: false },
       ],
     },
     {
       slug: "henna",
-      number: "05",
+      number: "04",
       title: "Henna",
       shortTitle: "Henna",
       summary: "Hand-drawn henna for celebrations, events, and individual appointments.",
       description:
-        "Custom henna designs created to suit the person and the occasion, from small personal details to more intricate hand and arm work.",
+        "Custom henna designs created for the person and occasion, ranging from elegant accents to intricate hand and arm work.",
       deliverables: [
         "Individual appointments",
         "Events and celebrations",
@@ -222,6 +202,32 @@ export const seedContent: SiteContent = {
       images: [
         { id: "henna-01", src: "/media/services/henna-01-cutout.webp", alt: "Detailed floral henna design extending across a hand and wrist.", placeholder: false },
         { id: "henna-02", src: "/media/services/henna-02-cutout.webp", alt: "Intricate floral and geometric henna design across a hand and forearm.", placeholder: false },
+        { id: "henna-03", src: "/media/services/henna-03-cutout.webp", alt: "Floral henna design with a snail and flowing botanical details across a hand.", placeholder: false },
+        { id: "henna-04", src: "/media/services/henna-04-cutout.webp", alt: "Dense floral henna design extending from fingertips to the wrist.", placeholder: false },
+        { id: "henna-05", src: "/media/services/henna-05-cutout.webp", alt: "Floral henna design photographed under warm pink light.", placeholder: false },
+        { id: "henna-06", src: "/media/services/henna-06-cutout.webp", alt: "Detailed botanical and geometric henna across a palm and fingers.", placeholder: false },
+        { id: "henna-07", src: "/media/services/henna-07-cutout.webp", alt: "Moon and leaves henna design centered on a forearm.", placeholder: false },
+        { id: "henna-08", src: "/media/services/henna-08-cutout.webp", alt: "Geometric and floral henna design across a hand and wrist.", placeholder: false },
+      ],
+    },
+    {
+      slug: "travel-collaborations",
+      number: "05",
+      title: "Travel Promotions",
+      shortTitle: "Travel Promotions",
+      summary: "Reels, stories, and short-form video for destinations, stays, and experiences.",
+      description:
+        "Promotional travel content for properties, destinations, and experience-led partners, created to turn a real sense of discovery into polished, inviting social coverage.",
+      deliverables: [
+        "Destination storytelling",
+        "Short-form & long-form travel content",
+        "Cross-platform content packages",
+      ],
+      accent: "bronze",
+      images: [
+        { id: "travel-collaborations-01", src: "/media/services/travel-resort-candid.webp", alt: "Tropical resort terrace overlooking an infinity pool and a coastal cove.", placeholder: false },
+        { id: "travel-collaborations-02", src: "/media/services/travel-resort-infinity-pool.webp", alt: "Sunlit resort terrace overlooking an infinity pool and quiet tropical cove.", placeholder: false },
+        { id: "travel-collaborations-03", src: "/media/services/travel-resort-breakfast.webp", alt: "Resort breakfast on an open-air terrace overlooking the coast.", placeholder: false },
       ],
     },
     {
@@ -231,7 +237,7 @@ export const seedContent: SiteContent = {
       shortTitle: "Face Painting",
       summary: "Expressive, camera-ready artistry for people, events, and concepts.",
       description:
-        "Creative face painting shaped to the setting, from private bookings and live events to editorials and one-of-a-kind concepts.",
+        "Creative face painting designed for each occasion, from private bookings and live events to editorials and one-of-a-kind concepts.",
       deliverables: [
         "Private and public events",
         "Editorial concepts",
@@ -265,10 +271,45 @@ export const seedContent: SiteContent = {
   featuredBrands: defaultFeaturedBrands,
   links: [
     {
+      id: "heyman-talent",
+      label: "Heyman Talent Agency Portfolio",
+      href: "https://www.heymantalent.com/t/sage-burress",
+      description: "Current agency portfolio, measurements, skills, and credits.",
+      active: true,
+    },
+    {
+      id: "talent-fusion",
+      label: "Talent Fusion Portfolio",
+      href: "https://www.talent-fusion.com/lifestyle-female",
+      description: "Lifestyle roster and agency representation.",
+      active: true,
+    },
+    {
+      id: "invu-model-talent",
+      label: "InVu Model & Talent Management Portfolio",
+      href: "https://www.invumodelandtalent.com/sage-burress",
+      description: "Sage’s InVu model and talent portfolio.",
+      active: true,
+    },
+    {
       id: "amazon-storefront",
       label: "Amazon Storefront",
       href: "https://www.amazon.com/shop/influencer-7b7f11ab",
       description: "Fashion, beauty, art, and everyday favorites.",
+      active: true,
+    },
+    {
+      id: "depop",
+      label: "Depop",
+      href: "https://www.depop.com/sage_burress/",
+      description: "Shop Sage’s current fashion listings.",
+      active: true,
+    },
+    {
+      id: "shopmy",
+      label: "ShopMy",
+      href: "https://shopmy.us/sageburress",
+      description: "A curated list of my recommended products",
       active: true,
     },
     {
@@ -282,21 +323,7 @@ export const seedContent: SiteContent = {
       id: "facebook",
       label: "Facebook",
       href: "https://www.facebook.com/107356810631100",
-      description: "Updates, portfolio moments, and ways to follow along.",
-      active: true,
-    },
-    {
-      id: "shopmy",
-      label: "ShopMy",
-      href: "https://shopmy.us/sageburress",
-      description: "A curated edit of products Sage recommends.",
-      active: true,
-    },
-    {
-      id: "heyman-talent",
-      label: "Heyman Talent Portfolio",
-      href: "https://www.heymantalent.com/t/sage-burress",
-      description: "Current agency portfolio, measurements, skills, and credits.",
+      description: "Updates, portfolio work, and personal moments.",
       active: true,
     },
   ],
@@ -328,9 +355,42 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
       stored.summary === "Reels, stories, and short-form video for destinations and experiences.";
     const hasLegacyTravelDescription = fallback.slug === "travel-collaborations" &&
       stored.description === "Collaborative travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.";
+    const legacyDescriptions: Record<string, string[]> = {
+      modeling: [
+        "A focused, collaborative presence for still photography, campaign work, lifestyle imagery, events, and other camera-facing assignments.",
+      ],
+      "content-creation": [
+        "Original storytelling that feels natural on social while still delivering the polish, intention, and creative perspective brands need.",
+      ],
+      henna: [
+        "Custom henna designs created to suit the person and the occasion, from small personal details to more intricate hand and arm work.",
+      ],
+      "travel-collaborations": [
+        "Promotional travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
+        "Collaborative travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
+      ],
+      "face-painting": [
+        "Creative face painting shaped to the setting, from private bookings and live events to editorials and one-of-a-kind concepts.",
+      ],
+    };
+    const hasLegacyDescription = legacyDescriptions[fallback.slug]?.includes(stored.description) ?? false;
     const hasLegacyHennaImages = fallback.slug === "henna" && stored.images.every((image) =>
-      image.src === "/media/services/henna-01.webp" || image.src === "/media/services/henna-02.webp"
+      [
+        "/media/services/henna-01.webp",
+        "/media/services/henna-02.webp",
+        "/media/services/henna-01-cutout.webp",
+        "/media/services/henna-02-cutout.webp",
+      ].includes(image.src)
     );
+    const hasLegacyMakeupImages = fallback.slug === "makeup-artist" &&
+      stored.images.length <= 3 &&
+      stored.images.every((image) => image.src.startsWith("/media/services/makeup-artist-"));
+    const hasLegacyTravelImages = fallback.slug === "travel-collaborations" &&
+      stored.images.every((image) =>
+        image.placeholder || !image.src || image.src === "/media/services/travel-resort-candid.webp"
+      );
+    const hasLegacyTravelOffer = fallback.slug === "travel-collaborations" &&
+      stored.deliverables.includes("Short-form travel content");
     return {
       ...fallback,
       ...stored,
@@ -342,14 +402,19 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
           ? fallback.shortTitle
           : stored.shortTitle,
       summary: hasLegacyTravelSummary ? fallback.summary : stored.summary,
-      description: hasLegacyTravelDescription ? fallback.description : stored.description,
+      description: hasLegacyTravelDescription || hasLegacyDescription ? fallback.description : stored.description,
       accent: fallback.accent,
       deliverables:
-        Array.isArray(stored.deliverables) && !hasLegacyModelingOffer && !hasLegacyHennaOffer
+        Array.isArray(stored.deliverables) && !hasLegacyModelingOffer && !hasLegacyHennaOffer && !hasLegacyTravelOffer
           ? stored.deliverables
           : fallback.deliverables,
       images:
-        !isLegacyServiceSet && !hasLegacyHennaImages && Array.isArray(stored.images) && stored.images.length
+        !isLegacyServiceSet &&
+        !hasLegacyHennaImages &&
+        !hasLegacyMakeupImages &&
+        !hasLegacyTravelImages &&
+        Array.isArray(stored.images) &&
+        stored.images.length
           ? stored.images
           : fallback.images,
     };
@@ -386,9 +451,16 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
       const stored = storedLinks.find((link) => link.id === fallback.id);
       if (!stored) return fallback;
       const hasStoredDestination = Boolean(stored.href?.trim());
+      const hasLegacyLabel = fallback.id === "heyman-talent" &&
+        stored.label === "Heyman Talent Portfolio";
+      const hasLegacyDescription =
+        (fallback.id === "shopmy" && stored.description === "A curated edit of products Sage recommends.") ||
+        (fallback.id === "facebook" && stored.description === "Updates, portfolio moments, and ways to follow along.");
       return {
         ...fallback,
         ...stored,
+        label: hasLegacyLabel ? fallback.label : stored.label,
+        description: hasLegacyDescription ? fallback.description : stored.description,
         href: hasStoredDestination ? stored.href : fallback.href,
         active: hasStoredDestination ? stored.active : fallback.active,
       };
@@ -403,7 +475,10 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
       ...seedContent.hero,
       ...value.hero,
       lead:
-        value.hero.lead === "Modeling, face painting, henna, makeup artistry, content creation, and travel collaborations."
+        [
+          "Modeling, face painting, henna, makeup artistry, content creation, and travel collaborations.",
+          "Modeling, content creation, makeup artistry, travel promotions, henna, and face painting.",
+        ].includes(value.hero.lead)
           ? seedContent.hero.lead
           : value.hero.lead,
       image:
@@ -415,11 +490,21 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
       ...seedContent.about,
       ...value.about,
       intro:
-        value.about.intro === "Sage works across modeling, face painting, henna, makeup artistry, content creation, and travel collaborations."
+        [
+          "Sage works across modeling, face painting, henna, makeup artistry, content creation, and travel collaborations.",
+          "Sage works across modeling, content creation, makeup artistry, travel promotions, henna, and face painting.",
+        ].includes(value.about.intro)
           ? seedContent.about.intro
           : value.about.intro,
     },
-    contact: { ...seedContent.contact, ...value.contact },
+    contact: {
+      ...seedContent.contact,
+      ...value.contact,
+      intro:
+        value.contact.intro === "Tell me what you have in mind, even if it’s still just an idea. A little context is helpful, but you don’t need every detail figured out. I typically reply within 48 hours."
+          ? seedContent.contact.intro
+          : value.contact.intro,
+    },
     services,
     projects: value.projects.filter((project) => project.image !== removedProjectImage),
     featuredBrands,

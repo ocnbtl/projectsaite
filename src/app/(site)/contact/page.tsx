@@ -47,8 +47,8 @@ export default async function ContactPage({
                   <li>Modeling</li>
                   <li>Content Creation</li>
                   <li>Makeup Artist</li>
-                  <li>Travel Promotions</li>
                   <li>Henna</li>
+                  <li>Travel Promotions</li>
                   <li>Face Painting</li>
                 </ul>
               </dd>
