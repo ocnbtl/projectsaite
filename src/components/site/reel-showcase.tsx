@@ -74,6 +74,13 @@ export function ReelShowcase({ reels }: { reels: Reel[] }) {
       frame = window.requestAnimationFrame(updateCards);
     };
 
+    const initialCard = cards[Math.min(1, Math.max(0, cards.length - 1))];
+    if (initialCard) {
+      viewport.scrollTo({
+        left: initialCard.offsetLeft - (viewport.clientWidth - initialCard.offsetWidth) / 2,
+        behavior: "auto",
+      });
+    }
     queueUpdate();
     viewport.addEventListener("scroll", queueUpdate, { passive: true });
     window.addEventListener("resize", queueUpdate);

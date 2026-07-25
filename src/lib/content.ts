@@ -132,7 +132,7 @@ export const seedContent: SiteContent = {
       shortTitle: "Modeling",
       summary: "Editorial, commercial, lifestyle, and creative bookings.",
       description:
-        "With ten years of modeling experience and current representation by three agencies, Sage brings expert posing instincts and a professional on-camera presence to photography, campaigns, lifestyle imagery, editorial, runway, events, and film.",
+        "Ten years of modeling experience, expert posing instincts, and current representation by three agencies across photography, campaigns, lifestyle imagery, editorial, runway, events, and film.",
       deliverables: [
         "Editorial and campaign shoots",
         "Lifestyle and commercial imagery",
@@ -309,7 +309,7 @@ export const seedContent: SiteContent = {
       id: "shopmy",
       label: "ShopMy",
       href: "https://shopmy.us/sageburress",
-      description: "A curated list of my recommended products",
+      description: "A curated list of my recommended products.",
       active: true,
     },
     {
@@ -360,6 +360,7 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
     const legacyDescriptions: Record<string, string[]> = {
       modeling: [
         "A focused, collaborative presence for still photography, campaign work, lifestyle imagery, events, and other camera-facing assignments.",
+        "With ten years of modeling experience and current representation by three agencies, Sage brings expert posing instincts and a professional on-camera presence to photography, campaigns, lifestyle imagery, editorial, runway, events, and film.",
       ],
       "content-creation": [
         "Original storytelling that feels natural on social while still delivering the polish, intention, and creative perspective brands need.",
@@ -458,6 +459,7 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
         stored.label === "Heyman Talent Portfolio";
       const hasLegacyDescription =
         (fallback.id === "shopmy" && stored.description === "A curated edit of products Sage recommends.") ||
+        (fallback.id === "shopmy" && stored.description === "A curated list of my recommended products") ||
         (fallback.id === "facebook" && stored.description === "Updates, portfolio moments, and ways to follow along.") ||
         (fallback.id === "heyman-talent" && stored.description === "Current agency portfolio, measurements, skills, and credits.") ||
         (fallback.id === "talent-fusion" && stored.description === "Lifestyle roster and agency representation.") ||

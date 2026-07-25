@@ -591,6 +591,26 @@ body:has(.admin-login) {
   color: #373a40;
 }
 
+.admin-login--minimal {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+}
+
+.admin-login--minimal .admin-login__panel {
+  width: 100%;
+  min-height: 100svh;
+  padding: 28px;
+}
+
+.admin-login--minimal .admin-login__panel > div {
+  width: min(100%, 360px);
+}
+
+.admin-login--minimal .admin-login__form {
+  margin-top: 0;
+}
+
 @media (max-width: 1350px) and (min-width: 801px) {
   .admin-shell .pitch-builder {
     grid-template-columns: 1fr;

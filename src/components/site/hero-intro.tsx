@@ -3,12 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 
 const scrambleAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const naturalTypingCadence = [58, 74, 49, 82, 64, 91, 53, 76, 61];
+const naturalTypingCadence = [82, 118, 74, 132, 91, 109, 78, 124, 88];
 
 function typingDelayAfter(kicker: string, characterIndex: number) {
-  if (kicker.startsWith("Hi,") && characterIndex < 2) return 40;
-  if (kicker.startsWith("Hi,") && characterIndex === 2) return 170;
-  if (kicker[characterIndex] === " ") return 42;
+  if (kicker.startsWith("Hi,") && characterIndex === 0) return 44;
+  if (kicker.startsWith("Hi,") && characterIndex === 1) return 38;
+  if (kicker.startsWith("Hi,") && characterIndex === 2) return 230;
+  if (kicker[characterIndex] === " ") return 65;
   return naturalTypingCadence[characterIndex % naturalTypingCadence.length];
 }
 
@@ -32,6 +33,8 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
   const characterCount = useMemo(() => title.replace(/\s/g, "").length, [title]);
   const [typedKicker, setTypedKicker] = useState("");
   const [scrambledTitle, setScrambledTitle] = useState(() => scrambleTitle(title, 0, 0));
+  const [showCaret, setShowCaret] = useState(true);
+  const [titleHasStarted, setTitleHasStarted] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -39,6 +42,8 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
       const reducedMotionTimer = window.setTimeout(() => {
         setTypedKicker(kicker);
         setScrambledTitle(title);
+        setShowCaret(false);
+        setTitleHasStarted(true);
       }, 0);
       return () => window.clearTimeout(reducedMotionTimer);
     }
@@ -47,25 +52,10 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
     let scrambleTick = 0;
     const timers: number[] = [];
 
-    const typeNextCharacter = () => {
-      typeIndex += 1;
-      setTypedKicker(kicker.slice(0, typeIndex));
-
-      if (typeIndex < kicker.length) {
-        const typingTimer = window.setTimeout(
-          typeNextCharacter,
-          typingDelayAfter(kicker, typeIndex - 1),
-        );
-        timers.push(typingTimer);
-      }
-    };
-
-    const typingStart = window.setTimeout(typeNextCharacter, 80);
-    timers.push(typingStart);
-
-    const scrambleStart = window.setTimeout(() => {
-      const warmupTicks = 4;
-      const ticksPerCharacter = 4;
+    const startScramble = () => {
+      setTitleHasStarted(true);
+      const warmupTicks = 3;
+      const ticksPerCharacter = 3;
       const scrambleTimer = window.setInterval(() => {
         scrambleTick += 1;
         const lockedCharacters = Math.min(
@@ -77,10 +67,29 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
           window.clearInterval(scrambleTimer);
           setScrambledTitle(title);
         }
-      }, 48);
+      }, 50);
       timers.push(scrambleTimer);
-    }, 400);
-    timers.push(scrambleStart);
+    };
+
+    const typeNextCharacter = () => {
+      typeIndex += 1;
+      setTypedKicker(kicker.slice(0, typeIndex));
+
+      if (typeIndex < kicker.length) {
+        const typingTimer = window.setTimeout(
+          typeNextCharacter,
+          typingDelayAfter(kicker, typeIndex - 1),
+        );
+        timers.push(typingTimer);
+      } else {
+        const scrambleStart = window.setTimeout(startScramble, 120);
+        const caretEnd = window.setTimeout(() => setShowCaret(false), 360);
+        timers.push(scrambleStart, caretEnd);
+      }
+    };
+
+    const typingStart = window.setTimeout(typeNextCharacter, 90);
+    timers.push(typingStart);
 
     return () => timers.forEach((timer) => window.clearTimeout(timer));
   }, [characterCount, kicker, title]);
@@ -89,11 +98,11 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
     <>
       <p className="editorial-hero__intro" aria-hidden="true">
         {typedKicker}
-        {typedKicker.length < kicker.length ? (
+        {showCaret ? (
           <span className="editorial-hero__typing-caret" aria-hidden="true" />
         ) : null}
       </p>
-      <h1 aria-label={`${kicker} ${title}`}>
+      <h1 className={titleHasStarted ? "is-scrambling" : "is-waiting"} aria-label={`${kicker} ${title}`}>
         <span className="editorial-visually-hidden">{kicker} {title}</span>
         {scrambledTitle.split(/\s+/).map((part, index) => (
           <span className="editorial-hero__name-word" aria-hidden="true" key={index}>

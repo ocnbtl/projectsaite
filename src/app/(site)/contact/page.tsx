@@ -20,12 +20,23 @@ export default async function ContactPage({
   const content = await getSiteContent();
   const params = await searchParams;
   const initialInquiry = typeof params.inquiry === "string" ? params.inquiry : undefined;
+  const replySentence = "I typically reply within 48 hours.";
+  const replyIndex = content.contact.intro.indexOf(replySentence);
+  const contactIntroLead = replyIndex >= 0
+    ? content.contact.intro.slice(0, replyIndex).trim()
+    : content.contact.intro;
+  const contactIntroReply = replyIndex >= 0 ? replySentence : "";
 
   return (
     <>
       <section className="editorial-page-hero editorial-page-hero--contact">
         <h1>{content.contact.title}</h1>
-        <p>{content.contact.intro}</p>
+        <p>
+          {contactIntroLead}
+          {contactIntroReply ? (
+            <span className="editorial-contact-reply">{contactIntroReply}</span>
+          ) : null}
+        </p>
       </section>
 
       <section className="editorial-contact-layout">

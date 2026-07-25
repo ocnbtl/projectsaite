@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -31,11 +31,11 @@ export function LoginForm({ configured }: { configured: boolean }) {
   return (
     <form className="admin-login__form" onSubmit={submit}>
       <label>
-        <span>Admin password</span>
+        <span>Password</span>
         <input name="password" type="password" autoComplete="current-password" required disabled={!configured} />
       </label>
       <button className="button button--dark" type="submit" disabled={!configured || loading}>
-        {loading ? <LoaderCircle className="spin" size={18} /> : <ArrowRight size={18} />}
+        {loading ? <LoaderCircle className="spin" size={18} /> : null}
         Enter studio
       </button>
       {error && <p role="alert">{error}</p>}
