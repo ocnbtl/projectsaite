@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const rootReadyClass = "is-home-reveal-ready";
 const revealedClass = "is-home-revealed";
+const portfolioTeaserClass = "is-home-portfolio-teaser";
 const heroIntroCompleteEvent = "editorial:hero-intro-complete";
 
 function setRevealDelays(targets: HTMLElement[]) {
@@ -52,12 +53,26 @@ export function HomepageMotion() {
     const portfolioHeading = targets.find(
       (target) => target.dataset.homeReveal === "portfolio-heading",
     );
-    const scrollTargets = targets.filter((target) => target !== portfolioHeading);
-    const revealPortfolioHeading = () => {
+    const portfolioItems = targets.filter(
+      (target) => target.dataset.homeReveal === "portfolio-item",
+    );
+    const scrollTargets = targets.filter(
+      (target) => target !== portfolioHeading && !portfolioItems.includes(target),
+    );
+    let hasUserScrolled = window.scrollY > 1;
+    const focusPortfolioItems = () => {
+      portfolioItems.forEach((target) => target.classList.add(revealedClass));
+    };
+    const revealPortfolioPreview = () => {
       portfolioHeading?.classList.add(revealedClass);
+      portfolioItems.forEach((target) => target.classList.add(portfolioTeaserClass));
+
+      if (hasUserScrolled) {
+        window.requestAnimationFrame(focusPortfolioItems);
+      }
     };
 
-    window.addEventListener(heroIntroCompleteEvent, revealPortfolioHeading, { once: true });
+    window.addEventListener(heroIntroCompleteEvent, revealPortfolioPreview, { once: true });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -81,18 +96,20 @@ export function HomepageMotion() {
     };
 
     const handleFirstScroll = () => {
+      hasUserScrolled = true;
+      focusPortfolioItems();
       startObserving();
       window.removeEventListener("scroll", handleFirstScroll);
     };
 
-    if (window.scrollY > 1) {
+    if (hasUserScrolled) {
       startObserving();
     } else {
       window.addEventListener("scroll", handleFirstScroll, { passive: true });
     }
 
     return () => {
-      window.removeEventListener(heroIntroCompleteEvent, revealPortfolioHeading);
+      window.removeEventListener(heroIntroCompleteEvent, revealPortfolioPreview);
       window.removeEventListener("scroll", handleFirstScroll);
       observer.disconnect();
       root.classList.remove(rootReadyClass);

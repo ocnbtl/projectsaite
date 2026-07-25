@@ -919,6 +919,21 @@ body:has(.editorial-site) {
     var(--editorial-home-reveal-delay, 0ms) both;
 }
 
+.editorial-site.is-home-reveal-ready
+  [data-home-reveal="portfolio-item"].is-home-portfolio-teaser:not(.is-home-revealed) {
+  opacity: 0.76;
+  filter: blur(6px);
+  clip-path: inset(0);
+  translate: 0 8px;
+  scale: 0.99;
+  animation: editorial-home-portfolio-materialize 820ms var(--editorial-ease-out) both;
+}
+
+.editorial-site.is-home-reveal-ready
+  [data-home-reveal="portfolio-item"].is-home-portfolio-teaser.is-home-revealed {
+  animation: editorial-home-portfolio-focus 280ms var(--editorial-ease-out) both;
+}
+
 @keyframes editorial-home-fog-reveal {
   from {
     opacity: 0;
@@ -926,6 +941,40 @@ body:has(.editorial-site) {
     clip-path: inset(8% 0 0);
     translate: 0 24px;
     scale: 0.985;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    clip-path: inset(0);
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@keyframes editorial-home-portfolio-materialize {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    clip-path: inset(8% 0 0);
+    translate: 0 24px;
+    scale: 0.985;
+  }
+  to {
+    opacity: 0.76;
+    filter: blur(6px);
+    clip-path: inset(0);
+    translate: 0 8px;
+    scale: 0.99;
+  }
+}
+
+@keyframes editorial-home-portfolio-focus {
+  from {
+    opacity: 0.76;
+    filter: blur(6px);
+    clip-path: inset(0);
+    translate: 0 8px;
+    scale: 0.99;
   }
   to {
     opacity: 1;
