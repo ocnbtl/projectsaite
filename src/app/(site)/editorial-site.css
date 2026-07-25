@@ -361,7 +361,7 @@ body:has(.editorial-site) {
   justify-self: end;
   max-height: min(64svh, 620px);
   border: 0;
-  animation: editorial-image-drop 1050ms var(--editorial-ease-out) 800ms both;
+  animation: editorial-image-drop 1280ms cubic-bezier(0.45, 0, 0.12, 1) 820ms both;
 }
 
 .editorial-hero__image img {
@@ -381,7 +381,7 @@ body:has(.editorial-site) {
   background: rgba(55, 58, 64, 0.2);
   border-radius: 50%;
   filter: blur(18px);
-  animation: editorial-shadow-land 1050ms var(--editorial-ease-out) 800ms both;
+  animation: editorial-shadow-land 1280ms cubic-bezier(0.45, 0, 0.12, 1) 820ms both;
 }
 
 @keyframes editorial-header-drop {
@@ -401,10 +401,11 @@ body:has(.editorial-site) {
 @keyframes editorial-image-drop {
   from {
     opacity: 0;
-    transform: translateY(-72px) scale(0.97);
+    transform: translateY(-96px) scale(0.97);
   }
-  72% {
-    transform: translateY(4px) scale(1.004);
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -413,9 +414,9 @@ body:has(.editorial-site) {
     opacity: 0;
     transform: scaleX(0.38) scaleY(0.6);
   }
-  72% {
+  to {
     opacity: 1;
-    transform: scaleX(1.08) scaleY(0.9);
+    transform: scaleX(1) scaleY(1);
   }
 }
 
@@ -443,9 +444,13 @@ body:has(.editorial-site) {
 }
 
 .editorial-rail__track {
+  --editorial-brand-gap: clamp(58px, 6vw, 92px);
+
   display: flex;
   align-items: center;
+  gap: var(--editorial-brand-gap);
   width: max-content;
+  padding-inline: clamp(29px, 3vw, 46px);
   animation: editorial-marquee 52s linear infinite;
 }
 
@@ -458,9 +463,9 @@ body:has(.editorial-site) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 238px;
+  min-width: 0;
   min-height: 86px;
-  padding: 18px 30px;
+  padding: 18px 0;
   line-height: 1;
   white-space: nowrap;
 }
@@ -487,7 +492,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-brandmark--rebel-magazine {
-  min-width: 190px;
+  min-width: 0;
 }
 
 .editorial-brandmark__rebel {
@@ -501,7 +506,7 @@ body:has(.editorial-site) {
 .editorial-brandmark--loveland-lifestyle,
 .editorial-brandmark--red-light-method,
 .editorial-brandmark--black-opal-aesthetics {
-  min-width: 286px;
+  min-width: 0;
 }
 
 .editorial-brandmark--loveland-lifestyle img {
@@ -511,7 +516,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-brandmark--elaine-b-jewelry {
-  min-width: 196px;
+  min-width: 0;
 }
 
 .editorial-brandmark--elaine-b-jewelry img {
@@ -539,7 +544,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-brandmark--romantic-adventure-getaways {
-  min-width: 286px;
+  min-width: 0;
 }
 
 .editorial-brandmark__romantic {
@@ -574,7 +579,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-brandmark--wooden-cask {
-  min-width: 284px;
+  min-width: 0;
 }
 
 .editorial-brandmark__wooden-cask {
@@ -1971,15 +1976,13 @@ body:has(.editorial-site) {
   }
 
   .editorial-rail__track span {
-    min-width: 190px;
-    padding: 24px;
     font-size: 1.35rem;
   }
 
   .editorial-brandmark {
-    min-width: 190px;
+    min-width: 0;
     min-height: 86px;
-    padding: 18px 24px;
+    padding: 18px 0;
   }
 
   .editorial-brandmark img {
@@ -1992,7 +1995,7 @@ body:has(.editorial-site) {
   .editorial-brandmark--romantic-adventure-getaways,
   .editorial-brandmark--black-opal-aesthetics,
   .editorial-brandmark--wooden-cask {
-    min-width: 250px;
+    min-width: 0;
   }
 
   .editorial-brandmark--elaine-b-jewelry img,
@@ -2268,39 +2271,53 @@ body:has(.editorial-site) {
   }
 
   .editorial-hero {
-    min-height: clamp(560px, calc(100svh - 132px), 620px);
-    padding-top: 48px;
+    min-height: 0;
+    padding: 14px 18px 18px;
   }
 
   .editorial-hero__services {
     width: 62%;
+    margin-top: 24px;
+  }
+
+  .editorial-hero .editorial-button {
+    margin-top: 18px;
   }
 
   .editorial-hero__image {
-    right: -4%;
-    bottom: 20px;
-    width: 60%;
-    height: 352px;
-    opacity: 0.86;
+    right: -3%;
+    bottom: 10px;
+    width: 58%;
+    height: 338px;
+    opacity: 0.9;
   }
 
   .editorial-rail {
     display: block;
-    min-height: 74px;
+    min-height: 58px;
+  }
+
+  .editorial-rail__track {
+    --editorial-brand-gap: 40px;
+
+    padding-inline: 20px;
   }
 
   .editorial-rail__track > .editorial-brandmark {
-    min-height: 72px;
-    padding: 10px 22px;
+    min-height: 56px;
+    padding: 7px 0;
   }
 
   .editorial-service-index__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
   }
 
-  .editorial-service-index__grid > a {
+  .editorial-service-index__grid > a.editorial-service-card {
     min-height: 205px;
     padding: 24px 16px;
+    border: 1px solid var(--editorial-rule);
   }
 
   .editorial-service-index__grid h3 {

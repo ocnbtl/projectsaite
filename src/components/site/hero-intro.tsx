@@ -3,6 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 
 const scrambleAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const naturalTypingCadence = [58, 74, 49, 82, 64, 91, 53, 76, 61];
+
+function typingDelayAfter(kicker: string, characterIndex: number) {
+  if (kicker.startsWith("Hi,") && characterIndex < 2) return 40;
+  if (kicker.startsWith("Hi,") && characterIndex === 2) return 170;
+  if (kicker[characterIndex] === " ") return 42;
+  return naturalTypingCadence[characterIndex % naturalTypingCadence.length];
+}
 
 function scrambleTitle(title: string, lockedCharacters: number, tick: number) {
   let visibleCharacter = 0;
@@ -39,19 +47,29 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
     let scrambleTick = 0;
     const timers: number[] = [];
 
-    const typingTimer = window.setInterval(() => {
+    const typeNextCharacter = () => {
       typeIndex += 1;
       setTypedKicker(kicker.slice(0, typeIndex));
-      if (typeIndex >= kicker.length) window.clearInterval(typingTimer);
-    }, 56);
-    timers.push(typingTimer);
+
+      if (typeIndex < kicker.length) {
+        const typingTimer = window.setTimeout(
+          typeNextCharacter,
+          typingDelayAfter(kicker, typeIndex - 1),
+        );
+        timers.push(typingTimer);
+      }
+    };
+
+    const typingStart = window.setTimeout(typeNextCharacter, 80);
+    timers.push(typingStart);
 
     const scrambleStart = window.setTimeout(() => {
-      const ticksPerCharacter = 3;
+      const warmupTicks = 4;
+      const ticksPerCharacter = 4;
       const scrambleTimer = window.setInterval(() => {
         scrambleTick += 1;
         const lockedCharacters = Math.min(
-          Math.floor(scrambleTick / ticksPerCharacter),
+          Math.max(0, Math.floor((scrambleTick - warmupTicks) / ticksPerCharacter)),
           characterCount,
         );
         setScrambledTitle(scrambleTitle(title, lockedCharacters, scrambleTick));
@@ -59,9 +77,9 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
           window.clearInterval(scrambleTimer);
           setScrambledTitle(title);
         }
-      }, 46);
+      }, 48);
       timers.push(scrambleTimer);
-    }, 420);
+    }, 400);
     timers.push(scrambleStart);
 
     return () => timers.forEach((timer) => window.clearTimeout(timer));
