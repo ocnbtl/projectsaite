@@ -46,12 +46,6 @@ export function HomepageMotion() {
       return () => root.classList.remove(rootReadyClass);
     }
 
-    const visibleThreshold = window.innerHeight * 0.94;
-    targets.forEach((target) => {
-      if (target.getBoundingClientRect().top <= visibleThreshold) {
-        target.classList.add(revealedClass);
-      }
-    });
     root.classList.add(rootReadyClass);
 
     const observer = new IntersectionObserver(
@@ -68,13 +62,26 @@ export function HomepageMotion() {
       },
     );
 
-    targets.forEach((target) => {
-      if (!target.classList.contains(revealedClass)) {
-        observer.observe(target);
-      }
-    });
+    let hasStartedObserving = false;
+    const startObserving = () => {
+      if (hasStartedObserving) return;
+      hasStartedObserving = true;
+      targets.forEach((target) => observer.observe(target));
+    };
+
+    const handleFirstScroll = () => {
+      startObserving();
+      window.removeEventListener("scroll", handleFirstScroll);
+    };
+
+    if (window.scrollY > 1) {
+      startObserving();
+    } else {
+      window.addEventListener("scroll", handleFirstScroll, { passive: true });
+    }
 
     return () => {
+      window.removeEventListener("scroll", handleFirstScroll);
       observer.disconnect();
       root.classList.remove(rootReadyClass);
     };

@@ -364,11 +364,11 @@ body:has(.editorial-site) {
 }
 
 .editorial-hero:has(.editorial-hero__copy h1.is-scrambling) .editorial-hero__services {
-  animation: editorial-support-in 720ms var(--editorial-ease-out) 1000ms both;
+  animation: editorial-hero-support-drop 1720ms cubic-bezier(0.45, 0, 0.12, 1) both;
 }
 
 .editorial-hero:has(.editorial-hero__copy h1.is-scrambling) .editorial-hero__copy > .editorial-button {
-  animation: editorial-support-in 680ms var(--editorial-ease-out) 1040ms both;
+  animation: editorial-hero-support-drop 1720ms cubic-bezier(0.45, 0, 0.12, 1) both;
 }
 
 .editorial-hero__image {
@@ -436,6 +436,17 @@ body:has(.editorial-site) {
   from {
     opacity: 0;
     transform: translateY(10px);
+  }
+}
+
+@keyframes editorial-hero-support-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-48px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
