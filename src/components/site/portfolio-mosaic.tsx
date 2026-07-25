@@ -54,10 +54,12 @@ export function PortfolioMosaic({
   projects,
   showCaptions = false,
   eagerCount = 0,
+  revealOnScroll = false,
 }: {
   projects: Project[];
   showCaptions?: boolean;
   eagerCount?: number;
+  revealOnScroll?: boolean;
 }) {
   const ordered = preferredImages
     .map((image) => projects.find((project) => project.image === image))
@@ -74,6 +76,7 @@ export function PortfolioMosaic({
         return (
           <figure
             className="editorial-mosaic__item"
+            data-home-reveal={revealOnScroll ? "portfolio-item" : undefined}
             key={project.slug}
             style={{
               "--editorial-mobile-order": mobileRowFirstOrders[index],

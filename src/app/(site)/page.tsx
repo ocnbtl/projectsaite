@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { HeroIntro } from "@/components/site/hero-intro";
+import { HomepageMotion } from "@/components/site/homepage-motion";
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
 import type { FeaturedBrand } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
@@ -120,11 +121,11 @@ export default async function HomePage() {
       </section>
 
       <section className="editorial-portfolio-preview" aria-labelledby="home-portfolio-heading">
-        <header>
+        <header data-home-reveal="portfolio-heading">
           <h2 id="home-portfolio-heading">Portfolio</h2>
         </header>
-        <PortfolioMosaic projects={content.projects} />
-        <div className="editorial-section-link">
+        <PortfolioMosaic projects={content.projects} revealOnScroll />
+        <div className="editorial-section-link" data-home-reveal="portfolio-link">
           <Link className="editorial-button" href="/portfolio">
             View the portfolio
           </Link>
@@ -132,13 +133,14 @@ export default async function HomePage() {
       </section>
 
       <section className="editorial-service-index" aria-labelledby="home-services-heading">
-        <div className="editorial-service-index__heading">
+        <div className="editorial-service-index__heading" data-home-reveal="service-heading">
           <h2 id="home-services-heading">Services</h2>
         </div>
         <div className="editorial-service-index__grid">
           {content.services.map((service) => (
             <Link
               className={`editorial-service-card editorial-service-card--${service.slug}`}
+              data-home-reveal="service-card"
               key={service.slug}
               href={`/services/${service.slug}`}
             >
@@ -150,13 +152,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-contact-callout">
+      <section className="editorial-contact-callout" data-home-reveal="contact-callout">
         <p>Have a project in mind?</p>
         <h2>Let’s work together.</h2>
         <Link className="editorial-button" href="/contact">
           Work with Sage
         </Link>
       </section>
+
+      <HomepageMotion />
     </>
   );
 }
