@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const rootReadyClass = "is-home-reveal-ready";
 const revealedClass = "is-home-revealed";
+const heroIntroCompleteEvent = "editorial:hero-intro-complete";
 
 function setRevealDelays(targets: HTMLElement[]) {
   const groups = new Map<string, HTMLElement[]>();
@@ -48,6 +49,16 @@ export function HomepageMotion() {
 
     root.classList.add(rootReadyClass);
 
+    const portfolioHeading = targets.find(
+      (target) => target.dataset.homeReveal === "portfolio-heading",
+    );
+    const scrollTargets = targets.filter((target) => target !== portfolioHeading);
+    const revealPortfolioHeading = () => {
+      portfolioHeading?.classList.add(revealedClass);
+    };
+
+    window.addEventListener(heroIntroCompleteEvent, revealPortfolioHeading, { once: true });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -66,7 +77,7 @@ export function HomepageMotion() {
     const startObserving = () => {
       if (hasStartedObserving) return;
       hasStartedObserving = true;
-      targets.forEach((target) => observer.observe(target));
+      scrollTargets.forEach((target) => observer.observe(target));
     };
 
     const handleFirstScroll = () => {
@@ -81,6 +92,7 @@ export function HomepageMotion() {
     }
 
     return () => {
+      window.removeEventListener(heroIntroCompleteEvent, revealPortfolioHeading);
       window.removeEventListener("scroll", handleFirstScroll);
       observer.disconnect();
       root.classList.remove(rootReadyClass);

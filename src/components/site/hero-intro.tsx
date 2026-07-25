@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const scrambleAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const naturalTypingCadence = [82, 118, 74, 132, 91, 109, 78, 124, 88];
+const heroIntroCompleteEvent = "editorial:hero-intro-complete";
 
 function typingDelayAfter(kicker: string, characterIndex: number) {
   if (kicker.startsWith("Hi,") && characterIndex === 0) return 44;
@@ -66,6 +67,7 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
         if (lockedCharacters >= characterCount) {
           window.clearInterval(scrambleTimer);
           setScrambledTitle(title);
+          window.dispatchEvent(new Event(heroIntroCompleteEvent));
         }
       }, 50);
       timers.push(scrambleTimer);
