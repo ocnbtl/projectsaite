@@ -29,7 +29,7 @@ export async function SiteFooter() {
             <Link href="/privacy">Privacy</Link>
             <Link href="/admin/login">Admin</Link>
           </div>
-          <p>Website Design by Sunder Das</p>
+          <p>Website by Sunderdas</p>
         </div>
       </div>
     </footer>

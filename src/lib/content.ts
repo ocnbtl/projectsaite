@@ -217,7 +217,7 @@ export const seedContent: SiteContent = {
       shortTitle: "Travel Promotions",
       summary: "Reels, stories, and short-form video for destinations, stays, and experiences.",
       description:
-        "Promotional travel content for properties, destinations, and experience-led partners, created to turn a real sense of discovery into polished, inviting social coverage.",
+        "Promotional travel content for properties, destinations, and experiences. Created to inspire the next trip.",
       deliverables: [
         "Destination storytelling",
         "Short-form & long-form travel content",
@@ -235,7 +235,7 @@ export const seedContent: SiteContent = {
       number: "06",
       title: "Face Painting",
       shortTitle: "Face Painting",
-      summary: "Expressive, camera-ready artistry for people, events, and concepts.",
+      summary: "Expressive artistry for people, events, and concepts.",
       description:
         "Creative face painting designed for each occasion, from private bookings and live events to editorials and one-of-a-kind concepts.",
       deliverables: [
@@ -274,21 +274,21 @@ export const seedContent: SiteContent = {
       id: "heyman-talent",
       label: "Heyman Talent Agency Portfolio",
       href: "https://www.heymantalent.com/t/sage-burress",
-      description: "Current agency portfolio, measurements, skills, and credits.",
+      description: "Agency portfolio, measurements, skills, and credits.",
       active: true,
     },
     {
       id: "talent-fusion",
       label: "Talent Fusion Portfolio",
       href: "https://www.talent-fusion.com/lifestyle-female",
-      description: "Lifestyle roster and agency representation.",
+      description: "Model and talent portfolio.",
       active: true,
     },
     {
       id: "invu-model-talent",
       label: "InVu Model & Talent Management Portfolio",
       href: "https://www.invumodelandtalent.com/sage-burress",
-      description: "Sage’s InVu model and talent portfolio.",
+      description: "Model and talent portfolio.",
       active: true,
     },
     {
@@ -302,7 +302,7 @@ export const seedContent: SiteContent = {
       id: "depop",
       label: "Depop",
       href: "https://www.depop.com/sage_burress/",
-      description: "Shop Sage’s current fashion listings.",
+      description: "Shop my current fashion listings.",
       active: true,
     },
     {
@@ -322,7 +322,7 @@ export const seedContent: SiteContent = {
     {
       id: "facebook",
       label: "Facebook",
-      href: "https://www.facebook.com/107356810631100",
+      href: "https://www.facebook.com/sage.burress",
       description: "Updates, portfolio work, and personal moments.",
       active: true,
     },
@@ -353,6 +353,8 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
       stored.title === "Travel Collaborations";
     const hasLegacyTravelSummary = fallback.slug === "travel-collaborations" &&
       stored.summary === "Reels, stories, and short-form video for destinations and experiences.";
+    const hasLegacyFacePaintingSummary = fallback.slug === "face-painting" &&
+      stored.summary === "Expressive, camera-ready artistry for people, events, and concepts.";
     const hasLegacyTravelDescription = fallback.slug === "travel-collaborations" &&
       stored.description === "Collaborative travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.";
     const legacyDescriptions: Record<string, string[]> = {
@@ -366,6 +368,7 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
         "Custom henna designs created to suit the person and the occasion, from small personal details to more intricate hand and arm work.",
       ],
       "travel-collaborations": [
+        "Promotional travel content for properties, destinations, and experience-led partners, created to turn a real sense of discovery into polished, inviting social coverage.",
         "Promotional travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
         "Collaborative travel content for properties, destinations, and experience-led partners, shaped around how the place actually feels to visit.",
       ],
@@ -401,7 +404,7 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
         fallback.slug === "travel-collaborations" && stored.shortTitle === "Travel Collaborations"
           ? fallback.shortTitle
           : stored.shortTitle,
-      summary: hasLegacyTravelSummary ? fallback.summary : stored.summary,
+      summary: hasLegacyTravelSummary || hasLegacyFacePaintingSummary ? fallback.summary : stored.summary,
       description: hasLegacyTravelDescription || hasLegacyDescription ? fallback.description : stored.description,
       accent: fallback.accent,
       deliverables:
@@ -455,13 +458,19 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
         stored.label === "Heyman Talent Portfolio";
       const hasLegacyDescription =
         (fallback.id === "shopmy" && stored.description === "A curated edit of products Sage recommends.") ||
-        (fallback.id === "facebook" && stored.description === "Updates, portfolio moments, and ways to follow along.");
+        (fallback.id === "facebook" && stored.description === "Updates, portfolio moments, and ways to follow along.") ||
+        (fallback.id === "heyman-talent" && stored.description === "Current agency portfolio, measurements, skills, and credits.") ||
+        (fallback.id === "talent-fusion" && stored.description === "Lifestyle roster and agency representation.") ||
+        (fallback.id === "invu-model-talent" && stored.description === "Sage’s InVu model and talent portfolio.") ||
+        (fallback.id === "depop" && stored.description === "Shop Sage’s current fashion listings.");
+      const hasLegacyFacebookDestination = fallback.id === "facebook" &&
+        stored.href === "https://www.facebook.com/107356810631100";
       return {
         ...fallback,
         ...stored,
         label: hasLegacyLabel ? fallback.label : stored.label,
         description: hasLegacyDescription ? fallback.description : stored.description,
-        href: hasStoredDestination ? stored.href : fallback.href,
+        href: hasStoredDestination && !hasLegacyFacebookDestination ? stored.href : fallback.href,
         active: hasStoredDestination ? stored.active : fallback.active,
       };
     }),

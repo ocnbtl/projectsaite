@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
+import { ReelShowcase } from "@/components/site/reel-showcase";
 import { seedContent, type Service, type SiteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 
@@ -42,21 +43,6 @@ const contentCreationReels = [
   },
 ];
 
-const travelPromotionReels = [
-  {
-    id: "cayman-islands-arrival",
-    title: "Cayman Islands travel reel",
-    href: "https://www.instagram.com/sage_burress/reel/DayADfvx_qD/",
-    embed: "https://www.instagram.com/reel/DayADfvx_qD/embed/",
-  },
-  {
-    id: "beach-day-grwm",
-    title: "Beach-day travel creator reel",
-    href: "https://www.instagram.com/sage_burress/reel/DbBBnLaxJVK/",
-    embed: "https://www.instagram.com/reel/DbBBnLaxJVK/embed/",
-  },
-];
-
 export function generateStaticParams() {
   return seedContent.services.map((service) => ({ slug: service.slug }));
 }
@@ -77,66 +63,8 @@ export async function generateMetadata({
   };
 }
 
-function ReelShowcase({
-  eyebrow,
-  heading,
-  headingId,
-  reels,
-  accentClass,
-}: {
-  eyebrow: string;
-  heading: string;
-  headingId: string;
-  reels: typeof contentCreationReels;
-  accentClass?: string;
-}) {
-  return (
-    <section className={`editorial-reel-showcase${accentClass ? ` ${accentClass}` : ""}`} aria-labelledby={headingId}>
-      <header>
-        <div>
-          <p>{eyebrow}</p>
-          <h2 id={headingId}>{heading}</h2>
-        </div>
-        <a href="https://www.instagram.com/sage_burress/" target="_blank" rel="noopener noreferrer">
-          Follow on Instagram <span aria-hidden="true">↗</span>
-        </a>
-      </header>
-      <div className="editorial-reel-showcase__viewport" tabIndex={0} aria-label="Scrollable Instagram reel showcase">
-        {reels.map((reel) => (
-          <article className="editorial-reel-phone" key={reel.id}>
-            <div className="editorial-reel-phone__speaker" aria-hidden="true" />
-            <iframe
-              src={reel.embed}
-              title={reel.title}
-              loading="lazy"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
-            <a href={reel.href} target="_blank" rel="noopener noreferrer">
-              Open reel on Instagram <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-        ))}
-        <a className="editorial-reel-showcase__more" href="https://www.instagram.com/sage_burress/reels/" target="_blank" rel="noopener noreferrer">
-          <span>More reels</span>
-          <strong>Keep watching on Instagram.</strong>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-      <p className="editorial-reel-showcase__hint">Swipe or scroll to move through the reels.</p>
-    </section>
-  );
-}
-
 function ContentCreationShowcase() {
-  return (
-    <ReelShowcase
-      eyebrow="Selected social work"
-      heading="Reels in motion."
-      headingId="content-reel-showcase-heading"
-      reels={contentCreationReels}
-    />
-  );
+  return <ReelShowcase reels={contentCreationReels} />;
 }
 
 function TravelPromotionsShowcase({ service }: { service: Service }) {
@@ -156,13 +84,6 @@ function TravelPromotionsShowcase({ service }: { service: Service }) {
           </figure>
         ))}
       </section>
-      <ReelShowcase
-        eyebrow="Travel and lifestyle motion"
-        heading="Places, in motion."
-        headingId="travel-reel-showcase-heading"
-        reels={travelPromotionReels}
-        accentClass="editorial-reel-showcase--travel"
-      />
     </>
   );
 }

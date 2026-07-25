@@ -4,11 +4,11 @@ import {
   ArrowUpRight,
   AtSign,
   BriefcaseBusiness,
+  Clapperboard,
   MessageCircle,
   Shirt,
   ShoppingBag,
-  Sparkles,
-  Users,
+  Store,
 } from "lucide-react";
 
 import { getSiteContent } from "@/lib/content-store";
@@ -37,15 +37,15 @@ function LinkIcon({ id }: { id: string }) {
     case "heyman-talent":
       return <BriefcaseBusiness {...props} />;
     case "talent-fusion":
-      return <Users {...props} />;
+      return <Clapperboard {...props} />;
     case "invu-model-talent":
       return <Aperture {...props} />;
     case "amazon-storefront":
-      return <ShoppingBag {...props} />;
+      return <Store {...props} />;
     case "depop":
       return <Shirt {...props} />;
     case "shopmy":
-      return <Sparkles {...props} />;
+      return <ShoppingBag {...props} />;
     case "instagram":
       return <AtSign {...props} />;
     case "facebook":
@@ -69,18 +69,16 @@ export default async function LinksPage() {
           <p>Shop my favorites or follow my latest work.</p>
         </div>
         <div className="editorial-links-list">
-          {content.links.map((item, index) => {
+          {content.links.map((item) => {
             const href = item.active ? getExternalHref(item.href) : null;
             return href ? (
               <a href={href} key={item.id} target="_blank" rel="noopener noreferrer">
-                <span className="editorial-links-list__number">{String(index + 1).padStart(2, "0")}</span>
                 <span className="editorial-links-list__icon"><LinkIcon id={item.id} /></span>
                 <div><h2>{item.label}</h2><p>{item.description}</p></div>
                 <ArrowUpRight className="editorial-links-list__arrow" size={27} strokeWidth={1.25} aria-hidden="true" />
               </a>
             ) : (
               <div className="editorial-links-list__pending" key={item.id}>
-                <span className="editorial-links-list__number">{String(index + 1).padStart(2, "0")}</span>
                 <span className="editorial-links-list__icon"><LinkIcon id={item.id} /></span>
                 <div><h2>{item.label}</h2><p>{item.description}</p></div>
                 <span>Coming soon</span>

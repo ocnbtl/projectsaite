@@ -43,22 +43,25 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
       typeIndex += 1;
       setTypedKicker(kicker.slice(0, typeIndex));
       if (typeIndex >= kicker.length) window.clearInterval(typingTimer);
-    }, Math.max(12, Math.floor(240 / Math.max(kicker.length, 1))));
+    }, 56);
     timers.push(typingTimer);
 
     const scrambleStart = window.setTimeout(() => {
+      const ticksPerCharacter = 3;
       const scrambleTimer = window.setInterval(() => {
         scrambleTick += 1;
-        const progress = Math.min(scrambleTick / 18, 1);
-        const lockedCharacters = Math.floor(progress * characterCount);
+        const lockedCharacters = Math.min(
+          Math.floor(scrambleTick / ticksPerCharacter),
+          characterCount,
+        );
         setScrambledTitle(scrambleTitle(title, lockedCharacters, scrambleTick));
-        if (progress >= 1) {
+        if (lockedCharacters >= characterCount) {
           window.clearInterval(scrambleTimer);
           setScrambledTitle(title);
         }
-      }, 32);
+      }, 46);
       timers.push(scrambleTimer);
-    }, 210);
+    }, 420);
     timers.push(scrambleStart);
 
     return () => timers.forEach((timer) => window.clearTimeout(timer));
