@@ -365,8 +365,13 @@ body:has(.editorial-site) {
   aspect-ratio: 2 / 3;
   justify-self: end;
   max-height: min(64svh, 620px);
+  opacity: 0;
   border: 0;
-  animation: editorial-image-drop 1280ms cubic-bezier(0.45, 0, 0.12, 1) 820ms both;
+  transform: translateY(-96px) scale(0.97);
+}
+
+.editorial-hero:has(.editorial-hero__copy h1.is-scrambling) .editorial-hero__image {
+  animation: editorial-image-drop 860ms cubic-bezier(0.45, 0, 0.12, 1) both;
 }
 
 .editorial-hero__image img {
@@ -386,7 +391,12 @@ body:has(.editorial-site) {
   background: rgba(55, 58, 64, 0.2);
   border-radius: 50%;
   filter: blur(18px);
-  animation: editorial-shadow-land 1280ms cubic-bezier(0.45, 0, 0.12, 1) 820ms both;
+  opacity: 0;
+  transform: scaleX(0.38) scaleY(0.6);
+}
+
+.editorial-hero:has(.editorial-hero__copy h1.is-scrambling) .editorial-hero__image::after {
+  animation: editorial-shadow-land 860ms cubic-bezier(0.45, 0, 0.12, 1) both;
 }
 
 @keyframes editorial-header-drop {
@@ -701,6 +711,10 @@ body:has(.editorial-site) {
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.editorial-mosaic__number--mobile {
+  display: none;
 }
 
 .editorial-section-link {
@@ -2035,11 +2049,14 @@ body:has(.editorial-site) {
   }
 
   .editorial-mosaic {
-    column-count: 1;
+    display: flex;
+    flex-direction: column;
+    column-count: auto;
     column-gap: 0;
   }
 
   .editorial-mosaic__item {
+    order: var(--editorial-mobile-order);
     margin-bottom: 5px;
     padding: 4px;
   }
@@ -2049,6 +2066,14 @@ body:has(.editorial-site) {
     gap: 3px;
     padding: 8px 0 2px;
     font-size: 0.55rem;
+  }
+
+  .editorial-mosaic__number--desktop {
+    display: none;
+  }
+
+  .editorial-mosaic__number--mobile {
+    display: inline;
   }
 
   .editorial-section-link .editorial-button {
@@ -2554,6 +2579,12 @@ body:has(.editorial-site) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .editorial-hero__image,
+  .editorial-hero__image::after {
+    opacity: 1;
+    transform: none;
+  }
+
   .editorial-site *,
   .editorial-site *::before,
   .editorial-site *::after {

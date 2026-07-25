@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 import { portfolioMedia } from "@/content/portfolio-media";
 import type { Project } from "@/lib/content";
@@ -18,6 +19,37 @@ const preferredImages = [
   "/media/sage/v1/sage-009.webp",
 ];
 
+type MosaicItemStyle = CSSProperties & {
+  "--editorial-mobile-order": number;
+};
+
+function getMobileRowFirstOrders(itemCount: number, columnCount = 4) {
+  const baseColumnLength = Math.floor(itemCount / columnCount);
+  const extraColumns = itemCount % columnCount;
+  const columnLengths = Array.from(
+    { length: columnCount },
+    (_, columnIndex) => baseColumnLength + (columnIndex < extraColumns ? 1 : 0),
+  );
+  const columnOffsets = columnLengths.reduce<number[]>((offsets, length, columnIndex) => {
+    offsets[columnIndex] = columnIndex === 0
+      ? 0
+      : offsets[columnIndex - 1] + columnLengths[columnIndex - 1];
+    return offsets;
+  }, []);
+  const orders = Array.from({ length: itemCount }, () => 0);
+  let rowFirstOrder = 0;
+
+  for (let rowIndex = 0; rowIndex < Math.max(0, ...columnLengths); rowIndex += 1) {
+    for (let columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+      if (rowIndex >= columnLengths[columnIndex]) continue;
+      orders[columnOffsets[columnIndex] + rowIndex] = rowFirstOrder;
+      rowFirstOrder += 1;
+    }
+  }
+
+  return orders;
+}
+
 export function PortfolioMosaic({
   projects,
   showCaptions = false,
@@ -32,6 +64,7 @@ export function PortfolioMosaic({
     .filter((project): project is Project => Boolean(project));
   const remaining = projects.filter((project) => !ordered.includes(project));
   const complete = [...ordered, ...remaining];
+  const mobileRowFirstOrders = getMobileRowFirstOrders(complete.length);
 
   return (
     <div className="editorial-mosaic">
@@ -39,7 +72,13 @@ export function PortfolioMosaic({
         const media = portfolioMedia.find((item) => item.src === project.image);
 
         return (
-          <figure className="editorial-mosaic__item" key={project.slug}>
+          <figure
+            className="editorial-mosaic__item"
+            key={project.slug}
+            style={{
+              "--editorial-mobile-order": mobileRowFirstOrders[index],
+            } as MosaicItemStyle}
+          >
             <Image
               src={project.image}
               alt={project.alt}
@@ -50,7 +89,12 @@ export function PortfolioMosaic({
             />
             {showCaptions ? (
               <figcaption>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span className="editorial-mosaic__number editorial-mosaic__number--desktop">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="editorial-mosaic__number editorial-mosaic__number--mobile">
+                  {String(mobileRowFirstOrders[index] + 1).padStart(2, "0")}
+                </span>
                 <span>{project.category}</span>
               </figcaption>
             ) : null}
