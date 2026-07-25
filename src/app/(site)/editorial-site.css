@@ -371,7 +371,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-hero:has(.editorial-hero__copy h1.is-scrambling) .editorial-hero__image {
-  animation: editorial-image-drop 860ms cubic-bezier(0.45, 0, 0.12, 1) both;
+  animation: editorial-image-drop 1640ms cubic-bezier(0.45, 0, 0.12, 1) both;
 }
 
 .editorial-hero__image img {
@@ -396,7 +396,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-hero:has(.editorial-hero__copy h1.is-scrambling) .editorial-hero__image::after {
-  animation: editorial-shadow-land 860ms cubic-bezier(0.45, 0, 0.12, 1) both;
+  animation: editorial-shadow-land 1640ms cubic-bezier(0.45, 0, 0.12, 1) both;
 }
 
 @keyframes editorial-header-drop {
