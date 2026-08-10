@@ -62,11 +62,32 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getSiteContent();
+  const title = `${content.hero.title} | Model & Creative`;
+
   return {
     description: content.hero.lead,
     openGraph: {
-      title: `${content.hero.title} | Model & Creative`,
+      title,
       description: content.hero.lead,
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "Sage Burress SB monogram",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: content.hero.lead,
+      images: [
+        {
+          url: "/twitter-image",
+          alt: "Sage Burress SB monogram",
+        },
+      ],
     },
   };
 }
