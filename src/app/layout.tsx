@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, Hanken_Grotesk } from "next/font/google";
 
+import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
 import { siteUrl } from "@/lib/site-url";
 
 import "./globals.css";
@@ -32,9 +33,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
+    url: siteUrl,
+    locale: "en_US",
     siteName: "Sage Burress",
     title: "Sage Burress | Model & Creative",
     description: "Selected work and bookings with Sage Burress.",
+    images: [openGraphShareImage],
+  },
+  twitter: {
+    card: "summary",
+    title: "Sage Burress | Model & Creative",
+    description: "Selected work and bookings with Sage Burress.",
+    images: [twitterShareImage],
   },
   robots: { index: true, follow: true },
 };

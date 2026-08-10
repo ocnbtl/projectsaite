@@ -7,6 +7,8 @@ import { HomepageMotion } from "@/components/site/homepage-motion";
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
 import type { FeaturedBrand } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
+import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
+import { siteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 
@@ -67,27 +69,19 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     description: content.hero.lead,
     openGraph: {
+      type: "website",
+      url: siteUrl,
+      locale: "en_US",
+      siteName: "Sage Burress",
       title,
       description: content.hero.lead,
-      images: [
-        {
-          url: "/opengraph-image",
-          width: 1200,
-          height: 630,
-          alt: "Sage Burress SB monogram",
-        },
-      ],
+      images: [openGraphShareImage],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title,
       description: content.hero.lead,
-      images: [
-        {
-          url: "/twitter-image",
-          alt: "Sage Burress SB monogram",
-        },
-      ],
+      images: [twitterShareImage],
     },
   };
 }
