@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
     if (!delivery.configured) {
       return NextResponse.json({ code: "delivery_not_configured" }, { status: 503 });
     }
-    return NextResponse.json({ ok: true, id: delivery.id });
-  } catch (error) {
-    console.error("Contact delivery failed", error);
+    return NextResponse.json({ ok: true, delivery: "accepted" });
+  } catch {
+    console.error("Contact delivery failed");
     return NextResponse.json({ code: "delivery_failed" }, { status: 500 });
   }
 }

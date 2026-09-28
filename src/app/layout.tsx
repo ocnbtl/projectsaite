@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
+import { VercelAnalytics } from "@/components/site/vercel-analytics";
 import { Cormorant_Garamond, Hanken_Grotesk } from "next/font/google";
 
 import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${display.variable} ${sans.variable}`} data-scroll-behavior="smooth">
       <body>
         {children}
-        <Analytics />
+        <VercelAnalytics environment={process.env.VERCEL_ENV ?? "local"} />
       </body>
     </html>
   );

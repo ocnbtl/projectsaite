@@ -63,5 +63,6 @@ export async function deliverContactMessage(input: ContactInput) {
   });
 
   if (error) throw new Error(error.message);
+  if (!data?.id) throw new Error("Delivery provider did not confirm acceptance");
   return { configured: true as const, id: data?.id };
 }
