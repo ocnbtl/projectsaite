@@ -106,11 +106,14 @@ async (page) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await preferences();
   await page.screenshot({ path: "output/playwright/privacy-mobile.png" });
-  const bounds = await page.getByRole("region", { name: "Your settings" }).boundingBox();
+  const bounds = await page.getByRole("region", { name: "Settings", exact: true }).boundingBox();
   assert(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390, "Privacy settings fit mobile width");
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "No horizontal overflow on mobile");
-  await page.getByText("Site owner settings", { exact: true }).click();
-  await page.getByRole("checkbox", { name: "Exclude this browser from analytics", exact: true }).check();
+  assert(await page.getByText("Site owner settings", { exact: true }).count() === 0, "Site owner controls are no longer public");
+  await page.evaluate(() => {
+    localStorage.setItem("sage-analytics-internal", "true");
+    window.dispatchEvent(new Event("sage-privacy-change"));
+  });
   assert(await page.getByRole("switch", { name: "Analytics", exact: true }).isDisabled(), "Internal browser exclusion disables optional tracking");
   return { checks, submissions, eventCounts: Object.fromEntries([...new Set(events.map(event => event.event))].map(name => [name, count(name)])) };
 }

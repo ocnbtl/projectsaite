@@ -15,22 +15,27 @@ async (page) => {
   });
   await context.route("**/api/contact", route => route.abort());
   const analytics = tab.getByRole("switch", { name: "Analytics", exact: true });
-  const recordings = tab.getByRole("switch", { name: "Session recordings", exact: true });
+  const recordings = tab.getByRole("switch", { name: "Recordings", exact: true });
   await tab.goto(origin);
-  const notice = tab.getByRole("region", { name: "Your privacy", exact: true });
+  const notice = tab.getByRole("region", { name: "Privacy", exact: true });
   await notice.waitFor();
-  await tab.screenshot({ path: "output/playwright/compact-notice-desktop.png" });
+  await tab.screenshot({ path: "output/playwright/minimal-notice-desktop.png" });
   const desktopBounds = await notice.boundingBox();
-  assert(desktopBounds.width <= 392 && desktopBounds.height <= 200, "Desktop notice is compact (at most 392 x 200)");
+  assert(desktopBounds.width <= 360 && desktopBounds.height <= 155, "Notice is smaller (at most 360 x 155)");
+  assert(await notice.locator("p").first().innerText() === "Optional analytics and recordings help improve this site.", "Notice uses the exact requested copy");
+  const settingsLink = notice.getByRole("link", { name: "Settings", exact: true });
+  assert(await settingsLink.innerText() === "" && await settingsLink.locator("svg").count() === 1, "Settings is an accessible icon-only link");
+  assert(await settingsLink.getAttribute("href") === "/privacy#settings", "Settings icon targets privacy controls");
   for (const width of [390, 320]) {
     await tab.setViewportSize({ width, height: 844 });
+    await tab.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     const bounds = await notice.boundingBox();
     assert(bounds.x >= 0 && bounds.x + bounds.width <= width && bounds.y >= 0 && bounds.y + bounds.height <= 844, `Notice fits ${width}px viewport`);
     for (const label of ["Accept", "Decline"]) {
       const button = await tab.getByRole("button", { name: label, exact: true }).boundingBox();
       assert(button.height >= 44, `${label} has 44px touch height at ${width}px`);
     }
-    await tab.screenshot({ path: `output/playwright/compact-notice-${width}.png` });
+    await tab.screenshot({ path: `output/playwright/minimal-notice-${width}.png` });
   }
   assert(requests.length === 0, "No PostHog requests before a choice");
   await tab.getByRole("button", { name: "Decline", exact: true }).click();
@@ -62,13 +67,16 @@ async (page) => {
   assert(!await analytics.isChecked() && !await recordings.isChecked(), "One click turns all optional tracking off");
   await tab.setViewportSize({ width: 390, height: 844 });
   await tab.evaluate(() => window.scrollTo(0, 0));
-  await tab.screenshot({ path: "output/playwright/compact-privacy-mobile.png", fullPage: true });
+  await tab.screenshot({ path: "output/playwright/minimal-privacy-mobile.png", fullPage: true });
   assert(await tab.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Mobile settings page has no horizontal overflow");
   await tab.setViewportSize({ width: 1200, height: 1000 });
-  await tab.screenshot({ path: "output/playwright/compact-privacy-desktop.png", fullPage: true });
+  await tab.screenshot({ path: "output/playwright/minimal-privacy-desktop.png", fullPage: true });
+  assert(await tab.getByRole("heading", { name: "Privacy Disclosure", exact: true }).count() === 1, "Privacy Disclosure heading replaces the old title");
+  assert(await tab.locator(".privacy-page__intro .ui-label").count() === 0 && !/The essentials|Your choices|Site owner settings/i.test(await tab.locator(".privacy-page").innerText()), "Requested eyebrow, tagline and owner controls are removed");
+  assert(await tab.locator("#settings").evaluate(el => getComputedStyle(el).borderTopWidth) === "0px", "Divider beneath the summaries is removed");
   await tab.getByText("What we collect & protect", { exact: true }).click();
   assert(await tab.getByText(/PostHog starts only after you opt in/).isVisible(), "Expanded details disclose provider, data, processing region and protections");
-  await tab.screenshot({ path: "output/playwright/compact-privacy-expanded.png", fullPage: true });
+  await tab.screenshot({ path: "output/playwright/minimal-privacy-expanded.png", fullPage: true });
   assert(errors.length === 0, "No uncaught browser errors");
   await context.close();
   return { checks, desktopBounds };

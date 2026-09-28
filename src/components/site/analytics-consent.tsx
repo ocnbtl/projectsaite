@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { analyticsActive, internalVisitor, privacySignal, readConsent, saveConsent, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
@@ -74,12 +75,12 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
   if (!configured || !open || pathname === "/privacy") return null;
   return (
     <section className="privacy-notice" role="region" aria-labelledby="privacy-notice-title" data-analytics-private>
-      <h2 id="privacy-notice-title">Your privacy</h2>
-      <p>Optional analytics and masked session recordings help improve this site.</p>
+      <h2 id="privacy-notice-title">Privacy</h2>
+      <p>Optional analytics and recordings help improve this site.</p>
       <div className="privacy-notice__actions">
         <button type="button" onClick={() => choose("recordings")}>Accept</button>
         <button type="button" onClick={() => choose("denied")}>Decline</button>
-        <Link href="/privacy#settings">Settings</Link>
+        <Link href="/privacy#settings" aria-label="Settings" title="Settings"><Settings size={18} aria-hidden="true" /></Link>
       </div>
       {error && <p role="alert">{error}</p>}
     </section>

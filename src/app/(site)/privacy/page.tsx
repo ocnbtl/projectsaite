@@ -11,24 +11,22 @@ export default function PrivacyPage() {
     <div className="privacy-page">
       <article className="privacy-page__inner">
         <header className="privacy-page__intro">
-          <p className="ui-label">Sage Burress</p>
-          <h1>Your privacy.</h1>
-          <p>The essentials, and your choices.</p>
+          <h1>Privacy Disclosure</h1>
         </header>
         <div className="privacy-page__summary">
           <section>
-            <h2>Your messages</h2>
-            <p>Your contact details and message are used to respond to your inquiry. They are not sold.</p>
+            <h2>Your Messages</h2>
+            <p>We use your details to reply to your inquiry. We never sell them.</p>
           </section>
           <section>
-            <h2>Site insights</h2>
-            <p>Vercel provides basic traffic counts. With permission, PostHog measures site usage and records masked interactions to help improve the experience.</p>
+            <h2>Site Insights</h2>
+            <p>Analytics and error reports help us improve this site.</p>
           </section>
         </div>
         <PrivacySettings environment={process.env.VERCEL_ENV ?? "local"} />
         <details className="privacy-page__details">
           <summary>What we collect &amp; protect</summary>
-          <p>PostHog starts only after you opt in. It processes page visits, general traffic sources, clicks, engagement, form outcomes, and browser/device information in the United States, using random session identifiers without identified profiles or IP-based location enrichment.</p>
+          <p>Vercel provides basic traffic counts. PostHog starts only after you opt in. It processes visits, traffic sources, actions, form outcomes, errors and device information in the US, using random identifiers without identified profiles or IP-based location enrichment.</p>
           <p>Recordings mask text and block images and forms. Contact, privacy and admin pages are not recorded. Form entries, uploaded files, sensitive URLs, network contents and console logs are excluded from PostHog.</p>
           <p>Your preferences are saved in browser storage. Do Not Track and Global Privacy Control keep optional tracking off. Opting out stops future collection; it does not delete previously collected data. See <a href="https://posthog.com/privacy" target="_blank" rel="noreferrer">PostHog’s privacy policy</a>.</p>
         </details>

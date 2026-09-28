@@ -49,7 +49,7 @@ async (page) => {
   await page.screenshot({ path: "output/playwright/release-confirmation-mobile.png" });
   assert(attempts === 3, "Mobile retry produces one further mocked submission");
   await page.getByRole("link", { name: "Privacy & settings", exact: true }).click();
-  const panel = await page.getByRole("region", { name: "Your settings" }).boundingBox();
+  const panel = await page.getByRole("region", { name: "Settings", exact: true }).boundingBox();
   assert(panel && panel.x >= 0 && panel.x + panel.width <= 390, "Release privacy settings fit mobile viewport");
   await page.screenshot({ path: "output/playwright/release-privacy-mobile.png" });
   await page.getByRole("button", { name: "Turn off optional tracking", exact: true }).click();

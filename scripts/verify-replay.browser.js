@@ -70,7 +70,7 @@ async (page) => {
   await context.addInitScript(() => Object.defineProperty(navigator, "globalPrivacyControl", { get: () => true, configurable: true }));
   await page.reload();
   const gpcRequests = requests.length;
-  assert(await page.getByRole("switch", { name: "Session recordings", exact: true }).isDisabled(), "Global Privacy Control disables recording opt-in");
+  assert(await page.getByRole("switch", { name: "Recordings", exact: true }).isDisabled(), "Global Privacy Control disables recording opt-in");
   await page.waitForTimeout(1500);
   assert(requests.length === gpcRequests, "Global Privacy Control sends no analytics requests");
   return { checks, recordingBatches: events.filter(e=>e.event === "$snapshot").length };

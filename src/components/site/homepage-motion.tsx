@@ -34,10 +34,40 @@ export function HomepageMotion() {
     const root = document.querySelector<HTMLElement>(".editorial-site");
     if (!root) return;
 
+    delete root.dataset.homeIntroComplete;
+    let cancelled = false;
+    let introFrame = 0;
+    // Wait for the actual entrance animations, not a second hard-coded timeline.
+    // The continuously scrolling brand rail must not keep the notice hidden.
+    const settleIntro = () => {
+      introFrame = window.requestAnimationFrame(() => {
+        if (cancelled) return;
+        const animations = root.getAnimations({ subtree: true }).filter(animation =>
+          animation.playState !== "finished" &&
+          animation.effect?.getTiming().iterations !== Infinity,
+        );
+        if (animations.length) {
+          void Promise.allSettled(animations.map(animation => animation.finished)).then(() => {
+            if (!cancelled) settleIntro();
+          });
+        } else {
+          root.dataset.homeIntroComplete = "true";
+        }
+      });
+    };
+    const cleanUpIntro = () => {
+      cancelled = true;
+      window.cancelAnimationFrame(introFrame);
+      delete root.dataset.homeIntroComplete;
+    };
+
     const targets = Array.from(
       document.querySelectorAll<HTMLElement>("[data-home-reveal]"),
     );
-    if (targets.length === 0) return;
+    if (targets.length === 0) {
+      settleIntro();
+      return cleanUpIntro;
+    }
 
     setRevealDelays(targets);
 
@@ -45,7 +75,13 @@ export function HomepageMotion() {
     if (reducedMotion || !("IntersectionObserver" in window)) {
       targets.forEach((target) => target.classList.add(revealedClass));
       root.classList.add(rootReadyClass);
-      return () => root.classList.remove(rootReadyClass);
+      if (reducedMotion) settleIntro();
+      else window.addEventListener(heroIntroCompleteEvent, settleIntro, { once: true });
+      return () => {
+        cleanUpIntro();
+        window.removeEventListener(heroIntroCompleteEvent, settleIntro);
+        root.classList.remove(rootReadyClass);
+      };
     }
 
     root.classList.add(rootReadyClass);
@@ -70,6 +106,7 @@ export function HomepageMotion() {
       if (hasUserScrolled) {
         window.requestAnimationFrame(focusPortfolioItems);
       }
+      settleIntro();
     };
 
     window.addEventListener(heroIntroCompleteEvent, revealPortfolioPreview, { once: true });
@@ -109,6 +146,7 @@ export function HomepageMotion() {
     }
 
     return () => {
+      cleanUpIntro();
       window.removeEventListener(heroIntroCompleteEvent, revealPortfolioPreview);
       window.removeEventListener("scroll", handleFirstScroll);
       observer.disconnect();

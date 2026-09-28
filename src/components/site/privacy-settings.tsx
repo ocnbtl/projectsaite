@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { internalVisitor, privacySignal, readConsent, saveConsent, syncAnalytics } from "@/lib/analytics";
+import { internalVisitor, privacySignal, readConsent, saveConsent } from "@/lib/analytics";
 import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, type AnalyticsConsent } from "@/lib/analytics-policy";
 
 export function PrivacySettings({ environment }: { environment: string }) {
@@ -33,42 +33,30 @@ export function PrivacySettings({ environment }: { environment: string }) {
   const recordings = !blocked && consent === "recordings";
 
   function choose(value: AnalyticsConsent) {
-    setStatus(saveConsent(value, environment) ? "Saved for this browser." : "Unable to save. Please check your browser settings.");
-  }
-
-  function excludeBrowser(excluded: boolean) {
-    try { localStorage.setItem(INTERNAL_KEY, String(excluded)); }
-    catch { setStatus("Your browser could not save this setting."); return; }
-    void syncAnalytics(environment);
-    window.dispatchEvent(new Event(PREFERENCES_EVENT));
-    setStatus(excluded ? "This browser is excluded from analytics." : "Browser exclusion removed.");
+    setStatus(saveConsent(value, environment) ? "Saved." : "Unable to save. Check your browser settings.");
   }
 
   return (
     <section className="privacy-settings" id="settings" aria-labelledby="privacy-settings-title" data-analytics-private>
       <div className="privacy-settings__heading">
-        <h2 id="privacy-settings-title">Your settings</h2>
-        <p>Optional. Change anytime. Saved in this browser.</p>
+        <h2 id="privacy-settings-title">Settings</h2>
+        <p>Optional. Saved in this browser.</p>
       </div>
-      {signal && <p className="privacy-settings__notice">Your browser’s privacy signal keeps optional tracking off.</p>}
-      {internal && <p className="privacy-settings__notice">This browser is excluded from analytics.</p>}
+      {signal && <p className="privacy-settings__notice">Tracking is off per your browser preference.</p>}
+      {internal && <p className="privacy-settings__notice">This browser is excluded.</p>}
       {!configured && <p className="privacy-settings__notice">Optional analytics are unavailable.</p>}
       <label className="privacy-setting">
-        <span><span className="privacy-setting__name" id="analytics-label">Analytics</span><span className="privacy-setting__description" id="analytics-description">Page visits, clicks and form outcomes.</span></span>
+        <span><span className="privacy-setting__name" id="analytics-label">Analytics</span><span className="privacy-setting__description" id="analytics-description">Visits, actions and errors.</span></span>
         <input type="checkbox" role="switch" aria-labelledby="analytics-label" aria-describedby="analytics-description" checked={analytics} disabled={blocked} onChange={event => choose(event.target.checked ? "analytics" : "denied")} />
       </label>
       <label className="privacy-setting">
-        <span><span className="privacy-setting__name" id="recordings-label">Session recordings</span><span className="privacy-setting__description" id="recordings-description">Masked interactions, never form entries. Requires analytics.</span></span>
+        <span><span className="privacy-setting__name" id="recordings-label">Recordings</span><span className="privacy-setting__description" id="recordings-description">Masked interactions. Requires analytics.</span></span>
         <input type="checkbox" role="switch" aria-labelledby="recordings-label" aria-describedby="recordings-description" checked={recordings} disabled={blocked || !analytics} onChange={event => choose(event.target.checked ? "recordings" : "analytics")} />
       </label>
       <div className="privacy-settings__footer">
-        <button className="privacy-text-button" type="button" disabled={!ready || !configured} onClick={() => choose("denied")}>Turn off optional tracking</button>
+        <button className="privacy-text-button" type="button" aria-label="Turn off optional tracking" disabled={!ready || !configured} onClick={() => choose("denied")}>Turn off</button>
         <span role="status">{status}</span>
       </div>
-      <details className="privacy-settings__owner">
-        <summary>Site owner settings</summary>
-        <label><input type="checkbox" checked={internal} disabled={!ready} onChange={event => excludeBrowser(event.target.checked)} /> Exclude this browser from analytics</label>
-      </details>
     </section>
   );
 }
