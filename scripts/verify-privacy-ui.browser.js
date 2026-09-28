@@ -22,7 +22,7 @@ async (page) => {
   await tab.screenshot({ path: "output/playwright/experience-notice-desktop.png" });
   const desktopBounds = await notice.boundingBox();
   assert(desktopBounds.width <= 600 && desktopBounds.height <= 155, "Notice stays compact while fitting the longer sentence");
-  assert(await notice.locator("p").first().innerText() === "Optional analytics and recordings help us improve your experience in this website.", "Notice uses the exact requested copy");
+  assert(await notice.locator("p").first().innerText() === "Optional analytics help us improve your experience with this website.", "Notice uses the exact requested copy");
   const desktopLines = await notice.locator("p").first().evaluate(el => {
     const range = document.createRange();
     range.selectNodeContents(el);

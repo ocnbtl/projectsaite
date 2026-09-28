@@ -38,7 +38,7 @@ async (page) => {
   await notice.waitFor();
   await live.waitForTimeout(1200);
   assert(requests.length === 0, "No production PostHog request before consent");
-  assert(await notice.locator("p").first().innerText() === "Optional analytics and recordings help us improve your experience in this website.", "Production uses the exact requested sentence");
+  assert(await notice.locator("p").first().innerText() === "Optional analytics help us improve your experience with this website.", "Production uses the exact requested sentence");
   assert(await notice.locator("p").first().evaluate(el => {
     const range = document.createRange();
     range.selectNodeContents(el);
