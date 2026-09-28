@@ -26,7 +26,7 @@ export async function SiteFooter() {
         </div>
         <div className="editorial-footer__meta">
           <div>
-            <Link href="/privacy">Privacy</Link>
+            <Link href="/privacy#settings">Privacy &amp; settings</Link>
             <Link href="/admin/login">Admin</Link>
           </div>
           <p>Website by Madagin</p>

@@ -14,7 +14,7 @@ export default async function PublicSiteLayout({ children }: { children: React.R
         Skip to content
       </a>
       <SiteHeader services={content.services} />
-      <main id="main-content">{children}</main>
+      <main id="main-content" tabIndex={-1}>{children}</main>
       <SiteFooter />
       <AnalyticsConsent environment={process.env.VERCEL_ENV ?? "local"} />
     </div>

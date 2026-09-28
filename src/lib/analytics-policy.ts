@@ -1,5 +1,6 @@
 /** Only fixed public route names and categorical values may enter analytics. */
 export const CONSENT_KEY = "sage-analytics-consent-v1";
+export const PREFERENCES_EVENT = "sage-privacy-change";
 export const INTERNAL_KEY = "sage-analytics-internal";
 export type AnalyticsConsent = "denied" | "analytics" | "recordings";
 

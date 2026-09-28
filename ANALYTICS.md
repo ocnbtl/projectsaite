@@ -20,7 +20,7 @@ Owner approved publication and project settings on September 28. Applied and rea
 ## Privacy behavior
 
 - No PostHog SDK initialization or requests until explicit opt-in. Separate choices: decline, analytics only, analytics plus masked recordings.
-- Privacy choices remain available; withdrawal stops future collection. DNT and Global Privacy Control disable optional tracking.
+- A compact notice offers Accept, Decline and Settings. Accept enables analytics and masked recordings; the privacy page has individual switches. The footer's Privacy & settings link remains available after a choice. Withdrawal stops future collection. DNT and Global Privacy Control disable optional tracking. Existing saved choices are preserved.
 - Internal visitors can exclude their browser. This also excludes their Vercel pageviews.
 - PostHog persistence is in memory, with no identified profiles. Counts are anonymous sessions, not unique people. Refreshes can reset identity.
 - Only approved public paths and predefined source/action/error categories leave the browser. Queries, fragments, raw referral URLs, form values, names, emails, messages and provider IDs are excluded.

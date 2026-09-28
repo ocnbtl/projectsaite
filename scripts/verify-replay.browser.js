@@ -26,7 +26,7 @@ async (page) => {
   });
   await context.route("**/api/contact", route => route.fulfill({ status: 503, contentType: "application/json", body: '{"code":"delivery_not_configured"}' }));
   await page.goto(origin);
-  await page.getByRole("button", { name: "Allow analytics + recordings", exact: true }).click();
+  await page.getByRole("button", { name: "Accept", exact: true }).click();
   await page.mouse.move(300, 300);
   await page.mouse.wheel(0, 400);
   for (let i=0; i<40 && !events.some(e=>e.event === "$snapshot"); i++) {
@@ -60,8 +60,8 @@ async (page) => {
   await page.waitForTimeout(1500);
   assert(requests.length === adminRequests, "Admin page does not initialize analytics or replay");
   await page.goto(origin);
-  await page.getByRole("button", { name: "Privacy choices", exact: true }).click();
-  await page.getByRole("button", { name: "Decline optional tracking", exact: true }).click();
+  await page.getByRole("link", { name: "Privacy & settings", exact: true }).click();
+  await page.getByRole("button", { name: "Turn off optional tracking", exact: true }).click();
   const afterDecline = requests.length;
   await page.mouse.wheel(0, 300);
   await page.waitForTimeout(12000);
@@ -70,8 +70,7 @@ async (page) => {
   await context.addInitScript(() => Object.defineProperty(navigator, "globalPrivacyControl", { get: () => true, configurable: true }));
   await page.reload();
   const gpcRequests = requests.length;
-  await page.getByRole("button", { name: "Privacy choices", exact: true }).click();
-  assert(await page.getByRole("button", { name: "Allow analytics + recordings", exact: true }).isDisabled(), "Global Privacy Control disables recording opt-in");
+  assert(await page.getByRole("switch", { name: "Session recordings", exact: true }).isDisabled(), "Global Privacy Control disables recording opt-in");
   await page.waitForTimeout(1500);
   assert(requests.length === gpcRequests, "Global Privacy Control sends no analytics requests");
   return { checks, recordingBatches: events.filter(e=>e.event === "$snapshot").length };

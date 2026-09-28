@@ -2,29 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { analyticsActive, internalVisitor, privacySignal, readConsent, saveConsent, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
-import { CONSENT_KEY, INTERNAL_KEY, publicPath, type AnalyticsConsent } from "@/lib/analytics-policy";
+import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath, type AnalyticsConsent } from "@/lib/analytics-policy";
 
 export function AnalyticsConsent({ environment }: { environment: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [signal, setSignal] = useState(false);
-  const [internal, setInternal] = useState(false);
-  const toggle = useRef<HTMLButtonElement>(null);
+  const [error, setError] = useState("");
   const configured = Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY);
 
   useEffect(() => {
     const refresh = () => {
-      setSignal(privacySignal());
-      setInternal(internalVisitor());
       setOpen(configured && !readConsent() && !privacySignal() && !internalVisitor());
       void syncAnalytics(environment);
     };
     refresh();
     const storage = (event: StorageEvent) => { if (event.key === CONSENT_KEY || event.key === INTERNAL_KEY || event.key === null) refresh(); };
     window.addEventListener("storage", storage);
-    return () => { window.removeEventListener("storage", storage); stopAnalytics(); };
+    window.addEventListener(PREFERENCES_EVENT, refresh);
+    return () => { window.removeEventListener("storage", storage); window.removeEventListener(PREFERENCES_EVENT, refresh); stopAnalytics(); };
   }, [configured, environment]);
 
   useEffect(() => {
@@ -66,38 +63,25 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
   }, []);
 
   function choose(value: AnalyticsConsent) {
-    saveConsent(value, environment);
+    if (!saveConsent(value, environment)) {
+      setError("Your browser could not save this choice. Optional tracking stays off.");
+      return;
+    }
     setOpen(false);
-    toggle.current?.focus();
+    document.getElementById("main-content")?.focus({ preventScroll: true });
   }
 
-  function toggleInternal() {
-    try { localStorage.setItem(INTERNAL_KEY, internal ? "false" : "true"); } catch { return; }
-    setInternal(!internal);
-    void syncAnalytics(environment);
-  }
-
-  if (!configured) return null;
+  if (!configured || !open || pathname === "/privacy") return null;
   return (
-    <div className="analytics-preferences" data-analytics-private>
-      <button ref={toggle} className="analytics-preferences__open" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="analytics-preferences-panel">Privacy choices</button>
-      {open && (
-        <section id="analytics-preferences-panel" className="analytics-preferences__panel" role="region" aria-labelledby="analytics-preferences-title">
-          <div className="analytics-preferences__heading">
-            <h2 id="analytics-preferences-title">Your privacy choices</h2>
-            <button type="button" onClick={() => { setOpen(false); toggle.current?.focus(); }} aria-label="Close privacy choices">×</button>
-          </div>
-          <p>Optional analytics help Sage understand which pages are useful. You can also allow masked recordings of page interactions. Contact forms and admin pages are never recorded.</p>
-          {signal && <p role="status">Your browser’s privacy signal is respected. Optional tracking is off.</p>}
-          {internal && <p role="status">This browser is excluded as an internal visit.</p>}
-          <div className="analytics-preferences__actions">
-            <button type="button" onClick={() => choose("denied")}>Decline optional tracking</button>
-            <button type="button" disabled={signal || internal} onClick={() => choose("analytics")}>Allow analytics only</button>
-            <button type="button" disabled={signal || internal} onClick={() => choose("recordings")}>Allow analytics + recordings</button>
-          </div>
-          <div className="analytics-preferences__details"><Link href="/privacy">Read the privacy policy</Link><button type="button" onClick={toggleInternal}>{internal ? "Include this browser again" : "Exclude this browser (site owner/testing)"}</button></div>
-        </section>
-      )}
-    </div>
+    <section className="privacy-notice" role="region" aria-labelledby="privacy-notice-title" data-analytics-private>
+      <h2 id="privacy-notice-title">Your privacy</h2>
+      <p>Optional analytics and masked session recordings help improve this site.</p>
+      <div className="privacy-notice__actions">
+        <button type="button" onClick={() => choose("recordings")}>Accept</button>
+        <button type="button" onClick={() => choose("denied")}>Decline</button>
+        <Link href="/privacy#settings">Settings</Link>
+      </div>
+      {error && <p role="alert">{error}</p>}
+    </section>
   );
 }

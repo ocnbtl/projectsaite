@@ -1,7 +1,7 @@
 "use client";
 
 import type { PostHog, PostHogConfig } from "posthog-js";
-import { CONSENT_KEY, INTERNAL_KEY, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
+import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
 
 let client: PostHog | undefined;
 let loading: Promise<void> | undefined;
@@ -165,8 +165,10 @@ export function track(event: AnalyticsEvent, properties: EventProperties = {}) {
 }
 
 export function saveConsent(value: AnalyticsConsent, environment: string) {
-  try { localStorage.setItem(CONSENT_KEY, value); } catch { return; }
+  try { localStorage.setItem(CONSENT_KEY, value); } catch { return false; }
   if (value !== "recordings") client?.stopSessionRecording();
   if (value === "denied") { client?.opt_out_capturing(); client?.reset(); lastPage = null; }
   void syncAnalytics(environment);
+  window.dispatchEvent(new Event(PREFERENCES_EVENT));
+  return true;
 }

@@ -45,18 +45,18 @@ async (page) => {
   });
   const count = name => events.filter(event => event.event === name).length;
   const settle = () => page.waitForTimeout(1400);
-  const preferences = async () => { if (!await page.getByRole("button", { name: "Decline optional tracking", exact: true }).isVisible()) await page.getByRole("button", { name: "Privacy choices", exact: true }).click(); };
+  const preferences = async () => { await page.getByRole("link", { name: "Privacy & settings", exact: true }).click(); await page.getByRole("switch", { name: "Analytics", exact: true }).waitFor(); };
   await page.goto(origin);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await settle();
   assert(requests.length === 0, "No PostHog requests before consent");
-  await page.getByRole("button", { name: "Decline optional tracking", exact: true }).click();
+  await page.getByRole("button", { name: "Decline", exact: true }).click();
   await page.reload();
   await settle();
   assert(requests.length === 0, "Decline persists without PostHog requests");
   await preferences();
-  await page.getByRole("button", { name: "Allow analytics only", exact: true }).click();
+  await page.getByRole("switch", { name: "Analytics", exact: true }).check();
   for (let i = 0; i < 20 && count("$pageview") === 0; i++) await page.waitForTimeout(500);
   assert(count("$pageview") === 1, `Exactly one initial pageview (got ${count("$pageview")})`);
   assert(count("$snapshot") === 0, "Analytics-only consent sends no replay");
@@ -97,7 +97,7 @@ async (page) => {
   assert(!JSON.stringify(events).includes("PRIVATE_TEST") && !JSON.stringify(events).includes("private-test@example"), "Analytics contain no entered names, messages or email addresses");
   assert(events.every(event => event.properties.environment === "test"), "All intercepted local events are tagged test");
   await preferences();
-  await page.getByRole("button", { name: "Decline optional tracking", exact: true }).click();
+  await page.getByRole("button", { name: "Turn off optional tracking", exact: true }).click();
   await settle();
   const afterDecline = requests.length;
   await page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Portfolio", exact: true }).click();
@@ -106,10 +106,11 @@ async (page) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await preferences();
   await page.screenshot({ path: "output/playwright/privacy-mobile.png" });
-  const bounds = await page.getByRole("region", { name: "Your privacy choices" }).boundingBox();
-  assert(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390 && bounds.y >= 0 && bounds.y + bounds.height <= 844, "Privacy panel fits mobile viewport");
+  const bounds = await page.getByRole("region", { name: "Your settings" }).boundingBox();
+  assert(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390, "Privacy settings fit mobile width");
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "No horizontal overflow on mobile");
-  await page.getByRole("button", { name: "Exclude this browser (site owner/testing)", exact: true }).click();
-  assert(await page.getByRole("button", { name: "Allow analytics only", exact: true }).isDisabled(), "Internal browser exclusion disables optional tracking");
+  await page.getByText("Site owner settings", { exact: true }).click();
+  await page.getByRole("checkbox", { name: "Exclude this browser from analytics", exact: true }).check();
+  assert(await page.getByRole("switch", { name: "Analytics", exact: true }).isDisabled(), "Internal browser exclusion disables optional tracking");
   return { checks, submissions, eventCounts: Object.fromEntries([...new Set(events.map(event => event.event))].map(name => [name, count(name)])) };
 }

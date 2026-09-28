@@ -19,7 +19,7 @@ async (page) => {
   });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("http://127.0.0.1:3107/");
-  await page.getByRole("button", { name: "Allow analytics + recordings", exact: true }).click();
+  await page.getByRole("button", { name: "Accept", exact: true }).click();
   await page.waitForTimeout(1500);
   assert(analyticsRequests === 0, "Normal localhost production build never initializes PostHog, even after opt-in");
   await page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Contact", exact: true }).click();
@@ -48,12 +48,12 @@ async (page) => {
   await page.locator(".form-confirmation").scrollIntoViewIfNeeded();
   await page.screenshot({ path: "output/playwright/release-confirmation-mobile.png" });
   assert(attempts === 3, "Mobile retry produces one further mocked submission");
-  await page.getByRole("button", { name: "Privacy choices", exact: true }).click();
-  const panel = await page.getByRole("region", { name: "Your privacy choices" }).boundingBox();
-  assert(panel && panel.x >= 0 && panel.y >= 0 && panel.x + panel.width <= 390 && panel.y + panel.height <= 844, "Release consent panel fits mobile viewport");
+  await page.getByRole("link", { name: "Privacy & settings", exact: true }).click();
+  const panel = await page.getByRole("region", { name: "Your settings" }).boundingBox();
+  assert(panel && panel.x >= 0 && panel.x + panel.width <= 390, "Release privacy settings fit mobile viewport");
   await page.screenshot({ path: "output/playwright/release-privacy-mobile.png" });
-  await page.getByRole("button", { name: "Decline optional tracking", exact: true }).click();
-  assert(await page.getByRole("button", { name: "Privacy choices", exact: true }).evaluate(el => document.activeElement === el), "Consent choice returns keyboard focus to the control");
+  await page.getByRole("button", { name: "Turn off optional tracking", exact: true }).click();
+  assert(await page.getByRole("button", { name: "Turn off optional tracking", exact: true }).evaluate(el => document.activeElement === el), "Privacy choice keeps keyboard focus on its control");
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "No horizontal overflow in the mobile contact layout");
   assert(analyticsRequests === 0 && errors.length === 0, "No PostHog requests or uncaught JavaScript errors in release-mode local smoke test");
   return { checks, mockedSubmissions: attempts };
