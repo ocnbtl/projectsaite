@@ -76,7 +76,7 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
   return (
     <section className="privacy-notice" role="region" aria-labelledby="privacy-notice-title" data-analytics-private>
       <h2 id="privacy-notice-title">Privacy</h2>
-      <p>Optional analytics and recordings help improve this site.</p>
+      <p>Optional analytics and recordings help us improve your experience in this website.</p>
       <div className="privacy-notice__actions">
         <button type="button" onClick={() => choose("recordings")}>Accept</button>
         <button type="button" onClick={() => choose("denied")}>Decline</button>

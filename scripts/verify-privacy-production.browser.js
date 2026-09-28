@@ -38,10 +38,16 @@ async (page) => {
   await notice.waitFor();
   await live.waitForTimeout(1200);
   assert(requests.length === 0, "No production PostHog request before consent");
-  await live.screenshot({ path: "output/playwright/live-minimal-notice-desktop.png" });
+  assert(await notice.locator("p").first().innerText() === "Optional analytics and recordings help us improve your experience in this website.", "Production uses the exact requested sentence");
+  assert(await notice.locator("p").first().evaluate(el => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return range.getClientRects().length === 1;
+  }), "Production desktop sentence fits on one line");
+  await live.screenshot({ path: "output/playwright/live-experience-notice-desktop.png" });
   await live.setViewportSize({ width: 390, height: 844 });
   await live.waitForTimeout(300);
-  await live.screenshot({ path: "output/playwright/live-minimal-notice-mobile.png" });
+  await live.screenshot({ path: "output/playwright/live-experience-notice-mobile.png" });
   const bounds = await notice.boundingBox();
   assert(bounds.x >= 0 && bounds.x + bounds.width <= 390 && bounds.y >= 0 && bounds.y + bounds.height <= 844, "Production notice fits mobile");
   await live.getByRole("button", { name: "Decline", exact: true }).click();
@@ -54,10 +60,10 @@ async (page) => {
   await analytics.waitFor();
   assert(!await notice.isVisible() && !await analytics.isChecked() && !await recordings.isChecked(), "Footer opens individual settings with saved choices");
   await live.evaluate(() => window.scrollTo(0, 0));
-  await live.screenshot({ path: "output/playwright/live-minimal-privacy-mobile.png", fullPage: true });
+  await live.screenshot({ path: "output/playwright/live-experience-privacy-mobile.png", fullPage: true });
   await live.setViewportSize({ width: 1200, height: 1000 });
   await live.waitForTimeout(400);
-  await live.screenshot({ path: "output/playwright/live-minimal-privacy-desktop.png", fullPage: true });
+  await live.screenshot({ path: "output/playwright/live-experience-privacy-desktop.png", fullPage: true });
   await live.getByText("What we collect & protect", { exact: true }).click();
   const privacyText = await live.locator(".privacy-page__inner").innerText();
   assert(privacyText.includes("PostHog starts only after you opt in") && privacyText.includes("Global Privacy Control"), "Concise policy retains expandable consent and protection details");

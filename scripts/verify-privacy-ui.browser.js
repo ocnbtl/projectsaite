@@ -19,13 +19,40 @@ async (page) => {
   await tab.goto(origin);
   const notice = tab.getByRole("region", { name: "Privacy", exact: true });
   await notice.waitFor();
-  await tab.screenshot({ path: "output/playwright/minimal-notice-desktop.png" });
+  await tab.screenshot({ path: "output/playwright/experience-notice-desktop.png" });
   const desktopBounds = await notice.boundingBox();
-  assert(desktopBounds.width <= 360 && desktopBounds.height <= 155, "Notice is smaller (at most 360 x 155)");
-  assert(await notice.locator("p").first().innerText() === "Optional analytics and recordings help improve this site.", "Notice uses the exact requested copy");
+  assert(desktopBounds.width <= 600 && desktopBounds.height <= 155, "Notice stays compact while fitting the longer sentence");
+  assert(await notice.locator("p").first().innerText() === "Optional analytics and recordings help us improve your experience in this website.", "Notice uses the exact requested copy");
+  const desktopLines = await notice.locator("p").first().evaluate(el => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return range.getClientRects().length;
+  });
+  assert(desktopLines === 1, "Complete desktop sentence fits on one line");
   const settingsLink = notice.getByRole("link", { name: "Settings", exact: true });
   assert(await settingsLink.innerText() === "" && await settingsLink.locator("svg").count() === 1, "Settings is an accessible icon-only link");
   assert(await settingsLink.getAttribute("href") === "/privacy#settings", "Settings icon targets privacy controls");
+  const layouts = [];
+  for (const [width, height] of [[1920, 1080], [1440, 900], [1024, 768], [768, 1024], [844, 390], [600, 360], [544, 844], [540, 844], [430, 932], [390, 844], [320, 568]]) {
+    await tab.setViewportSize({ width, height });
+    await tab.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    const layout = await notice.evaluate(el => {
+      const paragraph = el.querySelector("p");
+      const range = document.createRange();
+      range.selectNodeContents(paragraph);
+      const bounds = el.getBoundingClientRect();
+      return { lines: range.getClientRects().length, fontSize: getComputedStyle(paragraph).fontSize, fits: bounds.left >= 0 && bounds.right <= innerWidth && bounds.top >= 0 && bounds.bottom <= innerHeight && el.scrollWidth <= el.clientWidth };
+    });
+    assert(layout.fits && layout.fontSize === "13px", `Readable notice fits ${width}x${height} without shrinking or overflow`);
+    if (width >= 544) assert(layout.lines === 1, `Full sentence remains one line at ${width}x${height}`);
+    layouts.push({ width, height, ...layout });
+  }
+  for (const width of [1440, 320]) {
+    await tab.setViewportSize({ width, height: 900 });
+    await notice.locator("p").first().evaluate(el => { el.style.fontSize = "26px"; });
+    assert(await notice.evaluate(el => el.scrollWidth <= el.clientWidth && el.getBoundingClientRect().right <= innerWidth), `Double-size text wraps safely at ${width}px`);
+  }
+  await notice.locator("p").first().evaluate(el => { el.style.removeProperty("font-size"); });
   for (const width of [390, 320]) {
     await tab.setViewportSize({ width, height: 844 });
     await tab.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
@@ -35,7 +62,7 @@ async (page) => {
       const button = await tab.getByRole("button", { name: label, exact: true }).boundingBox();
       assert(button.height >= 44, `${label} has 44px touch height at ${width}px`);
     }
-    await tab.screenshot({ path: `output/playwright/minimal-notice-${width}.png` });
+    await tab.screenshot({ path: `output/playwright/experience-notice-${width}.png` });
   }
   assert(requests.length === 0, "No PostHog requests before a choice");
   await tab.getByRole("button", { name: "Decline", exact: true }).click();
@@ -79,5 +106,5 @@ async (page) => {
   await tab.screenshot({ path: "output/playwright/minimal-privacy-expanded.png", fullPage: true });
   assert(errors.length === 0, "No uncaught browser errors");
   await context.close();
-  return { checks, desktopBounds };
+  return { checks, desktopBounds, layouts };
 }
