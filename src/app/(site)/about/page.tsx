@@ -16,11 +16,12 @@ export default async function AboutPage() {
       <article className="editorial-about">
         <div className="editorial-about__image"><Image src={content.about.image} alt={content.about.imageAlt} width={960} height={1200} sizes="(max-width: 759px) 90vw, 40vw" priority /></div>
         <div className="editorial-about__copy">
-          <p className="editorial-eyebrow">Meet Sage</p>
           <h1>{biography.title}</h1>
           <p>{biography.introduction}</p>
           <p>{biography.work}</p>
+          <p>{biography.creative}</p>
           <p>{biography.local}</p>
+          <p className="editorial-about__closing">{biography.closing}</p>
           <div className="editorial-about__links"><Link href="/contact">Work with Sage ↗</Link><Link href="/portfolio">Explore my portfolio ↗</Link><a href="https://www.heymantalent.com/t/sage-burress" target="_blank" rel="noreferrer">Agency profile &amp; credits ↗</a></div>
         </div>
       </article>

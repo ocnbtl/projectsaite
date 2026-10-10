@@ -9,7 +9,7 @@ import type { FeaturedBrand } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
 import { siteUrl } from "@/lib/site-url";
-import { homeCredibility } from "@/lib/editorial-content";
+import { homeCredibilityLines } from "@/lib/editorial-content";
 
 export const dynamic = "force-dynamic";
 
@@ -96,10 +96,6 @@ export default async function HomePage() {
         <div className="editorial-hero__copy">
           <div className="editorial-hero__identity">
             <HeroIntro kicker={content.hero.kicker} title={content.hero.title} />
-            <div className="editorial-hero__about">
-              <p>{homeCredibility}</p>
-              <Link href="/about">A little more about me <span aria-hidden="true">↗</span></Link>
-            </div>
           </div>
 
           <div className="editorial-hero__services" aria-label="Services">
@@ -125,6 +121,10 @@ export default async function HomePage() {
             loading="eager"
             sizes="(max-width: 759px) 86vw, 48vw"
           />
+        </div>
+        <div className="editorial-hero__about">
+          <p>{homeCredibilityLines.map((line, index) => <span key={line}>{index > 0 && " "}{line}</span>)}</p>
+          <Link href="/about">Discover my story <span aria-hidden="true">↗</span></Link>
         </div>
       </section>
 
@@ -157,7 +157,6 @@ export default async function HomePage() {
       <section className="editorial-service-index" aria-labelledby="home-services-heading">
         <div className="editorial-service-index__heading" data-home-reveal="service-heading">
           <h2 id="home-services-heading">Services</h2>
-          <p className="editorial-service-context">Modeling, content and travel with Sage Burress. Makeup, henna and face painting with Sage’s Shenanigans in Cincinnati and Mason, Ohio.</p>
         </div>
         <div className="editorial-service-index__grid">
           {content.services.map((service) => (

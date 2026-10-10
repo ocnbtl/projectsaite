@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,7 +9,7 @@ import { ReelShowcase } from "@/components/site/reel-showcase";
 import { seedContent, type Service, type SiteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 import { StructuredData } from "@/components/site/structured-data";
-import { localServiceIntro, localServiceSlugs, serviceGuides } from "@/lib/editorial-content";
+import { localServiceSlugs, serviceGuides } from "@/lib/editorial-content";
 import { pageMetadata } from "@/lib/search-metadata";
 import { siteUrl } from "@/lib/site-url";
 
@@ -163,8 +164,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </section>
 
       {guide && <section className="editorial-faq" aria-labelledby="service-faq-heading">
-        <header><p className="editorial-eyebrow">{local ? localServiceIntro : "Sage Burress · Project details"}</p><h2 id="service-faq-heading">A few useful answers.</h2></header>
-        <div>{guide.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
+        <header><h2 id="service-faq-heading">A few useful answers.</h2></header>
+        <div>{guide.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<Plus className="editorial-faq__icon" size={18} aria-hidden="true" /></summary><p>{faq.answer}</p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
       </section>}
 
       <section className="editorial-contact-callout">

@@ -13,8 +13,8 @@ async (page) => {
   await tab.getByRole("button", { name: "Decline", exact: true }).click();
   const copy = tab.locator(".editorial-about__copy");
   const text = await copy.textContent();
-  for (const value of ["Meet Sage", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others", "Sage’s Shenanigans"]) assert(text.includes(value), `Copy: ${value}`);
-  for (const value of ["Selected credits", "educational videos", "dates and arrangements confirmed"]) assert(!text.includes(value), `Removed: ${value}`);
+  for (const value of ["The story so far.", "brands such as", "Through brand content and travel collaborations", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others", "Sage’s Shenanigans"]) assert(text.includes(value), `Copy: ${value}`);
+  for (const value of ["Selected credits", "educational videos", "dates and arrangements confirmed", "Beyond the runway", "I travel to clients as needed"]) assert(!text.includes(value), `Removed: ${value}`);
   const links = copy.locator(".editorial-about__links a");
   assert(JSON.stringify(await links.allTextContents()) === JSON.stringify(["Work with Sage ↗", "Explore my portfolio ↗", "Agency profile & credits ↗"]), "CTA order and labels");
   assert(await links.nth(2).getAttribute("href") === "https://www.heymantalent.com/t/sage-burress" && await links.nth(2).getAttribute("target") === "_blank", "Agency destination preserved");

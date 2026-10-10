@@ -22,13 +22,13 @@ async (page) => {
     const g = await tab.evaluate(() => {
       const rect = selector => { const r = document.querySelector(selector).getBoundingClientRect(); return { x: r.x, y: r.y, right: r.right, bottom: r.bottom, width: r.width, height: r.height }; };
       const about = document.querySelector(".editorial-hero__about p");
-      return { about: rect(".editorial-hero__about"), name: rect(".editorial-hero h1"), image: rect(".editorial-hero__image"), services: rect(".editorial-hero__services"), font: getComputedStyle(about).fontStyle };
+      return { hero: rect(".editorial-hero"), about: rect(".editorial-hero__about"), name: rect(".editorial-hero h1"), image: rect(".editorial-hero__image"), services: rect(".editorial-hero__services"), font: getComputedStyle(about).fontStyle };
     });
     geometry.push({ width, ...g });
     assert(await tab.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${width}: no page overflow`);
-    assert(g.about.x >= 0 && g.about.right <= width && g.about.bottom <= g.services.y, `${width}: blurb fits before service links`);
+    assert(g.about.x >= g.hero.x && g.about.right <= g.hero.right + 1 && g.about.y >= g.hero.y && g.about.bottom <= g.hero.bottom + 1, `${width}: blurb fits inside hero`);
     assert(g.font === "italic", `${width}: editorial italic styling`);
-    if (width > 1100) assert(g.about.x > g.name.x + g.name.width / 2 && g.about.right < g.image.x, `${width}: blurb beside name, before portrait`);
+    if (width >= 1180) assert(g.about.x >= g.image.right, `${width}: blurb to right of portrait`);
     else assert(g.about.y >= g.name.bottom, `${width}: compact layout reflows below name`);
     if ([320, 390, 768, 1024, 1110, 1280, 1440, 1920].includes(width)) {
       await tab.evaluate(() => window.scrollTo(0, 0));
@@ -47,11 +47,11 @@ async (page) => {
   assert(await tab.locator(".editorial-brandmark--xavier-university img").first().evaluate(img => getComputedStyle(img).filter === "brightness(0)" && getComputedStyle(img).backgroundColor === "rgba(0, 0, 0, 0)"), "Xavier monochrome without navy panel");
   await tab.locator(".editorial-brandmark--highest-on-the-runway").first().scrollIntoViewIfNeeded();
   await tab.screenshot({ path: "output/playwright/hero-fashion-rail.png" });
-  await tab.getByRole("link", { name: "A little more about me" }).focus();
+  await tab.getByRole("link", { name: "Discover my story" }).focus();
   await tab.keyboard.press("Enter"); await tab.waitForURL("**/about");
   assert(await tab.locator(".editorial-about").isVisible(), "About link works with keyboard");
   const markdown = await (await context.request.get(base, { headers: { Accept: "text/markdown" } })).text();
-  assert(markdown.includes("A decade of modeling, magazine features & runways around the world.") && !markdown.includes("Donny’s Devils") && !markdown.includes("Diyanni Surf"), "Markdown aligned with hero and rail");
+  assert(markdown.includes("A decade of modeling, magazine features, and runways around the world.") && !markdown.includes("Donny’s Devils") && !markdown.includes("Diyanni Surf"), "Markdown aligned with hero and rail");
   assert(errors.length === 0, "No uncaught page errors");
   await context.close();
   return { base, passed: checks.length, geometry, checks, errors };

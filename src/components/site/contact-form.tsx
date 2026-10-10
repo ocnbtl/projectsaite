@@ -3,6 +3,7 @@
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
+import { InquirySelect } from "@/components/site/inquiry-select";
 
 const inquiryOptions = [
   "Modeling",
@@ -99,12 +100,7 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
         </label>
       </div>
 
-      <label>
-        <span>What can Sage help with?</span>
-        <select name="inquiry" defaultValue={selectedInquiry} required>
-          {inquiryOptions.map((option) => <option key={option}>{option}</option>)}
-        </select>
-      </label>
+      <InquirySelect options={inquiryOptions} initialValue={selectedInquiry} disabled={state === "sending"} onChange={() => { validationTracked.current = false; if (!started.current) started.current = track("contact_form_started"); }} />
 
       <label>
         <span>Project details</span>
