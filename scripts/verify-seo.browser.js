@@ -78,7 +78,7 @@ async (page) => {
   await tab.goto(base);
   await tab.getByRole("link", { name: "Get to know me" }).click();
   await tab.waitForURL("**/about");
-  assert((await tab.locator("h1").innerText()).includes("The story"), "Client-side About navigation remains HTML");
+  assert((await tab.locator("h1").innerText()) === "Experience Meets Creativity", "Client-side About navigation remains HTML");
   for (const name of ["xavier-university", "university-cincinnati", "fashion-week-columbus"]) {
     const extension = name === "fashion-week-columbus" ? "png" : "svg";
     await tab.goto(`${base}/media/brands/${name}${name === "fashion-week-columbus" ? "-dark" : ""}.${extension}`);
