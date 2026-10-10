@@ -6,7 +6,7 @@ export const biography = {
   local: "Closer to home, Sage’s Shenanigans is my creative side: makeup artistry, henna, and face painting for people and events in Cincinnati and Mason, Ohio. I travel to clients as needed.",
 };
 
-export const homeCredibility = "A decade of modeling. Published in multiple magazines. Runway highlights include shows during New York Fashion Week and Paris Fashion Week, Miami Swim Week, and Fashion Week Columbus, among many others.";
+export const homeCredibility = "A decade of modeling, magazine features & runways around the world.";
 export const localServiceSlugs = ["makeup-artist", "henna", "face-painting"];
 export const localServiceIntro = "Sage’s Shenanigans · Cincinnati & Mason, Ohio · Traveling to you";
 

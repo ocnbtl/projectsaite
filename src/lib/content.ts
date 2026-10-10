@@ -97,9 +97,9 @@ export const defaultFeaturedBrands: FeaturedBrand[] = [
   { id: "xavier-university", name: "Xavier University — educational video", logo: "/media/brands/xavier-university.svg" },
   { id: "university-cincinnati", name: "University of Cincinnati — educational video", logo: "/media/brands/university-cincinnati.svg" },
   { id: "fashion-week-columbus", name: "Fashion Week Columbus — runway", logo: "/media/brands/fashion-week-columbus-dark.png" },
-  { id: "highest-on-the-runway", name: "Highest on the Runway · Paris" },
-  { id: "donnys-devils", name: "Donny’s Devils · NYFW" },
-  { id: "diyanni-surf", name: "Diyanni Surf Swimwear · NYFW" },
+  { id: "highest-on-the-runway", name: "Highest on the Runway · Paris", logo: "/media/brands/highest-on-the-runway.png" },
+  { id: "new-york-fashion-week", name: "Shows during New York Fashion Week — runway", logo: "/media/brands/new-york-fashion-week.png" },
+  { id: "paris-fashion-week", name: "Shows during Paris Fashion Week — runway", logo: "/media/brands/paris-fashion-week.png" },
 ];
 
 function media(id: string) {
@@ -430,7 +430,12 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
           : fallback.images,
     };
   });
-  const storedFeaturedBrands = Array.isArray(value.featuredBrands) ? value.featuredBrands : [];
+  // Retire these rail entries even when older admin content still contains them.
+  // This does not modify the stored document or any other custom brand entries.
+  const retiredBrandIds = new Set(["donnys-devils", "diyanni-surf"]);
+  const storedFeaturedBrands = Array.isArray(value.featuredBrands)
+    ? value.featuredBrands.filter((brand) => !retiredBrandIds.has(brand.id))
+    : [];
   const featuredBrandIds = new Set(defaultFeaturedBrands.map((brand) => brand.id));
   const featuredBrands = [
     ...defaultFeaturedBrands.map((fallback) => {

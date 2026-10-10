@@ -8,7 +8,7 @@ export function publicMarkdown(pathname: string, content: SiteContent): string |
   const navigation = `\n\n## Explore\n\n${[["About", "/about"], ["Portfolio", "/portfolio"], ["Contact", "/contact"], ["Privacy", "/privacy"]].map(([label, route]) => `- ${link(label, route)}`).join("\n")}`;
   let body: string;
   if (path === "/") {
-    body = `# Sage Burress — Model & Creative\n\n${content.hero.lead}\n\n## Experience, with personality.\n\n${homeCredibility}\n\n${link("A little more about me", "/about")}\n\n## Services\n\nModeling, content and travel with Sage Burress. Makeup, henna and face painting with Sage’s Shenanigans in Cincinnati and Mason, Ohio.\n\n${content.services.map(service => `### ${link(service.title, `/services/${service.slug}`)}\n\n${service.summary}`).join("\n\n")}\n\n## Selected work, publications and runway experience\n\n${content.featuredBrands.map(brand => brand.name).join(" · ")}`;
+    body = `# Sage Burress — Model & Creative\n\n${content.hero.lead}\n\n${homeCredibility}\n\n${link("A little more about me", "/about")}\n\n## Services\n\nModeling, content and travel with Sage Burress. Makeup, henna and face painting with Sage’s Shenanigans in Cincinnati and Mason, Ohio.\n\n${content.services.map(service => `### ${link(service.title, `/services/${service.slug}`)}\n\n${service.summary}`).join("\n\n")}\n\n## Selected work, publications and runway experience\n\n${content.featuredBrands.map(brand => brand.name).join(" · ")}`;
   } else if (path === "/about") {
     body = `# About Sage Burress\n\n## ${biography.title}\n\n${biography.introduction}\n\n${biography.work}\n\n${biography.local}`;
   } else if (path.startsWith("/services/")) {

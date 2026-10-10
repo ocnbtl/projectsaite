@@ -14,7 +14,7 @@ The owner authorized the brief biography, homepage credibility section, six sets
 - Xavier University SVG: exact `xavier-logo` symbol from https://www.xavier.edu/; wrapped as standalone SVG without changing artwork. Brand guidance: https://www.xavier.edu/brand/.
 - University of Cincinnati SVG: exact `svg-logo` from https://www.uc.edu/. Academic wordmark, not athletic mark. Guidance: https://www.uc.edu/about/marketing-communications/brand-guide/logos-marks.html.
 - Fashion Week Columbus PNG: official dark RGB artwork linked by https://fashionweekcolumbus.org/, Squarespace CDN, downloaded at 500px width for legibility on the light rail.
-- Highest on the Runway, Donny’s Devils and Diyanni Surf use plain text in the rail, not invented logos. Exact approved artwork remains an owner-supplied follow-up. Official Paris/NYFW umbrella marks and Art Basel marks are not used.
+- Initial release used text for Highest on the Runway and the two NYFW designers. In the subsequent owner-requested rail refinement, the owner supplied Highest, NYFW and Paris Fashion Week PNG artwork. These exact files are now used with monochrome CSS presentation, replacing the Donny’s Devils and Diyanni Surf rail entries. Highest reference supplied by owner: https://www.instagram.com/highestontherunway/ (fetch throttled during this pass; not independently inspected). Fashion-week labels describe shows during the weeks, not official organizer affiliation. No Art Basel mark added.
 - Rail describes selected work, publications and runway experience; it does not claim sponsorship or endorsement. New university alternative text specifies educational-video work.
 
 ## Maintenance and boundaries

@@ -72,7 +72,7 @@ async (page) => {
       }
       if (path === "/about" && width !== 768) await tab.screenshot({ path: `output/playwright/seo-about-${width}.png`, fullPage: true });
       if (path === "/services/henna" && width === 390) { await tab.locator(".editorial-faq").scrollIntoViewIfNeeded(); await tab.screenshot({ path: "output/playwright/seo-faq-mobile.png" }); }
-      if (path === "/" && width === 1440) { await tab.locator(".editorial-credibility").scrollIntoViewIfNeeded(); await tab.screenshot({ path: "output/playwright/seo-home-credibility.png" }); }
+      if (path === "/" && width === 1440) { await tab.locator(".editorial-hero__about").scrollIntoViewIfNeeded(); await tab.screenshot({ path: "output/playwright/seo-home-hero.png" }); }
     }
   }
   await tab.goto(base);

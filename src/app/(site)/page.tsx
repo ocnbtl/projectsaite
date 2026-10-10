@@ -94,7 +94,13 @@ export default async function HomePage() {
     <>
       <section className="editorial-hero">
         <div className="editorial-hero__copy">
-          <HeroIntro kicker={content.hero.kicker} title={content.hero.title} />
+          <div className="editorial-hero__identity">
+            <HeroIntro kicker={content.hero.kicker} title={content.hero.title} />
+            <div className="editorial-hero__about">
+              <p>{homeCredibility}</p>
+              <Link href="/about">A little more about me <span aria-hidden="true">↗</span></Link>
+            </div>
+          </div>
 
           <div className="editorial-hero__services" aria-label="Services">
             {content.services.map((service) => (
@@ -134,11 +140,6 @@ export default async function HomePage() {
             )))}
           </div>
         </div>
-      </section>
-
-      <section className="editorial-credibility" aria-labelledby="home-about-heading">
-        <h2 id="home-about-heading">Experience, with personality.</h2>
-        <div><p>{homeCredibility}</p><Link href="/about">A little more about me <span aria-hidden="true">↗</span></Link></div>
       </section>
 
       <section className="editorial-portfolio-preview" aria-labelledby="home-portfolio-heading">
