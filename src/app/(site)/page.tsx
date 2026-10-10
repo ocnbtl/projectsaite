@@ -53,7 +53,7 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
           width={220}
           height={56}
           className={brand.invert ? "is-inverted" : undefined}
-          loading={brand.id === "saks-fifth-avenue" && !duplicate ? "eager" : "lazy"}
+          loading={brand.id === "macys" && !duplicate ? "eager" : "lazy"}
           sizes="220px"
         />
       ) : (

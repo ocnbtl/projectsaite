@@ -31,7 +31,7 @@ async (page) => {
   }
   await tab.getByRole("link", { name: "Discover my story" }).click(); await tab.waitForURL("**/about");
   const about = await tab.locator(".editorial-about__copy").textContent();
-  assert(about.includes("brands such as") && about.includes("Through brand content and travel collaborations") && about.includes("Let’s create something that feels like you."), "About has non-exhaustive credits, dedicated creative paragraph and invitation");
+  assert(about.includes("brands such as") && about.includes("I love being part of a shoot") && about.includes("Let’s create something that feels like you."), "About has non-exhaustive credits, dedicated creative paragraph and invitation");
   assert(!about.includes("Beyond the runway") && !about.includes("I travel to clients as needed"), "Old transition and ending removed");
   for (const width of [390, 1440]) { await tab.setViewportSize({ width, height: 1000 }); await tab.screenshot({ path: `output/playwright/polish-about-${width}.png`, fullPage: true }); }
   for (const width of [320, 390, 768, 1440]) {

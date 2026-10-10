@@ -12,6 +12,7 @@ const stored = { ...seedContent, featuredBrands: [
   { id: "diyanni-surf", name: "Old designer two" },
   { id: "highest-on-the-runway", name: "Highest on the Runway · Paris" },
   { id: "custom-owner-credit", name: "Owner-managed credit", logo: "/custom-owner-logo.svg" },
+  { id: "fischer-homes", name: "Fischer Homes — face painting", logo: "/media/brands/fischer-homes.svg" },
 ] };
 const before = JSON.stringify(stored);
 const result = normalizeSiteContent(stored);
@@ -23,6 +24,10 @@ for (const id of ["highest-on-the-runway", "new-york-fashion-week", "paris-fashi
 assert.deepEqual(result.featuredBrands.find(brand => brand.id === "custom-owner-credit"), stored.featuredBrands[3]);
 assert.equal(JSON.stringify(stored), before);
 assert.equal(result.featuredBrands.filter(brand => brand.id === "fischer-homes").length, 1);
-assert.deepEqual(result.featuredBrands.find(brand => brand.id === "fischer-homes"), { id: "fischer-homes", name: "Fischer Homes — face painting", logo: "/media/brands/fischer-homes.svg" });
+assert.deepEqual(result.featuredBrands.find(brand => brand.id === "fischer-homes"), { id: "fischer-homes", name: "Fischer Homes", logo: "/media/brands/fischer-homes.svg", invert: undefined });
 assert.equal(normalizeSiteContent(result).featuredBrands.filter(brand => brand.id === "fischer-homes").length, 1);
-console.log("PASS: new assets merged once, Fischer Homes face-painting credit preserved without duplicates, retired entries excluded, custom credits and stored input untouched (12 assertions)");
+assert.deepEqual(result.featuredBrands.slice(0, 10).map(brand => brand.id), ["macys", "saks-fifth-avenue", "university-cincinnati", "xavier-university", "new-york-fashion-week", "paris-fashion-week", "versed-skincare", "fischer-homes", "heyman-talent", "rebel-magazine"]);
+assert.equal(result.featuredBrands.length, 25);
+assert.equal(new Set(result.featuredBrands.map(brand => brand.id)).size, 25);
+assert.equal(normalizeSiteContent({ ...stored, featuredBrands: [{ id: "fischer-homes", name: "Owner custom label" }] }).featuredBrands.find(brand => brand.id === "fischer-homes").name, "Owner custom label");
+console.log("PASS: requested first ten in order, all 24 defaults preserved, legacy Fischer label updated, custom labels and stored input untouched (16 assertions)");

@@ -77,30 +77,30 @@ export type SiteLink = {
 };
 
 export const defaultFeaturedBrands: FeaturedBrand[] = [
+  { id: "macys", name: "Macy's", logo: "/media/brands/macys.svg" },
   { id: "saks-fifth-avenue", name: "Saks Fifth Avenue", logo: "/media/brands/saks-fifth-avenue.svg" },
+  { id: "university-cincinnati", name: "University of Cincinnati — educational video", logo: "/media/brands/university-cincinnati.svg" },
+  { id: "xavier-university", name: "Xavier University — educational video", logo: "/media/brands/xavier-university.svg" },
+  { id: "new-york-fashion-week", name: "Shows during New York Fashion Week — runway", logo: "/media/brands/new-york-fashion-week.png" },
+  { id: "paris-fashion-week", name: "Shows during Paris Fashion Week — runway", logo: "/media/brands/paris-fashion-week.png" },
+  { id: "versed-skincare", name: "Versed Skincare", logo: "/media/brands/versed.png" },
+  { id: "fischer-homes", name: "Fischer Homes", logo: "/media/brands/fischer-homes.svg" },
+  { id: "heyman-talent", name: "Heyman Talent", logo: "/media/brands/heyman-talent-transparent.png" },
   { id: "rebel-magazine", name: "Rebel Magazine", logo: "/media/brands/rebel-magazine.svg" },
   { id: "loveland-lifestyle", name: "Loveland Lifestyle Magazine", logo: "/media/brands/loveland-lifestyle.png" },
   { id: "westcott-lighting", name: "Westcott Lighting", logo: "/media/brands/westcott.png" },
   { id: "nooon", name: "NOOON", logo: "/media/brands/nooon.svg", invert: true },
   { id: "ocean-savage", name: "Ocean Savage", logo: "/media/brands/ocean-savage.svg", invert: true },
-  { id: "heyman-talent", name: "Heyman Talent", logo: "/media/brands/heyman-talent-transparent.png" },
   { id: "timeless", name: "Timeless", logo: "/media/brands/timeless.webp" },
-  { id: "macys", name: "Macy's", logo: "/media/brands/macys.svg" },
   { id: "beautystat-cosmetics", name: "BeautyStat Cosmetics", logo: "/media/brands/beautystat.png" },
   { id: "elaine-b-jewelry", name: "Elaine B Jewelry", logo: "/media/brands/elaine-b-jewelry.png" },
   { id: "sequencing", name: "Sequencing.com", logo: "/media/brands/sequencing.svg" },
   { id: "wooden-cask", name: "Wooden Cask Brewing Company", logo: "/media/brands/wooden-cask.webp" },
   { id: "red-light-method", name: "Red Light Method Montgomery", logo: "/media/brands/red-light-method.svg" },
   { id: "romantic-adventure-getaways", name: "Romantic Adventure Getaways", logo: "/media/brands/romantic-adventure-getaways.svg" },
-  { id: "versed-skincare", name: "Versed Skincare", logo: "/media/brands/versed.png" },
   { id: "black-opal-aesthetics", name: "Black Opal Esthetics", logo: "/media/brands/black-opal-aesthetics.svg" },
-  { id: "fischer-homes", name: "Fischer Homes — face painting", logo: "/media/brands/fischer-homes.svg" },
-  { id: "xavier-university", name: "Xavier University — educational video", logo: "/media/brands/xavier-university.svg" },
-  { id: "university-cincinnati", name: "University of Cincinnati — educational video", logo: "/media/brands/university-cincinnati.svg" },
   { id: "fashion-week-columbus", name: "Fashion Week Columbus — runway", logo: "/media/brands/fashion-week-columbus-dark.png" },
   { id: "highest-on-the-runway", name: "Highest on the Runway · Paris", logo: "/media/brands/highest-on-the-runway.png" },
-  { id: "new-york-fashion-week", name: "Shows during New York Fashion Week — runway", logo: "/media/brands/new-york-fashion-week.png" },
-  { id: "paris-fashion-week", name: "Shows during Paris Fashion Week — runway", logo: "/media/brands/paris-fashion-week.png" },
 ];
 
 function media(id: string) {
@@ -449,11 +449,13 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
       ].includes(stored?.logo ?? "");
       const hasLegacyBlackOpalName = fallback.id === "black-opal-aesthetics" &&
         stored?.name === "Black Opal Aesthetics";
+      const hasLegacyFischerName = fallback.id === "fischer-homes" &&
+        stored?.name === "Fischer Homes — face painting";
       return stored
         ? {
             ...fallback,
             ...stored,
-            name: hasLegacyBlackOpalName ? fallback.name : stored.name,
+            name: hasLegacyBlackOpalName || hasLegacyFischerName ? fallback.name : stored.name,
             logo: hasLegacyRomanticLogo ? fallback.logo : stored.logo || fallback.logo,
             invert: hasLegacyRomanticLogo ? fallback.invert : stored.invert,
           }

@@ -3,7 +3,7 @@ export const biography = {
   title: "The story so far.",
   introduction: "I’m Sage Burress, a model & content creator with a decade of experience across commercial, e-commerce, fitness, high fashion, and runway. My work has appeared in multiple magazines and includes collaborations with brands such as Macy’s, Saks Fifth Avenue, and Westcott Lighting.",
   work: "My runway highlights include shows during New York Fashion Week and Paris Fashion Week, Miami Swim Week, and Fashion Week Columbus, among many others.",
-  creative: "Creating stories is just as much a part of my work as stepping in front of the camera. Through brand content and travel collaborations, I explore the people, places, and experiences that make a story worth sharing. From a product’s everyday possibilities to the character of a destination, I’m drawn to photo and video that feel personal, inviting, and true to the brand.",
+  creative: "I love being part of a shoot, and I love coming up with the ideas behind it, too. Content creation gives me room to do both, working with brands on photos and videos that feel like a natural part of everyday life. Travel brings another side of that work: getting to know a place and sharing what makes me want to stay a little longer. Whether we’re planning a campaign or a trip, I’d love to hear what you have in mind and figure it out together.",
   local: "Closer to home, Sage’s Shenanigans brings out my playful side through makeup artistry, henna, and face painting for people and events in Cincinnati and Mason, Ohio.",
   closing: "Have a campaign, a destination, or a celebration in mind? Let’s create something that feels like you.",
 };

@@ -13,7 +13,7 @@ async (page) => {
   await tab.getByRole("button", { name: "Decline", exact: true }).click();
   const copy = tab.locator(".editorial-about__copy");
   const text = await copy.textContent();
-  for (const value of ["The story so far.", "brands such as", "Through brand content and travel collaborations", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others", "Sage’s Shenanigans"]) assert(text.includes(value), `Copy: ${value}`);
+  for (const value of ["The story so far.", "brands such as", "I love being part of a shoot", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others", "Sage’s Shenanigans"]) assert(text.includes(value), `Copy: ${value}`);
   for (const value of ["Selected credits", "educational videos", "dates and arrangements confirmed", "Beyond the runway", "I travel to clients as needed"]) assert(!text.includes(value), `Removed: ${value}`);
   const links = copy.locator(".editorial-about__links a");
   assert(JSON.stringify(await links.allTextContents()) === JSON.stringify(["Work with Sage ↗", "Explore my portfolio ↗", "Agency profile & credits ↗"]), "CTA order and labels");
@@ -41,7 +41,7 @@ async (page) => {
   await links.nth(1).click(); await tab.waitForURL("**/portfolio");
   assert(await tab.locator("h1").count() === 1, "Second CTA opens portfolio");
   const markdown = await (await context.request.get(`${base}/about`, { headers: { Accept: "text/markdown" } })).text();
-  assert(markdown.includes("model & content creator") && markdown.includes("Westcott Lighting") && !markdown.includes("educational videos"), "HTML and agent-readable biography agree");
+  assert(markdown.includes("model & content creator") && markdown.includes("I love being part of a shoot") && markdown.includes("Westcott Lighting") && !markdown.includes("educational videos"), "HTML and agent-readable biography agree");
   assert(errors.length === 0, "No uncaught page errors");
   await context.close();
   return { base, passed: checks.length, geometry, checks, errors };

@@ -11,7 +11,7 @@ The owner authorized the brief biography, homepage credibility section, six sets
 
 ## Asset provenance
 
-- Fischer Homes: owner confirms Sage provided face painting. Rail label is "Fischer Homes — face painting", not a modeling, sponsorship or endorsement claim. Exact official SVG from https://static.fischerhomes.com/fischerhomes/images/FischerHomes-Logo-White.svg?v=c5feaa4, linked by https://www.fischerhomes.com/, saved locally as fischer-homes.svg. Artwork unchanged; CSS renders the existing white mark in black for the monochrome rail.
+- Fischer Homes: owner confirms Sage provided face painting. At the owner's request, the public rail label is simply "Fischer Homes"; this is not a modeling, sponsorship or endorsement claim. Exact official SVG from https://static.fischerhomes.com/fischerhomes/images/FischerHomes-Logo-White.svg?v=c5feaa4, linked by https://www.fischerhomes.com/, saved locally as fischer-homes.svg. Artwork unchanged; CSS renders the existing white mark in black for the monochrome rail.
 
 - Xavier University SVG: exact `xavier-logo` symbol from https://www.xavier.edu/; wrapped as standalone SVG without changing artwork. Brand guidance: https://www.xavier.edu/brand/.
 - University of Cincinnati SVG: exact `svg-logo` from https://www.uc.edu/. Academic wordmark, not athletic mark. Guidance: https://www.uc.edu/about/marketing-communications/brand-guide/logos-marks.html.
@@ -20,6 +20,8 @@ The owner authorized the brief biography, homepage credibility section, six sets
 - Rail describes selected work, publications and runway experience; it does not claim sponsorship or endorsement. New university alternative text specifies educational-video work.
 
 ## Maintenance and boundaries
+
+October 10 rail/copy follow-up: first ten credits are Macy’s, Saks Fifth Avenue, University of Cincinnati, Xavier University, New York Fashion Week, Paris Fashion Week, Versed, Fischer Homes, Heyman Talent, and Rebel. Remaining credits retain their relative order. "Reversed" in the request is interpreted as the existing Versed brand. The About content/travel paragraph uses conversational first-person language without new credentials or client claims. A targeted normalization replaces the old Fischer service-qualified label without rewriting stored content or overriding custom owner labels.
 
 October 10 editorial/UI follow-up: brand names are explicitly examples ("such as"), content creation and travel have a dedicated paragraph, and the biography ends with a project invitation. The homepage two-line experience note sits beside the portrait on wide screens and reflows within the hero on small screens; its CTA is "Discover my story." The redundant homepage service-context paragraph is removed, not the service pages or structured data. All six FAQ sets use conversational first-person answers without adding new factual claims. The custom inquiry selector preserves the original validated payload and privacy boundary. Reels use one complete Instagram embed at a time with verified-origin/source height messages and an always-available direct playback link; Instagram determines inline playback availability. Original rail artwork and credit meanings are unchanged; sizing is optically balanced.
 
