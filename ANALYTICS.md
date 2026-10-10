@@ -5,7 +5,7 @@
 - Canonical checkout: `C:\Code\projectsaite`, remote `ocnbtl/projectsaite`.
 - Verified pre-change GitHub main and Vercel production: `272df0a06a145ea44334e9739f47820aacb4990b` (September 28, 2026).
 - Vercel: Sage Burress team, `projectsaite`, project `prj_mN62M3IzJzPvCPUYA4IfGhYFL1Lu`. Both Ocean and Sage have owner access.
-- PostHog US: Sage Burress organization, project `632957` (currently called Default project), Ocean owner/operator.
+- PostHog US: Sage Burress organization, project `632957` (currently called OCN; verified October 10, 2026), Ocean owner/operator.
 - Dashboard: https://us.posthog.com/project/632957/dashboard/2144020
 - Local work is not a production release. Obtain explicit approval before pushing main, deploying, or changing Vercel production variables.
 
@@ -24,7 +24,8 @@ Owner approved publication and project settings on September 28. Applied and rea
 - Internal visitors can exclude their browser. This also excludes their Vercel pageviews.
 - PostHog persistence is in memory, with no identified profiles. Counts are anonymous sessions, not unique people. Refreshes can reset identity.
 - Only approved public paths and predefined source/action/error categories leave the browser. Queries, fragments, raw referral URLs, form values, names, emails, messages and provider IDs are excluded.
-- Replay masks all text and element attributes and blocks all forms, inputs, images, videos, canvases, iframes and contact links. It never records contact/privacy/admin/unrecognized routes or pages with query strings/fragments. Network bodies/headers, console logs and exception text are disabled.
+- Replay shows public editorial text, styling and checked-in `/media/` photographs. Forms/inputs, private-marked regions, mail/telephone links, query-bearing links, downloads, non-public images, videos, canvases and embedded content remain blocked. It never records contact/privacy/admin/unrecognized routes or pages with query strings/fragments. Network bodies/headers, console logs and exception text are disabled. Do not put visitor-specific text or attributes outside a `data-analytics-private` region.
+- Replay regression tests decompress the nested snapshot payload before checking visibility and sensitive-data exclusion. `verify-replay.browser.js` also reconstructs a captured full DOM snapshot at desktop/mobile sizes; this is snapshot fidelity evidence, not a claim of historical recording recovery. Previously masked recordings cannot be unmasked retroactively.
 - Existing Vercel Analytics remains installed. Its pageviews are production-only, omit internal browsers, and use sanitized public URLs. Its aggregate counts will differ from consented PostHog counts.
 - No uploads or booking/payment workflow are added.
 

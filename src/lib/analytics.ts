@@ -110,9 +110,11 @@ export async function syncAnalytics(environment: string) {
         before_send: beforeSend,
         session_recording: {
           maskAllInputs: true,
-          maskTextSelector: "*",
-          maskAllElementAttributes: true,
-          blockSelector: "form, input, textarea, select, [contenteditable], img, video, canvas, iframe, [data-analytics-private], a[href^='mailto:'], a[href^='tel:']",
+          // Public editorial copy, layout and checked-in photographs must remain
+          // visible. Blanket attribute masking also destroys replay styling.
+          maskTextSelector: "[data-analytics-private], .ph-mask",
+          maskAllElementAttributes: false,
+          blockSelector: "form, input, textarea, select, [contenteditable], video, canvas, iframe, object, embed, .ph-no-capture, [data-analytics-private], a[href^='mailto:'], a[href^='tel:'], a[href*='?'], a[download], img:not([src^='/_next/image?url=%2Fmedia%2F']):not([src^='/media/'])",
           recordBody: false,
           recordHeaders: false,
           captureJsonLd: false,

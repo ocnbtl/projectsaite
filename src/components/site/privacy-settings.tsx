@@ -50,7 +50,7 @@ export function PrivacySettings({ environment }: { environment: string }) {
         <input type="checkbox" role="switch" aria-labelledby="analytics-label" aria-describedby="analytics-description" checked={analytics} disabled={blocked} onChange={event => choose(event.target.checked ? "analytics" : "denied")} />
       </label>
       <label className="privacy-setting">
-        <span><span className="privacy-setting__name" id="recordings-label">Recordings</span><span className="privacy-setting__description" id="recordings-description">Masked interactions. Requires analytics.</span></span>
+        <span><span className="privacy-setting__name" id="recordings-label">Recordings</span><span className="privacy-setting__description" id="recordings-description">Public-page replay. Private inputs hidden.</span></span>
         <input type="checkbox" role="switch" aria-labelledby="recordings-label" aria-describedby="recordings-description" checked={recordings} disabled={blocked || !analytics} onChange={event => choose(event.target.checked ? "recordings" : "analytics")} />
       </label>
       <div className="privacy-settings__footer">

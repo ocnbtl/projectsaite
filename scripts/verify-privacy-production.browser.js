@@ -27,7 +27,15 @@ async (page) => {
       const encoded = raw.startsWith("{") || raw.startsWith("[") ? raw : new URLSearchParams(raw).get("data");
       if (encoded) {
         const data = JSON.parse(encoded.startsWith("{") || encoded.startsWith("[") ? encoded : Buffer.from(encoded, "base64").toString("utf8"));
-        events.push(...(Array.isArray(data) ? data : data.batch ?? [data]).filter(event => event?.event));
+        const batch = (Array.isArray(data) ? data : data.batch ?? [data]).filter(event => event?.event);
+        for (const event of batch) {
+          for (const snapshot of event.properties?.$snapshot_data ?? []) {
+            if (typeof snapshot.data === "string" && snapshot.data.charCodeAt(0) === 31) {
+              snapshot.data = await live.evaluate(async raw => JSON.parse(await new Response(new Blob([Uint8Array.from(raw, c => c.charCodeAt(0))]).stream().pipeThrough(new DecompressionStream("gzip"))).text()), snapshot.data);
+            }
+          }
+        }
+        events.push(...batch);
       }
     }
     return route.fulfill({ status: 200, contentType: "application/json", body: '{"status":1,"featureFlags":{}}' });
@@ -84,7 +92,7 @@ async (page) => {
   }
   assert(count("$snapshot") > 0, "Recordings start only after their separate setting is enabled");
   const replay = JSON.stringify(events.filter(event => event.event === "$snapshot"));
-  assert(!replay.includes("contact@sageburress.com") && !replay.includes("hero-cutout"), "Production replay masks contact text and blocks images");
+  assert(!replay.includes("contact@sageburress.com") && replay.includes("hero-cutout"), "Production replay hides contact details and shows public photographs");
   await live.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Contact", exact: true }).click();
   const contactSnapshots = count("$snapshot");
   await live.waitForTimeout(8000);
