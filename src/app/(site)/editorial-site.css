@@ -275,6 +275,37 @@ body:has(.editorial-site) {
   display: block;
 }
 
+.editorial-hero__name-word::before { content: attr(data-visual-text); }
+
+.editorial-credibility { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; padding: clamp(36px, 5vw, 72px) 5vw; border-bottom: 1px solid var(--editorial-rule); }
+.editorial-credibility h2 { margin: 0; font: italic 400 clamp(36px, 4vw, 58px)/1.05 var(--font-display), Georgia, serif; }
+.editorial-credibility p, .editorial-service-context { max-width: 58ch; font-size: 16px; line-height: 1.65; color: var(--editorial-muted); }
+.editorial-credibility p { margin: 0 0 12px; }
+.editorial-credibility a, .editorial-about__links a, .editorial-faq__contact { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
+.editorial-service-context { margin: 28px 0 0; }
+.editorial-eyebrow { font-size: 12px !important; letter-spacing: .08em; line-height: 1.6; text-transform: uppercase; }
+.editorial-about { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: 7vw; padding: 64px 5vw 88px; align-items: center; }
+.editorial-about__image img { display: block; width: 100%; height: auto; max-height: 740px; object-fit: cover; }
+.editorial-about h1 { margin: 16px 0 28px; font: italic 400 clamp(48px, 5vw, 76px)/.98 var(--font-display), Georgia, serif; letter-spacing: -.035em; }
+.editorial-about__copy > p { font-size: 16px; line-height: 1.75; max-width: 62ch; }
+.editorial-about__links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; }
+.editorial-faq { padding: 64px 5vw; display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1fr); gap: 6vw; border-bottom: 1px solid var(--editorial-rule); }
+.editorial-faq h2 { margin: 16px 0 0; font: italic 400 clamp(36px, 4.5vw, 60px)/1 var(--font-display), Georgia, serif; }
+.editorial-faq details { border-bottom: 1px solid var(--editorial-rule); }
+.editorial-faq details:first-child { border-top: 1px solid var(--editorial-rule); }
+.editorial-faq summary { min-height: 56px; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 16px 0; cursor: pointer; list-style: none; font-size: 16px; line-height: 1.5; }
+.editorial-faq summary::-webkit-details-marker { display: none; }
+.editorial-faq summary span { flex: 0 0 auto; font-size: 24px; font-weight: 300; }
+.editorial-faq details[open] summary span { transform: rotate(45deg); }
+.editorial-faq details p { margin: 0 0 24px; max-width: 65ch; font-size: 15px; line-height: 1.75; color: var(--editorial-muted); }
+.editorial-faq__contact { margin-top: 16px; }
+.editorial-faq summary:focus-visible, .editorial-credibility a:focus-visible, .editorial-about a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media (max-width: 759px) {
+  .editorial-credibility, .editorial-faq { grid-template-columns: 1fr; gap: 24px; padding: 40px 5vw; }
+  .editorial-about { grid-template-columns: 1fr; gap: 32px; padding: 32px 5vw 56px; }
+  .editorial-about__image img { max-height: 440px; object-position: center 30%; }
+}
+
 .editorial-hero h1.is-waiting {
   opacity: 0;
 }
@@ -542,6 +573,10 @@ body:has(.editorial-site) {
 .editorial-brandmark img.is-inverted {
   filter: invert(1) grayscale(1) contrast(1.25);
 }
+
+.editorial-brandmark--xavier-university img { background: #0c2340; padding: 10px 14px; height: 52px; max-width: 230px; filter: none; mix-blend-mode: normal; }
+.editorial-brandmark--university-cincinnati img { height: 32px; max-width: 220px; }
+.editorial-brandmark--fashion-week-columbus img { height: 46px; max-width: 190px; }
 
 .editorial-brandmark strong {
   font-family: var(--font-display), Georgia, serif;
@@ -2736,12 +2771,15 @@ body:has(.editorial-site) {
   }
 
   .editorial-rail__track {
-    width: 100%;
-    flex-wrap: wrap;
+    width: max-content;
+    flex-wrap: nowrap;
     transform: none;
+    animation: none !important;
   }
 
-  .editorial-rail__track span:nth-child(n + 5) {
+  .editorial-rail__viewport { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
+
+  .editorial-rail__track > .editorial-brandmark[aria-hidden="true"] {
     display: none;
   }
 }

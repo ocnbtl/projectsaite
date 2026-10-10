@@ -94,6 +94,12 @@ export const defaultFeaturedBrands: FeaturedBrand[] = [
   { id: "romantic-adventure-getaways", name: "Romantic Adventure Getaways", logo: "/media/brands/romantic-adventure-getaways.svg" },
   { id: "versed-skincare", name: "Versed Skincare", logo: "/media/brands/versed.png" },
   { id: "black-opal-aesthetics", name: "Black Opal Esthetics", logo: "/media/brands/black-opal-aesthetics.svg" },
+  { id: "xavier-university", name: "Xavier University — educational video", logo: "/media/brands/xavier-university.svg" },
+  { id: "university-cincinnati", name: "University of Cincinnati — educational video", logo: "/media/brands/university-cincinnati.svg" },
+  { id: "fashion-week-columbus", name: "Fashion Week Columbus — runway", logo: "/media/brands/fashion-week-columbus-dark.png" },
+  { id: "highest-on-the-runway", name: "Highest on the Runway · Paris" },
+  { id: "donnys-devils", name: "Donny’s Devils · NYFW" },
+  { id: "diyanni-surf", name: "Diyanni Surf Swimwear · NYFW" },
 ];
 
 function media(id: string) {
@@ -331,6 +337,7 @@ export const seedContent: SiteContent = {
 
 export const publicNavigation = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/links", label: "Links" },

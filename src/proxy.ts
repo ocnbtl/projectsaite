@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { prefersMarkdown } from "@/lib/markdown-preference";
 
 const adminCookieName = "saite_admin_session";
 
@@ -33,16 +33,20 @@ function hasValidAdminToken(token: string | undefined) {
 }
 
 export function proxy(request: NextRequest) {
-  if (request.nextUrl.pathname === "/admin/login") return NextResponse.next();
-
-  const token = request.cookies.get(adminCookieName)?.value;
-  if (!hasValidAdminToken(token)) {
-    return NextResponse.redirect(new URL("/admin/login", request.url));
+  // Preserve the existing authentication boundary before public negotiation.
+  if (request.nextUrl.pathname === "/admin" || request.nextUrl.pathname.startsWith("/admin/")) {
+    if (request.nextUrl.pathname === "/admin/login") return NextResponse.next();
+    const token = request.cookies.get(adminCookieName)?.value;
+    if (!hasValidAdminToken(token)) return NextResponse.redirect(new URL("/admin/login", request.url));
+    return NextResponse.next();
   }
-
+  // Never rewrite mutations, framework navigation, admin, APIs, or assets.
+  if (["GET", "HEAD"].includes(request.method) && !request.headers.has("rsc") && prefersMarkdown(request.headers.get("accept") ?? "")) {
+    const target = new URL("/agent-content", request.url);
+    target.searchParams.set("path", request.nextUrl.pathname);
+    return NextResponse.rewrite(target);
+  }
   return NextResponse.next();
 }
 
-export const config = {
-  matcher: "/admin/:path*",
-};
+export const config = { matcher: ["/admin/:path*", "/((?!api(?:/|$)|admin(?:/|$)|_next(?:/|$)|agent-content(?:/|$)|.*\\..*).*)"] };

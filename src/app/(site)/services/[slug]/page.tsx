@@ -7,6 +7,10 @@ import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
 import { ReelShowcase } from "@/components/site/reel-showcase";
 import { seedContent, type Service, type SiteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
+import { StructuredData } from "@/components/site/structured-data";
+import { localServiceIntro, localServiceSlugs, serviceGuides } from "@/lib/editorial-content";
+import { pageMetadata } from "@/lib/search-metadata";
+import { siteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 
@@ -56,11 +60,8 @@ export async function generateMetadata({
   const content = await getSiteContent();
   const service = content.services.find((item) => item.slug === slug);
   if (!service) return {};
-  return {
-    title: service.title,
-    description: service.summary,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+  const guide = serviceGuides[slug];
+  return pageMetadata(guide?.title ?? service.title, guide?.description ?? service.summary, `/services/${service.slug}`);
 }
 
 function ContentCreationShowcase() {
@@ -130,9 +131,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const content = await getSiteContent();
   const service = content.services.find((item) => item.slug === slug);
   if (!service) notFound();
+  const guide = serviceGuides[slug];
+  const local = localServiceSlugs.includes(slug);
 
   return (
     <>
+      <StructuredData data={{ "@context": "https://schema.org", "@type": "Service", "@id": `${siteUrl}/services/${slug}#service`, name: service.title, description: guide?.description ?? service.summary, url: `${siteUrl}/services/${slug}`, provider: { "@id": `${siteUrl}/#${local ? "shenanigans" : "sage"}` }, ...(local ? { areaServed: [{ "@type": "City", name: "Cincinnati, Ohio" }, { "@type": "City", name: "Mason, Ohio" }] } : {}) }} />
       <section className={`editorial-service-page-hero editorial-service-page-hero--${service.slug}`}>
         <p>{service.number} / Service</p>
         <h1>{service.title}</h1>
@@ -157,6 +161,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           ))}
         </ol>
       </section>
+
+      {guide && <section className="editorial-faq" aria-labelledby="service-faq-heading">
+        <header><p className="editorial-eyebrow">{local ? localServiceIntro : "Sage Burress · Project details"}</p><h2 id="service-faq-heading">A few useful answers.</h2></header>
+        <div>{guide.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
+      </section>}
 
       <section className="editorial-contact-callout">
         <p>Have something specific in mind?</p>

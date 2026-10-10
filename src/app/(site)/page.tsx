@@ -9,6 +9,7 @@ import type { FeaturedBrand } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
 import { siteUrl } from "@/lib/site-url";
+import { homeCredibility } from "@/lib/editorial-content";
 
 export const dynamic = "force-dynamic";
 
@@ -121,8 +122,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-rail" aria-label="Featured clients and collaborators">
-        <div className="editorial-rail__viewport">
+      <section className="editorial-rail" aria-label="Selected work, publications and runway experience">
+        <div className="editorial-rail__viewport" tabIndex={0} role="group" aria-label="Selected credits; scroll horizontally when motion is reduced">
           <div className="editorial-rail__track">
             {[0, 1].map((setIndex) => content.featuredBrands.map((brand) => (
               <FeaturedBrandMark
@@ -133,6 +134,11 @@ export default async function HomePage() {
             )))}
           </div>
         </div>
+      </section>
+
+      <section className="editorial-credibility" aria-labelledby="home-about-heading">
+        <h2 id="home-about-heading">Experience, with personality.</h2>
+        <div><p>{homeCredibility}</p><Link href="/about">A little more about me <span aria-hidden="true">↗</span></Link></div>
       </section>
 
       <section className="editorial-portfolio-preview" aria-labelledby="home-portfolio-heading">
@@ -150,6 +156,7 @@ export default async function HomePage() {
       <section className="editorial-service-index" aria-labelledby="home-services-heading">
         <div className="editorial-service-index__heading" data-home-reveal="service-heading">
           <h2 id="home-services-heading">Services</h2>
+          <p className="editorial-service-context">Modeling, content and travel with Sage Burress. Makeup, henna and face painting with Sage’s Shenanigans in Cincinnati and Mason, Ohio.</p>
         </div>
         <div className="editorial-service-index__grid">
           {content.services.map((service) => (

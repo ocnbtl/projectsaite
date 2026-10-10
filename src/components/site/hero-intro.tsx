@@ -33,7 +33,7 @@ function scrambleTitle(title: string, lockedCharacters: number, tick: number) {
 export function HeroIntro({ kicker, title }: { kicker: string; title: string }) {
   const characterCount = useMemo(() => title.replace(/\s/g, "").length, [title]);
   const [typedKicker, setTypedKicker] = useState("");
-  const [scrambledTitle, setScrambledTitle] = useState(() => scrambleTitle(title, 0, 0));
+  const [scrambledTitle, setScrambledTitle] = useState(title);
   const [showCaret, setShowCaret] = useState(true);
   const [titleHasStarted, setTitleHasStarted] = useState(false);
 
@@ -107,11 +107,10 @@ export function HeroIntro({ kicker, title }: { kicker: string; title: string }) 
       <h1 className={titleHasStarted ? "is-scrambling" : "is-waiting"} aria-label={`${kicker} ${title}`}>
         <span className="editorial-visually-hidden">{kicker} {title}</span>
         {scrambledTitle.split(/\s+/).map((part, index) => (
-          <span className="editorial-hero__name-word" aria-hidden="true" key={index}>
-            {part}
-          </span>
+          <span className="editorial-hero__name-word" aria-hidden="true" data-visual-text={part} key={index} />
         ))}
       </h1>
+      <noscript><style>{`.editorial-hero h1.is-waiting { opacity: 1; }`}</style></noscript>
     </>
   );
 }
