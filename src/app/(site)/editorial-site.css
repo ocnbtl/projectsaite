@@ -574,6 +574,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-brandmark--xavier-university img { filter: brightness(0); }
+.editorial-rail .editorial-brandmark--fischer-homes img { width: 160px; max-width: 160px; height: 48px; filter: brightness(0); }
 .editorial-brandmark--highest-on-the-runway,
 .editorial-brandmark--new-york-fashion-week,
 .editorial-brandmark--paris-fashion-week { background: var(--editorial-canvas); }

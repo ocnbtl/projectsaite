@@ -22,4 +22,7 @@ for (const id of ["highest-on-the-runway", "new-york-fashion-week", "paris-fashi
 }
 assert.deepEqual(result.featuredBrands.find(brand => brand.id === "custom-owner-credit"), stored.featuredBrands[3]);
 assert.equal(JSON.stringify(stored), before);
-console.log("PASS: retired persisted rail entries excluded, new assets merged once, other custom credits preserved, stored input untouched (9 assertions)");
+assert.equal(result.featuredBrands.filter(brand => brand.id === "fischer-homes").length, 1);
+assert.deepEqual(result.featuredBrands.find(brand => brand.id === "fischer-homes"), { id: "fischer-homes", name: "Fischer Homes — face painting", logo: "/media/brands/fischer-homes.svg" });
+assert.equal(normalizeSiteContent(result).featuredBrands.filter(brand => brand.id === "fischer-homes").length, 1);
+console.log("PASS: new assets merged once, Fischer Homes face-painting credit preserved without duplicates, retired entries excluded, custom credits and stored input untouched (12 assertions)");

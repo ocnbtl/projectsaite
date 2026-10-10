@@ -11,6 +11,8 @@ The owner authorized the brief biography, homepage credibility section, six sets
 
 ## Asset provenance
 
+- Fischer Homes: owner confirms Sage provided face painting. Rail label is "Fischer Homes — face painting", not a modeling, sponsorship or endorsement claim. Exact official SVG from https://static.fischerhomes.com/fischerhomes/images/FischerHomes-Logo-White.svg?v=c5feaa4, linked by https://www.fischerhomes.com/, saved locally as fischer-homes.svg. Artwork unchanged; CSS renders the existing white mark in black for the monochrome rail.
+
 - Xavier University SVG: exact `xavier-logo` symbol from https://www.xavier.edu/; wrapped as standalone SVG without changing artwork. Brand guidance: https://www.xavier.edu/brand/.
 - University of Cincinnati SVG: exact `svg-logo` from https://www.uc.edu/. Academic wordmark, not athletic mark. Guidance: https://www.uc.edu/about/marketing-communications/brand-guide/logos-marks.html.
 - Fashion Week Columbus PNG: official dark RGB artwork linked by https://fashionweekcolumbus.org/, Squarespace CDN, downloaded at 500px width for legibility on the light rail.
