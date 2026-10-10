@@ -20,6 +20,7 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
   const isDefaultWoodenCask = brand.id === "wooden-cask" && brand.logo === "/media/brands/wooden-cask.webp";
   const isDefaultRedLight = brand.id === "red-light-method" && brand.logo === "/media/brands/red-light-method.svg";
   const isDefaultRomantic = brand.id === "romantic-adventure-getaways" && brand.logo === "/media/brands/romantic-adventure-getaways.svg";
+  const isDefaultHeyman = brand.id === "heyman-talent" && brand.logo === "/media/brands/heyman-talent-symbol.png";
 
   return (
     <span
@@ -28,7 +29,12 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
       aria-label={duplicate ? undefined : brand.name}
       aria-hidden={duplicate || undefined}
     >
-      {isDefaultRebel ? (
+      {isDefaultHeyman ? (
+        <span className="editorial-brandmark__heyman" aria-hidden="true">
+          <Image src="/media/brands/heyman-talent-symbol.png" alt="" width={46} height={46} sizes="46px" />
+          <Image className="editorial-brandmark__heyman-wordmark" src="/media/brands/heyman-talent-wordmark.png" alt="" width={433} height={46} sizes="160px" />
+        </span>
+      ) : isDefaultRebel ? (
         <strong className="editorial-brandmark__rebel" aria-hidden="true">REBEL</strong>
       ) : isDefaultBlackOpal ? (
         <span className="editorial-brandmark__black-opal" aria-hidden="true">
@@ -125,22 +131,23 @@ export default async function HomePage() {
         </div>
         <div className="editorial-hero__about">
           <p>{homeCredibilityLines.map((line, index) => <span key={line}>{index > 0 && " "}{line}</span>)}</p>
-          <Link href="/about">Discover my story <span aria-hidden="true">↗</span></Link>
+          <Link href="/about">Get to know me <span aria-hidden="true">↗</span></Link>
         </div>
       </section>
 
       <section className="editorial-rail" aria-label="Selected work, publications and runway experience">
         <div className="editorial-rail__viewport" tabIndex={0} role="group" aria-label="Selected credits; scroll horizontally when motion is reduced">
           <div className="editorial-rail__track">
-            {[0, 1].map((setIndex) => content.featuredBrands.map((brand) => (
+            {[0, 1, 2].map((setIndex) => content.featuredBrands.map((brand) => (
               <FeaturedBrandMark
                 brand={brand}
-                duplicate={setIndex === 1}
+                duplicate={setIndex !== 1}
                 key={`${brand.id}-${setIndex}`}
               />
             )))}
           </div>
         </div>
+        <BrandRailMotion />
       </section>
 
       <section className="editorial-portfolio-preview" aria-labelledby="home-portfolio-heading">
@@ -184,7 +191,6 @@ export default async function HomePage() {
       </section>
 
       <HomepageMotion />
-      <BrandRailMotion />
     </>
   );
 }

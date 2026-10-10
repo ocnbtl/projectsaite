@@ -76,7 +76,7 @@ async (page) => {
     }
   }
   await tab.goto(base);
-  await tab.getByRole("link", { name: "Discover my story" }).click();
+  await tab.getByRole("link", { name: "Get to know me" }).click();
   await tab.waitForURL("**/about");
   assert((await tab.locator("h1").innerText()).includes("The story"), "Client-side About navigation remains HTML");
   for (const name of ["xavier-university", "university-cincinnati", "fashion-week-columbus"]) {

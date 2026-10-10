@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
+import { portfolioPageProjects } from "@/content/portfolio-additions";
 import { getSiteContent } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +23,7 @@ export default async function PortfolioPage() {
       </section>
 
       <section className="editorial-portfolio-page" aria-label="Sage Burress portfolio">
-        <PortfolioMosaic projects={content.projects} showCaptions />
+        <PortfolioMosaic projects={portfolioPageProjects(content.projects)} showCaptions />
       </section>
 
       <section className="editorial-contact-callout editorial-contact-callout--portfolio">

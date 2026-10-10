@@ -21,14 +21,15 @@ async (page) => {
       assert(await marks.nth(i).textContent() === "REBEL", "Rebel’s existing typographic mark preserved");
       continue;
     }
-    const img = marks.nth(i).locator("img");
-    await img.scrollIntoViewIfNeeded();
-    await img.evaluate(image => image.decode());
-    assert(await img.evaluate(image => image.naturalWidth > 0), `Leading logo ${ids[i]} loads`);
+    await marks.nth(i).scrollIntoViewIfNeeded();
+    for (const img of await marks.nth(i).locator("img").all()) {
+      await img.evaluate(image => image.decode());
+      assert(await img.evaluate(image => image.naturalWidth > 0), `Leading logo ${ids[i]} loads`);
+    }
   }
   const mark = tab.getByRole("img", { name: "Fischer Homes", exact: true });
   assert(await mark.count() === 1, "One accessible Fischer Homes credit without service qualifier");
-  assert(await tab.locator('.editorial-brandmark--fischer-homes[aria-hidden="true"]').count() === 1, "Animation duplicate hidden from assistive technology");
+  assert(await tab.locator('.editorial-brandmark--fischer-homes[aria-hidden="true"]').count() === 2, "Animation duplicates hidden from assistive technology");
   const geometry = [];
   for (const width of [1440, 390, 320]) {
     await tab.setViewportSize({ width, height: 900 });
@@ -46,9 +47,9 @@ async (page) => {
   assert(markdown.includes("Fischer Homes") && !markdown.includes("Fischer Homes — face painting"), "Markdown shares the simplified credit");
   const asset = await context.request.get(`${base}/media/brands/fischer-homes.svg`);
   assert(asset.ok() && (await asset.text()).startsWith("<svg"), "Local SVG served successfully");
-  await tab.getByRole("link", { name: "Discover my story" }).click();
+  await tab.getByRole("link", { name: "Get to know me" }).click();
   await tab.waitForURL("**/about");
-  assert(await tab.locator("h1").textContent() === "Model & Content Creator", "Existing About navigation preserved");
+  assert(await tab.locator("h1").textContent() === "Experience Meets Creativity", "Existing About navigation preserved");
   assert(errors.length === 0, "No uncaught browser errors");
   await context.close();
   return { base, passed: checks.length, geometry, errors };

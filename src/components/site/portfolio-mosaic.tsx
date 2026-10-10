@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 
 import { portfolioMedia } from "@/content/portfolio-media";
+import { portfolioAdditions } from "@/content/portfolio-additions";
 import type { Project } from "@/lib/content";
 
 const preferredImages = [
@@ -71,7 +72,7 @@ export function PortfolioMosaic({
   return (
     <div className="editorial-mosaic">
       {complete.map((project, index) => {
-        const media = portfolioMedia.find((item) => item.src === project.image);
+        const media = [...portfolioMedia, ...portfolioAdditions].find((item) => item.src === project.image);
 
         return (
           <figure

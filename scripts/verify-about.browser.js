@@ -13,7 +13,7 @@ async (page) => {
   await tab.getByRole("button", { name: "Decline", exact: true }).click();
   const copy = tab.locator(".editorial-about__copy");
   const text = await copy.textContent();
-  for (const value of ["Model & Content Creator", "brands such as", "I love being part of a shoot", "a different approach for each project", "Travel is part of that work", "I also run Sage’s Shenanigans", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others"]) assert(text.includes(value), `Copy: ${value}`);
+  for (const value of ["Experience Meets Creativity", "brands such as", "I love being part of a shoot", "a different approach for each project", "Travel is part of that work", "I also run Sage’s Shenanigans", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others"]) assert(text.includes(value), `Copy: ${value}`);
   for (const value of ["About Sage", "The story so far", "playful side", "natural part of everyday life", "stay a little longer", "Selected credits", "educational videos", "dates and arrangements confirmed", "Beyond the runway", "I travel to clients as needed"]) assert(!text.includes(value), `Removed: ${value}`);
   const links = copy.locator(".editorial-about__links a");
   assert(JSON.stringify(await links.allTextContents()) === JSON.stringify(["Work with Sage ↗", "Explore my portfolio ↗", "Agency profile & credits ↗"]), "CTA order and labels");
@@ -45,7 +45,7 @@ async (page) => {
   await links.nth(1).click(); await tab.waitForURL("**/portfolio");
   assert(await tab.locator("h1").count() === 1, "Second CTA opens portfolio");
   const markdown = await (await context.request.get(`${base}/about`, { headers: { Accept: "text/markdown" } })).text();
-  assert(markdown.includes("Model & Content Creator") && markdown.includes("a different approach for each project") && markdown.includes("Travel is part of that work") && markdown.includes("I also run Sage’s Shenanigans") && !markdown.includes("playful side"), "HTML and agent-readable biography agree");
+  assert(markdown.includes("Experience Meets Creativity") && markdown.includes("a different approach for each project") && markdown.includes("Travel is part of that work") && markdown.includes("I also run Sage’s Shenanigans") && !markdown.includes("playful side"), "HTML and agent-readable biography agree");
   assert(errors.length === 0, "No uncaught page errors");
   await context.close();
   return { base, passed: checks.length, geometry, checks, errors };

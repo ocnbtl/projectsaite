@@ -29,7 +29,7 @@ async (page) => {
     assert(await tab.locator(".editorial-service-context").count() === 0, "Redundant homepage service paragraph removed");
     if ([390, 1440].includes(width)) await tab.screenshot({ path: `output/playwright/polish-home-${width}.png` });
   }
-  await tab.getByRole("link", { name: "Discover my story" }).click(); await tab.waitForURL("**/about");
+  await tab.getByRole("link", { name: "Get to know me" }).click(); await tab.waitForURL("**/about");
   const about = await tab.locator(".editorial-about__copy").textContent();
   assert(about.includes("brands such as") && about.includes("I love being part of a shoot") && about.includes("Let’s create something that feels like you."), "About has non-exhaustive credits, dedicated creative paragraph and invitation");
   assert(!about.includes("Beyond the runway") && !about.includes("I travel to clients as needed"), "Old transition and ending removed");

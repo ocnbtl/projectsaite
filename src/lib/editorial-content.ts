@@ -1,6 +1,6 @@
 // Owner-confirmed October 10, 2026. Keep HTML, structured data and Markdown aligned.
 export const biography = {
-  title: "Model & Content Creator",
+  title: "Experience Meets Creativity",
   introduction: "I’m Sage Burress, a model & content creator with a decade of experience across commercial, e-commerce, fitness, high fashion, and runway. My work has appeared in multiple magazines and includes collaborations with brands such as Macy’s, Saks Fifth Avenue, and Westcott Lighting.",
   work: "My runway highlights include shows during New York Fashion Week and Paris Fashion Week, Miami Swim Week, and Fashion Week Columbus, among many others.",
   creative: "I love being part of a shoot, and I love coming up with the ideas behind it, too. I work with brands to develop concepts and create photos and videos, with a different approach for each project. Travel is part of that work as well, creating content that gives people a feel for a destination, a place to stay, or an experience to try.",

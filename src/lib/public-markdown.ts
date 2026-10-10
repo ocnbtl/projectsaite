@@ -1,4 +1,5 @@
 import type { SiteContent } from "@/lib/content";
+import { portfolioPageProjects } from "@/content/portfolio-additions";
 import { biography, homeCredibility, localServiceIntro, localServiceSlugs, serviceGuides } from "@/lib/editorial-content";
 import { siteUrl } from "@/lib/site-url";
 
@@ -8,7 +9,7 @@ export function publicMarkdown(pathname: string, content: SiteContent): string |
   const navigation = `\n\n## Explore\n\n${[["About", "/about"], ["Portfolio", "/portfolio"], ["Contact", "/contact"], ["Privacy", "/privacy"]].map(([label, route]) => `- ${link(label, route)}`).join("\n")}`;
   let body: string;
   if (path === "/") {
-    body = `# Sage Burress — Model & Creative\n\n${content.hero.lead}\n\n${homeCredibility}\n\n${link("Discover my story", "/about")}\n\n## Services\n\n${content.services.map(service => `### ${link(service.title, `/services/${service.slug}`)}\n\n${service.summary}`).join("\n\n")}\n\n## Selected work, publications and runway experience\n\n${content.featuredBrands.map(brand => brand.name).join(" · ")}`;
+    body = `# Sage Burress — Model & Creative\n\n${content.hero.lead}\n\n${homeCredibility}\n\n${link("Get to know me", "/about")}\n\n## Services\n\n${content.services.map(service => `### ${link(service.title, `/services/${service.slug}`)}\n\n${service.summary}`).join("\n\n")}\n\n## Selected work, publications and runway experience\n\n${content.featuredBrands.map(brand => brand.name).join(" · ")}`;
   } else if (path === "/about") {
     body = `# About Sage Burress\n\n## ${biography.title}\n\n${biography.introduction}\n\n${biography.work}\n\n${biography.creative}\n\n${biography.local}\n\n${biography.closing}`;
   } else if (path.startsWith("/services/")) {
@@ -17,7 +18,7 @@ export function publicMarkdown(pathname: string, content: SiteContent): string |
     const guide = serviceGuides[service.slug];
     body = `# ${service.title}\n\n${service.description}\n\n## What I offer\n\n${service.deliverables.map(value => `- ${value}`).join("\n")}\n\n## A few useful answers\n\n${localServiceSlugs.includes(service.slug) ? localServiceIntro : "Sage Burress · Project details"}\n\n${guide?.faqs.map(faq => `### ${faq.question}\n\n${faq.answer}`).join("\n\n") ?? ""}`;
   } else if (path === "/portfolio") {
-    body = `# Portfolio\n\nSelected modeling and creative work by Sage Burress.\n\n${content.projects.map(project => `- ${project.alt}`).join("\n")}`;
+    body = `# Portfolio\n\nSelected modeling and creative work by Sage Burress.\n\n${portfolioPageProjects(content.projects).map(project => `- ${project.alt}`).join("\n")}`;
   } else if (path.startsWith("/portfolio/")) {
     const project = content.projects.find(item => path === `/portfolio/${item.slug}`);
     if (!project) return null;

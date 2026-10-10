@@ -509,6 +509,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-rail {
+  position: relative;
   display: block;
   background: var(--editorial-canvas);
   isolation: isolate;
@@ -532,6 +533,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-rail__track {
+  position: relative;
   --editorial-brand-gap: clamp(32px, 3.4vw, 48px);
 
   background: var(--editorial-canvas);
@@ -543,7 +545,7 @@ body:has(.editorial-site) {
 }
 
 .editorial-rail[data-rail-motion="ready"] .editorial-rail__track {
-  animation: editorial-marquee var(--editorial-rail-duration, 70s) linear infinite paused;
+  animation: editorial-marquee 52s linear infinite paused;
 }
 
 .editorial-rail[data-rail-running="true"] .editorial-rail__track {
@@ -552,8 +554,27 @@ body:has(.editorial-site) {
 
 .editorial-rail:not([data-rail-motion="ready"]) .editorial-rail__viewport { overflow-x: auto; }
 
-.editorial-rail:is(:hover, :focus-within) .editorial-rail__track {
-  animation-play-state: paused;
+.editorial-rail__toggle {
+  position: absolute;
+  inset: 50% 0 auto auto;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: var(--editorial-canvas);
+  color: var(--editorial-ink);
+  cursor: pointer;
+}
+
+.editorial-rail__toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-rail__toggle { display: none; }
 }
 
 .editorial-brandmark {
@@ -732,8 +753,9 @@ body:has(.editorial-site) {
 }
 
 @keyframes editorial-marquee {
+  from { transform: translateX(var(--editorial-rail-start, 0px)); }
   to {
-    transform: translateX(-50%);
+    transform: translateX(var(--editorial-rail-end, -33.333333%));
   }
 }
 
@@ -825,7 +847,6 @@ body:has(.editorial-site) {
 
 .editorial-service-index {
   display: block;
-  border-top: 1px solid var(--editorial-rule);
   border-bottom: 1px solid var(--editorial-rule);
 }
 
@@ -2753,6 +2774,8 @@ body:has(.editorial-site) {
 .editorial-rail .editorial-brandmark--new-york-fashion-week img { margin-left: -4px; margin-right: -2px; }
 .editorial-rail .editorial-brandmark--fischer-homes img { margin-left: -3px; margin-right: -3px; }
 .editorial-rail .editorial-brandmark--heyman-talent img { width: 46px; max-width: 46px; height: 46px; margin-inline: -1px; }
+.editorial-brandmark__heyman { display: inline-flex; align-items: center; gap: 12px; }
+.editorial-rail .editorial-brandmark--heyman-talent .editorial-brandmark__heyman-wordmark { width: 160px; max-width: 160px; height: auto; margin: 0; }
 @media (max-width: 759px) {
   .editorial-rail .editorial-brandmark--ocean-savage img { margin-left: -19px; margin-right: -20px; }
 }
