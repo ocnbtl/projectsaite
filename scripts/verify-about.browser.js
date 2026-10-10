@@ -13,14 +13,18 @@ async (page) => {
   await tab.getByRole("button", { name: "Decline", exact: true }).click();
   const copy = tab.locator(".editorial-about__copy");
   const text = await copy.textContent();
-  for (const value of ["The story so far.", "brands such as", "I love being part of a shoot", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others", "Sage’s Shenanigans"]) assert(text.includes(value), `Copy: ${value}`);
-  for (const value of ["Selected credits", "educational videos", "dates and arrangements confirmed", "Beyond the runway", "I travel to clients as needed"]) assert(!text.includes(value), `Removed: ${value}`);
+  for (const value of ["Model & Content Creator", "brands such as", "I love being part of a shoot", "a different approach for each project", "Travel is part of that work", "I also run Sage’s Shenanigans", "model & content creator", "commercial, e-commerce, fitness, high fashion, and runway", "Macy’s", "Saks Fifth Avenue", "Westcott Lighting", "New York Fashion Week", "among many others"]) assert(text.includes(value), `Copy: ${value}`);
+  for (const value of ["About Sage", "The story so far", "playful side", "natural part of everyday life", "stay a little longer", "Selected credits", "educational videos", "dates and arrangements confirmed", "Beyond the runway", "I travel to clients as needed"]) assert(!text.includes(value), `Removed: ${value}`);
   const links = copy.locator(".editorial-about__links a");
   assert(JSON.stringify(await links.allTextContents()) === JSON.stringify(["Work with Sage ↗", "Explore my portfolio ↗", "Agency profile & credits ↗"]), "CTA order and labels");
   assert(await links.nth(2).getAttribute("href") === "https://www.heymantalent.com/t/sage-burress" && await links.nth(2).getAttribute("target") === "_blank", "Agency destination preserved");
   for (const width of [320, 390, 768, 1024, 1440]) {
     await tab.setViewportSize({ width, height: 1000 });
-    await tab.evaluate(() => document.fonts.ready);
+    await tab.evaluate(async () => {
+      await document.fonts.ready;
+      // Let container-query typography settle after each viewport change.
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
     const dimensions = await tab.locator(".editorial-about h1").evaluate(el => {
       const range = document.createRange(); range.selectNodeContents(el);
       return { lines: range.getClientRects().length, font: getComputedStyle(el).fontSize, width: el.getBoundingClientRect().width };
@@ -41,7 +45,7 @@ async (page) => {
   await links.nth(1).click(); await tab.waitForURL("**/portfolio");
   assert(await tab.locator("h1").count() === 1, "Second CTA opens portfolio");
   const markdown = await (await context.request.get(`${base}/about`, { headers: { Accept: "text/markdown" } })).text();
-  assert(markdown.includes("model & content creator") && markdown.includes("I love being part of a shoot") && markdown.includes("Westcott Lighting") && !markdown.includes("educational videos"), "HTML and agent-readable biography agree");
+  assert(markdown.includes("Model & Content Creator") && markdown.includes("a different approach for each project") && markdown.includes("Travel is part of that work") && markdown.includes("I also run Sage’s Shenanigans") && !markdown.includes("playful side"), "HTML and agent-readable biography agree");
   assert(errors.length === 0, "No uncaught page errors");
   await context.close();
   return { base, passed: checks.length, geometry, checks, errors };

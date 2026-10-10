@@ -285,7 +285,7 @@ body:has(.editorial-site) {
 .editorial-about { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: 7vw; padding: 64px 5vw 88px; align-items: center; }
 .editorial-about__image img { display: block; width: 100%; height: auto; max-height: 740px; object-fit: cover; }
 .editorial-about__copy { container-type: inline-size; min-width: 0; }
-.editorial-about h1 { margin: 16px 0 28px; font: italic 400 clamp(2rem, 8.5cqi, 3.75rem)/1.05 var(--font-display), Georgia, serif; letter-spacing: -.035em; }
+.editorial-about h1 { margin: 16px 0 28px; font: italic 400 clamp(1.5rem, 7cqi, 3.125rem)/1.05 var(--font-display), Georgia, serif; letter-spacing: -.035em; }
 .editorial-about__copy > p { font-size: 16px; line-height: 1.75; max-width: 62ch; }
 .editorial-about__links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; }
 .editorial-faq { width: min(90%, 1120px); margin: 0 auto; padding: 64px 0; border-bottom: 1px solid var(--editorial-rule); }
@@ -510,6 +510,8 @@ body:has(.editorial-site) {
 
 .editorial-rail {
   display: block;
+  background: var(--editorial-canvas);
+  isolation: isolate;
   align-items: center;
   min-height: 88px;
   border-top: 1px solid var(--editorial-rule);
@@ -530,19 +532,25 @@ body:has(.editorial-site) {
 }
 
 .editorial-rail__track {
-  --editorial-brand-gap: clamp(58px, 6vw, 92px);
+  --editorial-brand-gap: clamp(32px, 3.4vw, 48px);
 
+  background: var(--editorial-canvas);
   display: flex;
   align-items: center;
   gap: var(--editorial-brand-gap);
   width: max-content;
-  padding-inline: clamp(29px, 3vw, 46px);
-  animation: editorial-marquee-fallback 52s linear 2400ms infinite;
+  padding-inline: calc(var(--editorial-brand-gap) / 2);
 }
 
-.editorial-site:has(.editorial-hero h1.is-scrambling) .editorial-rail__track {
-  animation: editorial-marquee 52s linear 940ms infinite;
+.editorial-rail[data-rail-motion="ready"] .editorial-rail__track {
+  animation: editorial-marquee var(--editorial-rail-duration, 70s) linear infinite paused;
 }
+
+.editorial-rail[data-rail-running="true"] .editorial-rail__track {
+  animation-play-state: running;
+}
+
+.editorial-rail:not([data-rail-motion="ready"]) .editorial-rail__viewport { overflow-x: auto; }
 
 .editorial-rail:is(:hover, :focus-within) .editorial-rail__track {
   animation-play-state: paused;
@@ -554,6 +562,7 @@ body:has(.editorial-site) {
   align-items: center;
   justify-content: center;
   min-width: 0;
+  flex: 0 0 auto;
   min-height: 86px;
   padding: 18px 0;
   line-height: 1;
@@ -723,12 +732,6 @@ body:has(.editorial-site) {
 }
 
 @keyframes editorial-marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes editorial-marquee-fallback {
   to {
     transform: translateX(-50%);
   }
@@ -2379,9 +2382,9 @@ body:has(.editorial-site) {
   }
 
   .editorial-rail__track {
-    --editorial-brand-gap: 40px;
+    --editorial-brand-gap: 32px;
 
-    padding-inline: 20px;
+    padding-inline: calc(var(--editorial-brand-gap) / 2);
   }
 
   .editorial-rail__track > .editorial-brandmark {
@@ -2741,6 +2744,18 @@ body:has(.editorial-site) {
 .editorial-rail .editorial-brandmark--paris-fashion-week { padding: 3px 0; }
 .editorial-rail .editorial-brandmark--new-york-fashion-week img { width: 154px; max-width: 154px; height: 40px; }
 .editorial-rail .editorial-brandmark--xavier-university img { max-width: 172px; height: 32px; }
+
+/* Optical spacing: exclude blank margins inside supplied artwork from the gap.
+   The original image files stay intact; these offsets only affect layout. */
+.editorial-rail .editorial-brandmark--paris-fashion-week img { margin-left: -14px; margin-right: -14px; }
+.editorial-rail .editorial-brandmark--highest-on-the-runway img { margin-left: -17px; margin-right: -17px; }
+.editorial-rail .editorial-brandmark--ocean-savage img { margin-left: -24px; margin-right: -25px; }
+.editorial-rail .editorial-brandmark--new-york-fashion-week img { margin-left: -4px; margin-right: -2px; }
+.editorial-rail .editorial-brandmark--fischer-homes img { margin-left: -3px; margin-right: -3px; }
+.editorial-rail .editorial-brandmark--heyman-talent img { width: 46px; max-width: 46px; height: 46px; margin-inline: -1px; }
+@media (max-width: 759px) {
+  .editorial-rail .editorial-brandmark--ocean-savage img { margin-left: -19px; margin-right: -20px; }
+}
 
 /* A single complete embed, with quiet navigation rather than cropped phone frames. */
 .editorial-reels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(326px, 430px); align-items: start; gap: clamp(40px, 8vw, 128px); max-width: 1120px; margin: 0 auto; padding: 64px 5vw 80px; border-bottom: 1px solid var(--editorial-rule); }

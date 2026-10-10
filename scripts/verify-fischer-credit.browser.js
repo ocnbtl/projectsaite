@@ -48,7 +48,7 @@ async (page) => {
   assert(asset.ok() && (await asset.text()).startsWith("<svg"), "Local SVG served successfully");
   await tab.getByRole("link", { name: "Discover my story" }).click();
   await tab.waitForURL("**/about");
-  assert(await tab.locator("h1").textContent() === "The story so far.", "Existing About navigation preserved");
+  assert(await tab.locator("h1").textContent() === "Model & Content Creator", "Existing About navigation preserved");
   assert(errors.length === 0, "No uncaught browser errors");
   await context.close();
   return { base, passed: checks.length, geometry, errors };

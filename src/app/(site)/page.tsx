@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { HeroIntro } from "@/components/site/hero-intro";
 import { HomepageMotion } from "@/components/site/homepage-motion";
+import { BrandRailMotion } from "@/components/site/brand-rail-motion";
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
 import type { FeaturedBrand } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
@@ -183,6 +184,7 @@ export default async function HomePage() {
       </section>
 
       <HomepageMotion />
+      <BrandRailMotion />
     </>
   );
 }

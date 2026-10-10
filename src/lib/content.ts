@@ -85,7 +85,7 @@ export const defaultFeaturedBrands: FeaturedBrand[] = [
   { id: "paris-fashion-week", name: "Shows during Paris Fashion Week — runway", logo: "/media/brands/paris-fashion-week.png" },
   { id: "versed-skincare", name: "Versed Skincare", logo: "/media/brands/versed.png" },
   { id: "fischer-homes", name: "Fischer Homes", logo: "/media/brands/fischer-homes.svg" },
-  { id: "heyman-talent", name: "Heyman Talent", logo: "/media/brands/heyman-talent-transparent.png" },
+  { id: "heyman-talent", name: "Heyman Talent", logo: "/media/brands/heyman-talent-symbol.png" },
   { id: "rebel-magazine", name: "Rebel Magazine", logo: "/media/brands/rebel-magazine.svg" },
   { id: "loveland-lifestyle", name: "Loveland Lifestyle Magazine", logo: "/media/brands/loveland-lifestyle.png" },
   { id: "westcott-lighting", name: "Westcott Lighting", logo: "/media/brands/westcott.png" },
@@ -451,12 +451,16 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
         stored?.name === "Black Opal Aesthetics";
       const hasLegacyFischerName = fallback.id === "fischer-homes" &&
         stored?.name === "Fischer Homes — face painting";
+      const hasLegacyHeymanLogo = fallback.id === "heyman-talent" && [
+        "/media/brands/heyman-talent.png",
+        "/media/brands/heyman-talent-transparent.png",
+      ].includes(stored?.logo ?? "");
       return stored
         ? {
             ...fallback,
             ...stored,
             name: hasLegacyBlackOpalName || hasLegacyFischerName ? fallback.name : stored.name,
-            logo: hasLegacyRomanticLogo ? fallback.logo : stored.logo || fallback.logo,
+            logo: hasLegacyRomanticLogo || hasLegacyHeymanLogo ? fallback.logo : stored.logo || fallback.logo,
             invert: hasLegacyRomanticLogo ? fallback.invert : stored.invert,
           }
         : fallback;

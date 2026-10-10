@@ -30,4 +30,10 @@ assert.deepEqual(result.featuredBrands.slice(0, 10).map(brand => brand.id), ["ma
 assert.equal(result.featuredBrands.length, 25);
 assert.equal(new Set(result.featuredBrands.map(brand => brand.id)).size, 25);
 assert.equal(normalizeSiteContent({ ...stored, featuredBrands: [{ id: "fischer-homes", name: "Owner custom label" }] }).featuredBrands.find(brand => brand.id === "fischer-homes").name, "Owner custom label");
-console.log("PASS: requested first ten in order, all 24 defaults preserved, legacy Fischer label updated, custom labels and stored input untouched (16 assertions)");
+for (const logo of ["/media/brands/heyman-talent.png", "/media/brands/heyman-talent-transparent.png"]) {
+  const legacy = { ...stored, featuredBrands: [{ id: "heyman-talent", name: "Heyman Talent", logo }] };
+  assert.equal(normalizeSiteContent(legacy).featuredBrands.find(brand => brand.id === "heyman-talent").logo, "/media/brands/heyman-talent-symbol.png");
+  assert.equal(legacy.featuredBrands[0].logo, logo);
+}
+assert.equal(normalizeSiteContent({ ...stored, featuredBrands: [{ id: "heyman-talent", name: "Heyman Talent", logo: "/owner-custom.svg" }] }).featuredBrands.find(brand => brand.id === "heyman-talent").logo, "/owner-custom.svg");
+console.log("PASS: priority order, 24 defaults, legacy Fischer/Heyman migration, custom labels/assets and stored input preserved (21 assertions)");

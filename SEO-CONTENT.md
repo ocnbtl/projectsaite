@@ -11,6 +11,8 @@ The owner authorized the brief biography, homepage credibility section, six sets
 
 ## Asset provenance
 
+- Heyman Talent follow-up: owner supplied the black three-column symbol, saved unchanged as heyman-talent-symbol.png. Official https://www.heymantalent.com/ returned 200 and uses /art/logo_text.png for its header wordmark; the supplied symbol is the owner's selected rail artwork, not a recreation of that wordmark. Instagram could not be fetched independently. Old default wordmark paths migrate in rendering only; custom owner logo URLs remain untouched.
+
 - Fischer Homes: owner confirms Sage provided face painting. At the owner's request, the public rail label is simply "Fischer Homes"; this is not a modeling, sponsorship or endorsement claim. Exact official SVG from https://static.fischerhomes.com/fischerhomes/images/FischerHomes-Logo-White.svg?v=c5feaa4, linked by https://www.fischerhomes.com/, saved locally as fischer-homes.svg. Artwork unchanged; CSS renders the existing white mark in black for the monochrome rail.
 
 - Xavier University SVG: exact `xavier-logo` symbol from https://www.xavier.edu/; wrapped as standalone SVG without changing artwork. Brand guidance: https://www.xavier.edu/brand/.
@@ -20,6 +22,8 @@ The owner authorized the brief biography, homepage credibility section, six sets
 - Rail describes selected work, publications and runway experience; it does not claim sponsorship or endorsement. New university alternative text specifies educational-video work.
 
 ## Maintenance and boundaries
+
+October 10 final approved follow-up: professional first-person About copy removes "playful side", the everyday-life generalization, and the earlier travel sentence. The visible heading is "Model & Content Creator", replacing both rejected headings. Rail spacing uses a shared gap with optical compensation for blank asset margins. Motion waits until entrance completion and first visibility, holds two seconds, then scrolls at a readable constant speed, pausing offscreen and for keyboard/hover/reduced-motion preferences. Priority brand order is unchanged; mobile does not rush all ten through an eight-second window. User authorized publication of this combined refinement.
 
 October 10 rail/copy follow-up: first ten credits are Macy’s, Saks Fifth Avenue, University of Cincinnati, Xavier University, New York Fashion Week, Paris Fashion Week, Versed, Fischer Homes, Heyman Talent, and Rebel. Remaining credits retain their relative order. "Reversed" in the request is interpreted as the existing Versed brand. The About content/travel paragraph uses conversational first-person language without new credentials or client claims. A targeted normalization replaces the old Fischer service-qualified label without rewriting stored content or overriding custom owner labels.
 
