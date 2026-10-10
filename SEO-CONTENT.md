@@ -19,6 +19,8 @@ The owner authorized the brief biography, homepage credibility section, six sets
 
 ## Maintenance and boundaries
 
+October 10 About refinement: owner confirmed commercial, e-commerce, fitness, high fashion and runway experience, and work with Macy’s, Saks Fifth Avenue and Westcott Lighting (official Westcott spelling checked at fjwestcott.com). These replace the narrow examples in the biography; university/logo credits elsewhere remain intact. Runway locations are explicitly highlights, not an exhaustive list. No sponsorship or endorsement relationship is implied. Contact is the first About CTA, followed by the portfolio and agency credits.
+
 `src/lib/editorial-content.ts` supplies the owner-approved biography and service FAQs to both HTML and Markdown. Keep future factual edits in this source. Existing admin-managed content and Blob persistence are untouched. New brand defaults merge with stored content using existing normalization.
 
 Structured data uses Person, WebSite, Service and the named local-services Organization. No private/fabricated street address, fake LocalBusiness rich-result eligibility, ratings, or pricing. FAQs are visible, native expandable HTML; no Google FAQ rich-result promise (the feature was retired in May 2026).

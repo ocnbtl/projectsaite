@@ -29,7 +29,7 @@ async (page) => {
     const md = await mdResponse.text();
     assert(mdResponse.status() === 200 && mdResponse.headers()["content-type"].startsWith("text/markdown") && md.startsWith("# "), `${path}: real Markdown response`);
     assert(/(?:^|,)\s*Accept\s*(?:,|$)/i.test(mdResponse.headers().vary) && mdResponse.headers().link?.includes('rel="canonical"'), `${path}: Markdown cache variation and canonical`);
-    if (path === "/about") assert(md.includes("Highest on the Runway") && md.includes("Xavier University") && md.includes("Sage’s Shenanigans"), "About facts aligned in Markdown");
+    if (path === "/about") assert(md.includes("Macy’s") && md.includes("Saks Fifth Avenue") && md.includes("Westcott Lighting") && md.includes("Sage’s Shenanigans"), "About facts aligned in Markdown");
   }
   for (const accept of ["text/markdown;q=0", "text/html,text/markdown;q=0.8", "text/html,text/markdown", "*/*"]) {
     const response = await context.request.get(base, { headers: { Accept: accept } });

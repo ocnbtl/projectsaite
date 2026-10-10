@@ -1,12 +1,12 @@
 // Owner-confirmed October 10, 2026. Keep HTML, structured data and Markdown aligned.
 export const biography = {
-  title: "A decade in front of the camera.",
-  introduction: "I’m Sage Burress, a model and content creator with a decade of modeling experience and work published in multiple magazines. My runway experience spans shows during New York and Paris Fashion Weeks, Miami Swim Week, and Fashion Week Columbus.",
-  work: "My work brings together modeling, content creation, and travel storytelling. Selected credits include Highest on the Runway in Paris, Donny’s Devils and Diyanni Surf Swimwear in New York, and events during Miami Art Basel. I’ve also modeled in educational videos for Xavier University and the University of Cincinnati.",
-  local: "Closer to home, Sage’s Shenanigans is my creative side: makeup artistry, henna, and face painting for people and events in Cincinnati and Mason, Ohio. I travel to clients as needed, with dates and arrangements confirmed for each project.",
+  title: "A decade in modeling.",
+  introduction: "I’m Sage Burress, a model & content creator with a decade of experience across commercial, e-commerce, fitness, high fashion, and runway. My work has appeared in multiple magazines, and I’ve worked with Macy’s, Saks Fifth Avenue, and Westcott Lighting.",
+  work: "My runway highlights include shows during New York Fashion Week and Paris Fashion Week, Miami Swim Week, and Fashion Week Columbus, among many others. Beyond the runway, I bring that same creative energy to brand content and travel storytelling.",
+  local: "Closer to home, Sage’s Shenanigans is my creative side: makeup artistry, henna, and face painting for people and events in Cincinnati and Mason, Ohio. I travel to clients as needed.",
 };
 
-export const homeCredibility = "A decade of modeling. Published in multiple magazines. Runway experience at shows during New York and Paris Fashion Weeks, Miami Swim Week, and Fashion Week Columbus.";
+export const homeCredibility = "A decade of modeling. Published in multiple magazines. Runway highlights include shows during New York Fashion Week and Paris Fashion Week, Miami Swim Week, and Fashion Week Columbus, among many others.";
 export const localServiceSlugs = ["makeup-artist", "henna", "face-painting"];
 export const localServiceIntro = "Sage’s Shenanigans · Cincinnati & Mason, Ohio · Traveling to you";
 
