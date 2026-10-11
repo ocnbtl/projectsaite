@@ -52,32 +52,10 @@ async (page) => {
       }
     }
   }
-  // Keep pointer interaction checks independent of the repeated resize/full-page screenshot pass.
-  for (const width of [390, 1440]) {
-    const reelTab = await context.newPage();
-    await reelTab.setViewportSize({ width, height: 1000 });
-    await reelTab.goto(`${base}/services/content-creation`);
-        assert(await reelTab.locator(".editorial-reels iframe").count() === 1, "Only one reel embed loaded");
-        await reelTab.getByRole("button", { name: "Next reel", exact: true }).click();
-        await reelTab.waitForFunction(() => document.querySelector('.editorial-reels iframe')?.getAttribute('title') === 'Beach-day GRWM');
-        assert(await reelTab.locator(".editorial-reels iframe").getAttribute("title") === "Beach-day GRWM", "Next reel switches source");
-        await reelTab.getByRole("button", { name: "Vanlife storytelling reel", exact: true }).scrollIntoViewIfNeeded();
-        await reelTab.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-        await reelTab.getByRole("button", { name: "Vanlife storytelling reel", exact: true }).click();
-        await reelTab.waitForFunction(() => document.querySelector('.editorial-reels iframe')?.getAttribute('src')?.includes('DaGrAJgpGwr'));
-        assert((await reelTab.locator(".editorial-reels iframe").getAttribute("src")).includes("DaGrAJgpGwr"), "Named reel selection switches source");
-        assert((await reelTab.getByRole("link", { name: "Watch on Instagram", exact: true }).getAttribute("href")).includes("DaGrAJgpGwr"), "Direct playback fallback matches selected reel");
-    const frame = reelTab.frameLocator(".editorial-reels iframe");
-    await frame.locator("body").waitFor();
-    await frame.locator("body").evaluate(() => parent.postMessage(JSON.stringify({ type: "MEASURE", details: { height: 812 } }), "*"));
-    await reelTab.waitForFunction(() => document.querySelector('.editorial-reels iframe').clientHeight === 812);
-    assert(await reelTab.locator(".editorial-reels iframe").evaluate(el => el.clientHeight === 812), `${width}: trusted embed measurement fits complete content`);
-    await frame.locator("body").evaluate(() => parent.postMessage(JSON.stringify({ type: "MEASURE", details: { height: 90000 } }), "*"));
-    await reelTab.evaluate(() => { window.dispatchEvent(new MessageEvent('message', { origin: 'https://www.instagram.com', source: window, data: JSON.stringify({ type: 'MEASURE', details: { height: 900 } }) })); window.dispatchEvent(new MessageEvent('message', { origin: 'https://example.invalid', source: document.querySelector('.editorial-reels iframe').contentWindow, data: JSON.stringify({ type: 'MEASURE', details: { height: 900 } }) })); });
-    await reelTab.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-    assert(await reelTab.locator(".editorial-reels iframe").evaluate(el => el.clientHeight === 812), `${width}: invalid measurement, origin and source rejected`);
-    await reelTab.close();
-  }
+  // Detailed carousel measurement/security checks live in verify-reels-and-media.browser.js.
+  await tab.goto(`${base}/services/content-creation`);
+  assert(await tab.locator(".editorial-reels iframe").count() === 5, "Five complete reel screens rendered");
+  assert(await tab.getByRole("link", { name: "Watch on Instagram", exact: true }).count() === 5, "Each reel retains a direct playback fallback");
   await tab.setViewportSize({ width: 390, height: 844 });
   await tab.goto(`${base}/contact?inquiry=Henna`);
   const combo = tab.getByRole("combobox", { name: "What can I help with?" });

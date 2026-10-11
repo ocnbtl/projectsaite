@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
+import { portfolioPageProjects } from "@/content/portfolio-additions";
 import { ReelShowcase } from "@/components/site/reel-showcase";
 import { seedContent, type Service, type SiteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
@@ -94,7 +95,7 @@ function ServiceGallery({ service, content }: { service: Service; content: SiteC
   if (service.slug === "modeling") {
     return (
       <section className="editorial-service-modeling-gallery" aria-label="Modeling portfolio">
-        <PortfolioMosaic projects={content.projects} eagerCount={4} />
+        <PortfolioMosaic projects={portfolioPageProjects(content.projects)} eagerCount={4} />
       </section>
     );
   }

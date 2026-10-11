@@ -11,10 +11,12 @@ import { getSiteContent } from "@/lib/content-store";
 import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
 import { siteUrl } from "@/lib/site-url";
 import { homeCredibilityLines } from "@/lib/editorial-content";
+import { brandMedia } from "@/content/brand-media";
 
 export const dynamic = "force-dynamic";
 
 function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplicate: boolean }) {
+  const dimensions = brand.logo ? brandMedia[brand.logo] : undefined;
   const isDefaultRebel = brand.id === "rebel-magazine" && brand.logo === "/media/brands/rebel-magazine.svg";
   const isDefaultBlackOpal = brand.id === "black-opal-aesthetics" && brand.logo === "/media/brands/black-opal-aesthetics.svg";
   const isDefaultWoodenCask = brand.id === "wooden-cask" && brand.logo === "/media/brands/wooden-cask.webp";
@@ -31,8 +33,8 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
     >
       {isDefaultHeyman ? (
         <span className="editorial-brandmark__heyman" aria-hidden="true">
-          <Image src="/media/brands/heyman-talent-symbol.png" alt="" width={46} height={46} sizes="46px" />
-          <Image className="editorial-brandmark__heyman-wordmark" src="/media/brands/heyman-talent-wordmark.png" alt="" width={433} height={46} sizes="160px" />
+          <Image src="/media/brands/heyman-talent-symbol.png" alt="" width={275} height={275} sizes="46px" loading="eager" />
+          <Image className="editorial-brandmark__heyman-wordmark" src="/media/brands/heyman-talent-wordmark.png" alt="" width={433} height={46} sizes="160px" loading="eager" />
         </span>
       ) : isDefaultRebel ? (
         <strong className="editorial-brandmark__rebel" aria-hidden="true">REBEL</strong>
@@ -43,12 +45,12 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
         </span>
       ) : isDefaultWoodenCask ? (
         <span className="editorial-brandmark__wooden-cask" aria-hidden="true">
-          <Image src={brand.logo ?? "/media/brands/wooden-cask.webp"} alt="" width={72} height={72} sizes="48px" />
+          <Image src={brand.logo ?? "/media/brands/wooden-cask.webp"} alt="" width={500} height={500} sizes="48px" loading="eager" />
           <span><strong>WOODEN CASK</strong><small>BREWING COMPANY</small></span>
         </span>
       ) : isDefaultRedLight ? (
         <span className="editorial-brandmark__red-light" aria-hidden="true">
-          <Image src={brand.logo ?? "/media/brands/red-light-method.svg"} alt="" width={220} height={56} sizes="220px" />
+          <Image src={brand.logo ?? "/media/brands/red-light-method.svg"} alt="" width={682} height={152} sizes="220px" loading="eager" />
           <small>MONTGOMERY</small>
         </span>
       ) : isDefaultRomantic ? (
@@ -57,10 +59,10 @@ function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplica
         <Image
           src={brand.logo}
           alt=""
-          width={220}
-          height={56}
+          width={dimensions?.width ?? 220}
+          height={dimensions?.height ?? 56}
           className={brand.invert ? "is-inverted" : undefined}
-          loading={brand.id === "macys" && !duplicate ? "eager" : "lazy"}
+          loading="eager"
           sizes="220px"
         />
       ) : (

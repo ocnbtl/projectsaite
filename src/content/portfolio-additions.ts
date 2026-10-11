@@ -3,7 +3,7 @@ import type { Project } from "@/lib/content";
 
 // Selected by the owner on October 10, 2026 from Sage's Heyman Talent gallery.
 // Source: https://www.heymantalent.com/media/photos/<filename>.jpg
-// These additions are deliberately not part of the homepage seed selection.
+// Used on Portfolio and Modeling, deliberately not in the homepage selection.
 export const portfolioAdditions: PortfolioMedia[] = [
   {
     id: "HEYMAN-PORTRAIT", src: "/media/sage/agency/zh14h2356ikjkc.jpg",
@@ -25,7 +25,7 @@ export const portfolioAdditions: PortfolioMedia[] = [
   },
   {
     id: "HEYMAN-TAILORING-STANDING", src: "/media/sage/agency/zh14h1120pjxsa.jpg",
-    width: 1080, height: 1619, label: "Fashion",
+    width: 1080, height: 1619, label: "Editorial",
     alt: "Full-length studio photograph of Sage Burress in a black blazer, tailored shorts, and heels.",
     bytes: 111895, sha256: "56a18ecca2961b358ecca5ee03fe17ed41f01c81a68cd12d93d213e932785623",
   },
@@ -36,6 +36,8 @@ export const portfolioAdditions: PortfolioMedia[] = [
     bytes: 438954, sha256: "e4baa5528139070cd2b01df35d54eac750802e3d6ffe96f63cecb400224196d0",
   },
 ];
+
+export const aboutPortrait = portfolioAdditions[0];
 
 export function portfolioPageProjects(projects: Project[]): Project[] {
   return [...projects, ...portfolioAdditions

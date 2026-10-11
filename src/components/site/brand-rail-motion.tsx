@@ -17,16 +17,30 @@ export function BrandRailMotion() {
     let visible = false;
     let revealed = false;
     let disposed = false;
+    let previous: { start: number; period: number; anchor: number } | undefined;
     const measure = () => {
       const primary = track.querySelector<HTMLElement>('.editorial-brandmark:not([aria-hidden="true"])');
       const marks = Array.from(track.children) as HTMLElement[];
       const count = marks.length / 3;
       if (!primary || !marks[count]) return;
       // A preceding copy fills the left half while Macy's starts at the center.
-      const period = marks[count].offsetLeft - marks[0].offsetLeft;
-      const start = viewport.clientWidth / 2 - primary.offsetLeft - primary.offsetWidth / 2;
+      const trackBounds = track.getBoundingClientRect();
+      const primaryBounds = primary.getBoundingClientRect();
+      const period = primaryBounds.left - marks[0].getBoundingClientRect().left;
+      const anchor = primaryBounds.left - trackBounds.left + primaryBounds.width / 2;
+      const start = viewport.clientWidth / 2 - anchor;
+      if (previous && Math.abs(start - previous.start) < 0.1 && Math.abs(period - previous.period) < 0.1) return;
+      const animation = track.getAnimations()[0];
+      const time = Number(animation?.currentTime ?? 0);
+      // Preserve the visible position through late fonts or real viewport resizing.
+      const oldPosition = previous ? previous.anchor + previous.start - previous.period * ((time % 52000) / 52000) : 0;
       track.style.setProperty("--editorial-rail-start", `${start}px`);
       track.style.setProperty("--editorial-rail-end", `${start - period}px`);
+      if (previous && animation && time > 0 && period > 0) {
+        const progress = (anchor + start - oldPosition) / period;
+        animation.currentTime = ((progress % 1 + 1) % 1) * 52000;
+      }
+      previous = { start, period, anchor };
     };
     const sync = () => {
       // Start with the rail's entrance, not the later completion of the hero.

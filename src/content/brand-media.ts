@@ -1,0 +1,25 @@
+// Intrinsic dimensions reserve the final logo width before each image decodes.
+// Incorrect placeholder ratios caused the moving strip to change width mid-loop.
+export const brandMedia: Record<string, { width: number; height: number }> = {
+  "/media/brands/macys.svg": { width: 136, height: 39 },
+  "/media/brands/saks-fifth-avenue.svg": { width: 1196, height: 230 },
+  "/media/brands/university-cincinnati.svg": { width: 779, height: 136 },
+  "/media/brands/xavier-university.svg": { width: 406, height: 80 },
+  "/media/brands/new-york-fashion-week.png": { width: 853, height: 222 },
+  "/media/brands/paris-fashion-week.png": { width: 434, height: 434 },
+  "/media/brands/versed.png": { width: 250, height: 40 },
+  "/media/brands/fischer-homes.svg": { width: 978, height: 293 },
+  "/media/brands/heyman-talent-symbol.png": { width: 275, height: 275 },
+  "/media/brands/loveland-lifestyle.png": { width: 2517, height: 999 },
+  "/media/brands/westcott.png": { width: 1200, height: 168 },
+  "/media/brands/nooon.svg": { width: 230, height: 30 },
+  "/media/brands/ocean-savage.svg": { width: 230, height: 30 },
+  "/media/brands/timeless.webp": { width: 420, height: 245 },
+  "/media/brands/beautystat.png": { width: 900, height: 166 },
+  "/media/brands/elaine-b-jewelry.png": { width: 3200, height: 2251 },
+  "/media/brands/sequencing.svg": { width: 336, height: 64 },
+  "/media/brands/wooden-cask.webp": { width: 500, height: 500 },
+  "/media/brands/red-light-method.svg": { width: 682, height: 152 },
+  "/media/brands/fashion-week-columbus-dark.png": { width: 500, height: 231 },
+  "/media/brands/highest-on-the-runway.png": { width: 500, height: 500 },
+};

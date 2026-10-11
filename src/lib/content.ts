@@ -1,4 +1,5 @@
 import { portfolioMedia } from "@/content/portfolio-media";
+import { aboutPortrait } from "@/content/portfolio-additions";
 
 export type Service = {
   slug: string;
@@ -123,8 +124,8 @@ export const seedContent: SiteContent = {
       "Sage works across modeling, content creation, makeup artistry, henna, travel promotions, and face painting.",
     story:
       "Each project begins with the brief and the people it needs to reach, then builds a visual approach that feels natural to the setting.",
-    image: media("SRC-SAGE-001").src,
-    imageAlt: media("SRC-SAGE-001").alt,
+    image: aboutPortrait.src,
+    imageAlt: aboutPortrait.alt,
   },
   contact: {
     title: "Let’s work together.",
@@ -519,6 +520,8 @@ export function normalizeSiteContent(value: SiteContent): SiteContent {
     about: {
       ...seedContent.about,
       ...value.about,
+      image: value.about.image === media("SRC-SAGE-001").src ? aboutPortrait.src : value.about.image,
+      imageAlt: value.about.image === media("SRC-SAGE-001").src ? aboutPortrait.alt : value.about.imageAlt,
       intro:
         [
           "Sage works across modeling, face painting, henna, makeup artistry, content creation, and travel collaborations.",
