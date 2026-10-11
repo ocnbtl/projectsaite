@@ -2742,7 +2742,8 @@ body:has(.editorial-site) {
 .editorial-hero__about { position: static; min-width: 0; animation: editorial-support-fallback 760ms var(--editorial-ease-out) 2400ms both; }
 .editorial-hero__about p { margin: 0; font: italic 400 clamp(16px, 1.45vw, 22px)/1.35 var(--font-display), Georgia, serif; }
 .editorial-hero__about p span { display: block; }
-.editorial-hero__about a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 8px; font-size: 13px; text-decoration: underline; text-underline-offset: 5px; }
+.editorial-hero__about a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 8px; font-size: 13px; text-decoration: none; }
+.editorial-hero__about-label { text-decoration: underline; text-underline-offset: 5px; }
 .editorial-about__copy > .editorial-about__closing { font-family: var(--font-display), Georgia, serif; font-size: 23px; font-style: italic; line-height: 1.4; margin-top: 26px; }
 @media (min-width: 1180px) {
   .editorial-hero { width: min(94%, 1560px); grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr) minmax(0, 1fr); gap: clamp(20px, 2vw, 36px); }
