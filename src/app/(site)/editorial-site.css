@@ -284,7 +284,7 @@ body:has(.editorial-site) {
 .editorial-eyebrow { font-size: 12px !important; letter-spacing: .08em; line-height: 1.6; text-transform: uppercase; }
 .editorial-about { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(32px, 3vw, 48px); padding: 64px 5vw 88px; align-items: stretch; }
 .editorial-about__image { position: relative; min-width: 0; }
-.editorial-about__image img { position: absolute; inset: 0 0 0 auto; display: block; width: auto; height: 100%; max-width: 100%; border-radius: 16px; object-fit: cover; object-position: center 25%; }
+.editorial-about__image img { position: absolute; inset: 0 0 0 auto; display: block; width: auto; height: 100%; max-width: 100%; border-radius: 16px; object-fit: contain; object-position: center; background: #fafaf7; }
 .editorial-about__copy { container-type: inline-size; min-width: 0; }
 .editorial-about h1 { margin: 0 0 28px; font: italic 400 clamp(1.5rem, 7cqi, 3.125rem)/1.05 var(--font-display), Georgia, serif; letter-spacing: -.035em; }
 .editorial-about__copy > p { font-size: 16px; line-height: 1.75; max-width: 62ch; }
