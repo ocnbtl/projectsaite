@@ -140,7 +140,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <>
       <StructuredData data={{ "@context": "https://schema.org", "@type": "Service", "@id": `${siteUrl}/services/${slug}#service`, name: service.title, description: guide?.description ?? service.summary, url: `${siteUrl}/services/${slug}`, provider: { "@id": `${siteUrl}/#${local ? "shenanigans" : "sage"}` }, ...(local ? { areaServed: [{ "@type": "City", name: "Cincinnati, Ohio" }, { "@type": "City", name: "Mason, Ohio" }] } : {}) }} />
       <section className={`editorial-service-page-hero editorial-service-page-hero--${service.slug}`}>
-        <p>{service.number} / Service</p>
         <h1>{service.title}</h1>
         <div>
           <p>{service.description}</p>
