@@ -531,6 +531,8 @@ body:has(.editorial-site) {
 .editorial-rail__viewport {
   min-width: 0;
   overflow: hidden;
+  background: transparent;
+  mix-blend-mode: multiply;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
@@ -539,7 +541,7 @@ body:has(.editorial-site) {
   position: relative;
   --editorial-brand-gap: clamp(32px, 3.4vw, 48px);
 
-  background: var(--editorial-canvas);
+  background: transparent;
   display: flex;
   align-items: center;
   gap: var(--editorial-brand-gap);
@@ -599,7 +601,6 @@ body:has(.editorial-site) {
   max-width: 190px;
   height: 32px;
   object-fit: contain;
-  mix-blend-mode: multiply;
   filter: grayscale(1) contrast(1.15);
 }
 
@@ -611,7 +612,7 @@ body:has(.editorial-site) {
 .editorial-rail .editorial-brandmark--fischer-homes img { width: 160px; max-width: 160px; height: 48px; filter: brightness(0); }
 .editorial-brandmark--highest-on-the-runway,
 .editorial-brandmark--new-york-fashion-week,
-.editorial-brandmark--paris-fashion-week { background: var(--editorial-canvas); }
+.editorial-brandmark--paris-fashion-week { background: transparent; }
 .editorial-rail .editorial-brandmark--highest-on-the-runway { padding: 0; }
 .editorial-rail .editorial-brandmark--highest-on-the-runway img { width: 180px; max-width: 180px; height: 80px; object-fit: cover; filter: invert(1) grayscale(1) contrast(1.15); }
 .editorial-rail .editorial-brandmark--new-york-fashion-week img { max-width: 170px; }
@@ -2743,6 +2744,7 @@ body:has(.editorial-site) {
 
 /* Portrait-side story note; the composition reflows without squeezing the copy. */
 .editorial-hero__about { position: static; min-width: 0; animation: editorial-support-fallback 760ms var(--editorial-ease-out) 2400ms both; }
+.editorial-hero__about--mobile { display: none; }
 .editorial-hero__about p { margin: 0; font: italic 400 clamp(16px, 1.45vw, 22px)/1.35 var(--font-display), Georgia, serif; }
 .editorial-hero__about p span { display: block; }
 .editorial-hero__about a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 8px; font-size: 13px; text-decoration: none; }
@@ -2759,9 +2761,24 @@ body:has(.editorial-site) {
   .editorial-hero { row-gap: 28px; }
 }
 @media (max-width: 759px) {
-  .editorial-hero__about { position: relative; z-index: 2; margin-top: 32px; }
-  .editorial-hero__image { bottom: 138px; }
+  .editorial-hero__about--desktop { display: none; }
+  .editorial-hero__about--mobile { display: block; position: relative; margin: 0; padding: 28px 18px 0; }
+  .editorial-hero { display: flex; align-items: center; min-height: calc(100svh - 168px); padding: 14px 18px; }
+  .editorial-hero__copy { width: 100%; }
+  .editorial-hero__intro { font-size: clamp(1.75rem, 4.5svh, 2.5rem); margin-bottom: 8px; }
+  .editorial-hero h1 { font-size: clamp(4rem, min(20vw, 10svh), 6rem); }
+  .editorial-hero__services { margin-top: 18px; }
+  .editorial-hero__services a { min-height: 44px; }
+  .editorial-hero .editorial-button { min-height: 44px; margin-top: 14px; }
+  .editorial-hero__image { bottom: 14px; }
+  .editorial-rail { min-height: 88px; height: 88px; }
+  .editorial-rail__track > .editorial-brandmark { min-height: 86px; padding-block: 0; }
   .editorial-faq details p { padding-right: 0; }
+}
+@media (max-width: 759px) and (max-height: 700px) {
+  .editorial-hero__services { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 66%; column-gap: 12px; }
+  .editorial-hero__services a { gap: 4px; }
+  .editorial-hero__image { width: 42%; height: 270px; right: -4%; }
 }
 
 /* Keep unlike logo proportions optically balanced without changing their artwork. */

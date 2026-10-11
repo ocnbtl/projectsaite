@@ -15,6 +15,15 @@ import { brandMedia } from "@/content/brand-media";
 
 export const dynamic = "force-dynamic";
 
+function HomeAboutNote({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <div className={`editorial-hero__about editorial-hero__about--${mobile ? "mobile" : "desktop"}`}>
+      <p>{homeCredibilityLines.map((line, index) => <span key={line}>{index > 0 && " "}{line}</span>)}</p>
+      <Link href="/about"><span className="editorial-hero__about-label">More about my work</span><span aria-hidden="true">↗</span></Link>
+    </div>
+  );
+}
+
 function FeaturedBrandMark({ brand, duplicate }: { brand: FeaturedBrand; duplicate: boolean }) {
   const dimensions = brand.logo ? brandMedia[brand.logo] : undefined;
   const isDefaultRebel = brand.id === "rebel-magazine" && brand.logo === "/media/brands/rebel-magazine.svg";
@@ -131,10 +140,7 @@ export default async function HomePage() {
             sizes="(max-width: 759px) 86vw, 48vw"
           />
         </div>
-        <div className="editorial-hero__about">
-          <p>{homeCredibilityLines.map((line, index) => <span key={line}>{index > 0 && " "}{line}</span>)}</p>
-          <Link href="/about"><span className="editorial-hero__about-label">More about my work</span><span aria-hidden="true">↗</span></Link>
-        </div>
+        <HomeAboutNote />
       </section>
 
       <section className="editorial-rail" aria-label="Selected work, publications and runway experience">
@@ -151,6 +157,8 @@ export default async function HomePage() {
         </div>
         <BrandRailMotion />
       </section>
+
+      <HomeAboutNote mobile />
 
       <section className="editorial-portfolio-preview" aria-labelledby="home-portfolio-heading">
         <header data-home-reveal="portfolio-heading">
