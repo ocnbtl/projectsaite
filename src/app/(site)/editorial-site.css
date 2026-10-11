@@ -282,10 +282,11 @@ body:has(.editorial-site) {
 .editorial-about__links a, .editorial-faq__contact { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
 .editorial-service-context { margin: 28px 0 0; }
 .editorial-eyebrow { font-size: 12px !important; letter-spacing: .08em; line-height: 1.6; text-transform: uppercase; }
-.editorial-about { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: 7vw; padding: 64px 5vw 88px; align-items: center; }
-.editorial-about__image img { display: block; width: auto; height: auto; max-width: 100%; max-height: 740px; margin-inline: auto; object-fit: contain; object-position: center; }
+.editorial-about { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(32px, 3vw, 48px); padding: 64px 5vw 88px; align-items: stretch; }
+.editorial-about__image { position: relative; min-width: 0; }
+.editorial-about__image img { position: absolute; inset: 0 0 0 auto; display: block; width: auto; height: 100%; max-width: 100%; border-radius: 16px; object-fit: cover; object-position: center 25%; }
 .editorial-about__copy { container-type: inline-size; min-width: 0; }
-.editorial-about h1 { margin: 16px 0 28px; font: italic 400 clamp(1.5rem, 7cqi, 3.125rem)/1.05 var(--font-display), Georgia, serif; letter-spacing: -.035em; }
+.editorial-about h1 { margin: 0 0 28px; font: italic 400 clamp(1.5rem, 7cqi, 3.125rem)/1.05 var(--font-display), Georgia, serif; letter-spacing: -.035em; }
 .editorial-about__copy > p { font-size: 16px; line-height: 1.75; max-width: 62ch; }
 .editorial-about__links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; }
 .editorial-faq { width: min(90%, 1120px); margin: 0 auto; padding: 64px 0; border-bottom: 1px solid var(--editorial-rule); }
@@ -301,8 +302,10 @@ body:has(.editorial-site) {
 .editorial-faq summary:focus-visible, .editorial-hero__about a:focus-visible, .editorial-about a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 @media (max-width: 759px) {
   .editorial-faq { padding: 40px 0; }
+}
+@media (max-width: 1023px) {
   .editorial-about { grid-template-columns: 1fr; gap: 32px; padding: 32px 5vw 56px; }
-  .editorial-about__image img { max-height: 440px; }
+  .editorial-about__image img { position: static; width: auto; height: auto; max-width: 100%; max-height: 440px; margin-inline: auto; object-fit: contain; }
 }
 
 .editorial-hero h1.is-waiting {
