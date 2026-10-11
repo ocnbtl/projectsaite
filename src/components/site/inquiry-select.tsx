@@ -17,21 +17,16 @@ export function InquirySelect({ options, initialValue, disabled, onChange }: {
 
   useEffect(() => {
     const list = root.current?.querySelector<HTMLElement>('[role="listbox"]');
-    if (open && list) list.scrollTop = 0;
+    // Reveal the complete seven-option menu; it has no nested scroll region.
+    if (open && list) list.scrollIntoView({ block: "nearest", behavior: "instant" });
   }, [open]);
 
   useEffect(() => {
     if (!open) return;
-    const list = root.current?.querySelector<HTMLElement>('[role="listbox"]');
-    const option = list?.children[active] as HTMLElement | undefined;
-    if (list && option) {
-      if (option.offsetTop < list.scrollTop) list.scrollTop = option.offsetTop;
-      else if (option.offsetTop + option.offsetHeight > list.scrollTop + list.clientHeight) list.scrollTop = option.offsetTop + option.offsetHeight - list.clientHeight;
-    }
     const outside = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
     document.addEventListener("pointerdown", outside);
     return () => document.removeEventListener("pointerdown", outside);
-  }, [open, active]);
+  }, [open]);
 
   function onKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (event.key === "Escape") { event.preventDefault(); setOpen(false); return; }
