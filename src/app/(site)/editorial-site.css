@@ -1074,7 +1074,11 @@ body:has(.editorial-site) {
   min-height: 340px;
 }
 
-.editorial-page-hero--portfolio { border-bottom: 0; }
+.editorial-page-hero.editorial-page-hero--portfolio { min-height: 0; padding-block: 48px 32px; border-bottom: 0; }
+.editorial-page-hero--portfolio + .editorial-portfolio-page { padding-top: 8px; }
+@media (max-width: 759px) {
+  .editorial-page-hero.editorial-page-hero--portfolio { padding-block: 32px 24px; }
+}
 
 .editorial-page-hero--services h1,
 .editorial-page-hero--portfolio h1,
