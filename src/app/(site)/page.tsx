@@ -133,7 +133,7 @@ export default async function HomePage() {
         </div>
         <div className="editorial-hero__about">
           <p>{homeCredibilityLines.map((line, index) => <span key={line}>{index > 0 && " "}{line}</span>)}</p>
-          <Link href="/about">Get to know me <span aria-hidden="true">↗</span></Link>
+          <Link href="/about">More about my work <span aria-hidden="true">↗</span></Link>
         </div>
       </section>
 

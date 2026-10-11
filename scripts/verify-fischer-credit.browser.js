@@ -47,7 +47,7 @@ async (page) => {
   assert(markdown.includes("Fischer Homes") && !markdown.includes("Fischer Homes — face painting"), "Markdown shares the simplified credit");
   const asset = await context.request.get(`${base}/media/brands/fischer-homes.svg`);
   assert(asset.ok() && (await asset.text()).startsWith("<svg"), "Local SVG served successfully");
-  await tab.getByRole("link", { name: "Get to know me" }).click();
+  await tab.getByRole("link", { name: "More about my work" }).click();
   await tab.waitForURL("**/about");
   assert(await tab.locator("h1").textContent() === "Experience Meets Creativity", "Existing About navigation preserved");
   assert(errors.length === 0, "No uncaught browser errors");

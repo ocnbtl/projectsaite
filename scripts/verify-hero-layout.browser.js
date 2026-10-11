@@ -47,7 +47,7 @@ async (page) => {
   assert(await tab.locator(".editorial-brandmark--xavier-university img").first().evaluate(img => getComputedStyle(img).filter === "brightness(0)" && getComputedStyle(img).backgroundColor === "rgba(0, 0, 0, 0)"), "Xavier monochrome without navy panel");
   await tab.locator(".editorial-brandmark--highest-on-the-runway").first().scrollIntoViewIfNeeded();
   await tab.screenshot({ path: "output/playwright/hero-fashion-rail.png" });
-  await tab.getByRole("link", { name: "Get to know me" }).focus();
+  await tab.getByRole("link", { name: "More about my work" }).focus();
   await tab.keyboard.press("Enter"); await tab.waitForURL("**/about");
   assert(await tab.locator(".editorial-about").isVisible(), "About link works with keyboard");
   const markdown = await (await context.request.get(base, { headers: { Accept: "text/markdown" } })).text();

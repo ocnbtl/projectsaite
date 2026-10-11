@@ -13,7 +13,7 @@ async (page) => {
   assert(await tab.locator(".editorial-mosaic__item").count() === 12, "Homepage keeps its 12-photo selection");
   assert(await tab.locator('img[src*="agency%2F"]').count() === 0, "No agency additions on homepage");
   assert(await tab.locator(".editorial-service-index").evaluate(el => getComputedStyle(el).borderTopWidth === "0px"), "Removed divider above Services");
-  await tab.getByRole("link", { name: "Get to know me" }).click();
+  await tab.getByRole("link", { name: "More about my work" }).click();
   await tab.waitForURL("**/about");
   assert(await tab.locator("h1").textContent() === "Experience Meets Creativity", "New CTA reaches approved About heading");
   await tab.goto(`${base}/portfolio`);
