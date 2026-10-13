@@ -5,7 +5,7 @@ export const biography = {
   work: "My runway highlights include shows during New York Fashion Week and Paris Fashion Week, Miami Swim Week, and Fashion Week Columbus, among many others.",
   creative: "I love being part of a shoot, and I love coming up with the ideas behind it, too. I work with brands to develop concepts and create photos and videos, with a different approach for each project. Travel is part of that work as well, creating content that gives people a feel for a destination, a place to stay, or an experience to try.",
   local: "I also run Sage’s Shenanigans, offering makeup artistry, henna, and face painting for clients and events in Cincinnati and Mason, Ohio.",
-  closing: "Have a campaign, a destination, or a celebration in mind? Let’s create something that feels like you.",
+  closing: "Have a campaign, project, or idea in mind?\nI’d love to bring my experience and creativity to it.",
 };
 
 export const homeCredibility = "A decade of modeling, magazine features, and runways around the world.";
