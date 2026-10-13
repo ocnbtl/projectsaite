@@ -13,16 +13,17 @@ export const homeCredibilityLines = ["A decade of modeling, magazine features,",
 export const localServiceSlugs = ["makeup-artist", "henna", "face-painting"];
 export const localServiceIntro = "Sage’s Shenanigans · Cincinnati & Mason, Ohio · Traveling to you";
 
-type ServiceGuide = { title: string; description: string; faqs: { question: string; answer: string }[] };
+export type ServiceFaq = { question: string; answer: string; link?: { text: string; href: string } };
+type ServiceGuide = { title: string; description: string; faqs: ServiceFaq[] };
 export const serviceGuides: Record<string, ServiceGuide> = {
   modeling: {
     title: "Modeling & Runway",
     description: "Book Sage Burress for editorial, commercial and runway modeling. A decade of experience, magazine publications and fashion-week runway work.",
     faqs: [
       { question: "What kind of modeling do you do?", answer: "My work spans commercial, e-commerce, fitness, high fashion, and runway. Over the past decade, that’s included magazine features and shows during New York Fashion Week and Paris Fashion Week, as well as Miami Swim Week and Fashion Week Columbus. You can explore more in my portfolio and agency credits." },
-      { question: "Can you send casting information?", answer: "Of course. Send me your casting brief and let me know what you need, whether that’s current measurements, portfolio images, or availability. The client, shoot type, date, and location are a helpful place to start." },
-      { question: "Do you travel for shoots?", answer: "Yes. I work around Cincinnati and Mason, Ohio, and travel for projects, including Los Angeles and New York. Tell me where you’re shooting and the dates you have in mind, and we can talk through the possibilities." },
-      { question: "What should I include in my inquiry?", answer: "Share your concept, dates, location, expected hours, budget, and where the photos or video will appear. It’s okay if the plan is still taking shape. We’ll work through usage, travel, and booking details together before confirming the project." },
+      { question: "Can you send casting information?", answer: "Of course. Share your project details on the contact page and let me know what you need, whether that’s current measurements, portfolio images, or availability.", link: { text: "contact page", href: "/contact" } },
+      { question: "Do you travel for shoots?", answer: "Yes. I'm based in Cincinnati, Ohio, and frequently travel for projects, including Los Angeles, New York, Columbus, Miami, and internationally. Let me know what you're thinking and we can talk through possibilities." },
+      { question: "What should I include in my inquiry?", answer: "Share your concept, dates, location, expected hours, budget, and where the photos or video will appear. It’s okay if the plan is still taking shape. We’ll work through usage, travel, and final details together before confirming the project." },
     ],
   },
   "content-creation": {
@@ -59,10 +60,10 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     title: "Henna Artist in Cincinnati & Mason",
     description: "Custom henna by Sage’s Shenanigans in Cincinnati and Mason, Ohio. Explore hand-drawn designs and inquire about appointments, celebrations and events.",
     faqs: [
-      { question: "Can you bring henna to my event?", answer: "Yes! Through Sage’s Shenanigans, I offer henna around Cincinnati and Mason, Ohio, and travel to clients. Tell me where and when you’re planning it, and whether it’s a personal appointment or a celebration with guests." },
-      { question: "Can I choose my own design?", answer: "Absolutely. Send a few references and tell me where you’d like the design, how large it should be, and the level of detail you love. We can shape it together and allow the right amount of time." },
-      { question: "What do you need for an event quote?", answer: "Your date, venue, event length, and approximate guest count are a great start. Let me know the style of designs you’re imagining too. That helps us plan a comfortable pace and work out what’s realistic for your event." },
-      { question: "How should I prepare and care for it?", answer: "Ask me about preparation and aftercare when we plan your appointment. We can also talk about ingredients and any sensitivities beforehand. The way a stain develops and how long it lasts can vary, so we’ll keep your event timing in mind." },
+      { question: "Can you bring henna to my event?", answer: "Yes! Through Sage’s Shenanigans, I offer henna around Cincinnati and Mason, Ohio, and travel to clients. Let me know where and when you're planning it." },
+      { question: "Can I choose my own design?", answer: "Absolutely. I can go based off a reference or we can craft it together." },
+      { question: "What do you need for an event quote?", answer: "Your date, venue, event length, and approximate guest count are a great start. Let me know the style of designs you’re imagining too. That helps us get started and work out the details for your event." },
+      { question: "How should I prepare and care for it?", answer: "Ask me about preparation and aftercare when we plan your appointment. We can also talk about ingredients and any sensitivities beforehand." },
     ],
   },
   "face-painting": {

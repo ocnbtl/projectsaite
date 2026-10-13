@@ -10,7 +10,7 @@ import { ReelShowcase } from "@/components/site/reel-showcase";
 import { seedContent, type Service, type SiteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 import { StructuredData } from "@/components/site/structured-data";
-import { localServiceSlugs, serviceGuides } from "@/lib/editorial-content";
+import { localServiceSlugs, serviceGuides, type ServiceFaq } from "@/lib/editorial-content";
 import { pageMetadata } from "@/lib/search-metadata";
 import { siteUrl } from "@/lib/site-url";
 
@@ -64,6 +64,13 @@ export async function generateMetadata({
   if (!service) return {};
   const guide = serviceGuides[slug];
   return pageMetadata(guide?.title ?? service.title, guide?.description ?? service.summary, `/services/${service.slug}`);
+}
+
+function ServiceFaqAnswer({ faq }: { faq: ServiceFaq }) {
+  if (!faq.link) return faq.answer;
+  const index = faq.answer.indexOf(faq.link.text);
+  if (index < 0) return faq.answer;
+  return <>{faq.answer.slice(0, index)}<Link href={faq.link.href}>{faq.link.text}</Link>{faq.answer.slice(index + faq.link.text.length)}</>;
 }
 
 function ContentCreationShowcase() {
@@ -165,7 +172,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {guide && <section className="editorial-faq" aria-labelledby="service-faq-heading">
         <header><h2 id="service-faq-heading">A few useful answers.</h2></header>
-        <div>{guide.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<Plus className="editorial-faq__icon" size={18} aria-hidden="true" /></summary><p>{faq.answer}</p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
+        <div>{guide.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<Plus className="editorial-faq__icon" size={18} aria-hidden="true" /></summary><p><ServiceFaqAnswer faq={faq} /></p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
       </section>}
 
       <section className="editorial-contact-callout">

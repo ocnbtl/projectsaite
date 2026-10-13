@@ -16,7 +16,7 @@ export function publicMarkdown(pathname: string, content: SiteContent): string |
     const service = content.services.find(item => path === `/services/${item.slug}`);
     if (!service) return null;
     const guide = serviceGuides[service.slug];
-    body = `# ${service.title}\n\n${service.description}\n\n## What I offer\n\n${service.deliverables.map(value => `- ${value}`).join("\n")}\n\n## A few useful answers\n\n${localServiceSlugs.includes(service.slug) ? localServiceIntro : "Sage Burress · Project details"}\n\n${guide?.faqs.map(faq => `### ${faq.question}\n\n${faq.answer}`).join("\n\n") ?? ""}`;
+    body = `# ${service.title}\n\n${service.description}\n\n## What I offer\n\n${service.deliverables.map(value => `- ${value}`).join("\n")}\n\n## A few useful answers\n\n${localServiceSlugs.includes(service.slug) ? localServiceIntro : "Sage Burress · Project details"}\n\n${guide?.faqs.map(faq => `### ${faq.question}\n\n${faq.link ? faq.answer.replace(faq.link.text, link(faq.link.text, faq.link.href)) : faq.answer}`).join("\n\n") ?? ""}`;
   } else if (path === "/portfolio") {
     body = `# Portfolio\n\nSelected modeling and creative work by Sage Burress.\n\n${portfolioPageProjects(content.projects).map(project => `- ${project.alt}`).join("\n")}`;
   } else if (path.startsWith("/portfolio/")) {

@@ -299,7 +299,8 @@ body:has(.editorial-site) {
 .editorial-faq details[open] .editorial-faq__icon { transform: rotate(45deg); }
 .editorial-faq details p { margin: 0 0 24px; max-width: none; padding-right: 40px; font-size: 16px; line-height: 1.75; color: var(--editorial-muted); }
 .editorial-faq__contact { margin-top: 16px; }
-.editorial-faq summary:focus-visible, .editorial-hero__about a:focus-visible, .editorial-about a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.editorial-faq details p a { text-decoration: underline; text-underline-offset: 3px; }
+.editorial-faq summary:focus-visible, .editorial-faq a:focus-visible, .editorial-hero__about a:focus-visible, .editorial-about a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 @media (max-width: 759px) {
   .editorial-faq { padding: 40px 0; }
 }
@@ -1207,12 +1208,15 @@ body:has(.editorial-site) {
   font-style: italic;
 }
 
+section:has(+ .editorial-service-offerings) {
+  border-bottom: 0;
+}
+
 .editorial-service-offerings {
   display: grid;
   grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
   gap: 8vw;
   padding: clamp(64px, 8vw, 112px) 5vw;
-  border-bottom: 1px solid var(--editorial-rule);
 }
 
 .editorial-service-offerings h2 {
