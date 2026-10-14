@@ -1,48 +1,62 @@
 "use client";
 
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Heart, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-type Reel = { id: string; title: string; href: string; embed: string };
+export type Reel = {
+  id: string; title: string; href: string; src: string; poster: string;
+  instagram?: { likes?: number; views?: number; updated: string };
+};
 
 function ReelFrame({ reel }: { reel: Reel }) {
-  const container = useRef<HTMLDivElement>(null);
-  const iframe = useRef<HTMLIFrameElement>(null);
-  const [size, setSize] = useState({ width: 340, scale: 1 });
-  const [height, setHeight] = useState<number>();
-  const [loaded, setLoaded] = useState(false);
+  const video = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+  const [waiting, setWaiting] = useState(false);
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
-    const element = container.current;
+    const element = video.current;
     if (!element) return;
-    const resize = new ResizeObserver(() => {
-      const available = element.clientWidth;
-      // Keep a readable minimum embed layout on the narrowest phones.
-      // Scale the entire embed, never crop the video or its playback controls.
-      const width = Math.max(326, available);
-      setSize(previous => previous.width === width && previous.scale === available / width ? previous : { width, scale: available / width });
-    });
-    resize.observe(element);
-    const measure = (event: MessageEvent) => {
-      if (event.origin !== "https://www.instagram.com" || event.source !== iframe.current?.contentWindow) return;
-      try {
-        const message = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-        const rawHeight = message?.details?.height;
-        const nextHeight = typeof rawHeight === "number" || typeof rawHeight === "string" ? Number(rawHeight) : NaN;
-        if (message?.type === "MEASURE" && Number.isFinite(nextHeight) && nextHeight >= 320 && nextHeight <= 2400) {
-          setHeight(Math.ceil(nextHeight));
-          setLoaded(true);
-        }
-      } catch { /* Ignore unrelated or malformed provider messages. */ }
-    };
-    window.addEventListener("message", measure);
-    return () => { resize.disconnect(); window.removeEventListener("message", measure); };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio < 0.15) element.pause();
+    }, { threshold: [0, 0.15] });
+    observer.observe(element);
+    const hide = () => { if (document.hidden) element.pause(); };
+    document.addEventListener("visibilitychange", hide);
+    return () => { observer.disconnect(); document.removeEventListener("visibilitychange", hide); };
   }, []);
-  const embedHeight = height ?? Math.ceil(size.width * 16 / 9 + 190);
-  return <div ref={container} className="editorial-reels__embed" style={{ height: embedHeight * size.scale }}>
-    {!loaded && <p className="editorial-reels__loading" role="status">Loading from Instagram…</p>}
-    <iframe ref={iframe} src={reel.embed} title={reel.title}
-      style={{ width: size.width, height: embedHeight, transform: `scale(${size.scale})` }}
-      loading="lazy" scrolling="no" onLoad={() => setLoaded(true)} allow="encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
+  const play = async () => {
+    const element = video.current;
+    if (!element) return;
+    setFailed(false);
+    setStarted(true);
+    setWaiting(true);
+    if (element.error) element.load();
+    try { await element.play(); }
+    catch (error) {
+      // Scrolling out of view can intentionally interrupt a pending play request.
+      if (!(error instanceof DOMException && error.name === "AbortError")) setFailed(true);
+      setWaiting(false);
+    }
+  };
+  return <div className="editorial-reels__player">
+    <video ref={video} src={reel.src} poster={reel.poster} width={720} height={1280}
+      aria-label={reel.title} controls={started} preload="none" playsInline
+      onPlay={event => {
+        setStarted(true);
+        const current = event.currentTarget;
+        current.closest(".editorial-reels__viewport")?.querySelectorAll("video").forEach(other => {
+          if (other !== current) other.pause();
+        });
+      }}
+      onPlaying={() => { setWaiting(false); setFailed(false); }}
+      onWaiting={() => setWaiting(true)}
+      onPause={() => setWaiting(false)}
+      onError={() => { setFailed(true); setWaiting(false); }}>
+      Your browser cannot play this video. <a href={reel.href}>Watch on Instagram</a>.
+    </video>
+    {!started && !failed && <button type="button" className="editorial-reels__play" aria-label={`Play ${reel.title}`} onClick={play}><Play size={28} aria-hidden="true" /></button>}
+    {waiting && !failed && <p className="editorial-reels__status" role="status">Loading video…</p>}
+    {failed && <div className="editorial-reels__error" role="status"><p>This video couldn’t load.</p><button type="button" onClick={play}>Try again</button><a href={reel.href} target="_blank" rel="noopener noreferrer">Watch on Instagram</a></div>}
   </div>;
 }
 
@@ -92,11 +106,18 @@ export function ReelShowcase({ reels }: { reels: Reel[] }) {
         if (event.key === "Home" || event.key === "End") { event.preventDefault(); event.currentTarget.scrollTo({ left: event.key === "Home" ? 0 : event.currentTarget.scrollWidth, behavior: "instant" }); }
       }}>
       {reels.map((reel, index) => <article className="editorial-reels__card" key={reel.id} aria-label={`${index + 1} of ${reels.length}: ${reel.title}`}>
-        <h3>{reel.title}</h3>
         <ReelFrame reel={reel} />
+        <h3>{reel.title}</h3>
+        {reel.instagram && (reel.instagram.likes !== undefined || reel.instagram.views !== undefined) && <div className="editorial-reels__metrics">
+          <p>
+            {reel.instagram.likes !== undefined && <span><Heart size={16} aria-hidden="true" />{reel.instagram.likes.toLocaleString("en-US")} likes</span>}
+            {reel.instagram.views !== undefined && <span><Play size={16} aria-hidden="true" />{reel.instagram.views.toLocaleString("en-US")} views</span>}
+          </p>
+          <small>On Instagram · Updated <time dateTime={reel.instagram.updated}>{new Date(`${reel.instagram.updated}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></small>
+        </div>}
         <a href={reel.href} target="_blank" rel="noopener noreferrer">Watch on Instagram <ArrowUpRight size={16} aria-hidden="true" /></a>
       </article>)}
     </div>
-    <footer className="editorial-reels__footer"><p>Swipe or scroll to explore. Not playing? Open the reel on Instagram.</p><a href="https://www.instagram.com/sage_burress/reels/" target="_blank" rel="noopener noreferrer">More on Instagram <ArrowUpRight size={16} aria-hidden="true" /></a></footer>
+    <footer className="editorial-reels__footer"><p>Swipe or scroll to explore. Tap a reel to play.</p><a href="https://www.instagram.com/sage_burress/reels/" target="_blank" rel="noopener noreferrer">More on Instagram <ArrowUpRight size={16} aria-hidden="true" /></a></footer>
   </section>;
 }
