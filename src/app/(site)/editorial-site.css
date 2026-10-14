@@ -524,15 +524,19 @@ body:has(.editorial-site) {
   overflow: hidden;
 }
 
-/* The experience note and its supporting logos enter as one paired moment. */
+/* Let the logos establish the entrance before the lighter text follows. */
+.editorial-hero__about {
+  --editorial-support-offset: 200ms;
+}
+
 .editorial-rail,
 .editorial-hero__about {
-  animation: editorial-support-fallback 820ms var(--editorial-ease-out) 2400ms both;
+  animation: editorial-support-fallback 820ms var(--editorial-ease-out) calc(2400ms + var(--editorial-support-offset, 0ms)) both;
 }
 
 .editorial-site:has(.editorial-hero h1.is-scrambling) .editorial-rail,
 .editorial-site:has(.editorial-hero h1.is-scrambling) .editorial-hero__about {
-  animation: editorial-support-in 780ms var(--editorial-ease-out) 940ms both;
+  animation: editorial-support-in 780ms var(--editorial-ease-out) calc(940ms + var(--editorial-support-offset, 0ms)) both;
 }
 
 .editorial-rail__viewport {
