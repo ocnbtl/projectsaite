@@ -522,10 +522,16 @@ body:has(.editorial-site) {
   border-top: 1px solid var(--editorial-rule);
   border-bottom: 1px solid var(--editorial-rule);
   overflow: hidden;
+}
+
+/* The experience note and its supporting logos enter as one paired moment. */
+.editorial-rail,
+.editorial-hero__about {
   animation: editorial-support-fallback 820ms var(--editorial-ease-out) 2400ms both;
 }
 
-.editorial-site:has(.editorial-hero h1.is-scrambling) .editorial-rail {
+.editorial-site:has(.editorial-hero h1.is-scrambling) .editorial-rail,
+.editorial-site:has(.editorial-hero h1.is-scrambling) .editorial-hero__about {
   animation: editorial-support-in 780ms var(--editorial-ease-out) 940ms both;
 }
 
@@ -2739,7 +2745,7 @@ section:has(+ .editorial-service-offerings) {
 }
 
 /* Portrait-side story note; the composition reflows without squeezing the copy. */
-.editorial-hero__about { position: static; min-width: 0; animation: editorial-support-fallback 760ms var(--editorial-ease-out) 2400ms both; }
+.editorial-hero__about { position: static; min-width: 0; }
 .editorial-hero__about--mobile { display: none; }
 .editorial-hero__about p { margin: 0; font: italic 400 clamp(16px, 1.45vw, 22px)/1.35 var(--font-display), Georgia, serif; }
 .editorial-hero__about p span { display: block; }
