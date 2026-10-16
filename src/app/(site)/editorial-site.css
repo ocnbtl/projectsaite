@@ -2597,6 +2597,93 @@ section:has(+ .editorial-service-offerings) {
     margin-right: 0;
   }
 
+  /* Pack the existing cutouts by their nontransparent bounds, not their canvases.
+     Source dimensions below preserve every visible pixel and the original ratio. */
+  .editorial-service-gallery.editorial-service-gallery--henna {
+    display: flex;
+    gap: 1px;
+    padding-inline: 4px;
+  }
+
+  .editorial-service-gallery--henna figure {
+    --henna-source-width: 1;
+    --henna-crop-width: 1;
+    --henna-crop-height: 1;
+    --henna-crop-x: 0;
+    --henna-crop-y: 0;
+    flex: calc(var(--henna-crop-width) / var(--henna-source-width)) 1 0;
+    min-width: 0;
+    position: relative;
+    aspect-ratio: var(--henna-crop-width) / var(--henna-crop-height);
+    overflow: hidden;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-01-cutout"]) {
+    --henna-source-width: 1055;
+    --henna-crop-width: 1055;
+    --henna-crop-height: 1785;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-02-cutout"]) {
+    --henna-source-width: 1221;
+    --henna-crop-width: 1221;
+    --henna-crop-height: 1360;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-03-cutout"]) {
+    --henna-source-width: 1281;
+    --henna-crop-width: 1077;
+    --henna-crop-height: 1343;
+    --henna-crop-x: 47;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-04-cutout"]) {
+    --henna-source-width: 1320;
+    --henna-crop-width: 988;
+    --henna-crop-height: 1651;
+    --henna-crop-x: 297;
+    --henna-crop-y: 58;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-05-cutout"]) {
+    --henna-source-width: 1320;
+    --henna-crop-width: 1047;
+    --henna-crop-height: 1367;
+    --henna-crop-x: 273;
+    --henna-crop-y: 249;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-06-cutout"]) {
+    --henna-source-width: 1320;
+    --henna-crop-width: 1138;
+    --henna-crop-height: 1351;
+    --henna-crop-x: 112;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-07-cutout"]) {
+    --henna-source-width: 1270;
+    --henna-crop-width: 563;
+    --henna-crop-height: 1451;
+    --henna-crop-x: 279;
+  }
+
+  .editorial-service-gallery--henna figure:has(img[src*="henna-08-cutout"]) {
+    --henna-source-width: 1320;
+    --henna-crop-width: 777;
+    --henna-crop-height: 1154;
+    --henna-crop-x: 233;
+  }
+
+  .editorial-service-gallery--henna figure img {
+    position: absolute;
+    width: calc(100% * var(--henna-source-width) / var(--henna-crop-width));
+    max-width: none;
+    max-height: none;
+    left: calc(-100% * var(--henna-crop-x) / var(--henna-crop-width));
+    top: calc(-100% * var(--henna-crop-y) / var(--henna-crop-height));
+    filter: none;
+  }
+
   .editorial-service-gallery--makeup-artist {
     grid-template-columns: 1fr;
     gap: 10px;
