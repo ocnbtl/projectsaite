@@ -23,7 +23,7 @@ export default async function PortfolioPage() {
       </section>
 
       <section className="editorial-portfolio-page" aria-label="Sage Burress portfolio">
-        <PortfolioMosaic projects={portfolioPageProjects(content.projects)} showCaptions />
+        <PortfolioMosaic projects={portfolioPageProjects(content.projects)} showCaptions expandable />
       </section>
 
       <section className="editorial-contact-callout editorial-contact-callout--portfolio">

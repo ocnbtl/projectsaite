@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { portfolioMedia } from "@/content/portfolio-media";
 import { portfolioAdditions } from "@/content/portfolio-additions";
 import type { Project } from "@/lib/content";
+import { PortfolioViewer } from "./portfolio-viewer";
 
 const preferredImages = [
   "/media/sage/v1/sage-001.webp",
@@ -56,11 +57,13 @@ export function PortfolioMosaic({
   showCaptions = false,
   eagerCount = 0,
   revealOnScroll = false,
+  expandable = false,
 }: {
   projects: Project[];
   showCaptions?: boolean;
   eagerCount?: number;
   revealOnScroll?: boolean;
+  expandable?: boolean;
 }) {
   const ordered = preferredImages
     .map((image) => projects.find((project) => project.image === image))
@@ -69,10 +72,18 @@ export function PortfolioMosaic({
   const complete = [...ordered, ...remaining];
   const mobileRowFirstOrders = getMobileRowFirstOrders(complete.length);
 
-  return (
-    <div className="editorial-mosaic">
+  const mosaic = (
+    <div className={`editorial-mosaic${expandable ? " editorial-mosaic--expandable" : ""}`}>
       {complete.map((project, index) => {
         const media = [...portfolioMedia, ...portfolioAdditions].find((item) => item.src === project.image);
+        const photo = <Image
+          src={project.image}
+          alt={project.alt}
+          width={media?.width ?? 1600}
+          height={media?.height ?? 2000}
+          loading={index < eagerCount || (showCaptions && index < 4) ? "eager" : "lazy"}
+          sizes={expandable ? "(max-width: 900px) 50vw, (max-width: 1099px) 33vw, 25vw" : "(max-width: 759px) 100vw, (max-width: 1099px) 33vw, 25vw"}
+        />;
 
         return (
           <figure
@@ -83,14 +94,7 @@ export function PortfolioMosaic({
               "--editorial-mobile-order": mobileRowFirstOrders[index],
             } as MosaicItemStyle}
           >
-            <Image
-              src={project.image}
-              alt={project.alt}
-              width={media?.width ?? 1600}
-              height={media?.height ?? 2000}
-              loading={index < eagerCount || (showCaptions && index < 4) ? "eager" : "lazy"}
-              sizes="(max-width: 759px) 100vw, (max-width: 1099px) 33vw, 25vw"
-            />
+            {expandable ? <a href={project.image} data-portfolio-photo aria-haspopup="dialog" aria-label={`Enlarge photo ${index + 1}: ${project.alt}`}>{photo}</a> : photo}
             {showCaptions ? (
               <figcaption>
                 <span className="editorial-mosaic__number editorial-mosaic__number--desktop">
@@ -107,4 +111,5 @@ export function PortfolioMosaic({
       })}
     </div>
   );
+  return expandable ? <PortfolioViewer>{mosaic}</PortfolioViewer> : mosaic;
 }
