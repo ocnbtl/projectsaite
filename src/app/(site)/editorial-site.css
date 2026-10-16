@@ -2597,12 +2597,12 @@ section:has(+ .editorial-service-offerings) {
     margin-right: 0;
   }
 
-  /* A staggered mobile composition, measured against a 100 x 90 canvas.
-     Crop only transparent margins; each silhouette keeps its native proportions. */
+  /* A flowing mobile composition on a 100 x 78 canvas. Middle silhouettes bridge
+     the upper/lower hands; transparent image corners may interlock, never the art. */
   .editorial-service-gallery.editorial-service-gallery--henna {
     display: block;
     position: relative;
-    aspect-ratio: 100 / 90;
+    aspect-ratio: 100 / 78;
     margin-block: 24px;
     padding: 0;
   }
@@ -2617,7 +2617,7 @@ section:has(+ .editorial-service-offerings) {
     position: absolute;
     width: calc(var(--henna-width) * 1%);
     left: calc(var(--henna-x) * 1%);
-    top: calc(var(--henna-y) * 100% / 90);
+    top: calc(var(--henna-y) * 100% / 78);
     transform: none;
     aspect-ratio: var(--henna-crop-width) / var(--henna-crop-height);
     overflow: hidden;
@@ -2625,8 +2625,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-01-cutout"]) {
     --henna-width: 23;
-    --henna-x: 1;
-    --henna-y: 3;
+    --henna-x: 0.5;
+    --henna-y: 0;
     --henna-source-width: 1055;
     --henna-crop-width: 1055;
     --henna-crop-height: 1785;
@@ -2635,7 +2635,7 @@ section:has(+ .editorial-service-offerings) {
   .editorial-service-gallery--henna figure:has(img[src*="henna-02-cutout"]) {
     --henna-width: 24;
     --henna-x: 1;
-    --henna-y: 45;
+    --henna-y: 43;
     --henna-source-width: 1221;
     --henna-crop-width: 1221;
     --henna-crop-height: 1360;
@@ -2643,8 +2643,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-03-cutout"]) {
     --henna-width: 24;
-    --henna-x: 27;
-    --henna-y: 14;
+    --henna-x: 19;
+    --henna-y: 24;
     --henna-source-width: 1281;
     --henna-crop-width: 1077;
     --henna-crop-height: 1343;
@@ -2653,8 +2653,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-04-cutout"]) {
     --henna-width: 22;
-    --henna-x: 28;
-    --henna-y: 48;
+    --henna-x: 40;
+    --henna-y: 39;
     --henna-source-width: 1320;
     --henna-crop-width: 988;
     --henna-crop-height: 1651;
@@ -2664,8 +2664,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-05-cutout"]) {
     --henna-width: 24;
-    --henna-x: 54;
-    --henna-y: 2;
+    --henna-x: 38;
+    --henna-y: 0;
     --henna-source-width: 1320;
     --henna-crop-width: 1047;
     --henna-crop-height: 1367;
@@ -2675,8 +2675,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-06-cutout"]) {
     --henna-width: 24;
-    --henna-x: 53;
-    --henna-y: 37;
+    --henna-x: 75.5;
+    --henna-y: 40;
     --henna-source-width: 1320;
     --henna-crop-width: 1138;
     --henna-crop-height: 1351;
@@ -2685,8 +2685,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-07-cutout"]) {
     --henna-width: 14;
-    --henna-x: 83;
-    --henna-y: 10;
+    --henna-x: 63;
+    --henna-y: 16;
     --henna-source-width: 1270;
     --henna-crop-width: 563;
     --henna-crop-height: 1451;
@@ -2695,8 +2695,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-08-cutout"]) {
     --henna-width: 20;
-    --henna-x: 79;
-    --henna-y: 49;
+    --henna-x: 78;
+    --henna-y: 0;
     --henna-source-width: 1320;
     --henna-crop-width: 777;
     --henna-crop-height: 1154;
