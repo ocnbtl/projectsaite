@@ -136,7 +136,7 @@ function ServiceGallery({ service, content }: { service: Service; content: SiteC
               width={service.slug === "face-painting" ? 1600 : 1800}
               height={service.slug === "face-painting" ? 1600 : 2200}
               loading={index < 2 ? "eager" : "lazy"}
-              sizes="(max-width: 759px) 94vw, 46vw"
+              sizes={service.slug === "henna" ? "12vw" : "(max-width: 759px) 94vw, 46vw"}
             />
           </figure>
         ),

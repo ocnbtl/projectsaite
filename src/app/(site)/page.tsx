@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 import { HeroIntro } from "@/components/site/hero-intro";
 import { HomepageMotion } from "@/components/site/homepage-motion";
@@ -167,7 +168,8 @@ export default async function HomePage() {
         <PortfolioMosaic projects={content.projects} revealOnScroll />
         <div className="editorial-section-link" data-home-reveal="portfolio-link">
           <Link className="editorial-button" href="/portfolio">
-            View the portfolio
+            <span>View the Full Portfolio</span>
+            <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
           </Link>
         </div>
       </section>

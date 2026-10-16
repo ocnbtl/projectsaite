@@ -790,6 +790,8 @@ body:has(.editorial-site) {
 
 .editorial-portfolio-preview h2 {
   margin: 0;
+  /* Keep the italic ascenders and descenders inside the reveal's clip box. */
+  padding-block: 0.1em 0.2em;
   font-family: var(--font-display), Georgia, serif;
   font-size: clamp(4.5rem, 8vw, 8.5rem);
   font-style: italic;
@@ -914,7 +916,12 @@ body:has(.editorial-site) {
 }
 
 .editorial-section-link .editorial-button {
+  gap: 12px;
   margin-top: 64px;
+}
+
+.editorial-section-link .editorial-button svg {
+  flex-shrink: 0;
 }
 
 .editorial-service-index {
@@ -1399,11 +1406,11 @@ section:has(+ .editorial-service-offerings) {
   filter: drop-shadow(0 20px 22px rgba(55, 58, 64, 0.16));
 }
 
-.editorial-service-gallery--henna {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.editorial-service-gallery.editorial-service-gallery--henna {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   align-items: center;
-  gap: clamp(18px, 3vw, 54px);
-  padding: clamp(54px, 8vw, 116px) 4vw;
+  gap: clamp(2px, 0.6vw, 10px);
+  padding: clamp(28px, 4vw, 64px) clamp(8px, 2vw, 32px);
   overflow: hidden;
 }
 
@@ -1417,20 +1424,20 @@ section:has(+ .editorial-service-offerings) {
 
 .editorial-service-gallery--henna figure:nth-child(2),
 .editorial-service-gallery--henna figure:nth-child(5) {
-  transform: translateY(8%) rotate(2deg);
+  transform: translateY(8%);
 }
 
 .editorial-service-gallery--henna figure:nth-child(3),
 .editorial-service-gallery--henna figure:nth-child(7) {
-  transform: translateY(-4%) rotate(-2deg);
+  transform: translateY(-4%);
 }
 
 .editorial-service-gallery--henna figure img {
   width: 100%;
   height: auto;
-  max-height: 760px;
+  max-height: 360px;
   object-fit: contain;
-  filter: drop-shadow(0 30px 28px rgba(55, 58, 64, 0.2));
+  filter: drop-shadow(0 8px 12px rgba(55, 58, 64, 0.16));
 }
 
 .editorial-service-gallery--makeup-artist {
@@ -2588,23 +2595,6 @@ section:has(+ .editorial-service-offerings) {
   .editorial-service-gallery--face-painting figure:nth-child(even) {
     width: 90%;
     margin-right: 0;
-  }
-
-  .editorial-service-gallery--henna {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 12px;
-    padding: 54px 12px 72px;
-  }
-
-  .editorial-service-gallery--henna figure,
-  .editorial-service-gallery--henna figure:nth-child(7),
-  .editorial-service-gallery--henna figure:nth-child(8) {
-    grid-column: auto;
-    transform: none;
-  }
-
-  .editorial-service-gallery--henna figure:nth-child(even) {
-    transform: translateY(8%);
   }
 
   .editorial-service-gallery--makeup-artist {
