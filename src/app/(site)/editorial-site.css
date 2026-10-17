@@ -543,7 +543,6 @@ body:has(.editorial-site) {
   min-width: 0;
   overflow: hidden;
   background: transparent;
-  mix-blend-mode: multiply;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
@@ -552,7 +551,8 @@ body:has(.editorial-site) {
   position: relative;
   --editorial-brand-gap: clamp(32px, 3.4vw, 48px);
 
-  background: transparent;
+  /* Keep the blend backdrop inside the moving layer, including on iOS. */
+  background: var(--editorial-canvas);
   display: flex;
   align-items: center;
   gap: var(--editorial-brand-gap);
@@ -613,6 +613,8 @@ body:has(.editorial-site) {
   height: 32px;
   object-fit: contain;
   filter: grayscale(1) contrast(1.15);
+  /* Blend each logo into its local canvas, not across a masked/animated parent. */
+  mix-blend-mode: multiply;
 }
 
 .editorial-brandmark img.is-inverted {
@@ -2625,7 +2627,7 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-01-cutout"]) {
     --henna-width: 23;
-    --henna-x: 0.5;
+    --henna-x: 1.5;
     --henna-y: 0;
     --henna-source-width: 1055;
     --henna-crop-width: 1055;
@@ -2634,8 +2636,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-02-cutout"]) {
     --henna-width: 24;
-    --henna-x: 1;
-    --henna-y: 43;
+    --henna-x: 4;
+    --henna-y: 42;
     --henna-source-width: 1221;
     --henna-crop-width: 1221;
     --henna-crop-height: 1360;
@@ -2643,8 +2645,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-03-cutout"]) {
     --henna-width: 24;
-    --henna-x: 19;
-    --henna-y: 24;
+    --henna-x: 22;
+    --henna-y: 23.5;
     --henna-source-width: 1281;
     --henna-crop-width: 1077;
     --henna-crop-height: 1343;
@@ -2653,8 +2655,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-04-cutout"]) {
     --henna-width: 22;
-    --henna-x: 40;
-    --henna-y: 39;
+    --henna-x: 45.5;
+    --henna-y: 37;
     --henna-source-width: 1320;
     --henna-crop-width: 988;
     --henna-crop-height: 1651;
@@ -2664,8 +2666,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-05-cutout"]) {
     --henna-width: 24;
-    --henna-x: 38;
-    --henna-y: 0;
+    --henna-x: 34;
+    --henna-y: 3;
     --henna-source-width: 1320;
     --henna-crop-width: 1047;
     --henna-crop-height: 1367;
@@ -2676,7 +2678,7 @@ section:has(+ .editorial-service-offerings) {
   .editorial-service-gallery--henna figure:has(img[src*="henna-06-cutout"]) {
     --henna-width: 24;
     --henna-x: 75.5;
-    --henna-y: 40;
+    --henna-y: 39;
     --henna-source-width: 1320;
     --henna-crop-width: 1138;
     --henna-crop-height: 1351;
@@ -2685,8 +2687,8 @@ section:has(+ .editorial-service-offerings) {
 
   .editorial-service-gallery--henna figure:has(img[src*="henna-07-cutout"]) {
     --henna-width: 14;
-    --henna-x: 63;
-    --henna-y: 16;
+    --henna-x: 61;
+    --henna-y: 15.5;
     --henna-source-width: 1270;
     --henna-crop-width: 563;
     --henna-crop-height: 1451;
@@ -2696,7 +2698,7 @@ section:has(+ .editorial-service-offerings) {
   .editorial-service-gallery--henna figure:has(img[src*="henna-08-cutout"]) {
     --henna-width: 20;
     --henna-x: 78;
-    --henna-y: 0;
+    --henna-y: 6.5;
     --henna-source-width: 1320;
     --henna-crop-width: 777;
     --henna-crop-height: 1154;
