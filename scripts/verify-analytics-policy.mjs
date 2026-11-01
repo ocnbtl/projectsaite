@@ -21,4 +21,17 @@ assert.equal(sourceOf("https://sageburress.com/?utm_source=__proto__", ""), "dir
 assert.equal(sourceOf("https://sageburress.com/?utm_source=someone@example.com", ""), "direct_or_unknown");
 assert.equal(sourceOf("https://sageburress.com/", "https://l.instagram.com/?private=value"), "instagram");
 assert.equal(sourceOf("https://sageburress.com/", "https://instagram.com.evil.example/private"), "other_referral");
-console.log("PASS: environment isolation, sensitive route exclusion and categorical source sanitization (19 assertions)");
+for (const [host, expected] of [["claude.ai", "claude"], ["www.perplexity.ai", "perplexity"], ["gemini.google.com", "gemini"]]) assert.equal(sourceOf("https://sageburress.com/", `https://${host}/private`), expected);
+assert.equal(sourceOf("https://sageburress.com/?utm_source=google_business", ""), "google_business");
+assert.equal(policy.serviceCategory("Travel Promotions"), "travel-collaborations");
+assert.equal(policy.serviceCategory("private@example.com"), "other");
+assert.equal(policy.serviceCategory("__proto__"), "other");
+const point = { x: 1.7, y: 22, type: "click", target_fixed: true, text: "PRIVATE" };
+assert.deepEqual(policy.safeHeatmap({
+  "https://sageburress.com/": [point],
+  "https://sageburress.com/contact": [point],
+  "https://sageburress.com/?email=PRIVATE": [point],
+  "https://sageburress.com/admin": [point],
+  "https://other.example/": [point],
+}, "https://sageburress.com"), { "https://sageburress.com/": [{ x: 2, y: 22, type: "click", target_fixed: true }] });
+console.log("PASS: environment isolation, sensitive route exclusion, categorical sources and service sanitization");

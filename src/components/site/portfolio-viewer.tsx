@@ -1,6 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
+import { track } from "@/lib/analytics";
 import { useCallback, useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 
 type Viewing = {
@@ -128,6 +129,7 @@ export function PortfolioViewer({ children }: { children: ReactNode }) {
     frame.replaceChildren(image);
     shade.current!.style.opacity = "0";
     modal.showModal();
+    track("portfolio_opened");
     expand(rect);
     source.style.visibility = "hidden";
     fadeBackdrop(1, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 520);

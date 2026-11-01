@@ -12,24 +12,25 @@
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",
-    "@vercel/blob": "2.6.1",
+    "@vercel/blob": "2.8.2",
     "lucide-react": "1.24.0",
-    "next": "16.3.8",
-    "posthog-js": "1.434.16",
+    "next": "16.4.3",
+    "posthog-js": "1.444.0",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "resend": "6.17.2",
-    "zod": "4.4.3"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "26.1.1",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.1",
-    "eslint-config-next": "16.3.8",
+    "eslint-config-next": "16.4.3",
     "typescript": "5.9.3"
   },
   "overrides": {
+    "@vercel/cli-config": { "zod": "4.6.7" },
     "postcss": "8.5.28",
     "sharp": "0.35.5"
   }

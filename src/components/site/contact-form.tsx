@@ -3,6 +3,7 @@
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
+import { serviceCategory } from "@/lib/analytics-policy";
 import { InquirySelect } from "@/components/site/inquiry-select";
 
 const inquiryOptions = [
@@ -27,12 +28,14 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
   const selectedInquiry = inquiryOptions.includes(normalizedInitialInquiry as (typeof inquiryOptions)[number])
     ? normalizedInitialInquiry
     : "Content Creation";
+  const inquiry = useRef(selectedInquiry);
+  const formTrack: typeof track = (event, properties = {}) => track(event, { ...properties, service: serviceCategory(inquiry.current) });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current) return;
     submitting.current = true;
-    track("contact_submit_attempted");
+    formTrack("contact_submit_attempted");
     validationTracked.current = false;
     setState("sending");
     const form = event.currentTarget;
@@ -47,14 +50,14 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
       const result = (await response.json()) as { ok?: boolean; code?: string; delivery?: string };
 
       if (response.ok && result.ok && result.delivery === "accepted") {
-        track("contact_submit_succeeded");
+        formTrack("contact_submit_succeeded");
         setState("sent");
         form.reset();
         return;
       }
 
       if (result.code === "delivery_not_configured") {
-        track("contact_submit_failed", { reason: "delivery_not_configured" });
+        formTrack("contact_submit_failed", { reason: "delivery_not_configured" });
         const subject = encodeURIComponent(`${String(payload.inquiry)} inquiry from ${String(payload.name)}`);
         const body = encodeURIComponent(`${String(payload.message)}\n\nFrom: ${String(payload.name)} <${String(payload.email)}>`);
         setFallbackHref(`mailto:contact@sageburress.com?subject=${subject}&body=${body}`);
@@ -63,10 +66,10 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
       }
 
       const reason = result.code === "invalid_form" || result.code === "rate_limited" || result.code === "delivery_failed" ? result.code : "unexpected_response";
-      track("contact_submit_failed", { reason });
+      formTrack("contact_submit_failed", { reason });
       setState("error");
     } catch {
-      track("contact_submit_failed", { reason: "network" });
+      formTrack("contact_submit_failed", { reason: "network" });
       setState("error");
     } finally {
       submitting.current = false;
@@ -80,15 +83,15 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
         <p className="ui-label">Message received</p>
         <h2>Thank you for reaching out.</h2>
         <p>Sage will review the details and respond from contact@sageburress.com.</p>
-        <button className="text-link" type="button" onClick={() => { started.current = false; setState("idle"); }}>Send another inquiry</button>
+        <button className="text-link" type="button" onClick={() => { started.current = false; inquiry.current = selectedInquiry; setState("idle"); }}>Send another inquiry</button>
       </div>
     );
   }
 
   return (
     <form className="contact-form ph-no-capture" data-analytics-private onSubmit={handleSubmit}
-      onInput={() => { validationTracked.current = false; if (!started.current) started.current = track("contact_form_started"); }}
-      onInvalid={() => { if (!validationTracked.current) validationTracked.current = track("contact_validation_failed", { reason: "invalid_form" }); }}>
+      onInput={() => { validationTracked.current = false; if (!started.current) started.current = formTrack("contact_form_started"); }}
+      onInvalid={() => { if (!validationTracked.current) validationTracked.current = formTrack("contact_validation_failed", { reason: "invalid_form" }); }}>
       <div className="contact-form__row">
         <label>
           <span>Name</span>
@@ -100,7 +103,7 @@ export function ContactForm({ initialInquiry = "Content Creation" }: { initialIn
         </label>
       </div>
 
-      <InquirySelect options={inquiryOptions} initialValue={selectedInquiry} disabled={state === "sending"} onChange={() => { validationTracked.current = false; if (!started.current) started.current = track("contact_form_started"); }} />
+      <InquirySelect options={inquiryOptions} initialValue={selectedInquiry} disabled={state === "sending"} onChange={value => { inquiry.current = value; validationTracked.current = false; if (!started.current) started.current = formTrack("contact_form_started"); }} />
 
       <label>
         <span>Project details</span>

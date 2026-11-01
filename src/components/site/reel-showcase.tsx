@@ -2,6 +2,7 @@
 
 import { ArrowUpRight, ChevronLeft, ChevronRight, Heart, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { track } from "@/lib/analytics";
 
 export type Reel = {
   id: string; title: string; href: string; src: string; poster: string;
@@ -10,6 +11,7 @@ export type Reel = {
 
 function ReelFrame({ reel }: { reel: Reel }) {
   const video = useRef<HTMLVideoElement>(null);
+  const measured = useRef({ started: false, completed: false });
   const [started, setStarted] = useState(false);
   const [waiting, setWaiting] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -48,10 +50,11 @@ function ReelFrame({ reel }: { reel: Reel }) {
           if (other !== current) other.pause();
         });
       }}
-      onPlaying={() => { setWaiting(false); setFailed(false); }}
+      onPlaying={() => { setWaiting(false); setFailed(false); if (!measured.current.started) measured.current.started = track("reel_started", { reel: reel.id }); }}
+      onEnded={() => { if (measured.current.started && !measured.current.completed) measured.current.completed = track("reel_completed", { reel: reel.id }); }}
       onWaiting={() => setWaiting(true)}
       onPause={() => setWaiting(false)}
-      onError={() => { setFailed(true); setWaiting(false); }}>
+      onError={() => { setFailed(true); setWaiting(false); track("site_problem", { reason: "media_load", reel: reel.id }); }}>
       Your browser cannot play this video. <a href={reel.href}>Watch on Instagram</a>.
     </video>
     {!started && !failed && <button type="button" className="editorial-reels__play" aria-label={`Play ${reel.title}`} onClick={play}><Play size={28} aria-hidden="true" /></button>}

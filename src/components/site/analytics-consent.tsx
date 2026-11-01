@@ -3,12 +3,17 @@
 import Link from "next/link";
 import { Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReportWebVitals } from "next/web-vitals";
 import { analyticsActive, internalVisitor, privacySignal, readConsent, saveConsent, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
 import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath, type AnalyticsConsent } from "@/lib/analytics-policy";
 
 export function AnalyticsConsent({ environment }: { environment: string }) {
   const pathname = usePathname();
+  const initialPath = useRef(pathname);
+  useReportWebVitals(metric => {
+    if (location.pathname === initialPath.current) track("web_vital", { metric: metric.name, value: metric.value });
+  });
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const configured = Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY);
@@ -43,21 +48,28 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
     const click = (event: MouseEvent) => {
       const anchor = (event.target as Element)?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!anchor) return;
+      const placement = anchor.closest("nav") ? "navigation" : anchor.closest("footer") ? "footer" : "page";
       const url = new URL(anchor.href, location.origin);
       if (url.protocol === "mailto:") track("key_action_clicked", { action: "email" });
       else if (url.origin !== location.origin && ["http:", "https:"].includes(url.protocol)) track("key_action_clicked", { action: "external_link" });
       else if (publicPath(url.pathname)) {
         const action = url.pathname === "/contact" ? "contact" : url.pathname.startsWith("/services/") ? "service" : url.pathname.startsWith("/portfolio") ? "portfolio" : undefined;
-        if (action) track("key_action_clicked", { action, destination: url.pathname });
+        if (action) track("key_action_clicked", { action, destination: url.pathname, placement });
       }
     };
-    const error = () => track("site_problem", { reason: "runtime_error" });
-    const rejection = () => track("site_problem", { reason: "unhandled_rejection" });
+    const error = () => { track("site_problem", { reason: "runtime_error" }); track("$exception", { reason: "runtime_error" }); };
+    const rejection = () => { track("site_problem", { reason: "unhandled_rejection" }); track("$exception", { reason: "unhandled_rejection" }); };
+    const toggle = (event: Event) => {
+      const detail = event.target;
+      if (detail instanceof HTMLDetailsElement && detail.open && detail.hasAttribute("data-analytics-faq")) track("faq_opened", { faq: Number(detail.dataset.analyticsFaq) });
+    };
     document.addEventListener("click", click);
+    document.addEventListener("toggle", toggle, true);
     window.addEventListener("error", error);
     window.addEventListener("unhandledrejection", rejection);
     return () => {
       document.removeEventListener("click", click);
+      document.removeEventListener("toggle", toggle, true);
       window.removeEventListener("error", error);
       window.removeEventListener("unhandledrejection", rejection);
     };

@@ -182,7 +182,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {guide && <section className="editorial-faq" aria-labelledby="service-faq-heading">
         <header><h2 id="service-faq-heading">A few useful answers.</h2></header>
-        <div>{guide.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}<Plus className="editorial-faq__icon" size={18} aria-hidden="true" /></summary><p><ServiceFaqAnswer faq={faq} /></p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
+        <div>{guide.faqs.map((faq, index) => <details key={faq.question} data-analytics-faq={index}><summary>{faq.question}<Plus className="editorial-faq__icon" size={18} aria-hidden="true" /></summary><p><ServiceFaqAnswer faq={faq} /></p></details>)}<Link className="editorial-faq__contact" href={`/contact?inquiry=${encodeURIComponent(service.title)}`}>Ask about your project ↗</Link></div>
       </section>}
 
       <section className="editorial-contact-callout">

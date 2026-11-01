@@ -4,7 +4,7 @@ import { Check, ChevronDown } from "lucide-react";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 
 export function InquirySelect({ options, initialValue, disabled, onChange }: {
-  options: readonly string[]; initialValue: string; disabled?: boolean; onChange: () => void;
+  options: readonly string[]; initialValue: string; disabled?: boolean; onChange: (value: string) => void;
 }) {
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ export function InquirySelect({ options, initialValue, disabled, onChange }: {
   const [value, setValue] = useState(initialValue);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(options.indexOf(initialValue));
-  const choose = (index: number) => { setValue(options[index]); setOpen(false); onChange(); };
+  const choose = (index: number) => { setValue(options[index]); setOpen(false); onChange(options[index]); };
 
   useEffect(() => {
     const list = root.current?.querySelector<HTMLElement>('[role="listbox"]');

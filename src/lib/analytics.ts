@@ -1,13 +1,27 @@
 "use client";
 
 import type { PostHog, PostHogConfig } from "posthog-js";
-import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
+import { safeHeatmap } from "./analytics-policy";
+import { ATTRIBUTION_KEY, SERVICES, REELS, CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
 
 let client: PostHog | undefined;
 let loading: Promise<void> | undefined;
 let deployment = "local";
 let lastPage: string | null = null;
 let source = "direct_or_unknown";
+let landingSource: string | undefined;
+const sourceNames = new Set(["instagram", "facebook", "threads", "google", "bing", "chatgpt", "duckduckgo", "youtube", "tiktok", "claude", "gemini", "perplexity", "google_business", "internal", "other_referral", "direct_or_unknown"]);
+
+// Before consent only a category is retained in memory, never a URL or identifier.
+function rememberSource() {
+  landingSource ??= trafficSource(location.href, document.referrer);
+  if (!allowed()) return;
+  try {
+    const saved = sessionStorage.getItem(ATTRIBUTION_KEY);
+    source = saved && sourceNames.has(saved) ? saved : landingSource;
+    sessionStorage.setItem(ATTRIBUTION_KEY, source);
+  } catch { source = landingSource; }
+}
 
 export function readConsent(): AnalyticsConsent | null {
   try {
@@ -38,14 +52,20 @@ function replayAllowed() {
   return allowed() && readConsent() === "recordings" && location.pathname !== "/contact" && location.pathname !== "/privacy" && !location.search && !location.hash;
 }
 
+function heatmapsAllowed() {
+  return allowed() && !["/contact", "/privacy"].includes(location.pathname) && !location.search && !location.hash;
+}
+
 // A closed property list removes SDK URL/referrer/person defaults as well as accidental application data.
 const protocolKeys = new Set(["token", "distinct_id", "$device_id", "$session_id", "$window_id", "$insert_id", "$lib", "$lib_version", "$browser", "$browser_version", "$os", "$os_version", "$device_type", "$screen_height", "$screen_width", "$viewport_height", "$viewport_width", "$snapshot_bytes", "$snapshot_data", "$snapshot_source"]);
-const appKeys = new Set(["action", "destination", "reason", "traffic_source", "environment", "schema_version", "page_path", "$current_url", "$pathname", "$host", "$process_person_profile", "$geoip_disable"]);
+const appKeys = new Set(["action", "destination", "reason", "service", "placement", "reel", "faq", "metric", "value", "traffic_source", "environment", "schema_version", "page_path", "$current_url", "$pathname", "$host", "$process_person_profile", "$geoip_disable"]);
 
 export const beforeSend: PostHogConfig["before_send"] = (event) => {
   if (!event || !allowed()) return null;
   if (event.event === "$snapshot") {
     if (!replayAllowed()) return null;
+  } else if (event.event === "$$heatmap") {
+    if (!heatmapsAllowed()) return null;
   } else if (!(EVENT_NAMES as readonly string[]).includes(event.event)) return null;
   const properties = Object.fromEntries(Object.entries(event.properties ?? {}).filter(([key]) => protocolKeys.has(key) || appKeys.has(key)));
   const path = publicPath(location.pathname)!;
@@ -55,7 +75,17 @@ export const beforeSend: PostHogConfig["before_send"] = (event) => {
   properties.page_path = path;
   properties.environment = deployment === "production" ? "production" : "test";
   properties.traffic_source = source;
-  properties.schema_version = 1;
+  properties.schema_version = 2;
+  if (event.event === "$$heatmap") {
+    properties.$heatmap_data = safeHeatmap(event.properties?.$heatmap_data, location.origin);
+    if (!Object.keys(properties.$heatmap_data).length) return null;
+  }
+  // Error Tracking receives only these fixed labels, never the original error,
+  // stack, message, source code, URL, console output or user-entered content.
+  if (event.event === "$exception") {
+    const reason = properties.reason === "unhandled_rejection" ? "unhandled_rejection" : "runtime_error";
+    properties.$exception_list = [{ type: "SiteRuntimeError", value: reason, mechanism: { type: "generic", handled: false } }];
+  }
   properties.$process_person_profile = false;
   properties.$geoip_disable = true;
   event.properties = properties;
@@ -66,11 +96,14 @@ export const beforeSend: PostHogConfig["before_send"] = (event) => {
 
 export async function syncAnalytics(environment: string) {
   deployment = environment;
+  rememberSource();
   if (!allowed() || !process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+    client?.set_config({ capture_heatmaps: false });
     client?.stopSessionRecording();
     if (readConsent() === "denied" || internalVisitor() || privacySignal()) {
       client?.opt_out_capturing();
       client?.reset();
+      try { sessionStorage.removeItem(ATTRIBUTION_KEY); } catch { /* Storage may be disabled. */ }
     }
     lastPage = null;
     return;
@@ -80,12 +113,11 @@ export async function syncAnalytics(environment: string) {
       // No PostHog network request or identifier is created until explicit consent.
       const { default: posthog } = await import("posthog-js/full/no-external");
       if (!allowed()) return;
-      source = trafficSource(location.href, document.referrer);
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
         ui_host: "https://us.posthog.com",
         defaults: "2026-05-30",
-        persistence: "memory",
+        persistence: "sessionStorage",
         person_profiles: "never",
         ip: false,
         autocapture: false,
@@ -96,6 +128,7 @@ export async function syncAnalytics(environment: string) {
         capture_exceptions: false,
         capture_performance: false,
         enable_heatmaps: false,
+        capture_heatmaps: false,
         enable_recording_console_log: false,
         disable_surveys: true,
         disable_session_recording: true,
@@ -140,16 +173,19 @@ export async function syncAnalytics(environment: string) {
   }
   if (!client || !allowed()) return;
   if (client.has_opted_out_capturing()) client.opt_in_capturing({ captureEventName: false });
+  client.set_config({ capture_heatmaps: heatmapsAllowed() });
   if (replayAllowed()) client.startSessionRecording();
   else client.stopSessionRecording();
   const path = publicPath(location.pathname);
   if (path !== lastPage) {
     lastPage = path;
     track("$pageview");
+    if (path?.startsWith("/services/")) track("service_viewed", { service: path.split("/")[2] });
   }
 }
 
 export function stopAnalytics() {
+  client?.set_config({ capture_heatmaps: false });
   client?.stopSessionRecording();
   lastPage = null;
 }
@@ -159,7 +195,16 @@ export function track(event: AnalyticsEvent, properties: EventProperties = {}) {
   const safe: EventProperties = {};
   if (["contact", "email", "external_link", "portfolio", "service"].includes(properties.action ?? "")) safe.action = properties.action;
   if (properties.destination && publicPath(properties.destination)) safe.destination = publicPath(properties.destination)!;
-  if (["invalid_form", "rate_limited", "delivery_not_configured", "delivery_failed", "network", "unexpected_response", "runtime_error", "unhandled_rejection"].includes(properties.reason ?? "")) safe.reason = properties.reason;
+  if (["invalid_form", "rate_limited", "delivery_not_configured", "delivery_failed", "network", "unexpected_response", "runtime_error", "unhandled_rejection", "media_load"].includes(properties.reason ?? "")) safe.reason = properties.reason;
+  if ((SERVICES as readonly string[]).includes(properties.service ?? "")) safe.service = properties.service;
+  else if (location.pathname.startsWith("/services/")) safe.service = location.pathname.split("/")[2];
+  if (["navigation", "footer", "page"].includes(properties.placement ?? "")) safe.placement = properties.placement;
+  if (REELS.includes(properties.reel ?? "")) safe.reel = properties.reel;
+  if (Number.isInteger(properties.faq) && properties.faq! >= 0 && properties.faq! < 20) safe.faq = properties.faq;
+  if (["CLS", "LCP", "INP", "FCP", "TTFB"].includes(properties.metric ?? "") && Number.isFinite(properties.value) && properties.value! >= 0 && properties.value! < 3_600_000) {
+    safe.metric = properties.metric;
+    safe.value = Math.round(properties.value! * 1000) / 1000;
+  }
   try {
     client.capture(event, safe);
     return true;
@@ -169,7 +214,7 @@ export function track(event: AnalyticsEvent, properties: EventProperties = {}) {
 export function saveConsent(value: AnalyticsConsent, environment: string) {
   try { localStorage.setItem(CONSENT_KEY, value); } catch { return false; }
   if (value !== "recordings") client?.stopSessionRecording();
-  if (value === "denied") { client?.opt_out_capturing(); client?.reset(); lastPage = null; }
+  if (value === "denied") { client?.opt_out_capturing(); client?.reset(); lastPage = null; try { sessionStorage.removeItem(ATTRIBUTION_KEY); } catch { /* Storage unavailable. */ } }
   void syncAnalytics(environment);
   window.dispatchEvent(new Event(PREFERENCES_EVENT));
   return true;

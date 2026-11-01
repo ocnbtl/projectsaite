@@ -99,7 +99,7 @@ async (page) => {
   await page.waitForTimeout(12000);
   assert(events.filter(e=>e.event === "$snapshot").length === atQuery, "Pages with query strings or fragments produce no recording");
   const latestView = events.filter(e=>e.event === "$pageview").at(-1);
-  assert(latestView.properties.traffic_source === "instagram" && latestView.properties.$current_url === "https://sageburress.com/", "Traffic source remains categorical and page URL is sanitized");
+  assert(latestView.properties.traffic_source === events.find(e=>e.event === "$pageview").properties.traffic_source && latestView.properties.$current_url === "https://sageburress.com/", "Session source remains categorical and page URL is sanitized");
   assert(!JSON.stringify(requests).includes("QUERY_PRIVATE") && !JSON.stringify(requests).includes("HASH_PRIVATE"), "Sensitive URL values never leave in any PostHog request");
   await page.goto(`${origin}/admin/login`);
   const adminRequests = requests.length;
