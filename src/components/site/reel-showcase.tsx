@@ -1,12 +1,12 @@
 "use client";
 
-import { ArrowUpRight, ChevronLeft, ChevronRight, Heart, Play } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Eye, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
 
 export type Reel = {
   id: string; title: string; href: string; src: string; poster: string;
-  instagram?: { likes?: number; views?: number; updated: string };
+  instagram?: { views: string; updated: string };
 };
 
 function ReelFrame({ reel }: { reel: Reel }) {
@@ -111,10 +111,9 @@ export function ReelShowcase({ reels }: { reels: Reel[] }) {
       {reels.map((reel, index) => <article className="editorial-reels__card" key={reel.id} aria-label={`${index + 1} of ${reels.length}: ${reel.title}`}>
         <ReelFrame reel={reel} />
         <h3>{reel.title}</h3>
-        {reel.instagram && (reel.instagram.likes !== undefined || reel.instagram.views !== undefined) && <div className="editorial-reels__metrics">
+        {reel.instagram?.views !== undefined && <div className="editorial-reels__metrics">
           <p>
-            {reel.instagram.likes !== undefined && <span><Heart size={16} aria-hidden="true" />{reel.instagram.likes.toLocaleString("en-US")} likes</span>}
-            {reel.instagram.views !== undefined && <span><Play size={16} aria-hidden="true" />{reel.instagram.views.toLocaleString("en-US")} views</span>}
+            <span><Eye size={16} aria-hidden="true" />{reel.instagram.views} views</span>
           </p>
           <small>On Instagram · Updated <time dateTime={reel.instagram.updated}>{new Date(`${reel.instagram.updated}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></small>
         </div>}
