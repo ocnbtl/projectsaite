@@ -2919,6 +2919,27 @@ section:has(+ .editorial-service-offerings) {
   .editorial-rail .editorial-brandmark--ocean-savage img { margin-left: -19px; margin-right: -20px; }
 }
 
+.editorial-travel-photography {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(18px, 2vw, 32px);
+  padding: clamp(32px, 4vw, 64px) 5vw;
+}
+
+.editorial-travel-photography img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 759px) {
+  .editorial-travel-photography {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: 18px;
+  }
+}
+
 /* Native horizontal scrolling keeps complete portrait reels in their own screens. */
 .editorial-reels { min-width: 0; padding: clamp(32px, 4vw, 64px) 0 clamp(40px, 5vw, 72px); border-bottom: 1px solid var(--editorial-rule); }
 .editorial-reels__header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 5vw 28px; }

@@ -55,7 +55,25 @@ function ServiceGallery({ service, content }: { service: Service; content: SiteC
   }
 
   if (service.slug === "content-creation") return <ContentCreationShowcase />;
-  if (service.slug === "travel-collaborations") return <ReelShowcase reels={travelReels} />;
+  if (service.slug === "travel-collaborations") return <>
+    <ReelShowcase reels={travelReels} />
+    <section className="editorial-travel-photography" aria-label="Sage’s travel photography">
+      <Image
+        src="/media/services/travel-sage-lagoon.webp"
+        alt="Turquoise lagoon, a palm-covered islet, and green mountain peaks beneath a cloudy sky."
+        width={2400}
+        height={1600}
+        sizes="(max-width: 759px) calc(100vw - 36px), 44vw"
+      />
+      <Image
+        src="/media/services/travel-sage-coast.webp"
+        alt="A coastal road beside a calm lagoon, with palm trees and mountain peaks across the water."
+        width={2400}
+        height={1800}
+        sizes="(max-width: 759px) calc(100vw - 36px), 44vw"
+      />
+    </section>
+  </>;
 
   return (
     <section className={`editorial-service-gallery editorial-service-gallery--${service.slug}`} aria-label={`${service.title} examples`}>
