@@ -10,8 +10,20 @@ const load = async path => {
 const { contentCreationReels, travelReels } = await load("../src/content/service-reels.ts");
 const { REELS } = await load("../src/lib/analytics-policy.ts");
 const sources = await readFile(new URL("../public/media/reels/SOURCES.md", import.meta.url), "utf8");
-assert.deepEqual(contentCreationReels.map(r => r.id), ["Ddo5D8uJbMw", "DdmF7BoRO4i", "DcPCf61JC_A", "DUjZuJvCRyd", "DUsxBB9kZ9t", "DOZGwmliabC", "DdfKnCVJpp_"]);
-assert.deepEqual(travelReels.map(r => r.id), ["DdcHGPxJn5i", "DdbmqQ7RlDQ", "DQkL8qsiaO2", "DdhgiJ-p5pB", "DdaFZX4JFLA"]);
+const numericViews = value => {
+  const match = /^(\d+(?:\.\d+)?)([KM])?$/.exec(value.replaceAll(",", ""));
+  assert(match, `Invalid Instagram views: ${value}`);
+  return Number(match[1]) * ({ K: 1000, M: 1000000 }[match[2]] ?? 1);
+};
+assert.equal(numericViews("23K"), 23000);
+assert.equal(numericViews("1.2M"), 1200000);
+assert.equal(numericViews("4,230"), 4230);
+assert.deepEqual(contentCreationReels.map(r => r.id), ["DcPCf61JC_A", "DOZGwmliabC", "DdfKnCVJpp_", "Ddo5D8uJbMw", "DUsxBB9kZ9t", "DUjZuJvCRyd", "DdmF7BoRO4i"]);
+assert.deepEqual(travelReels.map(r => r.id), ["DdaFZX4JFLA", "DQkL8qsiaO2", "DdbmqQ7RlDQ", "DdhgiJ-p5pB", "DdcHGPxJn5i"]);
+for (const gallery of [contentCreationReels, travelReels]) {
+  const counts = gallery.map(reel => numericViews(reel.instagram.views));
+  assert(counts.every((count, index) => index === 0 || counts[index - 1] >= count), "Each gallery must run from highest to lowest Instagram views");
+}
 for (const reel of [...contentCreationReels, ...travelReels]) {
   assert(REELS.includes(reel.id), `Analytics must recognize ${reel.id}`);
   assert.equal(reel.href, `https://www.instagram.com/reel/${reel.id}/`);
@@ -25,4 +37,4 @@ for (const reel of [...contentCreationReels, ...travelReels]) {
   assert.equal(video.toString("ascii", 4, 8), "ftyp", "MP4 container");
   assert(video.indexOf(Buffer.from("moov")) < video.indexOf(Buffer.from("mdat")), "Fast-start streaming metadata");
 }
-console.log("PASS: 7 content + 5 travel reels in approved order; 24 local media assets, fast-start MP4s, truthful counts and analytics IDs");
+console.log("PASS: 7 content + 5 travel reels in descending numeric view order; 24 local media assets, fast-start MP4s, truthful counts and analytics IDs");

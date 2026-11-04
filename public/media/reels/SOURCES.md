@@ -1,6 +1,7 @@
 # Selected reels — November 4, 2026
 
-The owner selected these public Instagram reels for native website playback, in this order.
+The owner selected these public Instagram reels for native website playback.
+Each gallery is displayed in descending order by the recorded Instagram views.
 Downloaded without account cookies on November 4, 2026. MP4s retain the complete clip and audio,
 encoded H.264/AAC at a maximum width of 720 pixels with fast-start metadata and no personal metadata.
 Posters are frames from the corresponding videos.
@@ -28,9 +29,9 @@ not a claim of exactly 23,000 views. Likes are no longer presented on the websit
 | DdhgiJ-p5pB | 2,018 |
 | DdaFZX4JFLA | 23K |
 
-Content: Ddo5D8uJbMw, DdmF7BoRO4i, DcPCf61JC_A, DUjZuJvCRyd, DUsxBB9kZ9t, DOZGwmliabC, DdfKnCVJpp_
+Content: DcPCf61JC_A, DOZGwmliabC, DdfKnCVJpp_, Ddo5D8uJbMw, DUsxBB9kZ9t, DUjZuJvCRyd, DdmF7BoRO4i
 
-Travel: DdcHGPxJn5i, DdbmqQ7RlDQ, DQkL8qsiaO2, DdhgiJ-p5pB, DdaFZX4JFLA
+Travel: DdaFZX4JFLA, DQkL8qsiaO2, DdbmqQ7RlDQ, DdhgiJ-p5pB, DdcHGPxJn5i
 
 Canonical source URL for each ID: `https://www.instagram.com/reel/ID/`.
 
