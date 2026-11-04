@@ -2942,6 +2942,7 @@ section:has(+ .editorial-service-offerings) {
 
 /* Native horizontal scrolling keeps complete portrait reels in their own screens. */
 .editorial-reels { min-width: 0; padding: clamp(32px, 4vw, 64px) 0 clamp(40px, 5vw, 72px); border-bottom: 1px solid var(--editorial-rule); }
+.editorial-reels:has(+ .editorial-travel-photography) { border-bottom: 0; }
 .editorial-reels__header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 5vw 28px; }
 .editorial-reels h2 { margin: 0 0 12px; font: italic 400 clamp(32px, 4vw, 56px)/1.05 var(--font-display), Georgia, serif; letter-spacing: -.03em; }
 .editorial-reels__header p { margin: 0; color: var(--editorial-muted); font-size: 15px; line-height: 1.6; }
