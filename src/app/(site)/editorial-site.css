@@ -1466,43 +1466,6 @@ section:has(+ .editorial-service-offerings) {
   object-fit: contain;
 }
 
-.editorial-travel-collage {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: center;
-  gap: clamp(14px, 2vw, 32px);
-  padding: clamp(34px, 6vw, 90px) 4vw;
-  border-bottom: 1px solid var(--editorial-rule);
-}
-
-.editorial-travel-collage figure {
-  grid-column: span 4;
-  margin: 0;
-  padding: 7px;
-  border: 1px solid var(--editorial-soft-rule);
-  transition: transform 360ms var(--editorial-ease-out), box-shadow 360ms var(--editorial-ease-out);
-}
-
-.editorial-travel-collage figure:nth-child(2) {
-  transform: translateY(8%);
-}
-
-.editorial-travel-collage figure:nth-child(3) {
-  transform: translateY(-4%);
-}
-
-.editorial-travel-collage figure:is(:hover, :focus-within) {
-  z-index: 1;
-  box-shadow: 0 24px 52px rgba(55, 58, 64, 0.12);
-  transform: translateY(-4px);
-}
-
-.editorial-travel-collage img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .editorial-service-modeling-gallery {
   padding: 10px;
   border-bottom: 1px solid var(--editorial-rule);
@@ -1756,8 +1719,11 @@ section:has(+ .editorial-service-offerings) {
   border: 0;
 }
 
-.editorial-contact-layout dl > div + div {
-  border-top: 1px solid var(--editorial-rule);
+.editorial-contact-layout dl > .editorial-contact-services-box {
+  margin-top: 12px;
+  padding: 20px;
+  border: 1px solid var(--editorial-soft-rule);
+  border-radius: 16px;
 }
 
 .editorial-contact-layout dt {
@@ -1805,8 +1771,10 @@ section:has(+ .editorial-service-offerings) {
   gap: 9px;
 }
 
-.editorial-site .contact-form label > span {
+.editorial-site .contact-form label > span,
+.editorial-site .contact-form .inquiry-select > label {
   font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -2727,28 +2695,6 @@ section:has(+ .editorial-service-offerings) {
     grid-column: 1;
   }
 
-  .editorial-travel-collage {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    padding: 40px 10px 56px;
-  }
-
-  .editorial-travel-collage figure {
-    grid-column: auto;
-    padding: 4px;
-  }
-
-  .editorial-travel-collage figure:first-child {
-    grid-column: 1 / -1;
-    width: 72%;
-    justify-self: center;
-  }
-
-  .editorial-travel-collage figure:nth-child(2),
-  .editorial-travel-collage figure:nth-child(3) {
-    transform: none;
-  }
-
   .editorial-service-modeling-gallery {
     padding: 6px;
   }
@@ -3012,7 +2958,7 @@ section:has(+ .editorial-service-offerings) {
 
 /* Select-only combobox, using the contact form's existing privacy boundary. */
 .inquiry-select { position: relative; min-width: 0; }
-.editorial-site .inquiry-select > label { display: block; margin-bottom: 9px; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.editorial-site .inquiry-select > label { display: block; margin-bottom: 9px; }
 .inquiry-select__trigger { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 54px; padding: 14px 16px; border: 1px solid var(--editorial-soft-rule); border-radius: 12px; background: rgba(255,255,255,.26); color: var(--editorial-ink); font: inherit; text-align: left; cursor: pointer; }
 .inquiry-select__trigger svg { flex-shrink: 0; transition: transform 180ms var(--editorial-ease-out); }
 .inquiry-select__trigger[aria-expanded="true"] svg { transform: rotate(180deg); }

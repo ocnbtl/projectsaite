@@ -51,7 +51,7 @@ export default async function ContactPage({
                 all helpful. But none are required to start.
               </dd>
             </div>
-            <div>
+            <div className="editorial-contact-services-box">
               <dt>Services</dt>
               <dd>
                 <ul className="editorial-contact-services">

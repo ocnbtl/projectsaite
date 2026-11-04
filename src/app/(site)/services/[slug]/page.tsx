@@ -45,28 +45,6 @@ function ContentCreationShowcase() {
   return <ReelShowcase reels={contentCreationReels} />;
 }
 
-function TravelPromotionsShowcase({ service }: { service: Service }) {
-  return (
-    <>
-      <ReelShowcase reels={travelReels} />
-      <section className="editorial-travel-collage" aria-label="Travel promotion photography">
-        {service.images.map((image, index) => (
-          <figure key={image.id}>
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={index === 2 ? 1536 : 1120}
-              height={index === 2 ? 1024 : 1400}
-              loading={index < 2 ? "eager" : "lazy"}
-              sizes="(max-width: 759px) 92vw, 48vw"
-            />
-          </figure>
-        ))}
-      </section>
-    </>
-  );
-}
-
 function ServiceGallery({ service, content }: { service: Service; content: SiteContent }) {
   if (service.slug === "modeling") {
     return (
@@ -77,7 +55,7 @@ function ServiceGallery({ service, content }: { service: Service; content: SiteC
   }
 
   if (service.slug === "content-creation") return <ContentCreationShowcase />;
-  if (service.slug === "travel-collaborations") return <TravelPromotionsShowcase service={service} />;
+  if (service.slug === "travel-collaborations") return <ReelShowcase reels={travelReels} />;
 
   return (
     <section className={`editorial-service-gallery editorial-service-gallery--${service.slug}`} aria-label={`${service.title} examples`}>
