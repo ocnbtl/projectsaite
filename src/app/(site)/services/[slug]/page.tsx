@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { PortfolioMosaic } from "@/components/site/portfolio-mosaic";
 import { portfolioPageProjects } from "@/content/portfolio-additions";
 import { ReelShowcase } from "@/components/site/reel-showcase";
+import { contentCreationReels, travelReels } from "@/content/service-reels";
 import { seedContent, type Service, type SiteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/content-store";
 import { StructuredData } from "@/components/site/structured-data";
@@ -15,49 +16,6 @@ import { pageMetadata } from "@/lib/search-metadata";
 import { siteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
-
-const contentCreationReels = [
-  {
-    id: "vacation-pose-ideas",
-    title: "Vacation photo pose ideas",
-    href: "https://www.instagram.com/sage_burress/reel/Da3XPT1pm-w/",
-    src: "/media/reels/Da3XPT1pm-w.mp4",
-    poster: "/media/reels/Da3XPT1pm-w.jpg",
-    instagram: { likes: 72, updated: "2026-10-14" },
-  },
-  {
-    id: "beach-day-grwm",
-    title: "Beach-day GRWM",
-    href: "https://www.instagram.com/sage_burress/reel/DbBBnLaxJVK/",
-    src: "/media/reels/DbBBnLaxJVK.mp4",
-    poster: "/media/reels/DbBBnLaxJVK.jpg",
-    instagram: { likes: 98, updated: "2026-10-14" },
-  },
-  {
-    id: "runway-walk",
-    title: "Runway walk reel",
-    href: "https://www.instagram.com/sage_burress/reel/DNTjfV4p1Mh/",
-    src: "/media/reels/DNTjfV4p1Mh.mp4",
-    poster: "/media/reels/DNTjfV4p1Mh.jpg",
-    instagram: { likes: 5702, updated: "2026-10-14" },
-  },
-  {
-    id: "vanlife-story",
-    title: "Vanlife storytelling reel",
-    href: "https://www.instagram.com/sage_burress/reel/DaGrAJgpGwr/",
-    src: "/media/reels/DaGrAJgpGwr.mp4",
-    poster: "/media/reels/DaGrAJgpGwr.jpg",
-    instagram: { likes: 84815, updated: "2026-10-14" },
-  },
-  {
-    id: "cayman-dinner-grwm",
-    title: "Cayman Islands dinner GRWM",
-    href: "https://www.instagram.com/sage_burress/reel/DaynlZrpXuQ/",
-    src: "/media/reels/DaynlZrpXuQ.mp4",
-    poster: "/media/reels/DaynlZrpXuQ.jpg",
-    instagram: { likes: 81, updated: "2026-10-14" },
-  },
-];
 
 export function generateStaticParams() {
   return seedContent.services.map((service) => ({ slug: service.slug }));
@@ -90,6 +48,7 @@ function ContentCreationShowcase() {
 function TravelPromotionsShowcase({ service }: { service: Service }) {
   return (
     <>
+      <ReelShowcase reels={travelReels} />
       <section className="editorial-travel-collage" aria-label="Travel promotion photography">
         {service.images.map((image, index) => (
           <figure key={image.id}>

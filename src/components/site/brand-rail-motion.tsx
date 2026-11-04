@@ -19,15 +19,16 @@ export function BrandRailMotion() {
     let disposed = false;
     let previous: { start: number; period: number; anchor: number } | undefined;
     const measure = () => {
-      const primary = track.querySelector<HTMLElement>('.editorial-brandmark:not([aria-hidden="true"])');
+      const primary = track.querySelector<HTMLElement>('.editorial-brandmark--macys:not([aria-hidden="true"])');
+      const elle = track.querySelector<HTMLElement>('.editorial-brandmark--elle-magazine:not([aria-hidden="true"])');
       const marks = Array.from(track.children) as HTMLElement[];
       const count = marks.length / 3;
       if (!primary || !marks[count]) return;
-      // A preceding copy fills the left half while Macy's starts at the center.
+      // Center the opening Macy's/ELLE pair so both fit even on narrow phones.
       const trackBounds = track.getBoundingClientRect();
       const primaryBounds = primary.getBoundingClientRect();
-      const period = primaryBounds.left - marks[0].getBoundingClientRect().left;
-      const anchor = primaryBounds.left - trackBounds.left + primaryBounds.width / 2;
+      const period = marks[count].getBoundingClientRect().left - marks[0].getBoundingClientRect().left;
+      const anchor = (primaryBounds.left + (elle?.getBoundingClientRect().right ?? primaryBounds.right)) / 2 - trackBounds.left;
       const start = viewport.clientWidth / 2 - anchor;
       if (previous && Math.abs(start - previous.start) < 0.1 && Math.abs(period - previous.period) < 0.1) return;
       const animation = track.getAnimations()[0];

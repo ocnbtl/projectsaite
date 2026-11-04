@@ -8,7 +8,10 @@ export function serviceCategory(value: unknown) {
   const slug = typeof value === "string" ? value.toLowerCase().replaceAll(" ", "-").replace("travel-promotions", "travel-collaborations") : "";
   return (SERVICES as readonly string[]).includes(slug) ? slug : "other";
 }
-export const REELS = ["vacation-pose-ideas", "beach-day-grwm", "runway-walk", "vanlife-story", "cayman-dinner-grwm"];
+// Keep historical IDs readable while admitting only the owner-approved new reels.
+export const REELS = ["vacation-pose-ideas", "beach-day-grwm", "runway-walk", "vanlife-story", "cayman-dinner-grwm",
+  "Ddo5D8uJbMw", "DdmF7BoRO4i", "DcPCf61JC_A", "DUjZuJvCRyd", "DUsxBB9kZ9t", "DOZGwmliabC", "DdfKnCVJpp_",
+  "DdcHGPxJn5i", "DdbmqQ7RlDQ", "DQkL8qsiaO2", "DdhgiJ-p5pB", "DdaFZX4JFLA"];
 export type AnalyticsConsent = "denied" | "analytics" | "recordings";
 
 export function isAnalyticsEnvironment(environment: string, hostname: string, testMode = false) {

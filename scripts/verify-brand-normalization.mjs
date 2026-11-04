@@ -31,9 +31,10 @@ assert.equal(JSON.stringify(stored), before);
 assert.equal(result.featuredBrands.filter(brand => brand.id === "fischer-homes").length, 1);
 assert.deepEqual(result.featuredBrands.find(brand => brand.id === "fischer-homes"), { id: "fischer-homes", name: "Fischer Homes", logo: "/media/brands/fischer-homes.svg", invert: undefined });
 assert.equal(normalizeSiteContent(result).featuredBrands.filter(brand => brand.id === "fischer-homes").length, 1);
-assert.deepEqual(result.featuredBrands.slice(0, 10).map(brand => brand.id), ["macys", "saks-fifth-avenue", "university-cincinnati", "xavier-university", "new-york-fashion-week", "paris-fashion-week", "versed-skincare", "fischer-homes", "heyman-talent", "rebel-magazine"]);
-assert.equal(result.featuredBrands.length, 25);
-assert.equal(new Set(result.featuredBrands.map(brand => brand.id)).size, 25);
+assert.deepEqual(result.featuredBrands.slice(0, 2).map(brand => brand.id), ["macys", "elle-magazine"]);
+assert.deepEqual(result.featuredBrands.filter(brand => brand.id !== "elle-magazine").slice(0, 10).map(brand => brand.id), ["macys", "saks-fifth-avenue", "university-cincinnati", "xavier-university", "new-york-fashion-week", "paris-fashion-week", "versed-skincare", "fischer-homes", "heyman-talent", "rebel-magazine"]);
+assert.equal(result.featuredBrands.length, 26);
+assert.equal(new Set(result.featuredBrands.map(brand => brand.id)).size, 26);
 assert.equal(normalizeSiteContent({ ...stored, featuredBrands: [{ id: "fischer-homes", name: "Owner custom label" }] }).featuredBrands.find(brand => brand.id === "fischer-homes").name, "Owner custom label");
 for (const logo of ["/media/brands/heyman-talent.png", "/media/brands/heyman-talent-transparent.png"]) {
   const legacy = { ...stored, featuredBrands: [{ id: "heyman-talent", name: "Heyman Talent", logo }] };

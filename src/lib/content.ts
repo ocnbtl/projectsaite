@@ -79,6 +79,7 @@ export type SiteLink = {
 
 export const defaultFeaturedBrands: FeaturedBrand[] = [
   { id: "macys", name: "Macy's", logo: "/media/brands/macys.svg" },
+  { id: "elle-magazine", name: "ELLE Magazine", logo: "/media/brands/elle-magazine.svg" },
   { id: "saks-fifth-avenue", name: "Saks Fifth Avenue", logo: "/media/brands/saks-fifth-avenue.svg" },
   { id: "university-cincinnati", name: "University of Cincinnati — educational video", logo: "/media/brands/university-cincinnati.svg" },
   { id: "xavier-university", name: "Xavier University — educational video", logo: "/media/brands/xavier-university.svg" },

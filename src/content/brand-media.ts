@@ -1,6 +1,7 @@
 // Intrinsic dimensions reserve the final logo width before each image decodes.
 // Incorrect placeholder ratios caused the moving strip to change width mid-loop.
 export const brandMedia: Record<string, { width: number; height: number }> = {
+  "/media/brands/elle-magazine.svg": { width: 737, height: 266 },
   "/media/brands/macys.svg": { width: 136, height: 39 },
   "/media/brands/saks-fifth-avenue.svg": { width: 1196, height: 230 },
   "/media/brands/university-cincinnati.svg": { width: 779, height: 136 },
