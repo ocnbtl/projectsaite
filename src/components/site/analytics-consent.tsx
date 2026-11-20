@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useReportWebVitals } from "next/web-vitals";
-import { analyticsActive, internalVisitor, privacySignal, readConsent, saveConsent, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
-import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath, type AnalyticsConsent } from "@/lib/analytics-policy";
+import { analyticsActive, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
+import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath } from "@/lib/analytics-policy";
 
 export function AnalyticsConsent({ environment }: { environment: string }) {
   const pathname = usePathname();
@@ -14,13 +12,8 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
   useReportWebVitals(metric => {
     if (location.pathname === initialPath.current) track("web_vital", { metric: metric.name, value: metric.value });
   });
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
-  const configured = Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY);
-
   useEffect(() => {
     const refresh = () => {
-      setOpen(configured && !readConsent() && !privacySignal() && !internalVisitor());
       void syncAnalytics(environment);
     };
     refresh();
@@ -28,7 +21,7 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
     window.addEventListener("storage", storage);
     window.addEventListener(PREFERENCES_EVENT, refresh);
     return () => { window.removeEventListener("storage", storage); window.removeEventListener(PREFERENCES_EVENT, refresh); stopAnalytics(); };
-  }, [configured, environment]);
+  }, [environment]);
 
   useEffect(() => {
     void syncAnalytics(environment);
@@ -75,26 +68,5 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
     };
   }, []);
 
-  function choose(value: AnalyticsConsent) {
-    if (!saveConsent(value, environment)) {
-      setError("Your browser could not save this choice. Optional tracking stays off.");
-      return;
-    }
-    setOpen(false);
-    document.getElementById("main-content")?.focus({ preventScroll: true });
-  }
-
-  if (!configured || !open || pathname === "/privacy") return null;
-  return (
-    <section className="privacy-notice" role="region" aria-labelledby="privacy-notice-title" data-analytics-private>
-      <h2 id="privacy-notice-title">Privacy</h2>
-      <p>Optional analytics help us improve your experience with this website.</p>
-      <div className="privacy-notice__actions">
-        <button type="button" onClick={() => choose("recordings")}>Accept</button>
-        <button type="button" onClick={() => choose("denied")}>Decline</button>
-        <Link href="/privacy#settings" aria-label="Settings" title="Settings"><Settings size={18} aria-hidden="true" /></Link>
-      </div>
-      {error && <p role="alert">{error}</p>}
-    </section>
-  );
+  return null;
 }

@@ -1942,6 +1942,17 @@ section:has(+ .editorial-service-offerings) {
   text-align: right;
 }
 
+.editorial-footer__privacy-choices {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.editorial-footer__privacy-choices img {
+  flex: 0 0 auto;
+}
+
 .editorial-footer__meta > div {
   display: flex;
   flex-wrap: wrap;

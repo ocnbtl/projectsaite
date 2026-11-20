@@ -39,7 +39,7 @@ export function PrivacySettings({ environment }: { environment: string }) {
   return (
     <section className="privacy-settings" id="settings" aria-labelledby="privacy-settings-title" data-analytics-private>
       <div className="privacy-settings__heading">
-        <h2 id="privacy-settings-title">Settings</h2>
+        <h2 id="privacy-settings-title">Your Privacy Choices</h2>
         <p>Optional. Saved in this browser.</p>
       </div>
       {signal && <p className="privacy-settings__notice">Tracking is off per your browser preference.</p>}

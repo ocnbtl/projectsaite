@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { publicNavigation } from "@/lib/content";
@@ -26,7 +27,11 @@ export async function SiteFooter() {
         </div>
         <div className="editorial-footer__meta">
           <div>
-            <Link href="/privacy#settings">Privacy &amp; settings</Link>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link className="editorial-footer__privacy-choices" href="/privacy#settings">
+              Your Privacy Choices
+              <Image src="/california-privacy-choices.svg" width={30} height={14} alt="" unoptimized />
+            </Link>
             <Link href="/admin/login">Admin</Link>
           </div>
           <p>Website by Madagin</p>
