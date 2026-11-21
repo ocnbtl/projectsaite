@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { internalVisitor, privacySignal, readConsent, saveConsent } from "@/lib/analytics";
-import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, type AnalyticsConsent } from "@/lib/analytics-policy";
+import { internalVisitor, privacySignal, readPreferences, savePreferences } from "@/lib/analytics";
+import { CONSENT_KEY, PRIVACY_KEY, INTERNAL_KEY, PREFERENCES_EVENT, DEFAULT_PREFERENCES, type PrivacyPreferences } from "@/lib/analytics-policy";
 
 export function PrivacySettings({ environment }: { environment: string }) {
-  const [consent, setConsent] = useState<AnalyticsConsent | null>(null);
+  const [preferences, setPreferences] = useState<PrivacyPreferences>(DEFAULT_PREFERENCES);
   const [ready, setReady] = useState(false);
   const [signal, setSignal] = useState(false);
   const [internal, setInternal] = useState(false);
@@ -14,13 +14,13 @@ export function PrivacySettings({ environment }: { environment: string }) {
 
   useEffect(() => {
     const refresh = () => {
-      setConsent(readConsent());
+      setPreferences(readPreferences());
       setSignal(privacySignal());
       setInternal(internalVisitor());
       setReady(true);
     };
     const storage = (event: StorageEvent) => {
-      if (event.key === CONSENT_KEY || event.key === INTERNAL_KEY || event.key === null) refresh();
+      if (event.key === CONSENT_KEY || event.key === PRIVACY_KEY || event.key === INTERNAL_KEY || event.key === null) refresh();
     };
     refresh();
     window.addEventListener("storage", storage);
@@ -29,32 +29,37 @@ export function PrivacySettings({ environment }: { environment: string }) {
   }, []);
 
   const blocked = !ready || !configured || signal || internal;
-  const analytics = !blocked && (consent === "analytics" || consent === "recordings");
-  const recordings = !blocked && consent === "recordings";
+  const analytics = !blocked && preferences.analytics;
+  const recordings = !blocked && preferences.recordings;
 
-  function choose(value: AnalyticsConsent) {
-    setStatus(saveConsent(value, environment) ? "Saved." : "Unable to save. Check your browser settings.");
+  function choose(value: PrivacyPreferences) {
+    setStatus(savePreferences(value, environment) ? "Saved. Your choice applies immediately in this browser." : "Unable to save. Check your browser settings.");
   }
 
   return (
     <section className="privacy-settings" id="settings" aria-labelledby="privacy-settings-title" data-analytics-private>
       <div className="privacy-settings__heading">
         <h2 id="privacy-settings-title">Your Privacy Choices</h2>
-        <p>Optional. Saved in this browser.</p>
+        <p>Optional and independent. Saved in this browser.</p>
       </div>
-      {signal && <p className="privacy-settings__notice">Tracking is off per your browser preference.</p>}
+      <p>Optional tracking stays off until you enable it. Existing declines and browser privacy signals are honored.</p>
+      {signal && <p className="privacy-settings__notice">Tracking is off per your browser preference (GPC or Do Not Track).</p>}
       {internal && <p className="privacy-settings__notice">This browser is excluded.</p>}
       {!configured && <p className="privacy-settings__notice">Optional analytics are unavailable.</p>}
       <label className="privacy-setting">
-        <span><span className="privacy-setting__name" id="analytics-label">Analytics</span><span className="privacy-setting__description" id="analytics-description">Visits, actions and errors.</span></span>
-        <input type="checkbox" role="switch" aria-labelledby="analytics-label" aria-describedby="analytics-description" checked={analytics} disabled={blocked} onChange={event => choose(event.target.checked ? "analytics" : "denied")} />
+        <span><span className="privacy-setting__name" id="analytics-label">Analytics</span><span className="privacy-setting__description" id="analytics-description">Visits, actions, errors and page speed. Includes Vercel traffic analytics.</span></span>
+        <input type="checkbox" role="switch" aria-labelledby="analytics-label" aria-describedby="analytics-description" checked={analytics} disabled={blocked} onChange={event => choose({ ...preferences, analytics: event.target.checked })} />
+      </label>
+      <label className="privacy-setting">
+        <span><span className="privacy-setting__name" id="heatmaps-label">Heatmaps</span><span className="privacy-setting__description" id="heatmaps-description">Public-page click and movement coordinates, without form contents.</span></span>
+        <input type="checkbox" role="switch" aria-labelledby="heatmaps-label" aria-describedby="heatmaps-description" checked={!blocked && preferences.heatmaps} disabled={blocked} onChange={event => choose({ ...preferences, heatmaps: event.target.checked })} />
       </label>
       <label className="privacy-setting">
         <span><span className="privacy-setting__name" id="recordings-label">Recordings</span><span className="privacy-setting__description" id="recordings-description">Public-page replay. Private inputs hidden.</span></span>
-        <input type="checkbox" role="switch" aria-labelledby="recordings-label" aria-describedby="recordings-description" checked={recordings} disabled={blocked || !analytics} onChange={event => choose(event.target.checked ? "recordings" : "analytics")} />
+        <input type="checkbox" role="switch" aria-labelledby="recordings-label" aria-describedby="recordings-description" checked={recordings} disabled={blocked} onChange={event => choose({ ...preferences, recordings: event.target.checked })} />
       </label>
       <div className="privacy-settings__footer">
-        <button className="privacy-text-button" type="button" aria-label="Turn off optional tracking" disabled={!ready || !configured} onClick={() => choose("denied")}>Turn off</button>
+        <button className="privacy-text-button" type="button" aria-label="Turn off optional tracking" disabled={!ready} onClick={() => choose({ analytics: false, heatmaps: false, recordings: false })}>Turn off all</button>
         <span role="status">{status}</span>
       </div>
     </section>

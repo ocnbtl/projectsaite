@@ -44,7 +44,7 @@ const { PrivacySettings } = await load("../src/components/site/privacy-settings.
 const privacy = renderToStaticMarkup(react(PrivacySettings, { environment: "local" }));
 assert.match(privacy, /id="settings"/);
 assert.match(privacy, /Your Privacy Choices/);
-assert.equal((privacy.match(/role="switch"/g) ?? []).length, 2);
+assert.equal((privacy.match(/role="switch"/g) ?? []).length, 3);
 assert.doesNotMatch(privacy, /\schecked(?:=|\s|>)/);
 const { AnalyticsConsent } = await load("../src/components/site/analytics-consent.tsx");
 assert.equal(renderToStaticMarkup(react(AnalyticsConsent, { environment: "local" })), "");

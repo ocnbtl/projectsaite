@@ -2,6 +2,8 @@
 
 import type { PostHog, PostHogConfig } from "posthog-js";
 import { safeHeatmap } from "./analytics-policy";
+import { collectionPath, DEFAULT_PREFERENCES, PRIVACY_KEY, type PrivacyPreferences } from "./analytics-policy";
+import { replayAttribute, replayText } from "./replay-safety";
 import { ATTRIBUTION_KEY, SERVICES, REELS, CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
 
 let client: PostHog | undefined;
@@ -34,6 +36,35 @@ export function privacySignal() {
   return navigator.doNotTrack === "1" || (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
 }
 
+export function readPreferences(): PrivacyPreferences {
+  try {
+    const raw = localStorage.getItem(PRIVACY_KEY);
+    if (raw) {
+      const value = JSON.parse(raw);
+      if (["analytics", "heatmaps", "recordings"].every(k => typeof value?.[k] === "boolean")) return { analytics: value.analytics, heatmaps: value.heatmaps, recordings: value.recordings };
+      return { analytics: false, heatmaps: false, recordings: false };
+    }
+    const legacy = readConsent();
+    if (legacy === "denied") return { analytics: false, heatmaps: false, recordings: false };
+    if (legacy === "recordings") return { analytics: true, heatmaps: true, recordings: true };
+    if (legacy === "analytics") return { analytics: true, heatmaps: true, recordings: false };
+    return { ...DEFAULT_PREFERENCES };
+  } catch { return { analytics: false, heatmaps: false, recordings: false }; }
+}
+
+export function savePreferences(value: PrivacyPreferences, environment: string) {
+  try { localStorage.setItem(PRIVACY_KEY, JSON.stringify(value)); } catch { return false; }
+  if (!value.recordings) client?.stopSessionRecording();
+  if (!value.heatmaps) client?.set_config({ capture_heatmaps: false });
+  if (!Object.values(value).some(Boolean)) {
+    client?.opt_out_capturing(); client?.reset(); lastPage = null;
+    try { sessionStorage.removeItem(ATTRIBUTION_KEY); } catch { /* Storage unavailable. */ }
+  }
+  void syncAnalytics(environment);
+  window.dispatchEvent(new Event(PREFERENCES_EVENT));
+  return true;
+}
+
 export function internalVisitor() {
   try { return localStorage.getItem(INTERNAL_KEY) === "true"; } catch { return true; }
 }
@@ -43,17 +74,17 @@ export function environmentAllowed() {
 }
 
 function allowed() {
-  return environmentAllowed() && !internalVisitor() && !privacySignal() && ["analytics", "recordings"].includes(readConsent() ?? "") && publicPath(location.pathname) !== null;
+  return environmentAllowed() && !internalVisitor() && !privacySignal() && Object.values(readPreferences()).some(Boolean) && collectionPath(location.pathname) !== null;
 }
 
-export function analyticsActive() { return Boolean(client) && allowed(); }
+export function analyticsActive() { return Boolean(client) && allowed() && readPreferences().analytics; }
 
 function replayAllowed() {
-  return allowed() && readConsent() === "recordings" && location.pathname !== "/contact" && location.pathname !== "/privacy" && !location.search && !location.hash;
+  return allowed() && readPreferences().recordings && !location.search && !location.hash;
 }
 
 function heatmapsAllowed() {
-  return allowed() && !["/contact", "/privacy"].includes(location.pathname) && !location.search && !location.hash;
+  return allowed() && readPreferences().heatmaps && !location.search && !location.hash;
 }
 
 // A closed property list removes SDK URL/referrer/person defaults as well as accidental application data.
@@ -66,8 +97,18 @@ export const beforeSend: PostHogConfig["before_send"] = (event) => {
     if (!replayAllowed()) return null;
   } else if (event.event === "$$heatmap") {
     if (!heatmapsAllowed()) return null;
-  } else if (!(EVENT_NAMES as readonly string[]).includes(event.event)) return null;
+  } else if (!readPreferences().analytics || !(EVENT_NAMES as readonly string[]).includes(event.event)) return null;
   const properties = Object.fromEntries(Object.entries(event.properties ?? {}).filter(([key]) => protocolKeys.has(key) || appKeys.has(key)));
+  const categories: Record<string, readonly unknown[]> = {
+    action: ["contact", "email", "external_link", "portfolio", "service"],
+    reason: ["invalid_form", "rate_limited", "delivery_not_configured", "delivery_failed", "network", "unexpected_response", "runtime_error", "unhandled_rejection", "media_load"],
+    service: SERVICES,
+    placement: ["navigation", "footer", "page"], reel: REELS, metric: ["CLS", "LCP", "INP", "FCP", "TTFB"],
+  };
+  for (const [key, values] of Object.entries(categories)) if (!values.includes(properties[key])) delete properties[key];
+  if (typeof properties.destination !== "string" || !publicPath(properties.destination)) delete properties.destination;
+  if (!Number.isInteger(properties.faq) || Number(properties.faq) < 0 || Number(properties.faq) >= 20) delete properties.faq;
+  if (typeof properties.value !== "number" || !Number.isFinite(properties.value) || properties.value < 0 || properties.value >= 3_600_000) delete properties.value;
   const path = publicPath(location.pathname)!;
   properties.$current_url = `https://sageburress.com${path}`;
   properties.$pathname = path;
@@ -100,7 +141,7 @@ export async function syncAnalytics(environment: string) {
   if (!allowed() || !process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     client?.set_config({ capture_heatmaps: false });
     client?.stopSessionRecording();
-    if (readConsent() === "denied" || internalVisitor() || privacySignal()) {
+    if (!Object.values(readPreferences()).some(Boolean) || internalVisitor() || privacySignal()) {
       client?.opt_out_capturing();
       client?.reset();
       try { sessionStorage.removeItem(ATTRIBUTION_KEY); } catch { /* Storage may be disabled. */ }
@@ -146,8 +187,13 @@ export async function syncAnalytics(environment: string) {
           // Public editorial copy, layout and checked-in photographs must remain
           // visible. Blanket attribute masking also destroys replay styling.
           maskTextSelector: "[data-analytics-private], .ph-mask",
+          maskTextClass: /.*/,
+          maskTextFn: replayText,
+          maskAttributeFn: replayAttribute,
+          inlineStylesheet: false,
           maskAllElementAttributes: false,
-          blockSelector: "form, input, textarea, select, [contenteditable], video, canvas, iframe, object, embed, .ph-no-capture, [data-analytics-private], a[href^='mailto:'], a[href^='tel:'], a[href*='?'], a[download], img:not([src^='/_next/image?url=%2Fmedia%2F']):not([src^='/media/'])",
+          blockSelector: "form, input, textarea, select, [contenteditable], video, canvas, iframe, object, embed, script, noscript, .ph-no-capture, [data-analytics-private], a[href^='mailto:'], a[href^='tel:'], a[href*='?'], a[download], img:not([src^='/_next/image?url=%2Fmedia%2F']):not([src^='/media/'])",
+          slimDOMOptions: { script: true, comment: true, headMetaVerification: true },
           recordBody: false,
           recordHeaders: false,
           captureJsonLd: false,
@@ -177,7 +223,7 @@ export async function syncAnalytics(environment: string) {
   if (replayAllowed()) client.startSessionRecording();
   else client.stopSessionRecording();
   const path = publicPath(location.pathname);
-  if (path !== lastPage) {
+  if (path !== lastPage && readPreferences().analytics) {
     lastPage = path;
     track("$pageview");
     if (path?.startsWith("/services/")) track("service_viewed", { service: path.split("/")[2] });
@@ -191,7 +237,7 @@ export function stopAnalytics() {
 }
 
 export function track(event: AnalyticsEvent, properties: EventProperties = {}) {
-  if (!client || !allowed()) return false;
+  if (!client || !allowed() || !readPreferences().analytics) return false;
   const safe: EventProperties = {};
   if (["contact", "email", "external_link", "portfolio", "service"].includes(properties.action ?? "")) safe.action = properties.action;
   if (properties.destination && publicPath(properties.destination)) safe.destination = publicPath(properties.destination)!;
@@ -213,9 +259,5 @@ export function track(event: AnalyticsEvent, properties: EventProperties = {}) {
 
 export function saveConsent(value: AnalyticsConsent, environment: string) {
   try { localStorage.setItem(CONSENT_KEY, value); } catch { return false; }
-  if (value !== "recordings") client?.stopSessionRecording();
-  if (value === "denied") { client?.opt_out_capturing(); client?.reset(); lastPage = null; try { sessionStorage.removeItem(ATTRIBUTION_KEY); } catch { /* Storage unavailable. */ } }
-  void syncAnalytics(environment);
-  window.dispatchEvent(new Event(PREFERENCES_EVENT));
-  return true;
+  return savePreferences({ analytics: value !== "denied", heatmaps: value !== "denied", recordings: value === "recordings" }, environment);
 }

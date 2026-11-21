@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useReportWebVitals } from "next/web-vitals";
 import { analyticsActive, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
-import { CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath } from "@/lib/analytics-policy";
+import { CONSENT_KEY, PRIVACY_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath } from "@/lib/analytics-policy";
 
 export function AnalyticsConsent({ environment }: { environment: string }) {
   const pathname = usePathname();
@@ -17,7 +17,7 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
       void syncAnalytics(environment);
     };
     refresh();
-    const storage = (event: StorageEvent) => { if (event.key === CONSENT_KEY || event.key === INTERNAL_KEY || event.key === null) refresh(); };
+    const storage = (event: StorageEvent) => { if (event.key === CONSENT_KEY || event.key === PRIVACY_KEY || event.key === INTERNAL_KEY || event.key === null) refresh(); };
     window.addEventListener("storage", storage);
     window.addEventListener(PREFERENCES_EVENT, refresh);
     return () => { window.removeEventListener("storage", storage); window.removeEventListener(PREFERENCES_EVENT, refresh); stopAnalytics(); };

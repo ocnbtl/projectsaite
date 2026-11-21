@@ -1,5 +1,14 @@
 /** Only fixed public route names and categorical values may enter analytics. */
 export const CONSENT_KEY = "sage-analytics-consent-v1";
+export const PRIVACY_KEY = "sage-privacy-preferences-v2";
+export type PrivacyPreferences = { analytics: boolean; heatmaps: boolean; recordings: boolean };
+// No jurisdiction has an owner-approved basis for default-on collection yet.
+// Unknown geography MUST NOT be inferred from language, timezone or a client header.
+export const DEFAULT_PREFERENCES: PrivacyPreferences = { analytics: false, heatmaps: false, recordings: false };
+export function collectionPath(path: string) {
+  const safe = publicPath(path);
+  return safe && !["/contact", "/privacy"].includes(safe) ? safe : null;
+}
 export const PREFERENCES_EVENT = "sage-privacy-change";
 export const INTERNAL_KEY = "sage-analytics-internal";
 export const ATTRIBUTION_KEY = "sage-analytics-source-v2";
