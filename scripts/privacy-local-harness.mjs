@@ -2,9 +2,13 @@
 // Browser visits 3120. Never proxy analytics to PostHog or permit form/API writes.
 import http from "node:http";
 import { gunzipSync } from "node:zlib";
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, readFile, mkdir } from "node:fs/promises";
 let mode = "fresh", generation = 1;
 const requests = [], events = [], errors = [];
+if (process.argv[2]) {
+  const saved = JSON.parse(await readFile(process.argv[2], 'utf8'));
+  events.push(...saved.events); requests.push(...saved.requests); mode = 'archived-desktop';
+}
 async function report() {
   const snapshots = events.filter(e => e.event === "$snapshot");
   const decoded = JSON.stringify(events.map(decode));

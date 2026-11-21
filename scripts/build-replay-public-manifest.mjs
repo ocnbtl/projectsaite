@@ -19,6 +19,11 @@ for (const file of await files('src')) {
   visit(source);
 }
 const assets = (await files('public/media')).map(f => '/' + f.replaceAll('\\', '/').replace(/^public\//, ''));
-const classes = [...new Set([...literals].flatMap(s => s.split(/\s+/)).filter(s => /^[a-z][a-z0-9_-]+$/i.test(s)))];
+const cssClasses = [];
+for (const file of await files('src')) if (file.endsWith('.css')) {
+  const css = await readFile(file, 'utf8');
+  cssClasses.push(...[...css.matchAll(/\.([a-z_][a-z0-9_-]*)/gi)].map(m => m[1]));
+}
+const classes = [...new Set([...literals].flatMap(s => s.split(/\s+/)).filter(s => /^[a-z][a-z0-9_-]+$/i.test(s)).concat(cssClasses))];
 await writeFile('src/lib/replay-public-manifest.json', JSON.stringify({ text: [...literals].sort(), classes: classes.sort(), assets: assets.sort() }) + '\n');
 console.log(`Replay allowlist: ${literals.size} static strings, ${assets.length} checked-in assets`);
