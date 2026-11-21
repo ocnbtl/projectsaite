@@ -7,7 +7,7 @@ let mode = "fresh", generation = 1;
 const requests = [], events = [], errors = [];
 async function report() {
   const snapshots = events.filter(e => e.event === "$snapshot");
-  const decoded = JSON.stringify(events);
+  const decoded = JSON.stringify(events.map(decode));
   const raw = JSON.stringify(requests);
   return { mode, generation, requests: requests.length, events: events.map(e => e.event), snapshotBatches: snapshots.length,
     canaryInDecoded: decoded.includes("CANARY_PRIVATE"), canaryInRaw: raw.includes("CANARY_PRIVATE"), errors,
@@ -15,7 +15,9 @@ async function report() {
     hasFullSnapshot: snapshots.some(e => e.properties?.$snapshot_data?.some(s => s.type === 2 && s.data?.node)) };
 }
 function decode(value) {
-  if (value?.charCodeAt?.(0) === 31) return JSON.parse(gunzipSync(Buffer.from(value, "latin1")));
+  if (value?.charCodeAt?.(0) === 31) return decode(JSON.parse(gunzipSync(Buffer.from(value, "latin1"))));
+  if (Array.isArray(value)) return value.map(decode);
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,decode(v)]));
   return value;
 }
 http.createServer(async (req, res) => {
@@ -26,9 +28,9 @@ http.createServer(async (req, res) => {
   const url = new URL(req.url, "http://127.0.0.1:3119");
   if (url.pathname === "/control") { mode = url.searchParams.get("mode") ?? "fresh"; generation++; requests.length = events.length = errors.length = 0; res.end("Ready: " + mode); return; }
   if (url.pathname === "/report") { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(await report(), null, 2)); return; }
-  if (url.pathname === "/save") { await mkdir("output/playwright", { recursive: true }); await writeFile(`output/playwright/payloads-${mode}-${generation}.json`, JSON.stringify({ summary: await report(), events, requests }, null, 2)); res.end("Saved local evidence"); return; }
+  if (url.pathname === "/save") { await mkdir("output/playwright", { recursive: true }); await writeFile(`output/playwright/payloads-${mode}-${generation}.json`, JSON.stringify({ summary: await report(), events: events.map(decode), requests }, null, 2)); res.end("Saved local evidence"); return; }
   if (url.pathname === "/restored") {
-    const stream = events.flatMap(e => e.properties?.$snapshot_data ?? []);
+    const stream = events.map(decode).flatMap(e => e.properties?.$snapshot_data ?? []);
     const full = stream.find(s => s.type === 2 && s.data?.node);
     if (full) {
       const byId = new Map();
