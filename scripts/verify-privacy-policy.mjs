@@ -10,7 +10,7 @@ const navigator={doNotTrack:'0',globalPrivacyControl:false};
 const location={hostname:'127.0.0.1',pathname:'/',origin:'http://127.0.0.1',href:'http://127.0.0.1/',search:'',hash:''};
 const storage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};
 const analytics={};
-vm.runInNewContext(await compile('src/lib/analytics.ts'),{exports:analytics,require:name=>name==='./analytics-policy'?policy:{replayAttribute:()=>'',replayText:()=>''},localStorage:storage,sessionStorage:storage,navigator,location,document:{referrer:''},window:{dispatchEvent(){}},Event:class{},process:{env:{NEXT_PUBLIC_POSTHOG_TEST_MODE:'true'}},URL,console});
+vm.runInNewContext(await compile('src/lib/analytics.ts'),{exports:analytics,require:name=>name==='./analytics-policy'?policy:name==='./analytics-transport'?{privacyTransport:()=>({cancel(){},send(){}})}:{replayAttribute:()=>'',replayText:()=>''},localStorage:storage,sessionStorage:storage,navigator,location,document:{referrer:''},window:{dispatchEvent(){}},Event:class{},process:{env:{NEXT_PUBLIC_POSTHOG_TEST_MODE:'true'}},URL,console});
 const plain=x=>JSON.parse(JSON.stringify(x));
 assert.deepEqual(plain(analytics.readPreferences()),{analytics:false,heatmaps:false,recordings:false});
 for(const prior of ['denied','analytics','recordings']){ values.clear(); values.set(policy.CONSENT_KEY,prior);assert.equal(analytics.readPreferences().recordings,prior==='recordings');assert.equal(analytics.readPreferences().analytics,prior!=='denied'); }
@@ -34,7 +34,11 @@ values.clear();const eligible=policy.privacyRegion(true,'US','OH',null,null);awa
 assert.equal(analytics.beforeSend({event:'$snapshot',properties:{$snapshot_data:[{type:3,data:{source:8,rules:'PRIVATE_CSS'}},{type:5,data:{tag:'PRIVATE_CONSOLE'}}]}}),null);
 values.set(policy.CONSENT_KEY,'denied');assert.equal(analytics.beforeSend({event:'$pageview',properties:{}}),null);
 values.clear();await analytics.syncAnalytics('local',policy.privacyRegion(true,'US','OH','1',null));assert.equal(analytics.beforeSend({event:'$pageview',properties:{}}),null);
-console.log('PASS trusted regional defaults, replay-specific state holds, unknown/non-US fail-closed, header-only GPC veto and prior declines over defaults.');
+for (const country of ['NZ', 'AU']) assert.deepEqual({...policy.privacyRegion(true,country,null,null,null)}, {defaultsAllowed:true,replayDefaultAllowed:true,blocked:false});
+for (const country of ['CN','IS','LI','NO','GF','QQ','XX','ZZ']) assert.equal(policy.privacyRegion(true,country,null,null,null).defaultsAllowed,false);
+for (const region of [null,'XX','QC']) assert.equal(policy.privacyRegion(true,'CA',region,null,null).defaultsAllowed,false);
+assert.deepEqual({...policy.privacyRegion(true,'CA','ON',null,null)}, {defaultsAllowed:true,replayDefaultAllowed:false,blocked:false});
+console.log('PASS eligible countries, prior-choice jurisdictions, US state and Canadian subdivision holds, unknown location, browser signals and prior declines.');
 assert(policy.safeVercelReferrer('', 'https://sageburress.com'));
 assert(policy.safeVercelReferrer('https://sageburress.com/about','https://sageburress.com'));
 for(const ref of ['https://google.com/search?q=PRIVATE','https://private.example/PRIVATE','https://sageburress.com/contact','https://sageburress.com/?token=PRIVATE','https://sageburress.com/admin']) assert.equal(policy.safeVercelReferrer(ref,'https://sageburress.com'),false);

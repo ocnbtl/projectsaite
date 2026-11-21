@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useReportWebVitals } from "next/web-vitals";
 import { usePrivacyRegion } from "./privacy-region";
-import { analyticsActive, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
+import { analyticsActive, cancelPendingAnalytics, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
 import { CONSENT_KEY, PRIVACY_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath } from "@/lib/analytics-policy";
 
 export function AnalyticsConsent({ environment }: { environment: string }) {
@@ -16,6 +16,7 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
   });
   useEffect(() => {
     const refresh = () => {
+      cancelPendingAnalytics();
       void syncAnalytics(environment, policy);
     };
     refresh();

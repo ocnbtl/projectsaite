@@ -4,6 +4,7 @@ import type { PostHog, PostHogConfig } from "posthog-js";
 import { safeHeatmap } from "./analytics-policy";
 import { collectionPath, DEFAULT_PREFERENCES, PRIVACY_KEY, type PrivacyPreferences, type PrivacyRegion } from "./analytics-policy";
 import { replayAttribute, replayText } from "./replay-safety";
+import { privacyTransport } from "./analytics-transport";
 import { ATTRIBUTION_KEY, SERVICES, REELS, CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
 
 let client: PostHog | undefined;
@@ -13,6 +14,7 @@ let lastPage: string | null = null;
 let source = "direct_or_unknown";
 let landingSource: string | undefined;
 let regionPolicy: PrivacyRegion = { defaultsAllowed: false, replayDefaultAllowed: false, blocked: false };
+const transport = privacyTransport();
 const sourceNames = new Set(["instagram", "facebook", "threads", "google", "bing", "chatgpt", "duckduckgo", "youtube", "tiktok", "claude", "gemini", "perplexity", "google_business", "internal", "other_referral", "direct_or_unknown"]);
 
 // Before consent only a category is retained in memory, never a URL or identifier.
@@ -55,6 +57,7 @@ export function readPreferences(defaultsAllowed = regionPolicy.defaultsAllowed, 
 
 export function savePreferences(value: PrivacyPreferences, environment: string) {
   try { localStorage.setItem(PRIVACY_KEY, JSON.stringify(value)); } catch { return false; }
+  transport.cancel();
   if (!value.recordings) client?.stopSessionRecording();
   if (!value.heatmaps) client?.set_config({ capture_heatmaps: false });
   if (!Object.values(value).some(Boolean)) {
@@ -146,11 +149,24 @@ export const beforeSend: PostHogConfig["before_send"] = (event) => {
   return event;
 };
 
+// Return null to the SDK for every captured event: sanitized events use our
+// abortable one-shot transport, never the SDK retry/beacon/persistence queues.
+const sendOnce: PostHogConfig["before_send"] = event => {
+  const safe = beforeSend(event);
+  if (safe) transport.send(process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com", process.env.NEXT_PUBLIC_POSTHOG_KEY!, safe, () => {
+    if (safe.event === "$snapshot") return replayAllowed();
+    if (safe.event === "$$heatmap") return heatmapsAllowed();
+    return allowed() && readPreferences().analytics;
+  });
+  return null;
+};
+
 export async function syncAnalytics(environment: string, policy?: PrivacyRegion) {
   if (policy) regionPolicy = policy;
   deployment = environment;
   rememberSource();
   if (!allowed() || !process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+    transport.cancel();
     client?.set_config({ capture_heatmaps: false });
     client?.stopSessionRecording();
     if (!Object.values(readPreferences()).some(Boolean) || internalVisitor() || privacySignal()) {
@@ -193,7 +209,7 @@ export async function syncAnalytics(environment: string, policy?: PrivacyRegion)
         disable_compression: process.env.NEXT_PUBLIC_POSTHOG_TEST_MODE === "true",
         opt_out_useragent_filter: process.env.NEXT_PUBLIC_POSTHOG_TEST_MODE === "true",
         get_current_url: () => `https://sageburress.com${publicPath(location.pathname) ?? "/"}`,
-        before_send: beforeSend,
+        before_send: sendOnce,
         session_recording: {
           maskAllInputs: true,
           // Public editorial copy, layout and checked-in photographs must remain
@@ -243,10 +259,13 @@ export async function syncAnalytics(environment: string, policy?: PrivacyRegion)
 }
 
 export function stopAnalytics() {
+  transport.cancel();
   client?.set_config({ capture_heatmaps: false });
   client?.stopSessionRecording();
   lastPage = null;
 }
+
+export const cancelPendingAnalytics = transport.cancel;
 
 export function track(event: AnalyticsEvent, properties: EventProperties = {}) {
   if (!client || !allowed() || !readPreferences().analytics) return false;

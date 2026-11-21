@@ -78,6 +78,7 @@ http.createServer(async (req, res) => {
     }
   } catch (e) { errors.push(e.message); }
   res.setHeader("Content-Type", "application/json");
+  if (mode === 'retry-withdrawal' && req.method === 'POST' && !req.url.includes('flags') && !req.url.includes('decide')) { res.writeHead(503).end('{"status":0}'); return; }
   res.end(JSON.stringify({ status: 1, featureFlags: {}, supportedCompression: [], autocapture_opt_out: true, sessionRecording: { endpoint: "/s/", sampleRate: 1, minimumDurationMilliseconds: 0 } }));
 }).listen(3119, "127.0.0.1");
 http.createServer(async (req, res) => {
