@@ -2,7 +2,7 @@
 
 import type { PostHog, PostHogConfig } from "posthog-js";
 import { safeHeatmap } from "./analytics-policy";
-import { collectionPath, DEFAULT_PREFERENCES, PRIVACY_KEY, type PrivacyPreferences } from "./analytics-policy";
+import { collectionPath, DEFAULT_PREFERENCES, PRIVACY_KEY, type PrivacyPreferences, type PrivacyRegion } from "./analytics-policy";
 import { replayAttribute, replayText } from "./replay-safety";
 import { ATTRIBUTION_KEY, SERVICES, REELS, CONSENT_KEY, INTERNAL_KEY, PREFERENCES_EVENT, EVENT_NAMES, isAnalyticsEnvironment, publicPath, trafficSource, type AnalyticsConsent, type AnalyticsEvent, type EventProperties } from "./analytics-policy";
 
@@ -12,6 +12,7 @@ let deployment = "local";
 let lastPage: string | null = null;
 let source = "direct_or_unknown";
 let landingSource: string | undefined;
+let regionPolicy: PrivacyRegion = { defaultsAllowed: false, replayDefaultAllowed: false, blocked: false };
 const sourceNames = new Set(["instagram", "facebook", "threads", "google", "bing", "chatgpt", "duckduckgo", "youtube", "tiktok", "claude", "gemini", "perplexity", "google_business", "internal", "other_referral", "direct_or_unknown"]);
 
 // Before consent only a category is retained in memory, never a URL or identifier.
@@ -33,10 +34,10 @@ export function readConsent(): AnalyticsConsent | null {
 }
 
 export function privacySignal() {
-  return navigator.doNotTrack === "1" || (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+  return regionPolicy.blocked || navigator.doNotTrack === "1" || (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
 }
 
-export function readPreferences(): PrivacyPreferences {
+export function readPreferences(defaultsAllowed = regionPolicy.defaultsAllowed, replayDefaultAllowed = regionPolicy.replayDefaultAllowed): PrivacyPreferences {
   try {
     const raw = localStorage.getItem(PRIVACY_KEY);
     if (raw) {
@@ -48,7 +49,7 @@ export function readPreferences(): PrivacyPreferences {
     if (legacy === "denied") return { analytics: false, heatmaps: false, recordings: false };
     if (legacy === "recordings") return { analytics: true, heatmaps: true, recordings: true };
     if (legacy === "analytics") return { analytics: true, heatmaps: true, recordings: false };
-    return { ...DEFAULT_PREFERENCES };
+    return defaultsAllowed ? { analytics: true, heatmaps: true, recordings: replayDefaultAllowed } : { ...DEFAULT_PREFERENCES };
   } catch { return { analytics: false, heatmaps: false, recordings: false }; }
 }
 
@@ -95,6 +96,16 @@ export const beforeSend: PostHogConfig["before_send"] = (event) => {
   if (!event || !allowed()) return null;
   if (event.event === "$snapshot") {
     if (!replayAllowed()) return null;
+    // rrweb CSSOM/custom/plugin events can carry arbitrary strings outside DOM
+    // masking. Admit only masked DOM and positional interaction records.
+    const snapshots = event.properties?.$snapshot_data;
+    if (!Array.isArray(snapshots)) return null;
+    event.properties.$snapshot_data = snapshots.filter(snapshot => {
+      if (!snapshot || typeof snapshot !== "object") return false;
+      if ([0, 1, 2, 4].includes(snapshot.type)) return true;
+      return snapshot.type === 3 && snapshot.data && typeof snapshot.data === "object" && [0, 1, 2, 3, 4, 6, 12].includes(snapshot.data.source);
+    });
+    if (!event.properties.$snapshot_data.length) return null;
   } else if (event.event === "$$heatmap") {
     if (!heatmapsAllowed()) return null;
   } else if (!readPreferences().analytics || !(EVENT_NAMES as readonly string[]).includes(event.event)) return null;
@@ -135,7 +146,8 @@ export const beforeSend: PostHogConfig["before_send"] = (event) => {
   return event;
 };
 
-export async function syncAnalytics(environment: string) {
+export async function syncAnalytics(environment: string, policy?: PrivacyRegion) {
+  if (policy) regionPolicy = policy;
   deployment = environment;
   rememberSource();
   if (!allowed() || !process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -192,7 +204,7 @@ export async function syncAnalytics(environment: string) {
           maskAttributeFn: replayAttribute,
           inlineStylesheet: false,
           maskAllElementAttributes: false,
-          blockSelector: "form, input, textarea, select, [contenteditable], video, canvas, iframe, object, embed, script, noscript, .ph-no-capture, [data-analytics-private], a[href^='mailto:'], a[href^='tel:'], a[href*='?'], a[download], img:not([src^='/_next/image?url=%2Fmedia%2F']):not([src^='/media/'])",
+          blockSelector: "form, input, textarea, select, [contenteditable], video, canvas, iframe, object, embed, script, style, noscript, .ph-no-capture, [data-analytics-private], a[href^='mailto:'], a[href^='tel:'], a[href*='?'], a[download], img:not([src^='/_next/image?url=%2Fmedia%2F']):not([src^='/media/'])",
           slimDOMOptions: { script: true, comment: true, headMetaVerification: true },
           recordBody: false,
           recordHeaders: false,

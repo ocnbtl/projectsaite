@@ -19,6 +19,7 @@ const framework = {
   "@/lib/content-store": { getSiteContent: async () => ({ contact: { email: "fixture@example.invalid" } }) },
   "@/lib/analytics": {},
   "@/lib/analytics-policy": {},
+  "./privacy-region": { usePrivacyRegion: () => ({ defaultsAllowed: false, blocked: false }) },
 };
 
 async function load(path) {

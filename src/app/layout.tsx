@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { VercelAnalytics } from "@/components/site/vercel-analytics";
+import { PrivacyRegionProvider } from "@/components/site/privacy-region";
+import { requestPrivacyRegion } from "@/lib/privacy-region";
 import { Cormorant_Garamond, Hanken_Grotesk } from "next/font/google";
 
 import { openGraphShareImage, twitterShareImage } from "@/lib/social-metadata";
@@ -49,12 +51,15 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const policy = await requestPrivacyRegion();
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`} data-scroll-behavior="smooth">
       <body>
-        {children}
-        <VercelAnalytics environment={process.env.VERCEL_ENV ?? "local"} />
+        <PrivacyRegionProvider policy={policy}>
+          {children}
+          <VercelAnalytics environment={process.env.VERCEL_ENV ?? "local"} />
+        </PrivacyRegionProvider>
       </body>
     </html>
   );

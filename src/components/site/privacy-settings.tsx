@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePrivacyRegion } from "./privacy-region";
 import { internalVisitor, privacySignal, readPreferences, savePreferences } from "@/lib/analytics";
 import { CONSENT_KEY, PRIVACY_KEY, INTERNAL_KEY, PREFERENCES_EVENT, DEFAULT_PREFERENCES, type PrivacyPreferences } from "@/lib/analytics-policy";
 
 export function PrivacySettings({ environment }: { environment: string }) {
+  const policy = usePrivacyRegion();
   const [preferences, setPreferences] = useState<PrivacyPreferences>(DEFAULT_PREFERENCES);
   const [ready, setReady] = useState(false);
   const [signal, setSignal] = useState(false);
@@ -14,8 +16,8 @@ export function PrivacySettings({ environment }: { environment: string }) {
 
   useEffect(() => {
     const refresh = () => {
-      setPreferences(readPreferences());
-      setSignal(privacySignal());
+      setPreferences(readPreferences(policy.defaultsAllowed, policy.replayDefaultAllowed));
+      setSignal(privacySignal() || policy.blocked);
       setInternal(internalVisitor());
       setReady(true);
     };
@@ -26,7 +28,7 @@ export function PrivacySettings({ environment }: { environment: string }) {
     window.addEventListener("storage", storage);
     window.addEventListener(PREFERENCES_EVENT, refresh);
     return () => { window.removeEventListener("storage", storage); window.removeEventListener(PREFERENCES_EVENT, refresh); };
-  }, []);
+  }, [policy]);
 
   const blocked = !ready || !configured || signal || internal;
   const analytics = !blocked && preferences.analytics;
@@ -42,7 +44,7 @@ export function PrivacySettings({ environment }: { environment: string }) {
         <h2 id="privacy-settings-title">Your Privacy Choices</h2>
         <p>Optional and independent. Saved in this browser.</p>
       </div>
-      <p>Optional tracking stays off until you enable it. Existing declines and browser privacy signals are honored.</p>
+      <p>{policy.defaultsAllowed ? "Optional public-page insights are on by default for this region. You can turn each off below." : "Optional tracking stays off until you enable it for this region."} Existing declines and browser privacy signals are honored.</p>
       {signal && <p className="privacy-settings__notice">Tracking is off per your browser preference (GPC or Do Not Track).</p>}
       {internal && <p className="privacy-settings__notice">This browser is excluded.</p>}
       {!configured && <p className="privacy-settings__notice">Optional analytics are unavailable.</p>}
@@ -55,7 +57,7 @@ export function PrivacySettings({ environment }: { environment: string }) {
         <input type="checkbox" role="switch" aria-labelledby="heatmaps-label" aria-describedby="heatmaps-description" checked={!blocked && preferences.heatmaps} disabled={blocked} onChange={event => choose({ ...preferences, heatmaps: event.target.checked })} />
       </label>
       <label className="privacy-setting">
-        <span><span className="privacy-setting__name" id="recordings-label">Recordings</span><span className="privacy-setting__description" id="recordings-description">Public-page replay. Private inputs hidden.</span></span>
+        <span><span className="privacy-setting__name" id="recordings-label">Recordings</span><span className="privacy-setting__description" id="recordings-description">Masked public-page replay. {policy.defaultsAllowed && !policy.replayDefaultAllowed ? "Requires your opt-in in this region." : "Private inputs hidden."}</span></span>
         <input type="checkbox" role="switch" aria-labelledby="recordings-label" aria-describedby="recordings-description" checked={recordings} disabled={blocked} onChange={event => choose({ ...preferences, recordings: event.target.checked })} />
       </label>
       <div className="privacy-settings__footer">

@@ -3,28 +3,30 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useReportWebVitals } from "next/web-vitals";
+import { usePrivacyRegion } from "./privacy-region";
 import { analyticsActive, stopAnalytics, syncAnalytics, track } from "@/lib/analytics";
 import { CONSENT_KEY, PRIVACY_KEY, INTERNAL_KEY, PREFERENCES_EVENT, publicPath } from "@/lib/analytics-policy";
 
 export function AnalyticsConsent({ environment }: { environment: string }) {
   const pathname = usePathname();
+  const policy = usePrivacyRegion();
   const initialPath = useRef(pathname);
   useReportWebVitals(metric => {
     if (location.pathname === initialPath.current) track("web_vital", { metric: metric.name, value: metric.value });
   });
   useEffect(() => {
     const refresh = () => {
-      void syncAnalytics(environment);
+      void syncAnalytics(environment, policy);
     };
     refresh();
     const storage = (event: StorageEvent) => { if (event.key === CONSENT_KEY || event.key === PRIVACY_KEY || event.key === INTERNAL_KEY || event.key === null) refresh(); };
     window.addEventListener("storage", storage);
     window.addEventListener(PREFERENCES_EVENT, refresh);
     return () => { window.removeEventListener("storage", storage); window.removeEventListener(PREFERENCES_EVENT, refresh); stopAnalytics(); };
-  }, [environment]);
+  }, [environment, policy]);
 
   useEffect(() => {
-    void syncAnalytics(environment);
+    void syncAnalytics(environment, policy);
     let visibleSeconds = 0;
     let engaged = false;
     const timer = window.setInterval(() => {
@@ -35,7 +37,7 @@ export function AnalyticsConsent({ environment }: { environment: string }) {
       }
     }, 1000);
     return () => window.clearInterval(timer);
-  }, [environment, pathname]);
+  }, [environment, pathname, policy]);
 
   useEffect(() => {
     const click = (event: MouseEvent) => {

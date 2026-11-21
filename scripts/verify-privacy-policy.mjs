@@ -4,7 +4,7 @@ import vm from 'node:vm';
 import ts from 'typescript';
 const compile = async file => ts.transpileModule(await readFile(file, 'utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,resolveJsonModule:true}}).outputText;
 const policy = {};
-vm.runInNewContext(await compile('src/lib/analytics-policy.ts'),{exports:policy});
+vm.runInNewContext(await compile('src/lib/analytics-policy.ts'),{exports:policy,URL});
 const values=new Map();
 const navigator={doNotTrack:'0',globalPrivacyControl:false};
 const location={hostname:'127.0.0.1',pathname:'/',origin:'http://127.0.0.1',href:'http://127.0.0.1/',search:'',hash:''};
@@ -27,3 +27,15 @@ navigator.globalPrivacyControl=true;assert.equal(analytics.beforeSend({event:'$p
 navigator.globalPrivacyControl=false;navigator.doNotTrack='1';assert.equal(analytics.beforeSend({event:'$pageview',properties:{}}),null);
 navigator.doNotTrack='0'; location.pathname='/contact';assert.equal(analytics.beforeSend({event:'$pageview',properties:{}}),null);
 console.log('PASS independent preferences, fail-closed unknown/malformed storage, legacy declines, sensitive paths, transport allowlists, GPC and DNT. No network used.');
+for(const state of ['OH','NY','TX','AZ']) {const p=policy.privacyRegion(true,'US',state,null,null);assert.equal(p.defaultsAllowed,true);assert.equal(p.replayDefaultAllowed,true);}
+for(const state of ['CA','FL','MA','PA','WA']) {const p=policy.privacyRegion(true,'US',state,null,null);assert.equal(p.defaultsAllowed,true);assert.equal(p.replayDefaultAllowed,false);}
+for(const [trusted,country,state] of [[false,'US','OH'],[true,null,null],[true,'US',null],[true,'DE','BE'],[true,'GB','ENG'],[true,'CH','ZH'],[true,'CA','QC']]) assert.equal(policy.privacyRegion(trusted,country,state,null,null).defaultsAllowed,false);
+values.clear();const eligible=policy.privacyRegion(true,'US','OH',null,null);await analytics.syncAnalytics('local',eligible);assert.equal(analytics.readPreferences().recordings,true);
+assert.equal(analytics.beforeSend({event:'$snapshot',properties:{$snapshot_data:[{type:3,data:{source:8,rules:'PRIVATE_CSS'}},{type:5,data:{tag:'PRIVATE_CONSOLE'}}]}}),null);
+values.set(policy.CONSENT_KEY,'denied');assert.equal(analytics.beforeSend({event:'$pageview',properties:{}}),null);
+values.clear();await analytics.syncAnalytics('local',policy.privacyRegion(true,'US','OH','1',null));assert.equal(analytics.beforeSend({event:'$pageview',properties:{}}),null);
+console.log('PASS trusted regional defaults, replay-specific state holds, unknown/non-US fail-closed, header-only GPC veto and prior declines over defaults.');
+assert(policy.safeVercelReferrer('', 'https://sageburress.com'));
+assert(policy.safeVercelReferrer('https://sageburress.com/about','https://sageburress.com'));
+for(const ref of ['https://google.com/search?q=PRIVATE','https://private.example/PRIVATE','https://sageburress.com/contact','https://sageburress.com/?token=PRIVATE','https://sageburress.com/admin']) assert.equal(policy.safeVercelReferrer(ref,'https://sageburress.com'),false);
+console.log('PASS Vercel raw referrer suppression, including external/private URLs.');

@@ -2,12 +2,28 @@
 export const CONSENT_KEY = "sage-analytics-consent-v1";
 export const PRIVACY_KEY = "sage-privacy-preferences-v2";
 export type PrivacyPreferences = { analytics: boolean; heatmaps: boolean; recordings: boolean };
-// No jurisdiction has an owner-approved basis for default-on collection yet.
-// Unknown geography MUST NOT be inferred from language, timezone or a client header.
+// Conservative fallback. Never infer geography from language, timezone or URL.
 export const DEFAULT_PREFERENCES: PrivacyPreferences = { analytics: false, heatmaps: false, recordings: false };
+export type PrivacyRegion = { defaultsAllowed: boolean; replayDefaultAllowed: boolean; blocked: boolean };
+const US_REGIONS = new Set("AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY".split(" "));
+// Conservative replay-specific hold for all-party/mixed recording-law states.
+// This is not a declaration that every statute applies to masked public replay.
+const REPLAY_PRIOR_CHOICE = new Set("CA CT DE FL IL MD MA MI MT NV NH PA WA".split(" "));
+export function privacyRegion(trustedPlatform: boolean, country: string | null, region: string | null, gpc: string | null, dnt: string | null): PrivacyRegion {
+  const blocked = gpc === "1" || dnt === "1";
+  const defaultsAllowed = trustedPlatform && country === "US" && US_REGIONS.has(region ?? "") && !blocked;
+  return { defaultsAllowed, replayDefaultAllowed: defaultsAllowed && !REPLAY_PRIOR_CHOICE.has(region!), blocked };
+}
 export function collectionPath(path: string) {
   const safe = publicPath(path);
   return safe && !["/contact", "/privacy"].includes(safe) ? safe : null;
+}
+export function safeVercelReferrer(referrer: string, origin: string) {
+  if (!referrer) return true;
+  try {
+    const url = new URL(referrer);
+    return url.origin === origin && !url.search && !url.hash && collectionPath(url.pathname) !== null;
+  } catch { return false; }
 }
 export const PREFERENCES_EVENT = "sage-privacy-change";
 export const INTERNAL_KEY = "sage-analytics-internal";
