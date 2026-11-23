@@ -10,9 +10,16 @@ export function replayText(value: string) {
 export function replayUrl(value: string) {
   try {
     const url = new URL(value, location.origin);
-    if (url.origin !== location.origin) return "";
-    if (!url.search && !url.hash && (assets.has(url.pathname) || publicPath(url.pathname) || /^\/_next\/static\/[a-zA-Z0-9_./-]+$/.test(url.pathname))) return url.pathname;
-    if (url.pathname === "/_next/image" && !url.hash && [...url.searchParams.keys()].every(k => ["url", "w", "q"].includes(k)) && assets.has(url.searchParams.get("url") ?? "") && /^\d+$/.test(url.searchParams.get("w") ?? "") && /^\d+$/.test(url.searchParams.get("q") ?? "")) return url.pathname + url.search;
+    if (url.origin !== location.origin || url.username || url.password) return "";
+    const origin = "https://sageburress.com";
+    if (!url.search && !url.hash) {
+      if (assets.has(url.pathname) || /^\/_next\/static\/(?:immutable\/)?(?:chunks|media)\/[a-zA-Z0-9_.-]+\.(?:css|woff2?)$/.test(url.pathname)) return origin + url.pathname;
+      if (publicPath(url.pathname)) return url.pathname;
+    }
+    const image = url.searchParams.get("url") ?? "", w = url.searchParams.get("w") ?? "", q = url.searchParams.get("q") ?? "";
+    if (url.pathname === "/_next/image" && !url.hash && url.searchParams.size === 3 && assets.has(image) && /^\d+$/.test(w) && /^\d+$/.test(q)) {
+      return origin + "/_next/image?" + new URLSearchParams({ url: image, w, q });
+    }
   } catch { /* Fail closed. */ }
   return "";
 }

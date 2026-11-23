@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import ts from 'typescript';
+const manifest=JSON.parse(fs.readFileSync('src/lib/replay-public-manifest.json'));
+const exports={};
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/lib/replay-safety.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,{exports,URL,URLSearchParams,location:{origin:'https://sageburress.com'},require:name=>name.endsWith('.json')?{default:manifest}:{publicPath:p=>p==='/'?p:null}});
+const origin='https://sageburress.com', media=manifest.assets[0], css='/_next/static/immutable/chunks/3aqlg9k45f548.css';
+const image='/_next/image?'+new URLSearchParams({url:media,w:'640',q:'75'});
+for(const path of [media,css,image]) assert.equal(exports.replayUrl(path),origin+path);
+for(const path of ['/admin','/uploads/private.jpg',css+'?email=test',image+'&url=private','https://elsewhere.invalid'+media,'/api/contact','/_next/image?url=/secret&w=640&q=75']) assert.equal(exports.replayUrl(path),'');
+assert.equal(exports.replayAttribute('srcset',image+' 640w'),origin+image+' 640w');
+console.log('PASS: public CSS, image and srcset resolve on Sage; private, external and ambiguous URLs rejected.');
